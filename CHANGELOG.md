@@ -1,20 +1,5 @@
 # Changelog
 
-## [1.4.12] - 2025-11-04
-
-### Added
-- None.
-
-### Changed
-- None.
-
-### Fixed
-- Preserved the accessibility modal's text sizing and padding by capturing their pixel measurements so the Font Size control can resize host pages without altering the widget interface.
-- Regenerated both `accessibility-menu.js` and `accessibility-menu.min.js` together to maintain distribution parity.
-
-### Removed
-- None.
-
 ## [1.4.11] - 2025-11-03
 
 ### Added
