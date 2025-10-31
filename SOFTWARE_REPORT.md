@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.20
+- **Version**: 1.4.19
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-12
+- **Last Update**: 2025-11-11
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,7 +12,6 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
-- 2025-11-12 — Disabled the Text Align button group by default, added configuration toggles to re-enable it, and reset saved alignments when the control is unavailable (AI assistant)
 - 2025-11-11 — Ensured Text Align options no longer reflow the accessibility modal by excluding it from alignment helpers while keeping WCAG/EAA behaviour and announcements (AI assistant)
 - 2025-11-10 — Rebuilt Text Align as a WCAG 2.1 Level A/EAA compliant button group with start/center/end/justify options, document-level helpers, and migrated saved preferences (AI assistant)
 - 2025-11-09 — Applied text alignment updates so the control targets both `<html>` and `<body>` and restores the default icon after resets (AI assistant)
