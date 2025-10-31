@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.10`
+- **Current Version:** `1.4.11`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.11
+
+- Updated the **Hide Images** toggle to only remove URL-based backgrounds so branded sections such as `#headerContent` keep their gradient or colour treatments while inline media still disappears.
 
 ## What's New in 1.4.10
 

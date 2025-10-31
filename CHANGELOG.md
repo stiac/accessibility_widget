@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.11] - 2025-11-03
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Limited the **Hide Images** mode to URL-based backgrounds so elements like `#headerContent` keep their gradient styling while inline media and decorative photos still disappear.
+
+### Removed
+- None.
+
 ## [1.4.10] - 2025-11-02
 
 ### Added
