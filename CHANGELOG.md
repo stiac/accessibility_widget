@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.10] - 2025-11-02
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Stopped the Font Size control from traversing the accessibility modal when building its scaling registry so the widget's labels no longer change size alongside the host page.
+- Regenerated both `accessibility-menu.js` and `accessibility-menu.min.js` together to keep distributed bundles synchronized.
+
+### Removed
+- None.
+
 ## [1.4.9] - 2025-11-01
 
 ### Added
@@ -10,7 +25,6 @@
 
 ### Fixed
 - Restored the browser-default inline rendering for host audio, canvas, embed, iframe, img, object, svg, and video elements when the fallback Tailwind CDN build is injected while preserving block-level icons inside the accessibility widget.
-- Regenerated both `accessibility-menu.js` and `accessibility-menu.min.js` together to keep distributed bundles synchronized.
 
 ### Removed
 - None.

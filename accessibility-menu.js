@@ -796,6 +796,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 NodeFilter.SHOW_ELEMENT,
                 {
                     acceptNode(node) {
+                        if (accessibilityModal && (node === accessibilityModal || accessibilityModal.contains(node))) {
+                            // Reject the node and its descendants when it belongs to the accessibility modal
+                            // so the widget's own interface never receives inline font overrides.
+                            return NodeFilter.FILTER_REJECT;
+                        }
                         if (shouldSkipFontTarget(node)) {
                             return NodeFilter.FILTER_SKIP;
                         }
