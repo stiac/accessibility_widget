@@ -6,16 +6,25 @@ const accessibilityMenuStyles = `
       --acc_color_1: #0f172a;
       --acc_color_2: #f8fafc;
       --border_radius: 24px;
+      --acc-font-scale: 1;
     }
 
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
+      font-size: inherit;
       line-height: 1.25;
       letter-spacing: 0;
       user-select: none;
+    }
+
+    #accessibility-modal {
+      font-size: calc(1rem / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal * {
+      font-size: inherit;
     }
 
     #accessibility-modal {
@@ -903,12 +912,29 @@ document.addEventListener("DOMContentLoaded", function() {
     function applyGlobalFontSize(value) {
         const fontSizeValue = value || '';
         if (fontSizeValue) {
+            // Use percentage-based sizing so the root rem baseline actually grows; rem values
+            // on the <html> element resolve to its previous size and were therefore ignored.
             docElement.style.setProperty('font-size', fontSizeValue, 'important');
+            const normalizedValue = fontSizeValue.trim().toLowerCase();
+            let fontScale = 1;
+            if (normalizedValue.endsWith('%')) {
+                const parsedPercent = parseFloat(normalizedValue);
+                fontScale = Number.isFinite(parsedPercent) && parsedPercent > 0 ? parsedPercent / 100 : 1;
+            } else if (normalizedValue.endsWith('rem')) {
+                const parsedRem = parseFloat(normalizedValue);
+                fontScale = Number.isFinite(parsedRem) && parsedRem > 0 ? parsedRem : 1;
+            } else if (normalizedValue.endsWith('em')) {
+                const parsedEm = parseFloat(normalizedValue);
+                fontScale = Number.isFinite(parsedEm) && parsedEm > 0 ? parsedEm : 1;
+            }
+            // Store the resolved scale factor on the root element so the widget can counter-scale itself.
+            docElement.style.setProperty('--acc-font-scale', String(fontScale));
             if (bodyElement) {
-                bodyElement.style.setProperty('font-size', fontSizeValue, 'important');
+                bodyElement.style.setProperty('font-size', 'inherit', 'important');
             }
         } else {
             docElement.style.removeProperty('font-size');
+            docElement.style.removeProperty('--acc-font-scale');
             if (bodyElement) {
                 bodyElement.style.removeProperty('font-size');
             }
@@ -921,15 +947,15 @@ document.addEventListener("DOMContentLoaded", function() {
         let progressIndex = -1;
 
         if (fontSizeClickCount === 0) {
-            applyGlobalFontSize('1.3rem');
+            applyGlobalFontSize('130%');
             fontSizeClickCount = 1;
             progressIndex = 0;
         } else if (fontSizeClickCount === 1) {
-            applyGlobalFontSize('1.5rem');
+            applyGlobalFontSize('150%');
             fontSizeClickCount = 2;
             progressIndex = 1;
         } else if (fontSizeClickCount === 2) {
-            applyGlobalFontSize('1.8rem');
+            applyGlobalFontSize('180%');
             fontSizeClickCount = 3;
             progressIndex = 2;
         } else {
@@ -1376,15 +1402,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const fontSizeItem = document.querySelector('#font-size');
         const currentFontSize = docElement.style.getPropertyValue('font-size');
-        if (currentFontSize === '1.3rem') {
+        if (currentFontSize === '130%') {
             fontSizeClickCount = 1;
             updateProgress(fontSizeItem, 0);
             setControlActiveState(fontSizeItem, true);
-        } else if (currentFontSize === '1.5rem') {
+        } else if (currentFontSize === '150%') {
             fontSizeClickCount = 2;
             updateProgress(fontSizeItem, 1);
             setControlActiveState(fontSizeItem, true);
-        } else if (currentFontSize === '1.8rem') {
+        } else if (currentFontSize === '180%') {
             fontSizeClickCount = 3;
             updateProgress(fontSizeItem, 2);
             setControlActiveState(fontSizeItem, true);
