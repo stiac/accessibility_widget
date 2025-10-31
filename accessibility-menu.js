@@ -1117,6 +1117,22 @@ document.addEventListener("DOMContentLoaded", function() {
         center: `<path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM7.5 11C7.22386 11 7 10.7761 7 10.5C7 10.2239 7.22386 10 7.5 10H16.5C16.7761 10 17 10.2239 17 10.5C17 10.7761 16.7761 11 16.5 11H7.5ZM7.5 19C7.22386 19 7 18.7761 7 18.5C7 18.2239 7.22386 18 7.5 18H16.5C16.7761 18 17 18.2239 17 18.5C17 18.7761 16.7761 19 16.5 19H7.5Z" fill="black"/>`,
         right: `<path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM10.5 11C10.2239 11 10 10.7761 10 10.5C10 10.2239 10.2239 10 10.5 10H19.5C19.7761 10 20 10.2239 20 10.5C20 10.7761 19.7761 11 19.5 11H10.5ZM10.5 19C10.2239 19 10 18.7761 10 18.5C10 18.2239 10.2239 18 10.5 18H19.5C19.7761 18 20 18.2239 20 18.5C20 18.7761 19.7761 19 19.5 19H10.5Z" fill="black"/>`
     };
+    // Mirror text alignment across `<html>` and `<body>` so the host page responds
+    // while keeping compatibility with previously saved settings.
+    const getDocumentTextAlign = () => {
+        if (bodyElement && bodyElement.style.textAlign) {
+            return bodyElement.style.textAlign;
+        }
+        return docElement.style.textAlign || '';
+    };
+
+    const setDocumentTextAlign = (value) => {
+        const safeValue = value || '';
+        if (bodyElement) {
+            bodyElement.style.textAlign = safeValue;
+        }
+        docElement.style.textAlign = safeValue;
+    };
 
 
     const STORAGE_KEY = 'accessibility-settings';
@@ -1470,22 +1486,22 @@ document.addEventListener("DOMContentLoaded", function() {
             let iconMarkup = textAlignDefaultIcon;
 
             if (textAlignClickCount === 0) {
-                docElement.style.textAlign = 'left';
+                setDocumentTextAlign('left');
                 textAlignClickCount = 1;
                 progressIndex = 0;
                 iconMarkup = textAlignIcons.left;
             } else if (textAlignClickCount === 1) {
-                docElement.style.textAlign = 'center';
+                setDocumentTextAlign('center');
                 textAlignClickCount = 2;
                 progressIndex = 1;
                 iconMarkup = textAlignIcons.center;
             } else if (textAlignClickCount === 2) {
-                docElement.style.textAlign = 'right';
+                setDocumentTextAlign('right');
                 textAlignClickCount = 3;
                 progressIndex = 2;
                 iconMarkup = textAlignIcons.right;
             } else {
-                docElement.style.textAlign = '';
+                setDocumentTextAlign('');
                 textAlignClickCount = 0;
                 progressIndex = -1;
                 iconMarkup = textAlignDefaultIcon;
@@ -1653,7 +1669,7 @@ document.addEventListener("DOMContentLoaded", function() {
         applyGlobalFontSize('');
         docElement.classList.remove('line-height-0', 'line-height-1', 'line-height-2');
         docElement.style.letterSpacing = '';
-        docElement.style.textAlign = '';
+        setDocumentTextAlign('');
         setHideImagesActive(false);
         docElement.classList.remove('hide-video');
 
@@ -1694,7 +1710,7 @@ document.addEventListener("DOMContentLoaded", function() {
             fontSize: docElement.dataset.accFontSizeValue || '',
             lineHeight: docElement.classList.contains('line-height-2') ? 'line-height-2' : docElement.classList.contains('line-height-1') ? 'line-height-1' : docElement.classList.contains('line-height-0') ? 'line-height-0' : 'default',
             letterSpacing: docElement.style.letterSpacing || '',
-            textAlign: docElement.style.textAlign || '',
+            textAlign: getDocumentTextAlign(),
             hideImages: docElement.classList.contains('hide-images'),
             hideVideo: docElement.classList.contains('hide-video'),
             cursor: cursor.classList.contains('cursor-2') ? 'guide' : cursor.classList.contains('cursor-1') ? 'mask' : cursor.classList.contains('cursor-0') ? 'focus' : 'default',
@@ -1751,7 +1767,7 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.classList.toggle('line-height-1', settings.lineHeight === 'line-height-1');
         docElement.classList.toggle('line-height-2', settings.lineHeight === 'line-height-2');
         docElement.style.letterSpacing = settings.letterSpacing || '';
-        docElement.style.textAlign = settings.textAlign || '';
+        setDocumentTextAlign(settings.textAlign || '');
         setHideImagesActive(Boolean(settings.hideImages));
         docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
 
@@ -1903,21 +1919,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const textAlignItem = document.querySelector('#text-align');
         if (textAlignItem) {
-            if (docElement.style.textAlign === 'left') {
+            const currentTextAlign = getDocumentTextAlign();
+            if (currentTextAlign === 'left') {
                 textAlignClickCount = 1;
                 updateProgress(textAlignItem, 0);
                 setControlActiveState(textAlignItem, true);
                 if (textAlignIconElement) {
                     textAlignIconElement.innerHTML = textAlignIcons.left;
                 }
-            } else if (docElement.style.textAlign === 'center') {
+            } else if (currentTextAlign === 'center') {
                 textAlignClickCount = 2;
                 updateProgress(textAlignItem, 1);
                 setControlActiveState(textAlignItem, true);
                 if (textAlignIconElement) {
                     textAlignIconElement.innerHTML = textAlignIcons.center;
                 }
-            } else if (docElement.style.textAlign === 'right') {
+            } else if (currentTextAlign === 'right') {
                 textAlignClickCount = 3;
                 updateProgress(textAlignItem, 2);
                 setControlActiveState(textAlignItem, true);
