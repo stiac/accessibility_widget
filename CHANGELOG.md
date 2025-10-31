@@ -1,5 +1,19 @@
 # Changelog
 
+# [1.4.19] - 2025-11-11
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Removed the duplicate `getDocumentTextAlign` function declaration so the widget no longer throws a syntax error when the script is injected multiple times on the same page.
+
+### Removed
+- None.
+
 ## [1.4.18] - 2025-11-10
 
 ### Added
