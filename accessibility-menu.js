@@ -730,6 +730,150 @@ document.addEventListener("DOMContentLoaded", function() {
         const computed = parseFloat(window.getComputedStyle(bodyElement).fontSize);
         return Number.isFinite(computed) && computed > 0 ? computed : defaultRootFontSize;
     })();
+
+    // Maintain a registry of elements whose text should scale so pixel-based typography also grows with the Font Size control.
+    const textElementRegistry = new Map();
+    let activeFontScale = 1;
+    const TEXT_ELEMENT_SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'META', 'TITLE', 'LINK']);
+
+    function shouldSkipFontTarget(element) {
+        if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+            return true;
+        }
+        if (element === docElement || element === bodyElement) {
+            return true;
+        }
+        if (accessibilityModal && (element === accessibilityModal || accessibilityModal.contains(element))) {
+            return true;
+        }
+        return TEXT_ELEMENT_SKIP_TAGS.has(element.tagName);
+    }
+
+    function elementHasReadableTextContent(element) {
+        if (!element || !element.childNodes) {
+            return false;
+        }
+        for (let i = 0; i < element.childNodes.length; i += 1) {
+            const child = element.childNodes[i];
+            if (child.nodeType === Node.TEXT_NODE && child.textContent && child.textContent.trim().length > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function registerTextElement(element) {
+        if (!element || textElementRegistry.has(element)) {
+            return;
+        }
+        const computedSize = parseFloat(window.getComputedStyle(element).fontSize);
+        if (!Number.isFinite(computedSize) || computedSize <= 0) {
+            return;
+        }
+        const inlineValue = element.style.fontSize || '';
+        const inlinePriority = element.style.getPropertyPriority('font-size') || '';
+        const baseline = activeFontScale && activeFontScale > 0 ? computedSize / activeFontScale : computedSize;
+        textElementRegistry.set(element, {
+            originalSize: baseline,
+            inlineValue,
+            inlinePriority
+        });
+    }
+
+    function scanForTextElements(rootNode) {
+        if (!rootNode) {
+            return;
+        }
+
+        const nodesToProcess = [];
+        if (rootNode.nodeType === Node.ELEMENT_NODE && !shouldSkipFontTarget(rootNode) && elementHasReadableTextContent(rootNode)) {
+            nodesToProcess.push(rootNode);
+        }
+
+        if (rootNode.nodeType === Node.ELEMENT_NODE) {
+            const walker = document.createTreeWalker(
+                rootNode,
+                NodeFilter.SHOW_ELEMENT,
+                {
+                    acceptNode(node) {
+                        if (shouldSkipFontTarget(node)) {
+                            return NodeFilter.FILTER_SKIP;
+                        }
+                        return elementHasReadableTextContent(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+                    }
+                },
+                false
+            );
+
+            let current = walker.nextNode();
+            while (current) {
+                nodesToProcess.push(current);
+                current = walker.nextNode();
+            }
+        }
+
+        nodesToProcess.forEach(registerTextElement);
+    }
+
+    function unregisterTextElements(rootNode) {
+        if (!rootNode || rootNode.nodeType !== Node.ELEMENT_NODE) {
+            return;
+        }
+        const elementsToRemove = [];
+        textElementRegistry.forEach((_, element) => {
+            if (element === rootNode || (rootNode.contains && rootNode.contains(element))) {
+                elementsToRemove.push(element);
+            }
+        });
+        elementsToRemove.forEach((element) => {
+            textElementRegistry.delete(element);
+        });
+    }
+
+    function applyFontScaleToRegisteredElements(fontScale) {
+        textElementRegistry.forEach((meta, element) => {
+            if (!element || !element.isConnected || shouldSkipFontTarget(element)) {
+                textElementRegistry.delete(element);
+                return;
+            }
+
+            if (fontScale && fontScale > 0) {
+                const targetSize = meta.originalSize * fontScale;
+                element.style.setProperty('font-size', `${targetSize}px`, 'important');
+            } else {
+                element.style.removeProperty('font-size');
+                if (meta.inlineValue) {
+                    element.style.setProperty('font-size', meta.inlineValue, meta.inlinePriority || '');
+                }
+            }
+        });
+    }
+
+    const observerRoot = bodyElement || docElement;
+    if (observerRoot) {
+        scanForTextElements(observerRoot);
+        if (typeof MutationObserver === 'function') {
+            const dynamicContentObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            scanForTextElements(node);
+                        } else if (node.nodeType === Node.TEXT_NODE && node.parentElement && !shouldSkipFontTarget(node.parentElement)) {
+                            registerTextElement(node.parentElement);
+                        }
+                    });
+                    mutation.removedNodes.forEach((node) => {
+                        if (node.nodeType === Node.ELEMENT_NODE) {
+                            unregisterTextElements(node);
+                        } else if (node.nodeType === Node.TEXT_NODE && node.parentElement) {
+                            unregisterTextElements(node.parentElement);
+                        }
+                    });
+                });
+            });
+            dynamicContentObserver.observe(observerRoot, { childList: true, subtree: true });
+        }
+    }
     const filterState = {
         invert: false,
         grayscale: false,
@@ -989,6 +1133,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const fontSizeValue = value || '';
         if (fontSizeValue) {
             const fontScale = resolveFontScale(fontSizeValue) || 1;
+            if (observerRoot) {
+                scanForTextElements(observerRoot);
+            }
+            activeFontScale = fontScale;
             const rootTarget = defaultRootFontSize * fontScale;
             // Persist the calculated root font-size so all site content responds, not only the accessibility modal.
             docElement.style.setProperty('font-size', `${rootTarget}px`, 'important');
@@ -1000,7 +1148,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 bodyElement.style.setProperty('font-size', `${bodyTarget}px`, 'important');
                 bodyElement.style.setProperty('--acc-body-font-size', `${bodyTarget}px`);
             }
+            applyFontScaleToRegisteredElements(fontScale);
         } else {
+            applyFontScaleToRegisteredElements(null);
+            activeFontScale = 1;
             docElement.style.removeProperty('font-size');
             docElement.style.removeProperty('--acc-font-scale');
             docElement.style.removeProperty('--acc-root-font-size');
