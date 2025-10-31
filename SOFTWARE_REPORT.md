@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.17
+- **Version**: 1.4.18
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-09
+- **Last Update**: 2025-11-10
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-11-10 — Rebuilt Text Align as a WCAG 2.1 Level A/EAA compliant button group with start/center/end/justify options, document-level helpers, and migrated saved preferences (AI assistant)
 - 2025-11-09 — Applied text alignment updates so the control targets both `<html>` and `<body>` and restores the default icon after resets (AI assistant)
 - 2025-11-08 — Redirected the Font Size control to dataset-tracked host scaling so the accessibility modal no longer changes when zooming the page (AI assistant)
 - 2025-11-06 — Captured the accessibility modal's baseline font metrics in CSS variables so the Font Size control no longer alters widget labels even when saved zoom levels reapply (AI assistant)
