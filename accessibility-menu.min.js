@@ -107,6 +107,31 @@ const accessibilityMenuStyles = `
       outline-offset: 2px;
     }
 
+    #text-align [data-text-align-disabled-message] {
+      display: none;
+    }
+
+    #text-align[data-text-align-options-enabled="false"] {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    #text-align[data-text-align-options-enabled="false"] .acc-align-option {
+      pointer-events: none;
+    }
+
+    #text-align[data-text-align-options-enabled="false"] [data-text-align-options] {
+      display: none;
+    }
+
+    #text-align[data-text-align-options-enabled="false"] [data-text-align-disabled-message] {
+      display: block;
+    }
+
+    #text-align[data-text-align-options-enabled="false"] .acc-progress-parent {
+      display: none !important;
+    }
+
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -473,6 +498,57 @@ const accessibilityMenuStyles = `
       display: none;
     }
 `;
+
+// Determine whether the segmented Text Align buttons should render. Integrators can
+// opt-in via a global `accessibilityWidgetSettings.enableTextAlignOptions` flag or by
+// setting `data-acc-enable-text-align-options` on the root `<html>` element.
+const normaliseBooleanOption = (value) => {
+    if (value === null || typeof value === 'undefined') {
+        return null;
+    }
+    if (typeof value === 'boolean') {
+        return value;
+    }
+    if (typeof value === 'number') {
+        if (Number.isFinite(value) && value === 1) {
+            return true;
+        }
+        if (Number.isFinite(value) && value === 0) {
+            return false;
+        }
+    }
+    const normalised = String(value).trim().toLowerCase();
+    if (!normalised) {
+        return null;
+    }
+    if (['true', '1', 'yes', 'on', 'enable', 'enabled'].includes(normalised)) {
+        return true;
+    }
+    if (['false', '0', 'no', 'off', 'disable', 'disabled'].includes(normalised)) {
+        return false;
+    }
+    return null;
+};
+
+const rootDocumentElement = typeof document !== 'undefined' ? document.documentElement : null;
+const datasetTextAlignPreference = rootDocumentElement
+    ? rootDocumentElement.getAttribute('data-acc-enable-text-align-options')
+    : null;
+const datasetTextAlignEnabled = datasetTextAlignPreference !== null
+    ? normaliseBooleanOption(datasetTextAlignPreference)
+    : null;
+const windowObject = typeof window !== 'undefined' ? window : undefined;
+const globalWidgetSettings = windowObject && typeof windowObject.accessibilityWidgetSettings === 'object'
+    && windowObject.accessibilityWidgetSettings !== null
+    ? windowObject.accessibilityWidgetSettings
+    : {};
+const configTextAlignEnabled = normaliseBooleanOption(globalWidgetSettings.enableTextAlignOptions);
+const TEXT_ALIGN_OPTIONS_ENABLED = datasetTextAlignEnabled !== null
+    ? datasetTextAlignEnabled
+    : configTextAlignEnabled !== null
+        ? configTextAlignEnabled
+        : false;
+
 const accessibilityMenuHTML = `
     <div id="accessibility-modal" class="right close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-acc-preserve-images>
       <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg shadow-slate-900/40 transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel">
@@ -602,7 +678,7 @@ const accessibilityMenuHTML = `
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" id="text-align-label">Text Align</p>
             <p id="text-align-description" class="acc-sr-only">Choose how text should align across the page. Select the same option again to return to the default alignment.</p>
-            <div class="mt-1 grid w-full grid-cols-2 gap-2" role="group" aria-label="Text alignment options">
+            <div class="mt-1 grid w-full grid-cols-2 gap-2" role="group" aria-label="Text alignment options" data-text-align-options>
               <button type="button" class="acc-align-option" data-text-align-option="start">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
                   <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
@@ -629,6 +705,9 @@ const accessibilityMenuHTML = `
               </button>
             </div>
             <p class="acc-sr-only" data-text-align-status role="status" aria-live="polite"></p>
+            <p class="mt-1 w-full rounded-xl border border-dashed border-slate-900/10 bg-white/80 px-3 py-3 text-[0.75rem] font-medium leading-relaxed text-slate-600" data-text-align-disabled-message hidden>
+              Text alignment controls are disabled. Enable them from settings to restore the Start, Center, End, and Justify buttons.
+            </p>
             <div class="acc-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
               <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
               <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
@@ -1205,7 +1284,35 @@ document.addEventListener("DOMContentLoaded", function() {
     const textAlignIconElement = textAlignControl ? textAlignControl.querySelector('[data-text-align-icon]') : null;
     const textAlignDefaultIcon = textAlignIconElement ? textAlignIconElement.innerHTML : '';
     const textAlignStatusElement = textAlignControl ? textAlignControl.querySelector('[data-text-align-status]') : null;
-    const textAlignOptionButtons = textAlignControl ? Array.from(textAlignControl.querySelectorAll('[data-text-align-option]')) : [];
+    const textAlignDisabledMessage = textAlignControl ? textAlignControl.querySelector('[data-text-align-disabled-message]') : null;
+    const textAlignOptionsContainer = textAlignControl ? textAlignControl.querySelector('[data-text-align-options]') : null;
+    const textAlignOptionButtons = textAlignControl && TEXT_ALIGN_OPTIONS_ENABLED
+        ? Array.from(textAlignControl.querySelectorAll('[data-text-align-option]'))
+        : [];
+
+    if (textAlignControl) {
+        textAlignControl.setAttribute('data-text-align-options-enabled', TEXT_ALIGN_OPTIONS_ENABLED ? 'true' : 'false');
+        textAlignControl.setAttribute('tabindex', TEXT_ALIGN_OPTIONS_ENABLED ? '0' : '-1');
+        if (!TEXT_ALIGN_OPTIONS_ENABLED) {
+            textAlignControl.setAttribute('aria-disabled', 'true');
+        } else {
+            textAlignControl.removeAttribute('aria-disabled');
+        }
+    }
+    if (textAlignDisabledMessage) {
+        if (TEXT_ALIGN_OPTIONS_ENABLED) {
+            textAlignDisabledMessage.setAttribute('hidden', 'hidden');
+        } else {
+            textAlignDisabledMessage.removeAttribute('hidden');
+        }
+    }
+    if (textAlignOptionsContainer) {
+        if (TEXT_ALIGN_OPTIONS_ENABLED) {
+            textAlignOptionsContainer.removeAttribute('hidden');
+        } else {
+            textAlignOptionsContainer.setAttribute('hidden', 'hidden');
+        }
+    }
     const TEXT_ALIGN_SEQUENCE = ['start', 'center', 'end', 'justify'];
     const textAlignIcons = {
         start: `<path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>`,
@@ -1298,6 +1405,27 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!textAlignControl) {
             return;
         }
+        textAlignControl.setAttribute('data-text-align-options-enabled', TEXT_ALIGN_OPTIONS_ENABLED ? 'true' : 'false');
+        textAlignControl.setAttribute('tabindex', TEXT_ALIGN_OPTIONS_ENABLED ? '0' : '-1');
+        if (!TEXT_ALIGN_OPTIONS_ENABLED) {
+            textAlignControl.setAttribute('aria-disabled', 'true');
+        } else {
+            textAlignControl.removeAttribute('aria-disabled');
+        }
+        if (textAlignDisabledMessage) {
+            if (TEXT_ALIGN_OPTIONS_ENABLED) {
+                textAlignDisabledMessage.setAttribute('hidden', 'hidden');
+            } else {
+                textAlignDisabledMessage.removeAttribute('hidden');
+            }
+        }
+        if (textAlignOptionsContainer) {
+            if (TEXT_ALIGN_OPTIONS_ENABLED) {
+                textAlignOptionsContainer.removeAttribute('hidden');
+            } else {
+                textAlignOptionsContainer.setAttribute('hidden', 'hidden');
+            }
+        }
         const currentValue = getDocumentTextAlign();
         const progressIndex = currentValue ? TEXT_ALIGN_SEQUENCE.indexOf(currentValue) : -1;
 
@@ -1311,11 +1439,13 @@ document.addEventListener("DOMContentLoaded", function() {
         textAlignControl.classList.toggle('active', Boolean(currentValue));
         updateProgress(textAlignControl, typeof progressIndex === 'number' ? progressIndex : -1);
 
-        textAlignOptionButtons.forEach((button) => {
-            const optionValue = normaliseTextAlignValue(button.getAttribute('data-text-align-option'));
-            const isActive = currentValue === optionValue && Boolean(optionValue);
-            button.setAttribute('aria-pressed', String(isActive));
-        });
+        if (TEXT_ALIGN_OPTIONS_ENABLED) {
+            textAlignOptionButtons.forEach((button) => {
+                const optionValue = normaliseTextAlignValue(button.getAttribute('data-text-align-option'));
+                const isActive = currentValue === optionValue && Boolean(optionValue);
+                button.setAttribute('aria-pressed', String(isActive));
+            });
+        }
 
         if (textAlignStatusElement) {
             if (announce) {
@@ -1673,7 +1803,7 @@ document.addEventListener("DOMContentLoaded", function() {
         saveSettings();
     });
 
-    if (textAlignControl && textAlignOptionButtons.length > 0) {
+    if (TEXT_ALIGN_OPTIONS_ENABLED && textAlignControl && textAlignOptionButtons.length > 0) {
         const optionCount = textAlignOptionButtons.length;
         const focusOptionAt = (index) => {
             if (!textAlignOptionButtons[index]) {
@@ -1914,7 +2044,7 @@ document.addEventListener("DOMContentLoaded", function() {
             fontSize: docElement.dataset.accFontSizeValue || '',
             lineHeight: docElement.classList.contains('line-height-2') ? 'line-height-2' : docElement.classList.contains('line-height-1') ? 'line-height-1' : docElement.classList.contains('line-height-0') ? 'line-height-0' : 'default',
             letterSpacing: docElement.style.letterSpacing || '',
-            textAlign: getDocumentTextAlign(),
+            textAlign: TEXT_ALIGN_OPTIONS_ENABLED ? getDocumentTextAlign() : '',
             hideImages: docElement.classList.contains('hide-images'),
             hideVideo: docElement.classList.contains('hide-video'),
             cursor: cursor.classList.contains('cursor-2') ? 'guide' : cursor.classList.contains('cursor-1') ? 'mask' : cursor.classList.contains('cursor-0') ? 'focus' : 'default',
@@ -1971,7 +2101,11 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.classList.toggle('line-height-1', settings.lineHeight === 'line-height-1');
         docElement.classList.toggle('line-height-2', settings.lineHeight === 'line-height-2');
         docElement.style.letterSpacing = settings.letterSpacing || '';
-        setDocumentTextAlign(settings.textAlign || '');
+        if (TEXT_ALIGN_OPTIONS_ENABLED) {
+            setDocumentTextAlign(settings.textAlign || '');
+        } else {
+            setDocumentTextAlign('');
+        }
         setHideImagesActive(Boolean(settings.hideImages));
         docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
 

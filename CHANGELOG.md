@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.20] - 2025-11-12
+
+### Added
+- Introduced configuration toggles (`window.accessibilityWidgetSettings.enableTextAlignOptions` and `data-acc-enable-text-align-options`) so integrators can re-enable the Start/Center/End/Justify segmented control when desired.
+
+### Changed
+- Disabled the Text Align buttons by default, dimming the card, hiding the segmented group, and surfacing guidance until administrators opt back in.
+
+### Fixed
+- Cleared stored Text Align preferences whenever the control is disabled to prevent stale alignment overrides on host pages.
+
+### Removed
+- None.
+
 ## [1.4.19] - 2025-11-11
 
 ### Added
