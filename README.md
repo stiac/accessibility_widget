@@ -13,7 +13,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 
 ## What's New in 1.4.8
 
-- Traverse the host document to capture readable text nodes, scale their baseline pixel sizes when the Font Size control is activated, and observe dynamic updates so typography outside the accessibility modal enlarges reliably.
+- Restored the default inline display for host-page SVGs when the plugin loads its fallback Tailwind build so existing icon layouts are no longer broken by the preflight reset.
 
 ## What's New in 1.4.7
 

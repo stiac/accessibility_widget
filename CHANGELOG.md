@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.4.8] - 2024-06-30
+## [1.4.8] - 2025-10-31
 
 ### Added
 - None.
@@ -9,7 +9,7 @@
 - None.
 
 ### Fixed
-- Traversed the host document to capture readable text nodes and scale their baseline pixel values so the Font Size control enlarges content defined with absolute units outside the accessibility modal.
+- Reapplied the browser-default inline rendering to host SVG elements when the fallback Tailwind CDN is injected so Tailwind's preflight no longer forces them to behave like block elements.
 
 ### Removed
 - None.
