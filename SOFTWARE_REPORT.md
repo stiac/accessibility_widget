@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.16
+- **Version**: 1.4.17
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-08
+- **Last Update**: 2025-11-09
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-11-09 — Applied text alignment updates so the control targets both `<html>` and `<body>` and restores the default icon after resets (AI assistant)
 - 2025-11-08 — Redirected the Font Size control to dataset-tracked host scaling so the accessibility modal no longer changes when zooming the page (AI assistant)
 - 2025-11-06 — Captured the accessibility modal's baseline font metrics in CSS variables so the Font Size control no longer alters widget labels even when saved zoom levels reapply (AI assistant)
 - 2025-11-05 — Counter-scaled Tailwind typography utilities within `#accessibility-modal` so the Font Size control leaves the widget UI untouched even when the host page zooms (AI assistant)

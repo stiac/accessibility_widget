@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.17] - 2025-11-09
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Ensured the Text Align control synchronises styles across `<html>` and `<body>` so page content responds correctly and the widget icon resets cleanly.
+
+### Removed
+- None.
+
 ## [1.4.16] - 2025-11-08
 
 ### Added
