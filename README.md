@@ -8,14 +8,8 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.20`
+- **Current Version:** `1.4.19`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
-
-## What's New in 1.4.20
-
-- Disabled the Text Align segmented buttons by default, dimming the card and surfacing guidance until administrators opt the control back in.
-- Introduced configuration toggles (`window.accessibilityWidgetSettings.enableTextAlignOptions` or `data-acc-enable-text-align-options="true"`) so the Start, Center, End, and Justify button group can be restored when needed.
-- Cleared saved Text Align preferences automatically when the control is disabled to keep host pages aligned with their default author styles.
 
 ## What's New in 1.4.19
 
@@ -137,7 +131,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Font Size**: Increases the font size of the page to improve readability for users with visual impairments.
 - **Line Height**: Increases the line height of the page to improve readability for users with visual impairments.
 - **Letter Spacing**: Increases the letter spacing of the page to improve readability for users with visual impairments.
-- **Text Alignment**: (Optional) Provides Start, Center, End, or Justify alignment via a segmented control when enabled in settings, otherwise keeping the site's default author alignment.
+- **Text Alignment**: Lets readers pick Start, Center, End, or Justify alignment with an accessible segmented control that overrides author styles only while the preference is active.
 - **Low Contrast**: Reduces the contrast of the page to improve readability for users with visual impairments.
 - **High Contrast**: Increases the contrast of the page to improve readability for users with visual impairments.
 - **Extra Contrast**: Increases the contrast of the page even further to improve readability for users with visual impairments.
@@ -187,26 +181,6 @@ You can use `min.js` file _as your requirement_
 
 - The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads.
 - Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1` and `--acc_color_2`) at the top of `accessibility-menu.js`.
-
-### Enable Text Align Buttons
-
-- The segmented Start, Center, End, and Justify buttons are disabled by default. Enable them globally by defining the settings object **before** loading the widget script:
-
-  ```html
-  <script>
-    window.accessibilityWidgetSettings = {
-      enableTextAlignOptions: true
-    };
-  </script>
-  ```
-
-- Alternatively, add the attribute directly to the root element in your markup:
-
-  ```html
-  <html lang="en" data-acc-enable-text-align-options="true">
-  ```
-
-  Either approach reactivates the segmented control while keeping the default guidance card when the feature is turned off.
 
 ### Fine-tune Video Visibility
 
