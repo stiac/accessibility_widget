@@ -7,6 +7,7 @@ const accessibilityMenuStyles = `
       --acc_color_2: #f8fafc;
       --border_radius: 24px;
       --acc-font-scale: 1;
+      --acc-modal-scale: 1;
     }
 
     html[data-acc-font-scale-active] {
@@ -75,12 +76,12 @@ const accessibilityMenuStyles = `
       transform-origin: var(--acc-transform-origin);
       transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.35s ease, width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
       opacity: 0;
-      transform: translate3d(var(--acc-translate-x), 16px, 0) scale(0.96);
+      transform: translate3d(var(--acc-translate-x), 16px, 0) scale(calc(0.96 * var(--acc-modal-scale, 1)));
     }
 
     #accessibility-modal.is-ready {
       opacity: 1;
-      transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+      transform: translate3d(var(--acc-translate-x), 0, 0) scale(var(--acc-modal-scale, 1));
     }
 
     #accessibility-modal svg {
@@ -96,11 +97,11 @@ const accessibilityMenuStyles = `
       border-radius: 9999px;
       overflow: hidden;
       opacity: 1;
-      transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+      transform: translate3d(var(--acc-translate-x), 8px, 0) scale(calc(0.94 * var(--acc-modal-scale, 1)));
     }
 
     #accessibility-modal.is-ready.close {
-      transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+      transform: translate3d(var(--acc-translate-x), 8px, 0) scale(calc(0.94 * var(--acc-modal-scale, 1)));
     }
 
     #accessibility-modal.close #headerContent,
@@ -1285,6 +1286,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 bodyElement.style.setProperty('font-size', `${bodyTarget}px`, 'important');
                 bodyElement.style.setProperty('--acc-body-font-size', `${bodyTarget}px`);
             }
+            if (accessibilityModal) {
+                const modalScale = fontScale > 0 ? 1 / fontScale : 1;
+                accessibilityModal.style.setProperty('--acc-modal-scale', modalScale.toString());
+            }
             applyFontScaleToRegisteredElements(fontScale);
         } else {
             applyFontScaleToRegisteredElements(null);
@@ -1296,6 +1301,9 @@ document.addEventListener("DOMContentLoaded", function() {
             if (bodyElement) {
                 bodyElement.style.removeProperty('font-size');
                 bodyElement.style.removeProperty('--acc-body-font-size');
+            }
+            if (accessibilityModal) {
+                accessibilityModal.style.removeProperty('--acc-modal-scale');
             }
         }
     }
