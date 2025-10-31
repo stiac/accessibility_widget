@@ -1,15 +1,15 @@
 # Changelog
 
-# [1.4.19] - 2025-11-11
+## [1.4.19] - 2025-11-11
 
 ### Added
 - None.
 
 ### Changed
-- None.
+- Refined the text alignment helpers so they explicitly skip `#accessibility-modal`, keeping WCAG/EAA-compliant overrides focused on host-page content while preserving polite announcements and stored states.
 
 ### Fixed
-- Removed the duplicate `getDocumentTextAlign` function declaration so the widget no longer throws a syntax error when the script is injected multiple times on the same page.
+- Corrected a regression where choosing a Text Align option adjusted the accessibility modal instead of the site content.
 
 ### Removed
 - None.

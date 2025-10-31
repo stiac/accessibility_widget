@@ -13,7 +13,8 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 
 ## What's New in 1.4.19
 
-- Fixed a duplicate `getDocumentTextAlign` declaration that triggered a runtime syntax error when the widget script loaded more than once per page.
+- Fixed the Text Align control so it now targets host-page content exclusively, leaving the accessibility modal layout untouched while respecting user-selected Start, Center, End, and Justify modes.
+- Preserved WCAG 2.1 Level A and EAA alignment guarantees by continuing to normalise stored values and announce changes without overriding modal typography.
 
 ## What's New in 1.4.18
 
