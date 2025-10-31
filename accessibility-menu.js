@@ -785,8 +785,9 @@ document.addEventListener("DOMContentLoaded", function() {
             textXs: sampleSize('.text-xs', (value) => value * 0.75),
             textSm: sampleSize('.text-sm', (value) => value * 0.875),
             textLg: sampleSize('.text-lg', (value) => value * 1.125),
-            text10: sampleSize('.text-[10px]', 10),
-            text11: sampleSize('.text-[11px]', 11)
+            // Escape Tailwind's bracketed utilities so querySelector resolves them without errors.
+            text10: sampleSize('.text-\\[10px\\]', 10),
+            text11: sampleSize('.text-\\[11px\\]', 11)
         };
     })();
 
