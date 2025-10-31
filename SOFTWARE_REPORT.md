@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.6
+- **Version**: 1.4.7
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2024-06-28
+- **Last Update**: 2024-06-29
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2024-06-29 — Added a data attribute and CSS variables so the font-size control applies the scaled pixels to `<html>` and `<body>`, keeping the accessibility modal balanced via the stored root value (AI assistant)
 - 2024-06-28 — Reapplied font scaling using the page's baseline pixel sizes so `<html>` and `<body>` grow together while the accessibility modal counter-balances through the root variable (AI assistant)
 - 2024-06-27 — Captured the applied font-scale on `<html>` and counter-scaled the accessibility widget so the font-size tool enlarges page content without distorting the modal (AI assistant)
 - 2024-06-26 — Switched the Font Size control to percentage-based root sizing so rem/Tailwind typography scales consistently across the host site (AI assistant)

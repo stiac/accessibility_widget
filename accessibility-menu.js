@@ -9,6 +9,14 @@ const accessibilityMenuStyles = `
       --acc-font-scale: 1;
     }
 
+    html[data-acc-font-scale-active] {
+      font-size: var(--acc-root-font-size, 100%) !important;
+    }
+
+    html[data-acc-font-scale-active] body {
+      font-size: var(--acc-body-font-size, inherit) !important;
+    }
+
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -952,17 +960,24 @@ document.addEventListener("DOMContentLoaded", function() {
         if (fontSizeValue) {
             const fontScale = resolveFontScale(fontSizeValue) || 1;
             const rootTarget = defaultRootFontSize * fontScale;
+            // Persist the calculated root font-size so all site content responds, not only the accessibility modal.
             docElement.style.setProperty('font-size', `${rootTarget}px`, 'important');
             docElement.style.setProperty('--acc-font-scale', String(fontScale));
+            docElement.style.setProperty('--acc-root-font-size', `${rootTarget}px`);
+            docElement.setAttribute('data-acc-font-scale-active', String(fontScale));
             if (bodyElement) {
                 const bodyTarget = defaultBodyFontSize * fontScale;
                 bodyElement.style.setProperty('font-size', `${bodyTarget}px`, 'important');
+                bodyElement.style.setProperty('--acc-body-font-size', `${bodyTarget}px`);
             }
         } else {
             docElement.style.removeProperty('font-size');
             docElement.style.removeProperty('--acc-font-scale');
+            docElement.style.removeProperty('--acc-root-font-size');
+            docElement.removeAttribute('data-acc-font-scale-active');
             if (bodyElement) {
                 bodyElement.style.removeProperty('font-size');
+                bodyElement.style.removeProperty('--acc-body-font-size');
             }
         }
     }
