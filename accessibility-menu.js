@@ -6,16 +6,25 @@ const accessibilityMenuStyles = `
       --acc_color_1: #0f172a;
       --acc_color_2: #f8fafc;
       --border_radius: 24px;
+      --acc-font-scale: 1;
     }
 
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
+      font-size: inherit;
       line-height: 1.25;
       letter-spacing: 0;
       user-select: none;
+    }
+
+    #accessibility-modal {
+      font-size: calc(1rem / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal * {
+      font-size: inherit;
     }
 
     #accessibility-modal {
@@ -672,6 +681,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const docElement = document.documentElement;
     const bodyElement = document.body;
+    const defaultRootFontSize = (() => {
+        const computed = parseFloat(window.getComputedStyle(docElement).fontSize);
+        return Number.isFinite(computed) && computed > 0 ? computed : 16;
+    })();
+    const defaultBodyFontSize = (() => {
+        if (!bodyElement) {
+            return defaultRootFontSize;
+        }
+        const computed = parseFloat(window.getComputedStyle(bodyElement).fontSize);
+        return Number.isFinite(computed) && computed > 0 ? computed : defaultRootFontSize;
+    })();
     const filterState = {
         invert: false,
         grayscale: false,
@@ -899,16 +919,48 @@ document.addEventListener("DOMContentLoaded", function() {
         saveSettings();
     });
 
+    function resolveFontScale(value) {
+        if (!value) {
+            return null;
+        }
+        const normalizedValue = value.trim().toLowerCase();
+        if (!normalizedValue) {
+            return null;
+        }
+        let fontScale = null;
+        if (normalizedValue.endsWith('%')) {
+            const parsedPercent = parseFloat(normalizedValue);
+            fontScale = Number.isFinite(parsedPercent) && parsedPercent > 0 ? parsedPercent / 100 : null;
+        } else if (normalizedValue.endsWith('rem') || normalizedValue.endsWith('em')) {
+            const parsedRelative = parseFloat(normalizedValue);
+            fontScale = Number.isFinite(parsedRelative) && parsedRelative > 0 ? parsedRelative : null;
+        } else if (normalizedValue.endsWith('px')) {
+            const parsedPixels = parseFloat(normalizedValue);
+            fontScale = Number.isFinite(parsedPixels) && parsedPixels > 0 ? parsedPixels / defaultRootFontSize : null;
+        } else {
+            const parsedPlain = parseFloat(normalizedValue);
+            if (Number.isFinite(parsedPlain) && parsedPlain > 0) {
+                fontScale = parsedPlain > 10 ? parsedPlain / 100 : parsedPlain;
+            }
+        }
+        return fontScale && fontScale > 0 ? fontScale : null;
+    }
+
     // Apply font scaling to both the root element and body so rem- and px-based layouts respond consistently.
     function applyGlobalFontSize(value) {
         const fontSizeValue = value || '';
         if (fontSizeValue) {
-            docElement.style.setProperty('font-size', fontSizeValue, 'important');
+            const fontScale = resolveFontScale(fontSizeValue) || 1;
+            const rootTarget = defaultRootFontSize * fontScale;
+            docElement.style.setProperty('font-size', `${rootTarget}px`, 'important');
+            docElement.style.setProperty('--acc-font-scale', String(fontScale));
             if (bodyElement) {
-                bodyElement.style.setProperty('font-size', fontSizeValue, 'important');
+                const bodyTarget = defaultBodyFontSize * fontScale;
+                bodyElement.style.setProperty('font-size', `${bodyTarget}px`, 'important');
             }
         } else {
             docElement.style.removeProperty('font-size');
+            docElement.style.removeProperty('--acc-font-scale');
             if (bodyElement) {
                 bodyElement.style.removeProperty('font-size');
             }
@@ -921,15 +973,15 @@ document.addEventListener("DOMContentLoaded", function() {
         let progressIndex = -1;
 
         if (fontSizeClickCount === 0) {
-            applyGlobalFontSize('1.3rem');
+            applyGlobalFontSize('130%');
             fontSizeClickCount = 1;
             progressIndex = 0;
         } else if (fontSizeClickCount === 1) {
-            applyGlobalFontSize('1.5rem');
+            applyGlobalFontSize('150%');
             fontSizeClickCount = 2;
             progressIndex = 1;
         } else if (fontSizeClickCount === 2) {
-            applyGlobalFontSize('1.8rem');
+            applyGlobalFontSize('180%');
             fontSizeClickCount = 3;
             progressIndex = 2;
         } else {
@@ -1376,15 +1428,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const fontSizeItem = document.querySelector('#font-size');
         const currentFontSize = docElement.style.getPropertyValue('font-size');
-        if (currentFontSize === '1.3rem') {
+        const inlineFontScale = resolveFontScale(currentFontSize);
+        const storedFontScale = parseFloat(docElement.style.getPropertyValue('--acc-font-scale'));
+        const currentFontScale = Number.isFinite(inlineFontScale) && inlineFontScale > 0 ? inlineFontScale : Number.isFinite(storedFontScale) && storedFontScale > 0 ? storedFontScale : 1;
+        const isApproximately = (value, target) => Math.abs(value - target) < 0.05;
+        if (isApproximately(currentFontScale, 1.3)) {
             fontSizeClickCount = 1;
             updateProgress(fontSizeItem, 0);
             setControlActiveState(fontSizeItem, true);
-        } else if (currentFontSize === '1.5rem') {
+        } else if (isApproximately(currentFontScale, 1.5)) {
             fontSizeClickCount = 2;
             updateProgress(fontSizeItem, 1);
             setControlActiveState(fontSizeItem, true);
-        } else if (currentFontSize === '1.8rem') {
+        } else if (isApproximately(currentFontScale, 1.8)) {
             fontSizeClickCount = 3;
             updateProgress(fontSizeItem, 2);
             setControlActiveState(fontSizeItem, true);
