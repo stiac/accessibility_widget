@@ -21,12 +21,19 @@ const accessibilityMenuStyles = `
      * Tailwind's preflight sets inline media elements (audio, canvas, embed,
      * iframe, img, object, svg, video) to display: block. When we lazily load
      * the CDN build for hosts that do not already use Tailwind, that reset can
-     * unexpectedly force inline SVG icons to break layouts on the surrounding
+     * unexpectedly force inline media to break layouts on the surrounding
      * site. Mark the document when we inject our fallback Tailwind build and
-     * restore the browser defaults for inline SVGs while keeping the widget's
+     * restore the browser defaults for inline media while keeping the widget's
      * icons block-level for sizing consistency.
      */
-    html[data-acc-tailwind-fallback] svg {
+    html[data-acc-tailwind-fallback] audio,
+    html[data-acc-tailwind-fallback] canvas,
+    html[data-acc-tailwind-fallback] embed,
+    html[data-acc-tailwind-fallback] iframe,
+    html[data-acc-tailwind-fallback] img,
+    html[data-acc-tailwind-fallback] object,
+    html[data-acc-tailwind-fallback] svg,
+    html[data-acc-tailwind-fallback] video {
       display: inline;
       vertical-align: baseline;
     }

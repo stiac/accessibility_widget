@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.8
+- **Version**: 1.4.9
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-10-31
+- **Last Update**: 2025-11-01
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-11-01 — Restored browser-default inline rendering for host audio, canvas, embed, iframe, img, object, svg, and video elements when the fallback Tailwind CDN is injected, keeping widget icons block-level while preventing host layout regressions (AI assistant)
 - 2025-10-31 — Restored inline SVG rendering for host pages when the fallback Tailwind CDN is injected, preventing layout regressions triggered by the preflight reset (AI assistant)
 - 2024-06-29 — Added a data attribute and CSS variables so the font-size control applies the scaled pixels to `<html>` and `<body>`, keeping the accessibility modal balanced via the stored root value (AI assistant)
 - 2024-06-28 — Reapplied font scaling using the page's baseline pixel sizes so `<html>` and `<body>` grow together while the accessibility modal counter-balances through the root variable (AI assistant)
