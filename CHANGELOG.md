@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.13] - 2025-11-05
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Counter-scaled Tailwind typography utilities inside `#accessibility-modal` so the Font Size control leaves the widget interface unchanged while the host site zooms.
+
+### Removed
+- None.
+
 ## [1.4.12] - 2025-11-04
 
 ### Added
