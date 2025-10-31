@@ -1,6 +1,6 @@
 {
   "name": "accessibility-plugin",
-  "version": "1.4.12",
+  "version": "1.4.11",
   "description": "You can use this plugin to make a accessibility friendly website fast and easily",
   "main": "accessibility-menu.js",
   "scripts": {
