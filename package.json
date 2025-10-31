@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://stiac/accessibility-plugin.git"
-  }, 
+  },
   "keywords": [
     "accessibility-plugin",
     "Accessibility",
@@ -26,8 +26,8 @@
     "accessibility-tools",
     "free-plugin"
   ],
-  "author": "Praboth Charith",
-  "license": "ISC",
+  "author": "Stiac Web Services",
+  "license": "Stiac Web Services Proprietary License",
   "bugs": {
     "url": "https://github.com/stiac/accessibility-plugin.git/issues"
   },
