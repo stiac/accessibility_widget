@@ -4,6 +4,7 @@
 - Add automated regression coverage for `syncControls` and persistence helpers.
 - Provide UI feedback for binary toggles without progress indicators (e.g., grayscale) to reinforce state changes.
 - Introduce a lightweight lint/check step to catch syntax errors before publishing script updates.
+- Add a smoke test ensuring widget UI elements stay excluded from global font-size scaling routines.
 
 ## Mid Term
 - Offer configuration API for customizing control order and visibility without editing source.

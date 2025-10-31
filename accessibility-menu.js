@@ -61,6 +61,32 @@ const accessibilityMenuStyles = `
       font-size: inherit;
     }
 
+    /*
+     * Neutralise Tailwind typography utilities inside the accessibility modal when the
+     * Font Size control scales the host page. These utilities rely on rem units which
+     * follow the root font size, so we counter-scale them with the active font factor
+     * to keep the widget UI stable regardless of the applied zoom level.
+     */
+    #accessibility-modal .text-xs {
+      font-size: calc(0.75rem / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal .text-sm {
+      font-size: calc(0.875rem / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal .text-lg {
+      font-size: calc(1.125rem / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal .text-[10px] {
+      font-size: calc(10px / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal .text-[11px] {
+      font-size: calc(11px / var(--acc-font-scale, 1));
+    }
+
     #accessibility-modal {
       position: fixed;
       top: 1.5rem;
@@ -878,6 +904,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (accessibilityModal && (element === accessibilityModal || accessibilityModal.contains(element))) {
             return true;
         }
+        if (element.closest && element.closest('#accessibility-modal')) {
+            return true;
+        }
         return TEXT_ELEMENT_SKIP_TAGS.has(element.tagName);
     }
 
@@ -969,7 +998,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function applyFontScaleToRegisteredElements(fontScale) {
         textElementRegistry.forEach((meta, element) => {
-            if (!element || !element.isConnected || shouldSkipFontTarget(element)) {
+            const shouldRemove = !element || !element.isConnected || shouldSkipFontTarget(element);
+
+            if (shouldRemove) {
+                if (element && meta) {
+                    element.style.removeProperty('font-size');
+                    if (meta.inlineValue) {
+                        element.style.setProperty('font-size', meta.inlineValue, meta.inlinePriority || '');
+                    }
+                }
                 textElementRegistry.delete(element);
                 return;
             }
