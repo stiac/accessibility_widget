@@ -1364,29 +1364,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 scanForTextElements(observerRoot);
             }
             activeFontScale = fontScale;
-            const rootTarget = defaultRootFontSize * fontScale;
-            // Persist the calculated root font-size so all site content responds, not only the accessibility modal.
-            docElement.style.setProperty('font-size', `${rootTarget}px`, 'important');
-            docElement.style.setProperty('--acc-font-scale', String(fontScale));
-            docElement.style.setProperty('--acc-root-font-size', `${rootTarget}px`);
-            docElement.setAttribute('data-acc-font-scale-active', String(fontScale));
-            if (bodyElement) {
-                const bodyTarget = defaultBodyFontSize * fontScale;
-                bodyElement.style.setProperty('font-size', `${bodyTarget}px`, 'important');
-                bodyElement.style.setProperty('--acc-body-font-size', `${bodyTarget}px`);
-            }
+            docElement.dataset.accFontSizeValue = fontSizeValue;
+            docElement.dataset.accFontScale = String(fontScale);
             applyFontScaleToRegisteredElements(fontScale);
         } else {
             applyFontScaleToRegisteredElements(null);
             activeFontScale = 1;
-            docElement.style.removeProperty('font-size');
-            docElement.style.removeProperty('--acc-font-scale');
-            docElement.style.removeProperty('--acc-root-font-size');
-            docElement.removeAttribute('data-acc-font-scale-active');
-            if (bodyElement) {
-                bodyElement.style.removeProperty('font-size');
-                bodyElement.style.removeProperty('--acc-body-font-size');
-            }
+            delete docElement.dataset.accFontSizeValue;
+            delete docElement.dataset.accFontScale;
         }
     }
 
@@ -1706,7 +1691,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 contrast: filterState.contrast
             },
             underline: docElement.classList.contains('underline-style-2') ? 'style-2' : docElement.classList.contains('underline-style-1') ? 'style-1' : docElement.classList.contains('underline-style-0') ? 'style-0' : 'default',
-            fontSize: docElement.style.getPropertyValue('font-size') || '',
+            fontSize: docElement.dataset.accFontSizeValue || '',
             lineHeight: docElement.classList.contains('line-height-2') ? 'line-height-2' : docElement.classList.contains('line-height-1') ? 'line-height-1' : docElement.classList.contains('line-height-0') ? 'line-height-0' : 'default',
             letterSpacing: docElement.style.letterSpacing || '',
             textAlign: docElement.style.textAlign || '',
@@ -1851,10 +1836,14 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const fontSizeItem = document.querySelector('#font-size');
-        const currentFontSize = docElement.style.getPropertyValue('font-size');
-        const inlineFontScale = resolveFontScale(currentFontSize);
-        const storedFontScale = parseFloat(docElement.style.getPropertyValue('--acc-font-scale'));
-        const currentFontScale = Number.isFinite(inlineFontScale) && inlineFontScale > 0 ? inlineFontScale : Number.isFinite(storedFontScale) && storedFontScale > 0 ? storedFontScale : 1;
+        const storedFontSizeValue = docElement.dataset.accFontSizeValue || '';
+        const storedFontScale = parseFloat(docElement.dataset.accFontScale || '');
+        const resolvedStoredScale = resolveFontScale(storedFontSizeValue);
+        const currentFontScale = Number.isFinite(storedFontScale) && storedFontScale > 0
+            ? storedFontScale
+            : Number.isFinite(resolvedStoredScale) && resolvedStoredScale > 0
+                ? resolvedStoredScale
+                : activeFontScale || 1;
         const isApproximately = (value, target) => Math.abs(value - target) < 0.05;
         if (isApproximately(currentFontScale, 1.3)) {
             fontSizeClickCount = 1;
