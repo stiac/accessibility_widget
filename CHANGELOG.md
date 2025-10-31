@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.12] - 2025-11-04
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Stopped the Font Size control from writing inline styles or CSS variables onto `<html>` and the accessibility modal, eliminating the unintended `--acc-modal-scale` effect while keeping host-page content scalable.
+
+### Removed
+- None.
+
 ## [1.4.11] - 2025-11-03
 
 ### Added
