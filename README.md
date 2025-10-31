@@ -134,3 +134,7 @@ You can use `min.js` file _as your requirement_
 # accessibility_widget
 # accessibility_widget
 # accessibility_widget
+
+## License
+
+This project is distributed under the Stiac Web Services Proprietary License. Commercial use, modification, and redistribution are prohibited unless you receive explicit written authorization from Stiac Web Services.
