@@ -8,8 +8,18 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.16`
+- **Current Version:** `1.4.18`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.18
+
+- Rebuilt the Text Align experience as a WCAG 2.1 Level A and EAA compliant button group with Start, Center, End, and Justify options that work with keyboard navigation and screen readers.
+- Added document-level alignment helpers that respect writing direction while overriding conflicting author styles when a user preference is active.
+- Normalized stored preferences so existing left/center/right selections migrate to the new start/center/end/justify values without losing saved sessions.
+
+## What's New in 1.4.17
+
+- Fixed the Text Align control so it now applies alignment styles to both `<html>` and `<body>`, ensuring host page content responds and icons stay in sync after resets.
 
 ## What's New in 1.4.16
 
@@ -116,7 +126,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Font Size**: Increases the font size of the page to improve readability for users with visual impairments.
 - **Line Height**: Increases the line height of the page to improve readability for users with visual impairments.
 - **Letter Spacing**: Increases the letter spacing of the page to improve readability for users with visual impairments.
-- **Text Alignment**: Changes the text alignment of the page to improve readability for users with visual impairments.
+- **Text Alignment**: Lets readers pick Start, Center, End, or Justify alignment with an accessible segmented control that overrides author styles only while the preference is active.
 - **Low Contrast**: Reduces the contrast of the page to improve readability for users with visual impairments.
 - **High Contrast**: Increases the contrast of the page to improve readability for users with visual impairments.
 - **Extra Contrast**: Increases the contrast of the page even further to improve readability for users with visual impairments.

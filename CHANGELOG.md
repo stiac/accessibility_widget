@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.4.18] - 2025-11-10
+
+### Added
+- Introduced a keyboard-navigable Text Align button group with Start, Center, End, and Justify options that surface polite screen reader announcements.
+
+### Changed
+- Applied `data-acc-text-align` helpers and WCAG/EAA-driven styling so user-selected alignment overrides conflicting author styles while respecting document direction.
+
+### Fixed
+- Migrated legacy left/center/right settings to the new alignment model and ensured resets restore the original site alignment safely.
+
+### Removed
+- None.
+
+## [1.4.17] - 2025-11-09
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Ensured the Text Align control synchronises styles across `<html>` and `<body>` so page content responds correctly and the widget icon resets cleanly.
+
+### Removed
+- None.
+
 ## [1.4.16] - 2025-11-08
 
 ### Added
