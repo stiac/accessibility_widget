@@ -1,0 +1,33 @@
+# Software Report
+
+- **Project**: Accessibility Plugin
+- **Version**: 1.4.2
+- **Maintainer**: Praboth Charith
+- **Last Update**: 2024-06-24
+
+## Module Status
+- **Menu Rendering**: Completed
+- **Control Handlers**: Completed (refreshed in v1.3.0)
+- **Persistence Layer**: Completed
+- **Testing**: Planned (manual regression required)
+
+## Recent Activities
+- 2024-06-24 — Forced the Font Size control to apply with inline `!important` styles on `<html>` and `<body>` so typography scaling covers the whole site (AI assistant)
+- 2024-06-23 — Refined the modal animation, darkened progress indicators, and restored full-page cursor overlays (AI assistant)
+- 2024-06-22 — Restyled the accessibility menu with Tailwind CSS and added automatic CDN loading for consistent visuals (AI assistant)
+- 2024-06-21 — Added Stiac Web Services branding badge, dataset metadata, and console notice to assert proprietary ownership (AI assistant)
+- 2024-06-20 — Extended Hide Videos support to iframe/embed/object integrations and documented opt-in/out attributes (AI assistant)
+- 2024-06-19 — Expanded Hide Images coverage to include inline media and CSS backgrounds (AI assistant)
+- 2024-06-18 — Fixed syntax error preventing direct `<script>` usage (AI assistant)
+- 2024-06-17 — Refined progress indicator handling and text alignment icon syncing (AI assistant)
+- 2024-06-17 — Normalized cursor state synchronization (AI assistant)
+
+## Risks & Notes
+- Missing automated tests means regressions must be caught with manual QA.
+- Minified bundle is not regenerated automatically; ensure manual build when publishing.
+
+## Dependencies
+- No runtime dependencies.
+
+## Economic Report
+- Not tracked.
