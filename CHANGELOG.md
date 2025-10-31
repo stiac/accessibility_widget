@@ -1,19 +1,5 @@
 # Changelog
 
-## [1.4.12] - 2025-11-04
-
-### Added
-- None.
-
-### Changed
-- None.
-
-### Fixed
-- Counter-scaled the accessibility modal with a CSS variable so the Font Size control no longer enlarges its typography or padding when the host page scales.
-
-### Removed
-- None.
-
 ## [1.4.11] - 2025-11-03
 
 ### Added
