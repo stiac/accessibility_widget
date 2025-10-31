@@ -6,11 +6,10 @@
 - None.
 
 ### Changed
-- Adopted the Stiac Web Services Proprietary License, restricting commercial use, redistribution, and modification without written authorization.
-- Updated official authorship references to list Stiac Web Services.
+- None.
 
 ### Fixed
-- None.
+- Captured the applied font-scale on the `<html>` element and counter-scaled the accessibility modal so the font-size control enlarges the host page without blowing up the widget itself.
 
 ### Removed
 - None.

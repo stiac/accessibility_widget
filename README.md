@@ -13,12 +13,11 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 
 ## What's New in 1.4.5
 
-- Adopted the Stiac Web Services Proprietary License, which forbids commercial use, redistribution, or modifications without prior written authorization from Stiac Web Services.
-- Updated project attribution to list Stiac Web Services as the official author and rights holder.
+- Corrected the font-size tool to enlarge the host page while counter-scaling the accessibility widget via a root-level CSS variable, keeping the modal readable as the site grows.
 
 ## What's New in 1.4.4
 
-- Fixed the Font Size control so the root element receives percentage-based values, ensuring rem and Tailwind typography scale across the host site instead of staying locked to the default browser size.
+- Fixed the font-size control so the root element receives percentage-based values, ensuring rem and Tailwind typography scale across the host site instead of staying locked to the default browser size.
 
 ## What's New in 1.4.3
 

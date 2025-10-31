@@ -6,16 +6,25 @@ const accessibilityMenuStyles = `
       --acc_color_1: #0f172a;
       --acc_color_2: #f8fafc;
       --border_radius: 24px;
+      --acc-font-scale: 1;
     }
 
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 16px;
+      font-size: inherit;
       line-height: 1.25;
       letter-spacing: 0;
       user-select: none;
+    }
+
+    #accessibility-modal {
+      font-size: calc(1rem / var(--acc-font-scale, 1));
+    }
+
+    #accessibility-modal * {
+      font-size: inherit;
     }
 
     #accessibility-modal {
@@ -906,11 +915,26 @@ document.addEventListener("DOMContentLoaded", function() {
             // Use percentage-based sizing so the root rem baseline actually grows; rem values
             // on the <html> element resolve to its previous size and were therefore ignored.
             docElement.style.setProperty('font-size', fontSizeValue, 'important');
+            const normalizedValue = fontSizeValue.trim().toLowerCase();
+            let fontScale = 1;
+            if (normalizedValue.endsWith('%')) {
+                const parsedPercent = parseFloat(normalizedValue);
+                fontScale = Number.isFinite(parsedPercent) && parsedPercent > 0 ? parsedPercent / 100 : 1;
+            } else if (normalizedValue.endsWith('rem')) {
+                const parsedRem = parseFloat(normalizedValue);
+                fontScale = Number.isFinite(parsedRem) && parsedRem > 0 ? parsedRem : 1;
+            } else if (normalizedValue.endsWith('em')) {
+                const parsedEm = parseFloat(normalizedValue);
+                fontScale = Number.isFinite(parsedEm) && parsedEm > 0 ? parsedEm : 1;
+            }
+            // Store the resolved scale factor on the root element so the widget can counter-scale itself.
+            docElement.style.setProperty('--acc-font-scale', String(fontScale));
             if (bodyElement) {
                 bodyElement.style.setProperty('font-size', 'inherit', 'important');
             }
         } else {
             docElement.style.removeProperty('font-size');
+            docElement.style.removeProperty('--acc-font-scale');
             if (bodyElement) {
                 bodyElement.style.removeProperty('font-size');
             }
