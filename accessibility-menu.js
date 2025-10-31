@@ -878,6 +878,9 @@ document.addEventListener("DOMContentLoaded", function() {
         if (accessibilityModal && (element === accessibilityModal || accessibilityModal.contains(element))) {
             return true;
         }
+        if (element.closest && element.closest('#accessibility-modal')) {
+            return true;
+        }
         return TEXT_ELEMENT_SKIP_TAGS.has(element.tagName);
     }
 
@@ -969,7 +972,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function applyFontScaleToRegisteredElements(fontScale) {
         textElementRegistry.forEach((meta, element) => {
-            if (!element || !element.isConnected || shouldSkipFontTarget(element)) {
+            const shouldRemove = !element || !element.isConnected || shouldSkipFontTarget(element);
+
+            if (shouldRemove) {
+                if (element && meta) {
+                    element.style.removeProperty('font-size');
+                    if (meta.inlineValue) {
+                        element.style.setProperty('font-size', meta.inlineValue, meta.inlinePriority || '');
+                    }
+                }
                 textElementRegistry.delete(element);
                 return;
             }
