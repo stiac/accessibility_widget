@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.2
+- **Version**: 1.4.4
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2024-06-24
+- **Last Update**: 2024-06-26
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2024-06-26 — Switched the Font Size control to percentage-based root sizing so rem/Tailwind typography scales consistently across the host site (AI assistant)
 - 2024-06-24 — Forced the Font Size control to apply with inline `!important` styles on `<html>` and `<body>` so typography scaling covers the whole site (AI assistant)
 - 2024-06-23 — Refined the modal animation, darkened progress indicators, and restored full-page cursor overlays (AI assistant)
 - 2024-06-22 — Restyled the accessibility menu with Tailwind CSS and added automatic CDN loading for consistent visuals (AI assistant)

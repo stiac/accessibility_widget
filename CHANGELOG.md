@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.4] - 2024-06-26
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Reworked the Font Size control to use percentage values on the `<html>` element so rem-based typography across the host site actually scales when the control is toggled.
+
+### Removed
+- None.
+
 ## [1.4.3] - 2024-06-25
 
 ### Added
