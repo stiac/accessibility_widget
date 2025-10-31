@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.16] - 2025-11-08
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Shifted the Font Size control to rely on dataset-tracked scaling for registered host elements so the accessibility modal's content and layout stay untouched.
+
+### Removed
+- None.
+
 ## [1.4.15] - 2025-11-07
 
 ### Added
