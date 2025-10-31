@@ -8,8 +8,29 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.16`
+- **Current Version:** `1.4.20`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.20
+
+- Disabled the Text Align segmented buttons by default, dimming the card and surfacing guidance until administrators opt the control back in.
+- Introduced configuration toggles (`window.accessibilityWidgetSettings.enableTextAlignOptions` or `data-acc-enable-text-align-options="true"`) so the Start, Center, End, and Justify button group can be restored when needed.
+- Cleared saved Text Align preferences automatically when the control is disabled to keep host pages aligned with their default author styles.
+
+## What's New in 1.4.19
+
+- Fixed the Text Align control so it now targets host-page content exclusively, leaving the accessibility modal layout untouched while respecting user-selected Start, Center, End, and Justify modes.
+- Preserved WCAG 2.1 Level A and EAA alignment guarantees by continuing to normalise stored values and announce changes without overriding modal typography.
+
+## What's New in 1.4.18
+
+- Rebuilt the Text Align experience as a WCAG 2.1 Level A and EAA compliant button group with Start, Center, End, and Justify options that work with keyboard navigation and screen readers.
+- Added document-level alignment helpers that respect writing direction while overriding conflicting author styles when a user preference is active.
+- Normalized stored preferences so existing left/center/right selections migrate to the new start/center/end/justify values without losing saved sessions.
+
+## What's New in 1.4.17
+
+- Fixed the Text Align control so it now applies alignment styles to both `<html>` and `<body>`, ensuring host page content responds and icons stay in sync after resets.
 
 ## What's New in 1.4.16
 
@@ -116,7 +137,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Font Size**: Increases the font size of the page to improve readability for users with visual impairments.
 - **Line Height**: Increases the line height of the page to improve readability for users with visual impairments.
 - **Letter Spacing**: Increases the letter spacing of the page to improve readability for users with visual impairments.
-- **Text Alignment**: Changes the text alignment of the page to improve readability for users with visual impairments.
+- **Text Alignment**: (Optional) Provides Start, Center, End, or Justify alignment via a segmented control when enabled in settings, otherwise keeping the site's default author alignment.
 - **Low Contrast**: Reduces the contrast of the page to improve readability for users with visual impairments.
 - **High Contrast**: Increases the contrast of the page to improve readability for users with visual impairments.
 - **Extra Contrast**: Increases the contrast of the page even further to improve readability for users with visual impairments.
@@ -166,6 +187,26 @@ You can use `min.js` file _as your requirement_
 
 - The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads.
 - Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1` and `--acc_color_2`) at the top of `accessibility-menu.js`.
+
+### Enable Text Align Buttons
+
+- The segmented Start, Center, End, and Justify buttons are disabled by default. Enable them globally by defining the settings object **before** loading the widget script:
+
+  ```html
+  <script>
+    window.accessibilityWidgetSettings = {
+      enableTextAlignOptions: true
+    };
+  </script>
+  ```
+
+- Alternatively, add the attribute directly to the root element in your markup:
+
+  ```html
+  <html lang="en" data-acc-enable-text-align-options="true">
+  ```
+
+  Either approach reactivates the segmented control while keeping the default guidance card when the feature is turned off.
 
 ### Fine-tune Video Visibility
 
