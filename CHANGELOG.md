@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.4.8] - 2024-06-30
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Traversed the host document to capture readable text nodes and scale their baseline pixel values so the Font Size control enlarges content defined with absolute units outside the accessibility modal.
+
+### Removed
+- None.
+
+## [1.4.7] - 2024-06-29
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Applied CSS variables and a data attribute to propagate the scaled font sizes onto `<html>` and `<body>`, ensuring the Font S
+ize control affects the entire site instead of only resizing the accessibility modal.
+
+### Removed
+- None.
+
 ## [1.4.6] - 2024-06-28
 
 ### Added
