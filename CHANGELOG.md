@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.15] - 2025-11-07
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Escaped Tailwind bracket utility selectors before sampling modal typography so `querySelector` no longer throws syntax errors when measuring font sizes.
+
+### Removed
+- None.
+
 ## [1.4.14] - 2025-11-06
 
 ### Added
