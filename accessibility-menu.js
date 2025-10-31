@@ -681,6 +681,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const docElement = document.documentElement;
     const bodyElement = document.body;
+    const defaultRootFontSize = (() => {
+        const computed = parseFloat(window.getComputedStyle(docElement).fontSize);
+        return Number.isFinite(computed) && computed > 0 ? computed : 16;
+    })();
+    const defaultBodyFontSize = (() => {
+        if (!bodyElement) {
+            return defaultRootFontSize;
+        }
+        const computed = parseFloat(window.getComputedStyle(bodyElement).fontSize);
+        return Number.isFinite(computed) && computed > 0 ? computed : defaultRootFontSize;
+    })();
     const filterState = {
         invert: false,
         grayscale: false,
@@ -908,29 +919,44 @@ document.addEventListener("DOMContentLoaded", function() {
         saveSettings();
     });
 
+    function resolveFontScale(value) {
+        if (!value) {
+            return null;
+        }
+        const normalizedValue = value.trim().toLowerCase();
+        if (!normalizedValue) {
+            return null;
+        }
+        let fontScale = null;
+        if (normalizedValue.endsWith('%')) {
+            const parsedPercent = parseFloat(normalizedValue);
+            fontScale = Number.isFinite(parsedPercent) && parsedPercent > 0 ? parsedPercent / 100 : null;
+        } else if (normalizedValue.endsWith('rem') || normalizedValue.endsWith('em')) {
+            const parsedRelative = parseFloat(normalizedValue);
+            fontScale = Number.isFinite(parsedRelative) && parsedRelative > 0 ? parsedRelative : null;
+        } else if (normalizedValue.endsWith('px')) {
+            const parsedPixels = parseFloat(normalizedValue);
+            fontScale = Number.isFinite(parsedPixels) && parsedPixels > 0 ? parsedPixels / defaultRootFontSize : null;
+        } else {
+            const parsedPlain = parseFloat(normalizedValue);
+            if (Number.isFinite(parsedPlain) && parsedPlain > 0) {
+                fontScale = parsedPlain > 10 ? parsedPlain / 100 : parsedPlain;
+            }
+        }
+        return fontScale && fontScale > 0 ? fontScale : null;
+    }
+
     // Apply font scaling to both the root element and body so rem- and px-based layouts respond consistently.
     function applyGlobalFontSize(value) {
         const fontSizeValue = value || '';
         if (fontSizeValue) {
-            // Use percentage-based sizing so the root rem baseline actually grows; rem values
-            // on the <html> element resolve to its previous size and were therefore ignored.
-            docElement.style.setProperty('font-size', fontSizeValue, 'important');
-            const normalizedValue = fontSizeValue.trim().toLowerCase();
-            let fontScale = 1;
-            if (normalizedValue.endsWith('%')) {
-                const parsedPercent = parseFloat(normalizedValue);
-                fontScale = Number.isFinite(parsedPercent) && parsedPercent > 0 ? parsedPercent / 100 : 1;
-            } else if (normalizedValue.endsWith('rem')) {
-                const parsedRem = parseFloat(normalizedValue);
-                fontScale = Number.isFinite(parsedRem) && parsedRem > 0 ? parsedRem : 1;
-            } else if (normalizedValue.endsWith('em')) {
-                const parsedEm = parseFloat(normalizedValue);
-                fontScale = Number.isFinite(parsedEm) && parsedEm > 0 ? parsedEm : 1;
-            }
-            // Store the resolved scale factor on the root element so the widget can counter-scale itself.
+            const fontScale = resolveFontScale(fontSizeValue) || 1;
+            const rootTarget = defaultRootFontSize * fontScale;
+            docElement.style.setProperty('font-size', `${rootTarget}px`, 'important');
             docElement.style.setProperty('--acc-font-scale', String(fontScale));
             if (bodyElement) {
-                bodyElement.style.setProperty('font-size', 'inherit', 'important');
+                const bodyTarget = defaultBodyFontSize * fontScale;
+                bodyElement.style.setProperty('font-size', `${bodyTarget}px`, 'important');
             }
         } else {
             docElement.style.removeProperty('font-size');
@@ -1402,15 +1428,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const fontSizeItem = document.querySelector('#font-size');
         const currentFontSize = docElement.style.getPropertyValue('font-size');
-        if (currentFontSize === '130%') {
+        const inlineFontScale = resolveFontScale(currentFontSize);
+        const storedFontScale = parseFloat(docElement.style.getPropertyValue('--acc-font-scale'));
+        const currentFontScale = Number.isFinite(inlineFontScale) && inlineFontScale > 0 ? inlineFontScale : Number.isFinite(storedFontScale) && storedFontScale > 0 ? storedFontScale : 1;
+        const isApproximately = (value, target) => Math.abs(value - target) < 0.05;
+        if (isApproximately(currentFontScale, 1.3)) {
             fontSizeClickCount = 1;
             updateProgress(fontSizeItem, 0);
             setControlActiveState(fontSizeItem, true);
-        } else if (currentFontSize === '150%') {
+        } else if (isApproximately(currentFontScale, 1.5)) {
             fontSizeClickCount = 2;
             updateProgress(fontSizeItem, 1);
             setControlActiveState(fontSizeItem, true);
-        } else if (currentFontSize === '180%') {
+        } else if (isApproximately(currentFontScale, 1.8)) {
             fontSizeClickCount = 3;
             updateProgress(fontSizeItem, 2);
             setControlActiveState(fontSizeItem, true);

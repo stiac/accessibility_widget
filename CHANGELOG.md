@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.6] - 2024-06-28
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Calculated the font-scale against the page's initial pixel values and reapplied the scaled sizes to `<html>` and `<body>`, ensuring the font-size control enlarges site content instead of only shrinking the accessibility modal.
+
+### Removed
+- None.
+
 ## [1.4.5] - 2024-06-27
 
 ### Added
