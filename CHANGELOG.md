@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.20] - 2025-11-12
+
+### Added
+- None.
+
+### Changed
+- Reinstated the single-card Text Align control so it cycles Start, Center, End, and Justify like the other accessibility toggles while retaining keyboard shortcuts and polite announcements.
+- Introduced inline helper copy that surfaces whether the default site alignment or a custom override is active.
+
+### Fixed
+- None.
+
+### Removed
+- Removed the multi-button Text Align grid to match the streamlined interaction pattern used by the rest of the widget controls.
+
 ## [1.4.19] - 2025-11-11
 
 ### Added
