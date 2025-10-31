@@ -17,6 +17,25 @@ const accessibilityMenuStyles = `
       font-size: var(--acc-body-font-size, inherit) !important;
     }
 
+    /*
+     * Tailwind's preflight sets inline media elements (audio, canvas, embed,
+     * iframe, img, object, svg, video) to display: block. When we lazily load
+     * the CDN build for hosts that do not already use Tailwind, that reset can
+     * unexpectedly force inline SVG icons to break layouts on the surrounding
+     * site. Mark the document when we inject our fallback Tailwind build and
+     * restore the browser defaults for inline SVGs while keeping the widget's
+     * icons block-level for sizing consistency.
+     */
+    html[data-acc-tailwind-fallback] svg {
+      display: inline;
+      vertical-align: baseline;
+    }
+
+    html[data-acc-tailwind-fallback] #accessibility-modal svg {
+      display: block;
+      vertical-align: middle;
+    }
+
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -602,6 +621,10 @@ function ensureTailwindCSSLoaded() {
     const existingTailwindAsset = document.querySelector('script[src*="tailwindcss.com"]') || document.querySelector('link[href*="tailwind"]');
     if (existingTailwindAsset || !document.head) {
         return;
+    }
+
+    if (document.documentElement && !document.documentElement.hasAttribute('data-acc-tailwind-fallback')) {
+        document.documentElement.setAttribute('data-acc-tailwind-fallback', 'true');
     }
 
     const tailwindScript = document.createElement('script');

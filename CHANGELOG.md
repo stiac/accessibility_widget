@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.8] - 2025-10-31
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Reapplied the browser-default inline rendering to host SVG elements when the fallback Tailwind CDN is injected so Tailwind's preflight no longer forces them to behave like block elements.
+
+### Removed
+- None.
+
 ## [1.4.7] - 2024-06-29
 
 ### Added

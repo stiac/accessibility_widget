@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.7`
+- **Current Version:** `1.4.8`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.8
+
+- Restored the default inline display for host-page SVGs when the plugin loads its fallback Tailwind build so existing icon layouts are no longer broken by the preflight reset.
 
 ## What's New in 1.4.7
 
