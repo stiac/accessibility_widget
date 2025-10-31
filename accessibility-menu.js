@@ -276,15 +276,6 @@ const accessibilityMenuStyles = `
       display: initial !important;
     }
 
-    .hide-images :where(*) {
-      background-image: none !important;
-    }
-
-    .hide-images [data-acc-preserve-images],
-    .hide-images [data-acc-preserve-images] :where(*) {
-      background-image: initial !important;
-    }
-
     .hide-video :where(
         video,
         iframe[src*="youtube.com"],
@@ -730,6 +721,147 @@ document.addEventListener("DOMContentLoaded", function() {
         const computed = parseFloat(window.getComputedStyle(bodyElement).fontSize);
         return Number.isFinite(computed) && computed > 0 ? computed : defaultRootFontSize;
     })();
+
+    // Track host elements whose CSS background images are temporarily disabled by the Hide Images control.
+    const hideImageBackgroundElements = new Set();
+    let hideImagesObserver = null;
+
+    function elementIsInsideAccessibilityWidget(element) {
+        if (!element || !accessibilityModal) {
+            return false;
+        }
+        return element === accessibilityModal || accessibilityModal.contains(element);
+    }
+
+    function shouldProcessBackgroundImage(element) {
+        if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+            return false;
+        }
+        if (element === docElement || element === bodyElement) {
+            return false;
+        }
+        if (elementIsInsideAccessibilityWidget(element)) {
+            return false;
+        }
+        if (element.closest('[data-acc-preserve-images]')) {
+            return false;
+        }
+        return true;
+    }
+
+    function gatherBackgroundTargets(root) {
+        const targets = [];
+        if (shouldProcessBackgroundImage(root)) {
+            targets.push(root);
+        }
+        if (root && typeof root.querySelectorAll === 'function') {
+            root.querySelectorAll('*').forEach((element) => {
+                if (shouldProcessBackgroundImage(element)) {
+                    targets.push(element);
+                }
+            });
+        }
+        return targets;
+    }
+
+    function applyHideImagesToBackgrounds(root = docElement) {
+        const targets = gatherBackgroundTargets(root);
+        targets.forEach((element) => {
+            if (hideImageBackgroundElements.has(element)) {
+                return;
+            }
+
+            const computed = window.getComputedStyle(element);
+            const backgroundImage = computed ? computed.backgroundImage : '';
+
+            if (!backgroundImage || backgroundImage === 'none' || !backgroundImage.includes('url(')) {
+                return;
+            }
+
+            const inlineValue = element.style.getPropertyValue('background-image');
+            const inlinePriority = element.style.getPropertyPriority('background-image');
+
+            if (inlineValue) {
+                element.dataset.accBgImageInlineValue = inlineValue;
+                element.dataset.accBgImageHadInline = 'true';
+                if (inlinePriority) {
+                    element.dataset.accBgImageInlinePriority = inlinePriority;
+                } else {
+                    delete element.dataset.accBgImageInlinePriority;
+                }
+            } else {
+                element.dataset.accBgImageHadInline = 'false';
+                delete element.dataset.accBgImageInlineValue;
+                delete element.dataset.accBgImageInlinePriority;
+            }
+
+            element.style.setProperty('background-image', 'none', 'important');
+            hideImageBackgroundElements.add(element);
+        });
+    }
+
+    function resetHideImagesBackgrounds() {
+        hideImageBackgroundElements.forEach((element) => {
+            if (element.dataset.accBgImageHadInline === 'true') {
+                const inlineValue = element.dataset.accBgImageInlineValue || '';
+                const inlinePriority = element.dataset.accBgImageInlinePriority || '';
+                element.style.setProperty('background-image', inlineValue, inlinePriority);
+            } else {
+                element.style.removeProperty('background-image');
+            }
+
+            delete element.dataset.accBgImageInlineValue;
+            delete element.dataset.accBgImageInlinePriority;
+            delete element.dataset.accBgImageHadInline;
+        });
+
+        hideImageBackgroundElements.clear();
+    }
+
+    function ensureHideImagesObserver() {
+        if (hideImagesObserver) {
+            return;
+        }
+
+        hideImagesObserver = new MutationObserver((mutations) => {
+            if (!docElement.classList.contains('hide-images')) {
+                return;
+            }
+
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        applyHideImagesToBackgrounds(node);
+                    }
+                });
+            });
+        });
+
+        hideImagesObserver.observe(docElement, { childList: true, subtree: true });
+    }
+
+    function disconnectHideImagesObserver() {
+        if (!hideImagesObserver) {
+            return;
+        }
+
+        hideImagesObserver.disconnect();
+        hideImagesObserver = null;
+    }
+
+    // Toggle the Hide Images state while keeping gradients and other non-image backgrounds intact.
+    function setHideImagesActive(active) {
+        const shouldActivate = Boolean(active);
+        docElement.classList.toggle('hide-images', shouldActivate);
+
+        if (shouldActivate) {
+            applyHideImagesToBackgrounds();
+            ensureHideImagesObserver();
+        } else {
+            disconnectHideImagesObserver();
+            resetHideImagesBackgrounds();
+        }
+    }
 
     // Maintain a registry of elements whose text should scale so pixel-based typography also grows with the Font Size control.
     const textElementRegistry = new Map();
@@ -1326,7 +1458,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('#hide-images').addEventListener('click', () => {
         const item = document.querySelector('#hide-images');
         const nextState = !docElement.classList.contains('hide-images');
-        docElement.classList.toggle('hide-images');
+        setHideImagesActive(nextState);
         setControlActiveState(item, nextState);
         saveSettings();
     });
@@ -1447,7 +1579,8 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.classList.remove('line-height-0', 'line-height-1', 'line-height-2');
         docElement.style.letterSpacing = '';
         docElement.style.textAlign = '';
-        docElement.classList.remove('hide-images', 'hide-video');
+        setHideImagesActive(false);
+        docElement.classList.remove('hide-video');
 
         if (cursorElement) {
             cursorElement.classList.remove('cursor-0', 'cursor-1', 'cursor-2');
@@ -1544,7 +1677,7 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.classList.toggle('line-height-2', settings.lineHeight === 'line-height-2');
         docElement.style.letterSpacing = settings.letterSpacing || '';
         docElement.style.textAlign = settings.textAlign || '';
-        docElement.classList.toggle('hide-images', Boolean(settings.hideImages));
+        setHideImagesActive(Boolean(settings.hideImages));
         docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
 
         cursor.classList.toggle('cursor-0', settings.cursor === 'focus');
