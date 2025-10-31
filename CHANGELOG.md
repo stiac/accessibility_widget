@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.14] - 2025-11-06
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Captured the accessibility modal's baseline font metrics in CSS variables so the Font Size control leaves every widget element unchanged, even when saved zoom levels reapply on load.
+
+### Removed
+- None.
+
 ## [1.4.13] - 2025-11-05
 
 ### Added

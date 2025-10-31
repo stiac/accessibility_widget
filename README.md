@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.13`
+- **Current Version:** `1.4.14`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.14
+
+- Captured baseline font metrics for the accessibility modal and stored them in CSS variables so the Font Size control now leaves every widget label untouched, even when the host page rescales.
 
 ## What's New in 1.4.13
 

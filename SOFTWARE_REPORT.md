@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.13
+- **Version**: 1.4.14
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-05
+- **Last Update**: 2025-11-06
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-11-06 — Captured the accessibility modal's baseline font metrics in CSS variables so the Font Size control no longer alters widget labels even when saved zoom levels reapply (AI assistant)
 - 2025-11-05 — Counter-scaled Tailwind typography utilities within `#accessibility-modal` so the Font Size control leaves the widget UI untouched even when the host page zooms (AI assistant)
 - 2025-11-04 — Restored the Font Size feature so it never alters typography inside `#accessibility-modal` by resetting inline styles when removing registered nodes (AI assistant)
 - 2025-11-03 — Limited the Hide Images background stripping logic to URL-driven assets so branded sections keep their gradients while inline media is still removed (AI assistant)
@@ -35,6 +36,7 @@
 ## Risks & Notes
 - Missing automated tests means regressions must be caught with manual QA.
 - Minified bundle is not regenerated automatically; ensure manual build when publishing.
+- New CSS variable baseline for modal fonts should be regression-tested across browsers until automated coverage is available.
 
 ## Dependencies
 - No runtime dependencies.

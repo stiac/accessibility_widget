@@ -54,7 +54,7 @@ const accessibilityMenuStyles = `
     }
 
     #accessibility-modal {
-      font-size: calc(1rem / var(--acc-font-scale, 1));
+      font-size: var(--acc-modal-font-size, calc(1rem / var(--acc-font-scale, 1)));
     }
 
     #accessibility-modal * {
@@ -64,27 +64,28 @@ const accessibilityMenuStyles = `
     /*
      * Neutralise Tailwind typography utilities inside the accessibility modal when the
      * Font Size control scales the host page. These utilities rely on rem units which
-     * follow the root font size, so we counter-scale them with the active font factor
-     * to keep the widget UI stable regardless of the applied zoom level.
+     * follow the root font size, so we provide fixed pixel fallbacks based on the
+     * widget's baseline measurements and counter-scale them with the active font factor
+     * to keep the UI stable regardless of the applied zoom level.
      */
     #accessibility-modal .text-xs {
-      font-size: calc(0.75rem / var(--acc-font-scale, 1));
+      font-size: var(--acc-modal-text-xs, calc(0.75rem / var(--acc-font-scale, 1)));
     }
 
     #accessibility-modal .text-sm {
-      font-size: calc(0.875rem / var(--acc-font-scale, 1));
+      font-size: var(--acc-modal-text-sm, calc(0.875rem / var(--acc-font-scale, 1)));
     }
 
     #accessibility-modal .text-lg {
-      font-size: calc(1.125rem / var(--acc-font-scale, 1));
+      font-size: var(--acc-modal-text-lg, calc(1.125rem / var(--acc-font-scale, 1)));
     }
 
     #accessibility-modal .text-[10px] {
-      font-size: calc(10px / var(--acc-font-scale, 1));
+      font-size: var(--acc-modal-text-10, calc(10px / var(--acc-font-scale, 1)));
     }
 
     #accessibility-modal .text-[11px] {
-      font-size: calc(11px / var(--acc-font-scale, 1));
+      font-size: var(--acc-modal-text-11, calc(11px / var(--acc-font-scale, 1)));
     }
 
     #accessibility-modal {
@@ -747,6 +748,57 @@ document.addEventListener("DOMContentLoaded", function() {
         const computed = parseFloat(window.getComputedStyle(bodyElement).fontSize);
         return Number.isFinite(computed) && computed > 0 ? computed : defaultRootFontSize;
     })();
+
+    // Capture the modal's baseline font metrics so we can freeze them in CSS variables and
+    // prevent the Font Size control from propagating to the widget interface.
+    const modalFontMetrics = (() => {
+        if (!accessibilityModal) {
+            return null;
+        }
+
+        const parseSize = (value, fallback) => {
+            const parsed = parseFloat(value);
+            return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+        };
+
+        const resolveModalSize = () => {
+            const computed = window.getComputedStyle(accessibilityModal).fontSize;
+            return parseSize(computed, defaultBodyFontSize);
+        };
+
+        const baseSize = resolveModalSize();
+
+        const resolveFallback = (fallback) => (typeof fallback === 'function' ? fallback(baseSize) : fallback);
+
+        const sampleSize = (selector, fallback) => {
+            const target = accessibilityModal.querySelector(selector);
+            const fallbackValue = resolveFallback(fallback);
+            if (!target) {
+                return fallbackValue;
+            }
+            const computed = window.getComputedStyle(target).fontSize;
+            return parseSize(computed, fallbackValue);
+        };
+
+        return {
+            base: baseSize,
+            textXs: sampleSize('.text-xs', (value) => value * 0.75),
+            textSm: sampleSize('.text-sm', (value) => value * 0.875),
+            textLg: sampleSize('.text-lg', (value) => value * 1.125),
+            text10: sampleSize('.text-[10px]', 10),
+            text11: sampleSize('.text-[11px]', 11)
+        };
+    })();
+
+    if (modalFontMetrics) {
+        const formatPixels = (value) => `${Math.round(value * 1000) / 1000}px`;
+        accessibilityModal.style.setProperty('--acc-modal-font-size', formatPixels(modalFontMetrics.base));
+        accessibilityModal.style.setProperty('--acc-modal-text-xs', formatPixels(modalFontMetrics.textXs));
+        accessibilityModal.style.setProperty('--acc-modal-text-sm', formatPixels(modalFontMetrics.textSm));
+        accessibilityModal.style.setProperty('--acc-modal-text-lg', formatPixels(modalFontMetrics.textLg));
+        accessibilityModal.style.setProperty('--acc-modal-text-10', formatPixels(modalFontMetrics.text10));
+        accessibilityModal.style.setProperty('--acc-modal-text-11', formatPixels(modalFontMetrics.text11));
+    }
 
     // Track host elements whose CSS background images are temporarily disabled by the Hide Images control.
     const hideImageBackgroundElements = new Set();
