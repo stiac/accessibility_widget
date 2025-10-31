@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.12] - 2025-11-04
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Ensured the Font Size control restores any inline font declarations and skips elements inside `#accessibility-modal` so the
+  widget's own interface never receives unintended scaling.
+
+### Removed
+- None.
+
 ## [1.4.11] - 2025-11-03
 
 ### Added
