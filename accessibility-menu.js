@@ -658,12 +658,47 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeBtn = document.getElementById('closeBtn');
     const accessibilityTools = document.getElementById('accessibility-tools');
 
+    let hasPreservedModalMetrics = false;
+
+    /**
+     * Lock the font sizes and padding values used inside the accessibility modal so the
+     * global Font Size control never alters the widget's own interface. The measurements
+     * are captured in pixels so future root <html> font-size changes do not cascade into
+     * the modal via rem-based Tailwind utilities.
+     */
+    function preserveAccessibilityModalMetrics() {
+        if (hasPreservedModalMetrics || !accessibilityModal) {
+            return;
+        }
+
+        const modalElements = [accessibilityModal, ...accessibilityModal.querySelectorAll('*')];
+        modalElements.forEach((element) => {
+            const computed = window.getComputedStyle(element);
+
+            if (computed.fontSize) {
+                element.style.setProperty('font-size', computed.fontSize);
+            }
+
+            ['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft'].forEach((property) => {
+                const value = computed[property];
+                if (value) {
+                    element.style[property] = value;
+                }
+            });
+        });
+
+        hasPreservedModalMetrics = true;
+    }
+
     accessibilityModal.classList.add('stiac-sws-protected');
     accessibilityModal.setAttribute('data-stiac-owner', 'Stiac Web Services');
 
     // Trigger the refined reveal transition once the modal has been added to the DOM.
     requestAnimationFrame(() => {
         accessibilityModal.classList.add('is-ready');
+        requestAnimationFrame(() => {
+            preserveAccessibilityModalMetrics();
+        });
     });
 
     console.info('Stiac Web Services Accessibility Suite - Software proprietario, uso non autorizzato vietato.');
