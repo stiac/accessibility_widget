@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.5] - 2024-06-27
+
+### Added
+- None.
+
+### Changed
+- Adopted the Stiac Web Services Proprietary License, restricting commercial use, redistribution, and modification without written authorization.
+- Updated official authorship references to list Stiac Web Services.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 ## [1.4.4] - 2024-06-26
 
 ### Added
