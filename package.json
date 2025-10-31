@@ -1,6 +1,6 @@
 {
   "name": "accessibility-plugin",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "You can use this plugin to make a accessibility friendly website fast and easily",
   "main": "accessibility-menu.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://stiac/accessibility-plugin.git"
-  }, 
+  },
   "keywords": [
     "accessibility-plugin",
     "Accessibility",
@@ -26,8 +26,8 @@
     "accessibility-tools",
     "free-plugin"
   ],
-  "author": "Praboth Charith",
-  "license": "ISC",
+  "author": "Stiac Web Services",
+  "license": "Stiac Web Services Proprietary License",
   "bugs": {
     "url": "https://github.com/stiac/accessibility-plugin.git/issues"
   },
