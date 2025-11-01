@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.4] - 2025-11-24
+
+### Added
+- None.
+
+### Changed
+- Softened the modal expansion by morphing between circular and rectangular states with clip-path animations so the launcher no longer snaps into a rectangle when opening.
+
+### Fixed
+- Hid the language selector container while the widget is collapsed to prevent its labels from appearing outside the closed bubble.
+
+### Removed
+- None.
+
 # [1.5.3] - 2025-11-23
 
 ### Added

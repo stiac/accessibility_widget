@@ -1271,7 +1271,11 @@ const accessibilityMenuStyles = `
       --acc-translate-x: 0;
       --acc-transform-origin: top right;
       transform-origin: var(--acc-transform-origin);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.35s ease, width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
+      /* Use clip paths so the launcher bubble morphs smoothly into the panel. */
+      --acc-open-clip-path: inset(0 round 24px);
+      --acc-closed-clip-path: circle(48% at 50% 50%);
+      clip-path: var(--acc-open-clip-path);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.35s ease, width 0.35s ease, height 0.35s ease, opacity 0.35s ease, clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       opacity: 0;
       transform: translate3d(var(--acc-translate-x), 16px, 0) scale(0.96);
       filter: saturate(100%) blur(0);
@@ -1296,16 +1300,37 @@ const accessibilityMenuStyles = `
         opacity: 0;
         transform: translate3d(var(--acc-translate-x), 22px, 0) scale(0.9);
         filter: saturate(92%) blur(8px);
+        clip-path: var(--acc-closed-clip-path);
       }
       55% {
         opacity: 1;
         transform: translate3d(var(--acc-translate-x), -6px, 0) scale(1.02);
         filter: saturate(110%) blur(0);
+        clip-path: inset(0 round 28px);
       }
       100% {
         opacity: 1;
         transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
         filter: saturate(100%) blur(0);
+        clip-path: var(--acc-open-clip-path);
+      }
+    }
+
+    #accessibility-modal.is-ready.close {
+      animation: acc-modal-collapse 0.45s cubic-bezier(0.55, 0, 0.45, 1);
+      animation-fill-mode: both;
+    }
+
+    @keyframes acc-modal-collapse {
+      0% {
+        opacity: 1;
+        transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+        clip-path: var(--acc-open-clip-path);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+        clip-path: var(--acc-closed-clip-path);
       }
     }
 
@@ -1324,6 +1349,7 @@ const accessibilityMenuStyles = `
       opacity: 1;
       transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
       filter: saturate(100%) blur(0);
+      clip-path: var(--acc-closed-clip-path);
     }
 
     #accessibility-modal.is-ready.close {
@@ -1332,6 +1358,7 @@ const accessibilityMenuStyles = `
 
     #accessibility-modal.close #headerContent,
     #accessibility-modal.close #accessibility-tools,
+    #accessibility-modal.close #language-selector,
     #accessibility-modal.close #acc-footer {
       display: none;
     }
