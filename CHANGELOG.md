@@ -2,18 +2,17 @@
 # [1.5.4] - 2025-11-24
 
 ### Added
-- Embedded the six core locale decks directly into the widget bundle so same-origin fallbacks are always available without
-  additional requests.
-
-### Changed
 - None.
 
+### Changed
+- Softened the modal expansion by morphing between circular and rectangular states with clip-path animations so the launcher no longer snaps into a rectangle when opening.
+
 ### Fixed
-- `i18n.js` now checks embedded locale data before issuing fetch calls, eliminating language loader failures when remote JSON
-  responses are blocked by CORS policies or temporary CDN outages.
+- Hid the language selector container while the widget is collapsed to prevent its labels from appearing outside the closed bubble.
 
 ### Removed
 - None.
+
 # [1.5.3] - 2025-11-23
 
 ### Added

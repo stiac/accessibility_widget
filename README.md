@@ -13,8 +13,8 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 
 ## What's New in 1.5.4
 
-- Bundled the six default locale files directly inside the widget and taught `i18n.js` to read them before issuing network
-  requests, so language switching works even when CDN-hosted JSON is blocked by CORS or unavailable.
+- Reworked the launcher animation with clip-path driven transitions so the menu grows smoothly from the circular button without jarring shape changes.
+- Hid the language selector stack whenever the widget is closed to stop stray labels from peeking outside the launcher bubble.
 
 ## What's New in 1.5.3
 

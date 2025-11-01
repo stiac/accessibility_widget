@@ -11,7 +11,7 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
-- 2025-11-24 — Embedded the six default locale decks directly into the widget and updated the loader to consume them before requesting JSON over the network, preventing CORS-blocked language failures (AI assistant)
+- 2025-11-24 — Reworked the launcher animation with clip-path transitions and hid the language selector while collapsed to stop UI fragments bleeding outside the closed bubble (AI assistant)
 - 2025-11-22 — Smoothed the accessibility modal reveal with a spring-inspired animation that honours Reduce Motion preferences for gentler open transitions (AI assistant)
 - 2025-11-21 — Hardened locale loading to prefer same-origin bundles when scripts are served cross-origin, documenting mitigation steps for CDN integrations (AI assistant)
 - 2025-11-20 — Added the asynchronous i18n loader, JSON locale bundles for six languages, and an in-widget language selector with polite announcements (AI assistant)
