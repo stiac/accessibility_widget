@@ -1,4 +1,31 @@
 # Changelog
+## [1.4.21] - 2025-11-13
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- Dropped the visible "Click to cycle alignment" helper text from the Text Align card now that the control's behavior is self-evident and reinforced via screen reader guidance.
+
+## [1.4.20] - 2025-11-12
+
+### Added
+- None.
+
+### Changed
+- Replaced the Text Align button grid with a single clickable card that cycles through Start, Center, End, and Justify while updating icons, announcements, and saved states.
+
+### Fixed
+- None.
+
+### Removed
+- Retired the four-button Text Align group now that the card itself handles cycling through alignments.
 
 ## [1.4.19] - 2025-11-11
 

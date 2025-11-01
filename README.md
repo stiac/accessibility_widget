@@ -8,8 +8,16 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.19`
+- **Current Version:** `1.4.21`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.21
+
+- Removed the "Click to cycle alignment" helper text from the Text Align card while retaining the screen-reader guidance so the layout stays streamlined without losing accessibility support.
+
+## What's New in 1.4.20
+
+- Simplified the Text Align control so clicking the card cycles Start → Center → End → Justify before returning to the site default, keeping the icon, announcements, and saved states in sync.
 
 ## What's New in 1.4.19
 
@@ -131,7 +139,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Font Size**: Increases the font size of the page to improve readability for users with visual impairments.
 - **Line Height**: Increases the line height of the page to improve readability for users with visual impairments.
 - **Letter Spacing**: Increases the letter spacing of the page to improve readability for users with visual impairments.
-- **Text Alignment**: Lets readers pick Start, Center, End, or Justify alignment with an accessible segmented control that overrides author styles only while the preference is active.
+- **Text Alignment**: Cycle through Start, Center, End, and Justify by clicking the card; the preference overrides host styles while active and resets to default after the final option.
 - **Low Contrast**: Reduces the contrast of the page to improve readability for users with visual impairments.
 - **High Contrast**: Increases the contrast of the page to improve readability for users with visual impairments.
 - **Extra Contrast**: Increases the contrast of the page even further to improve readability for users with visual impairments.

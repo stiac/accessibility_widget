@@ -77,36 +77,6 @@ const accessibilityMenuStyles = `
       border: 0;
     }
 
-    #text-align .acc-align-option {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(15, 23, 42, 0.15);
-      background-color: rgba(248, 250, 252, 0.85);
-      color: var(--acc_color_1);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.5rem 0.75rem;
-      width: 100%;
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    #text-align .acc-align-option[aria-pressed="true"] {
-      background-color: var(--acc_color_1);
-      color: var(--acc_color_2);
-      border-color: var(--acc_color_1);
-      box-shadow: 0 12px 30px -18px rgba(15, 23, 42, 0.7);
-    }
-
-    #text-align .acc-align-option:focus-visible {
-      outline: 2px solid rgba(15, 23, 42, 0.45);
-      outline-offset: 2px;
-    }
-
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -596,38 +566,12 @@ const accessibilityMenuHTML = `
 
         <!--text align-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" role="group" aria-labelledby="text-align-label" aria-describedby="text-align-description">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-text-align-icon>
               <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" id="text-align-label">Text Align</p>
-            <p id="text-align-description" class="acc-sr-only">Choose how text should align across the page. Select the same option again to return to the default alignment.</p>
-            <div class="mt-1 grid w-full grid-cols-2 gap-2" role="group" aria-label="Text alignment options">
-              <button type="button" class="acc-align-option" data-text-align-option="start">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                  <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
-                </svg>
-                <span>Start</span>
-              </button>
-              <button type="button" class="acc-align-option" data-text-align-option="center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                  <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM7.5 11C7.22386 11 7 10.7761 7 10.5C7 10.2239 7.22386 10 7.5 10H16.5C16.7761 10 17 10.2239 17 10.5C17 10.7761 16.7761 11 16.5 11H7.5ZM7.5 19C7.22386 19 7 18.7761 7 18.5C7 18.2239 7.22386 18 7.5 18H16.5C16.7761 18 17 18.2239 17 18.5C17 18.7761 16.7761 19 16.5 19H7.5Z" fill="currentColor"/>
-                </svg>
-                <span>Center</span>
-              </button>
-              <button type="button" class="acc-align-option" data-text-align-option="end">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                  <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM10.5 11C10.2239 11 10 10.7761 10 10.5C10 10.2239 10.2239 10 10.5 10H19.5C19.7761 10 20 10.2239 20 10.5C20 10.7761 19.7761 11 19.5 11H10.5ZM10.5 19C10.2239 19 10 18.7761 10 18.5C10 18.2239 10.2239 18 10.5 18H19.5C19.7761 18 20 18.2239 20 18.5C20 18.7761 19.7761 19 19.5 19H10.5Z" fill="currentColor"/>
-                </svg>
-                <span>End</span>
-              </button>
-              <button type="button" class="acc-align-option" data-text-align-option="justify">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                  <path d="M4.5 6H19.5C19.7761 6 20 5.77614 20 5.5C20 5.22386 19.7761 5 19.5 5H4.5C4.22386 5 4 5.22386 4 5.5C4 5.77614 4.22386 6 4.5 6ZM4.5 10H19.5C19.7761 10 20 9.77614 20 9.5C20 9.22386 19.7761 9 19.5 9H4.5C4.22386 9 4 9.22386 4 9.5C4 9.77614 4.22386 10 4.5 10ZM4.5 14H19.5C19.7761 14 20 13.7761 20 13.5C20 13.2239 19.7761 13 19.5 13H4.5C4.22386 13 4 13.2239 4 13.5C4 13.7761 4.22386 14 4.5 14ZM4.5 18H19.5C19.7761 18 20 17.7761 20 17.5C20 17.2239 19.7761 17 19.5 17H4.5C4.22386 17 4 17.2239 4 17.5C4 17.7761 4.22386 18 4.5 18Z" fill="currentColor"/>
-                </svg>
-                <span>Justify</span>
-              </button>
-            </div>
+            <p id="text-align-description" class="acc-sr-only">Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.</p>
             <p class="acc-sr-only" data-text-align-status role="status" aria-live="polite"></p>
             <div class="acc-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
               <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
@@ -1205,7 +1149,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const textAlignIconElement = textAlignControl ? textAlignControl.querySelector('[data-text-align-icon]') : null;
     const textAlignDefaultIcon = textAlignIconElement ? textAlignIconElement.innerHTML : '';
     const textAlignStatusElement = textAlignControl ? textAlignControl.querySelector('[data-text-align-status]') : null;
-    const textAlignOptionButtons = textAlignControl ? Array.from(textAlignControl.querySelectorAll('[data-text-align-option]')) : [];
     const TEXT_ALIGN_SEQUENCE = ['start', 'center', 'end', 'justify'];
     const textAlignIcons = {
         start: `<path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>`,
@@ -1310,12 +1253,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         textAlignControl.classList.toggle('active', Boolean(currentValue));
         updateProgress(textAlignControl, typeof progressIndex === 'number' ? progressIndex : -1);
-
-        textAlignOptionButtons.forEach((button) => {
-            const optionValue = normaliseTextAlignValue(button.getAttribute('data-text-align-option'));
-            const isActive = currentValue === optionValue && Boolean(optionValue);
-            button.setAttribute('aria-pressed', String(isActive));
-        });
 
         if (textAlignStatusElement) {
             if (announce) {
@@ -1673,51 +1610,24 @@ document.addEventListener("DOMContentLoaded", function() {
         saveSettings();
     });
 
-    if (textAlignControl && textAlignOptionButtons.length > 0) {
-        const optionCount = textAlignOptionButtons.length;
-        const focusOptionAt = (index) => {
-            if (!textAlignOptionButtons[index]) {
-                return;
-            }
-            textAlignOptionButtons[index].focus();
-        };
-
-        const handleTextAlignSelection = (targetValue) => {
-            const safeTarget = normaliseTextAlignValue(targetValue);
+    if (textAlignControl) {
+        // Cycle the document text alignment each time the card is activated.
+        textAlignControl.addEventListener('click', () => {
             const currentValue = getDocumentTextAlign();
-            const nextValue = currentValue === safeTarget ? '' : safeTarget;
-            setDocumentTextAlign(nextValue);
+            if (!currentValue) {
+                setDocumentTextAlign(TEXT_ALIGN_SEQUENCE[0]);
+            } else {
+                const currentIndex = TEXT_ALIGN_SEQUENCE.indexOf(currentValue);
+                const isKnownValue = currentIndex >= 0;
+                if (!isKnownValue || currentIndex === TEXT_ALIGN_SEQUENCE.length - 1) {
+                    setDocumentTextAlign('');
+                } else {
+                    setDocumentTextAlign(TEXT_ALIGN_SEQUENCE[currentIndex + 1]);
+                }
+            }
+
             syncTextAlignUI({ announce: true });
             saveSettings();
-        };
-
-        textAlignOptionButtons.forEach((button, index) => {
-            button.addEventListener('click', (event) => {
-                event.stopPropagation();
-                handleTextAlignSelection(button.getAttribute('data-text-align-option'));
-            });
-
-            button.addEventListener('keydown', (event) => {
-                const { key } = event;
-                if (key === 'ArrowRight' || key === 'ArrowDown') {
-                    event.preventDefault();
-                    const nextIndex = (index + 1) % optionCount;
-                    focusOptionAt(nextIndex);
-                } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
-                    event.preventDefault();
-                    const previousIndex = (index - 1 + optionCount) % optionCount;
-                    focusOptionAt(previousIndex);
-                } else if (key === 'Home') {
-                    event.preventDefault();
-                    focusOptionAt(0);
-                } else if (key === 'End') {
-                    event.preventDefault();
-                    focusOptionAt(optionCount - 1);
-                } else if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
-                    event.preventDefault();
-                    button.click();
-                }
-            });
         });
     }
 
