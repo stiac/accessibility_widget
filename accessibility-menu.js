@@ -3216,7 +3216,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const headerTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderText, null);
     const controlActiveBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActive, null);
     const controlActiveTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActiveText, null);
-    const headerBackgroundColor = headerBackgroundPreference || '#036cff';
+    const headerBackgroundColor = headerBackgroundPreference || resolvedColors.active;
     const textColor = textPreference || 'rgba(15, 23, 42, 0.85)';
     const controlActiveBackgroundColor = controlActiveBackgroundPreference || headerBackgroundColor;
     const headerTextColor = headerTextPreference
