@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.22] - 2025-12-12
+
+### Added
+- Considered the host document's `lang` attribute when determining the initial widget language so server-rendered pages influence localisation.
+
+### Changed
+- Reordered the language initialisation priorities so stored preferences and browser/document locales outrank configured defaults.
+
+### Fixed
+- Restored automatic locale detection for supported visitor languages even when integrators supply a `data-default-language` value.
+
+### Removed
+- None.
+
 # [1.5.21] - 2025-12-11
 
 ### Added
