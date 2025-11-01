@@ -4445,7 +4445,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         element.classList.toggle('active', isActive);
         element.setAttribute('aria-pressed', String(Boolean(isActive)));
-        const targetColor = isActive ? 'var(--acc_header_text_color)' : 'var(--acc_text_color)';
+        const targetColor = isActive ? 'var(--acc_control_active_text_color)' : 'var(--acc_text_color)';
         element.style.color = targetColor;
         element.querySelectorAll('svg').forEach(icon => {
             icon.style.color = targetColor;
@@ -5330,7 +5330,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!trigger) {
             return;
         }
-        const targetColor = trigger.classList.contains('active') ? 'var(--acc_header_text_color)' : 'var(--acc_text_color)';
+        const targetColor = trigger.classList.contains('active') ? 'var(--acc_control_active_text_color)' : 'var(--acc_text_color)';
         trigger.style.color = targetColor;
         trigger.querySelectorAll('svg').forEach(icon => {
             icon.style.color = targetColor;
