@@ -12,15 +12,18 @@ const accessibilityMenuStyles = `
     /*
      * Provide OpenDyslexic as the primary dyslexia-friendly typeface with
      * a bold companion so text retains hierarchy when the control is active.
-     * The font files are served from GitHub's raw CDN and loaded with swap
-     * behaviour so content remains visible while the resource downloads.
+     * The font files are served directly from the upstream Forge repository
+     * and loaded with swap behaviour so content remains visible while the
+     * resource downloads, matching the user's requirement for sourcing.
      */
     @font-face {
       font-family: "OpenDyslexic";
       font-style: normal;
       font-weight: 400;
       font-display: swap;
-      src: url("https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/woff/OpenDyslexic-Regular.woff") format("woff");
+      src:
+        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF2/OpenDyslexic-Regular.woff2") format("woff2"),
+        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF/OpenDyslexic-Regular.woff") format("woff");
     }
 
     @font-face {
@@ -28,7 +31,9 @@ const accessibilityMenuStyles = `
       font-style: normal;
       font-weight: 700;
       font-display: swap;
-      src: url("https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/woff/OpenDyslexic-Bold.woff") format("woff");
+      src:
+        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF2/OpenDyslexic-Bold.woff2") format("woff2"),
+        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF/OpenDyslexic-Bold.woff") format("woff");
     }
 
     html[data-acc-font-scale-active] {

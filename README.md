@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.24`
+- **Current Version:** `1.4.25`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.25
+
+- Redirected the **Font Dyslexia** toggle to load OpenDyslexic weights directly from the upstream Forge repository so the preference no longer triggers 404s and keeps swap behaviour intact.
 
 ## What's New in 1.4.24
 

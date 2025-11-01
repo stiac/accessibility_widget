@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.25] - 2025-11-17
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Redirected the Font Dyslexia toggle to source OpenDyslexic fonts from the upstream Forge repository so enabling the control no longer causes 404 errors.
+
+### Removed
+- None.
+
 ## [1.4.24] - 2025-11-16
 
 ### Added
