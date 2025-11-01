@@ -1270,8 +1270,12 @@ const accessibilityMenuStyles = `
       text-align: left;
       --acc-translate-x: 0;
       --acc-transform-origin: top right;
+      --acc-open-radius: 24px;
+      --acc-closed-radius: 9999px;
+      --acc-launcher-shadow: 0 22px 36px -18px rgba(15, 23, 42, 0.55);
       transform-origin: var(--acc-transform-origin);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.35s ease, width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
+      border-radius: var(--acc-open-radius);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1), width 0.35s ease, height 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
       opacity: 0;
       transform: translate3d(var(--acc-translate-x), 16px, 0) scale(0.96);
       filter: saturate(100%) blur(0);
@@ -1296,16 +1300,41 @@ const accessibilityMenuStyles = `
         opacity: 0;
         transform: translate3d(var(--acc-translate-x), 22px, 0) scale(0.9);
         filter: saturate(92%) blur(8px);
+        border-radius: var(--acc-closed-radius);
+        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
       }
       55% {
         opacity: 1;
         transform: translate3d(var(--acc-translate-x), -6px, 0) scale(1.02);
         filter: saturate(110%) blur(0);
+        border-radius: calc(var(--acc-open-radius) + 12px);
       }
       100% {
         opacity: 1;
         transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
         filter: saturate(100%) blur(0);
+        border-radius: var(--acc-open-radius);
+        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+      }
+    }
+
+    #accessibility-modal.is-ready.close {
+      animation: acc-modal-collapse 0.45s cubic-bezier(0.55, 0, 0.45, 1);
+      animation-fill-mode: both;
+    }
+
+    @keyframes acc-modal-collapse {
+      0% {
+        opacity: 1;
+        transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+        border-radius: var(--acc-open-radius);
+        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+        border-radius: var(--acc-closed-radius);
+        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
       }
     }
 
@@ -1319,11 +1348,12 @@ const accessibilityMenuStyles = `
       height: 3.75rem;
       min-width: 3.75rem;
       min-height: 3.75rem;
-      border-radius: 9999px;
+      border-radius: var(--acc-closed-radius);
       overflow: hidden;
       opacity: 1;
       transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
       filter: saturate(100%) blur(0);
+      box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
     }
 
     #accessibility-modal.is-ready.close {
@@ -1332,6 +1362,7 @@ const accessibilityMenuStyles = `
 
     #accessibility-modal.close #headerContent,
     #accessibility-modal.close #accessibility-tools,
+    #accessibility-modal.close #language-selector,
     #accessibility-modal.close #acc-footer {
       display: none;
     }
@@ -1343,7 +1374,7 @@ const accessibilityMenuStyles = `
       height: 2.75rem;
       border-radius: 9999px;
       margin: 0;
-      box-shadow: none;
+      box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
     }
 
     #accessibility-modal.close #closeBtn svg {
@@ -1542,6 +1573,16 @@ const accessibilityMenuStyles = `
      * pausing CSS driven transitions/animations, disabling smooth scrolling, and
      * allowing the widget itself to continue operating normally.
      */
+    @media (prefers-reduced-motion: reduce) {
+      #accessibility-modal {
+        transition-duration: 0.001ms !important;
+      }
+
+      #accessibility-modal.is-ready:not(.close) {
+        animation: none !important;
+      }
+    }
+
     html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *)),
     html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::before,
     html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::after {
@@ -2285,6 +2326,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const docElement = document.documentElement;
     const bodyElement = document.body;
+    const systemReduceMotionQuery = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : null;
+    let pendingSystemReduceMotion = systemReduceMotionQuery ? systemReduceMotionQuery.matches : false;
+    let reduceMotionPreferenceLocked = false;
     const defaultRootFontSize = (() => {
         const computed = parseFloat(window.getComputedStyle(docElement).fontSize);
         return Number.isFinite(computed) && computed > 0 ? computed : 16;
@@ -2679,6 +2725,24 @@ document.addEventListener("DOMContentLoaded", function() {
             docElement.removeAttribute('data-acc-reduce-motion');
             resumeMotionTargets();
             disconnectReduceMotionObserver();
+        }
+    }
+
+    if (systemReduceMotionQuery) {
+        const handleSystemReduceMotionChange = (event) => {
+            pendingSystemReduceMotion = event.matches;
+            if (!reduceMotionPreferenceLocked) {
+                setReduceMotionActive(event.matches);
+                if (typeof syncControls === 'function') {
+                    syncControls();
+                }
+            }
+        };
+
+        if (typeof systemReduceMotionQuery.addEventListener === 'function') {
+            systemReduceMotionQuery.addEventListener('change', handleSystemReduceMotionChange);
+        } else if (typeof systemReduceMotionQuery.addListener === 'function') {
+            systemReduceMotionQuery.addListener(handleSystemReduceMotionChange);
         }
     }
 
@@ -3384,6 +3448,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('#reduce-motion').addEventListener('click', () => {
         const item = document.querySelector('#reduce-motion');
         const nextState = !docElement.classList.contains('reduce-motion');
+        reduceMotionPreferenceLocked = true;
         setReduceMotionActive(nextState);
         setControlActiveState(item, nextState);
         saveSettings();
@@ -3502,6 +3567,10 @@ document.addEventListener("DOMContentLoaded", function() {
         setHideImagesActive(false);
         docElement.classList.remove('hide-video');
         setReduceMotionActive(false);
+        reduceMotionPreferenceLocked = false;
+        if (pendingSystemReduceMotion) {
+            setReduceMotionActive(true);
+        }
 
         if (cursorElement) {
             cursorElement.classList.remove('cursor-0', 'cursor-1', 'cursor-2');
@@ -3855,6 +3924,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (savedSettings) {
         applySavedSettings(savedSettings);
+        if (typeof savedSettings.reduceMotion === 'boolean') {
+            reduceMotionPreferenceLocked = true;
+        }
+    }
+
+    if (!reduceMotionPreferenceLocked && pendingSystemReduceMotion) {
+        setReduceMotionActive(true);
     }
 
     syncControls();

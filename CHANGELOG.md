@@ -1,4 +1,32 @@
 # Changelog
+# [1.5.5] - 2025-11-25
+
+### Added
+- Auto-activated the Reduce Motion mode when the operating system prefers reduced motion and introduced a CSS media-query fallback that cancels the reveal animation pre-initialisation.
+
+### Changed
+- Replaced the clip-path driven reveal with a border-radius animation that preserves the launcher shadow and delivers a smoother, accessible panel expansion.
+
+### Fixed
+- Restored the launcher bubble's drop shadow in its closed state so the toggle button retains depth cues when the menu is hidden.
+
+### Removed
+- None.
+
+# [1.5.4] - 2025-11-24
+
+### Added
+- None.
+
+### Changed
+- Softened the modal expansion by morphing between circular and rectangular states with clip-path animations so the launcher no longer snaps into a rectangle when opening.
+
+### Fixed
+- Hid the language selector container while the widget is collapsed to prevent its labels from appearing outside the closed bubble.
+
+### Removed
+- None.
+
 # [1.5.3] - 2025-11-23
 
 ### Added

@@ -8,8 +8,19 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.3`
+- **Current Version:** `1.5.5`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.5
+
+- Restored the launcher button shadow and replaced the clip-path morph with a smoother border-radius animation so the panel opens fluidly without sacrificing contrast.
+- Honoured system-level motion preferences by auto-enabling the Reduce Motion mode when `prefers-reduced-motion` is detected and short-circuiting the reveal animation in CSS.
+- Added a media-query fallback for browsers that prefer reduced motion so the modal open effect stays gentle even before the widget initialises.
+
+## What's New in 1.5.4
+
+- Reworked the launcher animation with clip-path driven transitions so the menu grows smoothly from the circular button without jarring shape changes.
+- Hid the language selector stack whenever the widget is closed to stop stray labels from peeking outside the launcher bubble.
 
 ## What's New in 1.5.3
 
