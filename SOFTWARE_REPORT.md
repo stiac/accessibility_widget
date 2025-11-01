@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.17
+- **Version**: 1.5.19
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-07
+- **Last Update**: 2025-12-09
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,6 +11,8 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
+- 2025-12-09 — Re-triggered the scrollbar-aware padding logic when reopening the widget so the tools grid remains centred after toggling from the launcher (AI assistant)
+- 2025-12-08 — Reserved additional right padding inside the accessibility tools grid so the navigation column stays visually centred when the scrollbar appears (AI assistant)
 - 2025-12-07 — Defaulted header and active control text datasets to white so scripts inherit accessible typography without manual overrides (AI assistant)
 - 2025-12-06 — Corrected the default close/reset palette and extended hover styling so grouped cards and icons follow the configured blue/white scheme (AI assistant)
 - 2025-12-05 — Split the header and active card palettes into dedicated dataset-controlled variables and refreshed the default blue/white styling for higher contrast (AI assistant)

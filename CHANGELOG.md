@@ -1,4 +1,32 @@
 # Changelog
+# [1.5.19] - 2025-12-09
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Re-applied the accessibility tools padding calculation whenever the widget opens so the grid remains centred even when the modal toggles from its closed launcher state.
+
+### Removed
+- None.
+
+# [1.5.18] - 2025-12-08
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Synced the accessibility tools grid padding with the scrollbar width so the navigation column stays visually centred even when the vertical scrollbar is visible.
+
+### Removed
+- None.
+
 # [1.5.17] - 2025-12-07
 
 ### Added
