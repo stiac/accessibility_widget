@@ -72,6 +72,8 @@
     "position": {
       "left": "Épingler le widget au bord gauche",
       "top": "Épingler le widget au bord supérieur",
+      "topLeft": "Épingler le widget dans le coin supérieur gauche",
+      "topRight": "Épingler le widget dans le coin supérieur droit",
       "bottom": "Épingler le widget au bord inférieur",
       "bottomLeft": "Épingler le widget dans le coin inférieur gauche",
       "bottomRight": "Épingler le widget dans le coin inférieur droit",

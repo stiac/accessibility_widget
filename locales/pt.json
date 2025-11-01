@@ -72,6 +72,8 @@
     "position": {
       "left": "Fixar o widget na borda esquerda",
       "top": "Fixar o widget na borda superior",
+      "topLeft": "Fixar o widget no canto superior esquerdo",
+      "topRight": "Fixar o widget no canto superior direito",
       "bottom": "Fixar o widget na borda inferior",
       "bottomLeft": "Fixar o widget no canto inferior esquerdo",
       "bottomRight": "Fixar o widget no canto inferior direito",
