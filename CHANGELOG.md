@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.25] - 2025-12-15
+
+### Added
+- None.
+
+### Changed
+- Show the universal accessibility glyph on the launcher while the widget is closed and restore the "X" icon whenever the panel opens.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.24] - 2025-12-14
 
 ### Added
