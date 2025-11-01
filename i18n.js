@@ -156,6 +156,20 @@
         return null;
     }
 
+    /**
+     * Inspect the host document for a declared language so server-rendered
+     * pages without navigator context can still influence the initial locale.
+     */
+    function detectDocumentLanguage() {
+        if (typeof document === 'undefined' || !document.documentElement) {
+            return null;
+        }
+        const attribute = document.documentElement.getAttribute('lang')
+            || document.documentElement.lang
+            || '';
+        return normaliseLanguage(attribute);
+    }
+
     function getStoredLanguage() {
         if (typeof window === 'undefined' || !window.localStorage) {
             return null;
@@ -622,10 +636,11 @@
         state.onLanguageApplied = typeof options.onLanguageApplied === 'function' ? options.onLanguageApplied : null;
 
         const initialCandidates = [
-            normaliseLanguage(options.initialLanguage),
             getStoredLanguage(),
-            normaliseLanguage(options.defaultLanguage),
+            normaliseLanguage(options.initialLanguage),
             detectNavigatorLanguage(),
+            detectDocumentLanguage(),
+            normaliseLanguage(options.defaultLanguage),
             state.fallbackLanguage
         ];
         let initialLanguage = null;
