@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.1`
+- **Current Version:** `1.5.2`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.2
+
+- Refined the accessibility modal launch animation with a spring-like overshoot, smoother scaling, and blur easing so the panel grows from the launcher bubble more naturally while still respecting Reduce Motion preferences.
 
 ## What's New in 1.5.1
 

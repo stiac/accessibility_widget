@@ -1,4 +1,17 @@
 # Changelog
+## [1.5.2] - 2025-11-22
+
+### Added
+- None.
+
+### Changed
+- Reimagined the accessibility modal reveal with a smoother, spring-inspired animation that eases in from the launcher bubble and adds gentle blur/focus transitions for a more polished entry.
+
+### Fixed
+- Honoured the Reduce Motion mode by disabling the new reveal animation whenever the global motion limiter is active.
+
+### Removed
+- None.
 ## [1.5.1] - 2025-11-21
 
 ### Added
