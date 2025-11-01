@@ -1451,6 +1451,8 @@ const accessibilityMenuStyles = `
 
     #accessibility-modal #accessibility-tools {
       scrollbar-width: thin;
+      /* Keep the tools grid visually centred beside the navigation column. */
+      padding-right: 0.9rem;
     }
 
     #accessibility-modal #accessibility-tools::-webkit-scrollbar {
@@ -3283,7 +3285,6 @@ document.addEventListener("DOMContentLoaded", function() {
     //accessibility tool
     const accessibilityModal = document.getElementById('accessibility-modal');
     const closeBtn = document.getElementById('closeBtn');
-    const accessibilityTools = document.getElementById('accessibility-tools');
     const headingTitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.title"]') : null;
     const headingSubtitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.subtitle"]') : null;
     const languageSelectElement = document.getElementById('acc-language-select');
@@ -3649,7 +3650,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function accessibilityModalOpenCloseToggle() {
-        accessibilityModal.classList.toggle('close');
+        const isClosing = accessibilityModal.classList.toggle('close');
         updateCloseButtonIcon();
     }
 
