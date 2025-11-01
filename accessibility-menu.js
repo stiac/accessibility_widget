@@ -2029,13 +2029,13 @@ const accessibilityMenuHTML = `
         <!--change positions-->
         <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
           <button
-            id="align-acc-left"
+            id="align-acc-top-left"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
-            aria-label="Dock widget to the left edge"
-            title="Dock widget to the left edge"
-            data-i18n-attr="aria-label:controls.position.left, title:controls.position.left"
+            aria-label="Dock widget to the top-left corner"
+            title="Dock widget to the top-left corner"
+            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -2047,6 +2047,7 @@ const accessibilityMenuHTML = `
               <path
                 d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
                 fill="currentColor"
+                transform="rotate(-45 12 12)"
               />
             </svg></button>
           <button
@@ -2110,7 +2111,7 @@ const accessibilityMenuHTML = `
               <path
                 d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
-                transform="rotate(-45 12 12)"
+                transform="rotate(45 12 12)"
               />
             </svg></button>
           <button
@@ -2132,17 +2133,17 @@ const accessibilityMenuHTML = `
               <path
                 d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
-                transform="rotate(45 12 12)"
+                transform="rotate(-45 12 12)"
               />
             </svg></button>
           <button
-            id="align-acc-right"
+            id="align-acc-top-right"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
-            aria-label="Dock widget to the right edge"
-            title="Dock widget to the right edge"
-            data-i18n-attr="aria-label:controls.position.right, title:controls.position.right"
+            aria-label="Dock widget to the top-right corner"
+            title="Dock widget to the top-right corner"
+            data-i18n-attr="aria-label:controls.position.topRight, title:controls.position.topRight"
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -2154,6 +2155,7 @@ const accessibilityMenuHTML = `
               <path
                 d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
                 fill="currentColor"
+                transform="rotate(-45 12 12)"
               />
             </svg></button>
         </div>
@@ -4480,21 +4482,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    const alignAccLeft = document.getElementById('align-acc-left');
+    const alignAccTopLeft = document.getElementById('align-acc-top-left');
     const alignAccTop = document.getElementById('align-acc-top');
     const alignAccBottom = document.getElementById('align-acc-bottom');
     const alignAccBottomLeft = document.getElementById('align-acc-bottom-left');
     const alignAccBottomRight = document.getElementById('align-acc-bottom-right');
-    const alignAccRight = document.getElementById('align-acc-right');
+    const alignAccTopRight = document.getElementById('align-acc-top-right');
 
     const positionClasses = ['left', 'top', 'bottom', 'right', 'bottom-left', 'bottom-right'];
     const positionControls = [
-        { element: alignAccLeft, className: 'left' },
+        { element: alignAccTopLeft, className: 'left' },
         { element: alignAccTop, className: 'top' },
         { element: alignAccBottom, className: 'bottom' },
         { element: alignAccBottomLeft, className: 'bottom-left' },
         { element: alignAccBottomRight, className: 'bottom-right' },
-        { element: alignAccRight, className: 'right' }
+        { element: alignAccTopRight, className: 'right' }
     ];
 
     function getCurrentPosition() {
