@@ -72,6 +72,8 @@
     "position": {
       "left": "Dock widget to the left edge",
       "top": "Dock widget to the top edge",
+      "topLeft": "Dock widget to the top-left corner",
+      "topRight": "Dock widget to the top-right corner",
       "bottom": "Dock widget to the bottom edge",
       "bottomLeft": "Dock widget to the bottom-left corner",
       "bottomRight": "Dock widget to the bottom-right corner",

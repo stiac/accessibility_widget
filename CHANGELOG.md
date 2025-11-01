@@ -1,4 +1,145 @@
 # Changelog
+# [1.5.21] - 2025-12-11
+
+### Added
+- None.
+
+### Changed
+- Moved the top-left alignment control so it renders immediately after the top alignment button, matching the modal placement order.
+
+### Fixed
+- Rotated the top-left alignment icon by 45° so it points toward the modal's new docking corner.
+
+### Removed
+- None.
+
+# [1.5.20] - 2025-12-10
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Set a constant 0.9rem right padding on `#accessibility-tools` so the grid remains centred beside the navigation even when the scrollbar renders.
+
+### Removed
+- None.
+
+# [1.5.19] - 2025-12-09
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Re-applied the accessibility tools padding calculation whenever the widget opens so the grid remains centred even when the modal toggles from its closed launcher state.
+
+### Removed
+- None.
+
+# [1.5.18] - 2025-12-08
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Synced the accessibility tools grid padding with the scrollbar width so the navigation column stays visually centred even when the vertical scrollbar is visible.
+
+### Removed
+- None.
+
+# [1.5.17] - 2025-12-07
+
+### Added
+- None.
+
+### Changed
+- Defaulted the `data-color-header-text` and `data-color-control-active-text` script attributes to white (`#ffffff`) so header and active control typography stays readable without custom configuration.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.16] - 2025-12-06
+
+### Added
+- None.
+
+### Changed
+- Updated the default accent palette so the close toggle, Reset All button, and hover states inherit the blue `#036cff` header scheme by default.
+
+### Fixed
+- Ensured the close toggle and Reset All button apply the configured header colours instead of the generic accent fallback.
+- Applied hover background, text, and icon fill overrides when hovering the `.acc-item.group` wrapper so cards reflect the chosen palette consistently.
+
+### Removed
+- None.
+
+# [1.5.15] - 2025-12-05
+
+### Added
+- Dataset controls (`data-color-header-background`, `data-color-control-active`, and their text counterparts) that let integrators tune header and active card palettes independently.
+
+### Changed
+- Swapped the default header, Reset button, and active position toggle styling to a blue `#036cff` background with white text for clearer contrast.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.14] - 2025-12-04
+
+### Added
+- None.
+
+### Changed
+- Rendered every Change Positions arrow SVG as a block-level icon so the glyphs stay perfectly centered inside their buttons.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.13] - 2025-12-03
+
+### Added
+- None.
+
+### Changed
+- Rotated the bottom-left and bottom-right Change Positions arrows to reuse the shared directional glyph for visual consistency.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.12] - 2025-12-02
+
+### Added
+- None.
+
+### Changed
+- Swapped the Change Positions button glyphs for clear directional arrows that illustrate where the widget will dock.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.11] - 2025-12-01
 
 ### Added

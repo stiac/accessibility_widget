@@ -72,6 +72,8 @@
     "position": {
       "left": "Widget am linken Rand andocken",
       "top": "Widget am oberen Rand andocken",
+      "topLeft": "Widget in der oberen linken Ecke andocken",
+      "topRight": "Widget in der oberen rechten Ecke andocken",
       "bottom": "Widget am unteren Rand andocken",
       "bottomLeft": "Widget in der unteren linken Ecke andocken",
       "bottomRight": "Widget in der unteren rechten Ecke andocken",

@@ -1105,12 +1105,15 @@ const openDyslexicBoldDataUri =
 
 const accessibilityMenuStyles = `
     :root {
-      --acc_color_1: #0f172a;
+      --acc_color_1: #036cff;
       --acc_color_2: #f8fafc;
-      --acc_hover_color: #1c2c4d;
+      --acc_hover_color: #1f5dff;
       --acc_hover_text_color: #f8fafc;
       --acc_text_color: rgba(15, 23, 42, 0.85);
-      --acc_header_text_color: #f8fafc;
+      --acc_header_bg_color: #036cff;
+      --acc_header_text_color: #ffffff;
+      --acc_control_active_bg_color: #036cff;
+      --acc_control_active_text_color: #ffffff;
       --border_radius: 24px;
       --acc-font-scale: 1;
     }
@@ -1448,6 +1451,8 @@ const accessibilityMenuStyles = `
 
     #accessibility-modal #accessibility-tools {
       scrollbar-width: thin;
+      /* Keep the tools grid visually centred beside the navigation column. */
+      padding-right: 0.9rem;
     }
 
     #accessibility-modal #accessibility-tools::-webkit-scrollbar {
@@ -1479,15 +1484,21 @@ const accessibilityMenuStyles = `
     }
 
     .acc-child.active {
-      background: var(--acc_color_1);
-      color: var(--acc_header_text_color);
+      background: var(--acc_control_active_bg_color);
+      color: var(--acc_control_active_text_color);
       border-color: transparent;
     }
 
     .acc-child:not(.active):hover,
-    .acc-child.active:hover {
+    .acc-child.active:hover,
+    .acc-item.group:hover .acc-child {
       background: var(--acc_hover_color);
       color: var(--acc_hover_text_color);
+    }
+
+    .acc-item.group:hover .acc-child svg {
+      color: inherit;
+      fill: currentColor;
     }
 
     .acc-progress-parent {
@@ -1510,7 +1521,7 @@ const accessibilityMenuStyles = `
     }
 
     #headerContent {
-      background: var(--acc_color_1) !important;
+      background: var(--acc_header_bg_color) !important;
       color: var(--acc_header_text_color) !important;
     }
 
@@ -1519,7 +1530,7 @@ const accessibilityMenuStyles = `
     }
 
     #closeBtn {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
@@ -1536,7 +1547,7 @@ const accessibilityMenuStyles = `
     }
 
     #reset-all {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
@@ -1565,7 +1576,7 @@ const accessibilityMenuStyles = `
     }
 
     #change-positions button.active {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       box-shadow: none;
     }
@@ -2020,18 +2031,6 @@ const accessibilityMenuHTML = `
         <!--change positions-->
         <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
           <button
-            id="align-acc-left"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the left edge"
-            title="Dock widget to the left edge"
-            data-i18n-attr="aria-label:controls.position.left, title:controls.position.left"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-start" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
-              <path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
-            </svg></button>
-          <button
             id="align-acc-top"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
@@ -2039,9 +2038,40 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the top edge"
             title="Dock widget to the top edge"
             data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
-              <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)" />
-              <path d="M1.5 2a.5.5 0 0 1 0-1zm13-1a.5.5 0 0 1 0 1zm-13 0h13v1h-13z" />
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4.47 10.53a.75.75 0 0 0 1.06 0L9.25 6.81V19a.75.75 0 0 0 1.5 0V6.81l3.72 3.72a.75.75 0 1 0 1.06-1.06l-5-5a.75.75 0 0 0-1.06 0l-5 5a.75.75 0 0 0 0 1.06Z"
+                fill="currentColor"
+              />
+            </svg></button>
+          <button
+            id="align-acc-top-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top-left corner"
+            title="Dock widget to the top-left corner"
+            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
+                fill="currentColor"
+                transform="rotate(45 12 12)"
+              />
             </svg></button>
           <button
             id="align-acc-bottom"
@@ -2051,9 +2081,18 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom edge"
             title="Dock widget to the bottom edge"
             data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-bottom" viewBox="0 0 16 16">
-              <rect width="4" height="12" x="6" y="1" rx="1" />
-              <path d="M1.5 14a.5.5 0 0 0 0 1zm13 1a.5.5 0 0 0 0-1zm-13 0h13v-1h-13z" />
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
+                fill="currentColor"
+              />
             </svg></button>
           <button
             id="align-acc-bottom-left"
@@ -2063,10 +2102,19 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom-left corner"
             title="Dock widget to the bottom-left corner"
             data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5" />
-              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
-              <rect x="2.5" y="9" width="6" height="4" rx="1" />
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
+                fill="currentColor"
+                transform="rotate(45 12 12)"
+              />
             </svg></button>
           <button
             id="align-acc-bottom-right"
@@ -2076,22 +2124,41 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom-right corner"
             title="Dock widget to the bottom-right corner"
             data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5" />
-              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
-              <rect x="7.5" y="9" width="6" height="4" rx="1" />
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
+                fill="currentColor"
+                transform="rotate(-45 12 12)"
+              />
             </svg></button>
           <button
-            id="align-acc-right"
+            id="align-acc-top-right"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
-            aria-label="Dock widget to the right edge"
-            title="Dock widget to the right edge"
-            data-i18n-attr="aria-label:controls.position.right, title:controls.position.right"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5" />
-              <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1z" />
+            aria-label="Dock widget to the top-right corner"
+            title="Dock widget to the top-right corner"
+            data-i18n-attr="aria-label:controls.position.topRight, title:controls.position.topRight"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
+                fill="currentColor"
+                transform="rotate(-45 12 12)"
+              />
             </svg></button>
         </div>
         <p id="acc-language-announcement" class="acc-sr-only" aria-live="polite" role="status"></p>
@@ -2107,11 +2174,14 @@ function resolveWidgetScriptConfig() {
     const defaults = {
         defaultLanguage: 'en',
         mode: 'production',
-        colorButtonActive: '#0f172a',
+        colorButtonActive: '#036cff',
         colorButton: '#f8fafc',
         colorButtonHover: '',
         colorText: '',
-        colorHeaderText: '',
+        colorHeaderBackground: '',
+        colorHeaderText: '#ffffff',
+        colorControlActive: '',
+        colorControlActiveText: '#ffffff',
         voce1: '',
         voce2: '',
         localesPath: '',
@@ -2176,8 +2246,20 @@ function resolveWidgetScriptConfig() {
         config.colorText = script.dataset.colorText.trim();
     }
 
+    if (typeof script.dataset.colorHeaderBackground === 'string' && script.dataset.colorHeaderBackground.trim()) {
+        config.colorHeaderBackground = script.dataset.colorHeaderBackground.trim();
+    }
+
     if (typeof script.dataset.colorHeaderText === 'string' && script.dataset.colorHeaderText.trim()) {
         config.colorHeaderText = script.dataset.colorHeaderText.trim();
+    }
+
+    if (typeof script.dataset.colorControlActive === 'string' && script.dataset.colorControlActive.trim()) {
+        config.colorControlActive = script.dataset.colorControlActive.trim();
+    }
+
+    if (typeof script.dataset.colorControlActiveText === 'string' && script.dataset.colorControlActiveText.trim()) {
+        config.colorControlActiveText = script.dataset.colorControlActiveText.trim();
     }
 
     if (typeof script.dataset.voce1 === 'string' && script.dataset.voce1.trim()) {
@@ -3128,23 +3210,39 @@ function ensureTailwindCSSLoaded() {
 document.addEventListener("DOMContentLoaded", function() {
 
     const resolvedColors = {
-        active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#0f172a'),
+        active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#036cff'),
         inactive: sanitiseWidgetColor(widgetScriptConfig.colorButton, '#f8fafc')
     };
 
     const hoverPreference = sanitiseWidgetColor(widgetScriptConfig.colorButtonHover, null);
     const textPreference = sanitiseWidgetColor(widgetScriptConfig.colorText, null);
+    const headerBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderBackground, null);
     const headerTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderText, null);
-    const hoverColor = hoverPreference || deriveHoverColor(resolvedColors.active) || resolvedColors.active;
+    const controlActiveBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActive, null);
+    const controlActiveTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActiveText, null);
+    const headerBackgroundColor = headerBackgroundPreference || '#036cff';
     const textColor = textPreference || 'rgba(15, 23, 42, 0.85)';
+    const controlActiveBackgroundColor = controlActiveBackgroundPreference || headerBackgroundColor;
     const headerTextColor = headerTextPreference
-        || deriveReadableTextColor(resolvedColors.active, [
+        || deriveReadableTextColor(headerBackgroundColor, [
             textPreference,
             resolvedColors.inactive,
             '#ffffff',
             '#000000',
             textColor
         ]);
+    const controlActiveTextColor = controlActiveTextPreference
+        || deriveReadableTextColor(controlActiveBackgroundColor, [
+            headerTextPreference,
+            headerTextColor,
+            resolvedColors.inactive,
+            textColor,
+            '#ffffff',
+            '#000000'
+        ]);
+    const hoverColor = hoverPreference
+        || deriveHoverColor(controlActiveBackgroundColor)
+        || controlActiveBackgroundColor;
     const hoverTextColor = deriveReadableTextColor(hoverColor, [
         headerTextPreference,
         headerTextColor,
@@ -3160,7 +3258,10 @@ document.addEventListener("DOMContentLoaded", function() {
         document.documentElement.style.setProperty('--acc_hover_color', hoverColor);
         document.documentElement.style.setProperty('--acc_hover_text_color', hoverTextColor);
         document.documentElement.style.setProperty('--acc_text_color', textColor);
+        document.documentElement.style.setProperty('--acc_header_bg_color', headerBackgroundColor);
         document.documentElement.style.setProperty('--acc_header_text_color', headerTextColor);
+        document.documentElement.style.setProperty('--acc_control_active_bg_color', controlActiveBackgroundColor);
+        document.documentElement.style.setProperty('--acc_control_active_text_color', controlActiveTextColor);
     }
 
     ensureTailwindCSSLoaded();
@@ -3184,7 +3285,6 @@ document.addEventListener("DOMContentLoaded", function() {
     //accessibility tool
     const accessibilityModal = document.getElementById('accessibility-modal');
     const closeBtn = document.getElementById('closeBtn');
-    const accessibilityTools = document.getElementById('accessibility-tools');
     const headingTitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.title"]') : null;
     const headingSubtitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.subtitle"]') : null;
     const languageSelectElement = document.getElementById('acc-language-select');
@@ -3529,12 +3629,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const resetAllButton = document.getElementById('reset-all');
     if (resetAllButton) {
-        resetAllButton.style.backgroundColor = resolvedColors.active;
+        resetAllButton.style.backgroundColor = headerBackgroundColor;
         resetAllButton.style.color = headerTextColor;
     }
 
     if (closeBtn) {
-        closeBtn.style.backgroundColor = resolvedColors.active;
+        closeBtn.style.backgroundColor = headerBackgroundColor;
         closeBtn.style.color = headerTextColor;
     }
 
@@ -3550,8 +3650,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function accessibilityModalOpenCloseToggle() {
-        accessibilityModal.classList.toggle('close');
+        const isClosing = accessibilityModal.classList.toggle('close');
         updateCloseButtonIcon();
+        if (!isClosing) {
+            requestAnimationFrame(() => {
+                applyAccessibilityToolsScrollbarPadding();
+            });
+        }
     }
 
     function getCloseButtonIconMarkup(position) {
@@ -4383,21 +4488,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    const alignAccLeft = document.getElementById('align-acc-left');
+    const alignAccTopLeft = document.getElementById('align-acc-top-left');
     const alignAccTop = document.getElementById('align-acc-top');
     const alignAccBottom = document.getElementById('align-acc-bottom');
     const alignAccBottomLeft = document.getElementById('align-acc-bottom-left');
     const alignAccBottomRight = document.getElementById('align-acc-bottom-right');
-    const alignAccRight = document.getElementById('align-acc-right');
+    const alignAccTopRight = document.getElementById('align-acc-top-right');
 
     const positionClasses = ['left', 'top', 'bottom', 'right', 'bottom-left', 'bottom-right'];
     const positionControls = [
-        { element: alignAccLeft, className: 'left' },
+        { element: alignAccTopLeft, className: 'left' },
         { element: alignAccTop, className: 'top' },
         { element: alignAccBottom, className: 'bottom' },
         { element: alignAccBottomLeft, className: 'bottom-left' },
         { element: alignAccBottomRight, className: 'bottom-right' },
-        { element: alignAccRight, className: 'right' }
+        { element: alignAccTopRight, className: 'right' }
     ];
 
     function getCurrentPosition() {

@@ -8,8 +8,50 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.11`
+- **Current Version:** `1.5.21`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.21
+
+- Rotated the top-left dock icon 45 degrees and repositioned its control next to the top alignment button so the visual order mirrors the widget placements.
+
+## What's New in 1.5.20
+
+- Locked the accessibility tools grid to a 0.9rem right padding so it stays aligned with the navigation column regardless of the scrollbar.
+
+## What's New in 1.5.19
+
+- Re-trigger the scrollbar padding measurement whenever the widget opens so the accessibility tools grid stays centred beside the navigation column.
+
+## What's New in 1.5.18
+
+- Balanced the right-side padding of the accessibility tools grid with the scrollbar width so the menu stays centred next to the navigation column.
+
+## What's New in 1.5.17
+
+- Default the header banner and active control text datasets to white so integrators automatically get high-contrast typography without specifying `data-color-header-text` or `data-color-control-active-text`.
+
+## What's New in 1.5.16
+
+- Default the Close toggle and Reset All button to the header palette so they immediately adopt the blue `#036cff` background and white text without requiring overrides.
+- Apply the configured hover colours to entire accessibility cards (including SVG icons) even when the pointer rests on the `.acc-item.group` wrapper.
+
+## What's New in 1.5.15
+
+- Introduced dedicated dataset attributes and CSS variables for the header banner and control cards so their backgrounds and text/icon colours can be tuned independently from the global palette.
+- Updated default branding to use a blue `#036cff` backdrop with high-contrast white typography across the header, Reset button, and active position toggles.
+
+## What's New in 1.5.14
+
+- Centered every Change Positions arrow icon within its control button to remove the slight visual offset that users reported.
+
+## What's New in 1.5.13
+
+- Rotated the bottom-left and bottom-right Change Positions arrows so they reuse the same directional glyph with consistent styling across every docking option.
+
+## What's New in 1.5.12
+
+- Replaced the Change Positions icons with directional arrows so each docking option immediately communicates the widget's target location.
 
 ## What's New in 1.5.11
 
@@ -138,7 +180,7 @@ You can use `min.js` file _as your requirement_
 ### Styling
 
 - The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads.
-- Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1`, `--acc_color_2`, `--acc_hover_color`, `--acc_hover_text_color`, `--acc_text_color`, `--acc_header_text_color`) at the top of `accessibility-menu.js`.
+- Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1`, `--acc_color_2`, `--acc_hover_color`, `--acc_hover_text_color`, `--acc_text_color`, `--acc_header_bg_color`, `--acc_header_text_color`, `--acc_control_active_bg_color`, `--acc_control_active_text_color`) at the top of `accessibility-menu.js`.
 
 ### Script data attributes
 
@@ -161,11 +203,14 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 | --- | --- | --- | --- |
 | `data-default-language` | Sets the UI language for headings, card labels, and screen-reader helpers. | `en`, `it` (other values fall back to English) | `en` |
 | `data-mode` | Enables additional console output to verify the resolved configuration. | `production`, `debug` | `production` |
-| `data-color-button-active` | CSS colour used for active cards, the close button, and the reset button background. | Any valid CSS colour (`#hex`, `rgb()`, etc.) | `#0f172a` |
-| `data-color-button` | CSS colour used for the idle background of cards, the header banner, and other neutral surfaces. | Any valid CSS colour | `#f8fafc` |
+| `data-color-button-active` | Accent colour for controls such as the close button, progress indicators, and hover derivations. | Any valid CSS colour (`#hex`, `rgb()`, etc.) | `#0f172a` |
+| `data-color-button` | CSS colour used for the idle background of cards and other neutral surfaces. | Any valid CSS colour | `#f8fafc` |
 | `data-color-button-hover` | Optional CSS colour used for hover backgrounds. When omitted, the widget derives an accessible shade from `data-color-button-active`. | Any valid CSS colour | Derived automatically |
 | `data-color-text` | Primary text and icon colour for idle controls and body copy inside the widget. | Any valid CSS colour | `rgba(15, 23, 42, 0.85)` |
-| `data-color-header-text` | Overrides the text colour used by the header banner and active buttons. Falls back to the most legible option if omitted. | Any valid CSS colour | Derived from palette |
+| `data-color-header-background` | Background colour applied to the header banner, Reset button, and active Change Positions toggles. | Any valid CSS colour | `#036cff` |
+| `data-color-header-text` | Overrides the text/icon colour used by the header banner and active Change Positions toggles. Falls back to the most legible option if omitted. | Any valid CSS colour | Derived from palette |
+| `data-color-control-active` | Background colour for active accessibility cards inside the grid. | Any valid CSS colour | Matches header background by default |
+| `data-color-control-active-text` | Overrides the text/icon colour used by active accessibility cards. Falls back to a contrast-safe value if omitted. | Any valid CSS colour | Derived from palette |
 | `data-voce1` | Overrides the main heading inside the widget (useful for localisation/branding). | Free text | `Accessibility Tools` / translated value |
 | `data-voce2` | Overrides the sub-heading tagline beneath the title. | Free text | `Fine-tune colours…` / translated value |
 | `data-locales-path` | Overrides the folder that contains JSON locale files. Use when hosting the bundles outside the script directory. | Relative or absolute path ending in the folder containing locale JSON files. | `<script dir>/locales` when same origin, otherwise the host site's `/locales` folder |
