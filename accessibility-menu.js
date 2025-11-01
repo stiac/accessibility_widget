@@ -3652,6 +3652,11 @@ document.addEventListener("DOMContentLoaded", function() {
     function accessibilityModalOpenCloseToggle() {
         const isClosing = accessibilityModal.classList.toggle('close');
         updateCloseButtonIcon();
+        if (!isClosing) {
+            requestAnimationFrame(() => {
+                applyAccessibilityToolsScrollbarPadding();
+            });
+        }
     }
 
     function getCloseButtonIconMarkup(position) {
