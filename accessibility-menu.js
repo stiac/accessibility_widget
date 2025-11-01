@@ -22,8 +22,8 @@ const accessibilityMenuStyles = `
       font-weight: 400;
       font-display: swap;
       src:
-        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF2/OpenDyslexic-Regular.woff2") format("woff2"),
-        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF/OpenDyslexic-Regular.woff") format("woff");
+        url("http://cnd.stiac.it/open-dyslexic/compiled/OpenDyslexic-Regular.woff2") format("woff2"),
+        url("http://cnd.stiac.it/open-dyslexic/compiled/OpenDyslexic-Regular.woff") format("woff");
     }
 
     @font-face {
@@ -32,8 +32,8 @@ const accessibilityMenuStyles = `
       font-weight: 700;
       font-display: swap;
       src:
-        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF2/OpenDyslexic-Bold.woff2") format("woff2"),
-        url("https://forge.hackers.town/antijingoist/opendyslexic/raw/branch/master/WOFF/OpenDyslexic-Bold.woff") format("woff");
+        url("http://cnd.stiac.it/open-dyslexic/compiled/OpenDyslexic-Bold.woff2") format("woff2"),
+        url("http://cnd.stiac.it/open-dyslexic/compiled/OpenDyslexic-Bold.woff") format("woff");
     }
 
     html[data-acc-font-scale-active] {
