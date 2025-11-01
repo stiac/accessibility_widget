@@ -1,4 +1,19 @@
 # Changelog
+# [1.5.16] - 2025-12-06
+
+### Added
+- None.
+
+### Changed
+- Updated the default accent palette so the close toggle, Reset All button, and hover states inherit the blue `#036cff` header scheme by default.
+
+### Fixed
+- Ensured the close toggle and Reset All button apply the configured header colours instead of the generic accent fallback.
+- Applied hover background, text, and icon fill overrides when hovering the `.acc-item.group` wrapper so cards reflect the chosen palette consistently.
+
+### Removed
+- None.
+
 # [1.5.15] - 2025-12-05
 
 ### Added

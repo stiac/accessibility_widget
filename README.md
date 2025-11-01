@@ -8,8 +8,13 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.15`
+- **Current Version:** `1.5.16`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.16
+
+- Default the Close toggle and Reset All button to the header palette so they immediately adopt the blue `#036cff` background and white text without requiring overrides.
+- Apply the configured hover colours to entire accessibility cards (including SVG icons) even when the pointer rests on the `.acc-item.group` wrapper.
 
 ## What's New in 1.5.15
 
