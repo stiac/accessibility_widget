@@ -1586,6 +1586,10 @@ const accessibilityMenuStyles = `
       animation: none !important;
     }
 
+    html.reduce-motion #accessibility-modal.is-ready.close {
+      animation: none !important;
+    }
+
     html.reduce-motion body marquee,
     html.reduce-motion body blink {
       animation: none !important;
