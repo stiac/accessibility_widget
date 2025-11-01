@@ -2071,8 +2071,9 @@ const accessibilityMenuHTML = `
             data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
           ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
-                d="M8.75 14.5h-3.5a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v1.94l8.22-8.22a.75.75 0 0 1 1.06 1.06l-8.22 8.22h1.94a.75.75 0 0 1 0 1.5Z"
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
+                transform="rotate(-45 12 12)"
               />
             </svg></button>
           <button
@@ -2085,8 +2086,9 @@ const accessibilityMenuHTML = `
             data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
           ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path
-                d="M15.25 14.5h3.5a.75.75 0 0 0 .75-.75v-3.5a.75.75 0 0 0-1.5 0v1.94l-8.22-8.22a.75.75 0 0 0-1.06 1.06l8.22 8.22h-1.94a.75.75 0 1 0 0 1.5Z"
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
+                transform="rotate(45 12 12)"
               />
             </svg></button>
           <button

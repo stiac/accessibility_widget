@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.13] - 2025-12-03
+
+### Added
+- None.
+
+### Changed
+- Rotated the bottom-left and bottom-right Change Positions arrows to reuse the shared directional glyph for visual consistency.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.12] - 2025-12-02
 
 ### Added
