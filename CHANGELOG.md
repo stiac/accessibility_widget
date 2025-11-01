@@ -1,4 +1,32 @@
 # Changelog
+# [1.5.10] - 2025-11-30
+
+### Added
+- Localised Change Position button labels (including the bottom-left and bottom-right controls) so assistive technologies announce each placement option accurately.
+
+### Changed
+- Synced the Change Position controls' `aria-pressed` state to mirror the active docking spot for screen readers and other assistive tech.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.9] - 2025-11-29
+
+### Added
+- Introduced bottom-left and bottom-right docking controls so the launcher can occupy any corner, complete with refreshed icons and saved preferences.
+
+### Changed
+- Updated the close button icon logic and position persistence helpers to recognise the new corner placements when the widget toggles open or closed.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.8] - 2025-11-28
 
 ### Added

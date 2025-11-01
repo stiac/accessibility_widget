@@ -8,8 +8,16 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.8`
+- **Current Version:** `1.5.10`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.10
+
+- Added localised aria labels and pressed state syncing to every Change Position control so screen readers can identify the bottom-left and bottom-right corner options alongside the existing edges.
+
+## What's New in 1.5.9
+
+- Added dedicated controls to pin the widget to the bottom-left or bottom-right corners alongside the existing edge positions, with icons and persistence wired into local storage.
 
 ## What's New in 1.5.8
 
@@ -79,7 +87,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Reading Guide**: Makes it easier to read long lines of text by Long Highlight Cursor.
 - **Reset**: Resets all accessibility settings to their default values.
 - **Close**: Closes the accessibility menu.
-- **Change Position**: You can change the position of the accessibility menu to `left`, `right`, `top` or `bottom` as User needs.
+- **Change Position**: You can change the position of the accessibility menu to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` as user needs.
 - **Save Settings**: Save the current settings to the local storage and load them when the page is reloaded.
 - **Internationalisation**: Auto-detects the visitor language, offers six bundled translations, and exposes a keyboard-accessible language picker with polite announcements.
 
@@ -119,7 +127,7 @@ You can use `min.js` file _as your requirement_
 ### Change Position
 
 - In the js file, you can find the `first div` with `id` as `accessibility-modal`
-- In this div, you can find class `right` by **default**. You can change it to `left`, `right`, `top` or `bottom` as you need
+- In this div, you can find class `right` by **default**. You can change it to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` as you need
 
 ### Styling
 

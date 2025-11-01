@@ -68,6 +68,14 @@
     },
     "resetAll": {
       "label": "Reimposta Tutto"
+    },
+    "position": {
+      "left": "Ancorare il widget al bordo sinistro",
+      "top": "Ancorare il widget al bordo superiore",
+      "bottom": "Ancorare il widget al bordo inferiore",
+      "bottomLeft": "Ancorare il widget all'angolo in basso a sinistra",
+      "bottomRight": "Ancorare il widget all'angolo in basso a destra",
+      "right": "Ancorare il widget al bordo destro"
     }
   },
   "announcements": {
