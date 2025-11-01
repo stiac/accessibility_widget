@@ -3680,8 +3680,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function accessibilityModalOpenCloseToggle() {
-        accessibilityModal.classList.toggle('close');
+        const isClosing = accessibilityModal.classList.toggle('close');
         updateCloseButtonIcon();
+        if (!isClosing) {
+            requestAnimationFrame(() => {
+                applyAccessibilityToolsScrollbarPadding();
+            });
+        }
     }
 
     function getCloseButtonIconMarkup(position) {
