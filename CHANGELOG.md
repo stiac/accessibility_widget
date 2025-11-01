@@ -1,4 +1,46 @@
 # Changelog
+## [1.4.25] - 2025-11-17
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Redirected the Font Dyslexia toggle to source OpenDyslexic fonts from the upstream Forge repository so enabling the control no longer causes 404 errors.
+
+### Removed
+- None.
+
+## [1.4.24] - 2025-11-16
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Re-pointed the Font Dyslexia toggle to GitHub-hosted OpenDyslexic font files so enabling the control no longer triggers 404 errors and dyslexia-friendly typography renders reliably.
+
+### Removed
+- None.
+
+## [1.4.23] - 2025-11-15
+
+### Added
+- Introduced a Font Dyslexia toggle that applies an OpenDyslexic-led font stack across the host page, giving dyslexic readers a WCAG 2.1 Level A and EAA compliant typography option while keeping the widget interface unchanged.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 ## [1.4.22] - 2025-11-14
 
 ### Added

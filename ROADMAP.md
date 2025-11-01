@@ -6,6 +6,7 @@
 - Provide UI feedback for binary toggles without progress indicators (e.g., grayscale) to reinforce state changes.
 - Introduce a lightweight lint/check step to catch syntax errors before publishing script updates.
 - Add a smoke test ensuring the modal's baseline font variables keep widget UI elements excluded from global font-size scaling routines.
+- Add regression coverage to verify the Font Dyslexia toggle loads fallback fonts gracefully if the upstream Forge host is unavailable.
 
 ## Mid Term
 - Offer configuration API for customizing control order and visibility without editing source.
