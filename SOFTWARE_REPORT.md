@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.5
+- **Version**: 1.5.6
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-25
+- **Last Update**: 2025-11-26
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,6 +11,7 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
+- 2025-11-26 — Rebuilt the language dropdown with Tailwind styling, inline SVG flags, and native language labels by default with an optional translation toggle (AI assistant)
 - 2025-11-25 — Restored the launcher shadow, replaced clip-path morphing with an accessible radius-based reveal, and auto-enabled Reduce Motion when the OS requests it (AI assistant)
 - 2025-11-24 — Reworked the launcher animation with clip-path transitions and hid the language selector while collapsed to stop UI fragments bleeding outside the closed bubble (AI assistant)
 - 2025-11-22 — Smoothed the accessibility modal reveal with a spring-inspired animation that honours Reduce Motion preferences for gentler open transitions (AI assistant)
