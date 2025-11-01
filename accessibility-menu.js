@@ -3681,17 +3681,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 '</svg>';
         }
         if (position === 'bottom-left') {
-            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">\n' +
-                '  <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5"/>\n' +
-                '  <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5"/>\n' +
-                '  <rect x="2.5" y="9" width="6" height="4" rx="1"/>\n' +
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">\n' +
+                '  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" transform="rotate(45 8 8)"/>\n' +
                 '</svg>';
         }
         if (position === 'bottom-right') {
-            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">\n' +
-                '  <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5"/>\n' +
-                '  <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5"/>\n' +
-                '  <rect x="7.5" y="9" width="6" height="4" rx="1"/>\n' +
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">\n' +
+                '  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" transform="rotate(45 8 8)"/>\n' +
                 '</svg>';
         }
         return '';
