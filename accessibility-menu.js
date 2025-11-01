@@ -1107,6 +1107,10 @@ const accessibilityMenuStyles = `
     :root {
       --acc_color_1: #0f172a;
       --acc_color_2: #f8fafc;
+      --acc_hover_color: #1c2c4d;
+      --acc_hover_text_color: #f8fafc;
+      --acc_text_color: rgba(15, 23, 42, 0.85);
+      --acc_header_text_color: #f8fafc;
       --border_radius: 24px;
       --acc-font-scale: 1;
     }
@@ -1461,21 +1465,29 @@ const accessibilityMenuStyles = `
 
     .acc-child {
       border: 1px solid rgba(15, 23, 42, 0.1);
-      background: rgba(255, 255, 255, 0.9);
+      background: var(--acc_color_2);
       border-radius: 20px;
       box-shadow: none;
-      color: rgba(15, 23, 42, 0.85);
+      color: var(--acc_text_color);
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .acc-child svg {
+      color: inherit;
+      fill: currentColor;
+      transition: color 0.2s ease, fill 0.2s ease;
     }
 
     .acc-child.active {
       background: var(--acc_color_1);
-      color: var(--acc_color_2);
+      color: var(--acc_header_text_color);
       border-color: transparent;
     }
 
-    .acc-child.active svg {
-      color: var(--acc_color_2);
-      fill: currentColor;
+    .acc-child:not(.active):hover,
+    .acc-child.active:hover {
+      background: var(--acc_hover_color);
+      color: var(--acc_hover_text_color);
     }
 
     .acc-progress-parent {
@@ -1497,20 +1509,75 @@ const accessibilityMenuStyles = `
       box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.65);
     }
 
+    #headerContent {
+      background: var(--acc_color_1) !important;
+      color: var(--acc_header_text_color) !important;
+    }
+
+    #headerContent * {
+      color: var(--acc_header_text_color) !important;
+    }
+
+    #closeBtn {
+      background: var(--acc_color_1);
+      color: var(--acc_header_text_color);
+      transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    #closeBtn:hover {
+      background: var(--acc_hover_color);
+      color: var(--acc_hover_text_color);
+    }
+
+    #closeBtn svg {
+      color: inherit;
+      fill: currentColor;
+      transition: color 0.2s ease, fill 0.2s ease;
+    }
+
+    #reset-all {
+      background: var(--acc_color_1);
+      color: var(--acc_header_text_color);
+      transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    #reset-all:hover {
+      background: var(--acc_hover_color);
+      color: var(--acc_hover_text_color);
+    }
+
+    #change-positions button {
+      background: var(--acc_color_2);
+      color: var(--acc_text_color);
+      border-color: transparent;
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    #change-positions button svg {
+      color: inherit;
+      fill: currentColor;
+      transition: color 0.2s ease, fill 0.2s ease;
+    }
+
+    #change-positions button:hover {
+      background: var(--acc_hover_color);
+      color: var(--acc_hover_text_color);
+    }
+
     #change-positions button.active {
       background: var(--acc_color_1);
-      color: var(--acc_color_2);
+      color: var(--acc_header_text_color);
       box-shadow: none;
     }
 
-    #change-positions button.active svg {
-      fill: currentColor;
+    #change-positions button.active:hover {
+      background: var(--acc_hover_color);
+      color: var(--acc_hover_text_color);
     }
 
-    #reset-all:hover,
-    #change-positions button:hover,
     .acc-item:hover .acc-child.active {
-      filter: brightness(1.05);
+      background: var(--acc_hover_color);
+      color: var(--acc_hover_text_color);
     }
 
     .hidden {
@@ -1699,13 +1766,13 @@ const accessibilityMenuStyles = `
 `;
 const accessibilityMenuHTML = `
     <div id="accessibility-modal" class="right close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-acc-preserve-images>
-      <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white shadow-lg shadow-slate-900/40 transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
+      <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-lg shadow-slate-900/40 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">
           <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z" />
           <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8" />
         </svg>
       </button>
-      <div id="headerContent" class="mx-6 mt-8 flex flex-col gap-2 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-6 py-5 text-slate-100 shadow-lg shadow-slate-900/40">
+      <div id="headerContent" class="mx-6 mt-8 flex flex-col gap-2 rounded-2xl px-6 py-5 shadow-lg shadow-slate-900/40">
         <p class="text-lg font-semibold tracking-tight" data-i18n="controls.heading.title">Accessibility Tools</p>
         <span class="text-sm font-normal text-slate-300" data-i18n="controls.heading.subtitle">Fine-tune colours, typography and focus helpers with a refreshed look.</span>
       </div>
@@ -1739,7 +1806,7 @@ const accessibilityMenuHTML = `
 
         <!--invert colors-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="invert-colors">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="invert-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-half" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z" />
               <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z" />
@@ -1755,7 +1822,7 @@ const accessibilityMenuHTML = `
 
         <!--grayscale-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="grayscale">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="grayscale">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
             </svg>
@@ -1770,7 +1837,7 @@ const accessibilityMenuHTML = `
 
         <!--saturation-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="saturation">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="saturation">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-palette" viewBox="0 0 16 16">
               <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
               <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
@@ -1785,7 +1852,7 @@ const accessibilityMenuHTML = `
 
         <!--links highlight-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="underline">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
               <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
               <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
@@ -1801,7 +1868,7 @@ const accessibilityMenuHTML = `
 
         <!--font size-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-size">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-size">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 12V17H17.5C17.7761 17 18 17.2239 18 17.5C18 17.7761 17.7761 18 17.5 18H15.5C15.2239 18 15 17.7761 15 17.5C15 17.2239 15.2239 17 15.5 17H16V12H14V12.5C14 12.7761 13.7761 13 13.5 13C13.2239 13 13 12.7761 13 12.5V11.5C13 11.2239 13.2239 11 13.5 11H19.5C19.7761 11 20 11.2239 20 11.5V12.5C20 12.7761 19.7761 13 19.5 13C19.2239 13 19 12.7761 19 12.5V12H17ZM10 6V17H11.5C11.7761 17 12 17.2239 12 17.5C12 17.7761 11.7761 18 11.5 18H7.5C7.22386 18 7 17.7761 7 17.5C7 17.2239 7.22386 17 7.5 17H9V6H5V7.5C5 7.77614 4.77614 8 4.5 8C4.22386 8 4 7.77614 4 7.5V5.5C4 5.22386 4.22386 5 4.5 5H14.5C14.7761 5 15 5.22386 15 5.5V7.5C15 7.77614 14.7761 8 14.5 8C14.2239 8 14 7.77614 14 7.5V6H10Z" fill="currentColor" />
             </svg>
@@ -1816,7 +1883,7 @@ const accessibilityMenuHTML = `
 
         <!--line height-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="line-height">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="line-height">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
@@ -1831,7 +1898,7 @@ const accessibilityMenuHTML = `
 
         <!--letter spacing-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="letter-spacing">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="letter-spacing">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
@@ -1846,7 +1913,7 @@ const accessibilityMenuHTML = `
 
         <!--dyslexia friendly font toggle-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-dyslexia" aria-describedby="font-dyslexia-description">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-dyslexia" aria-describedby="font-dyslexia-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.5 5C3.11929 5 2 6.11929 2 7.5V16.5C2 17.8807 3.11929 19 4.5 19H11.75C13.1307 19 14.25 17.8807 14.25 16.5V13.75H19.5C20.8807 13.75 22 12.6307 22 11.25V7.5C22 6.11929 20.8807 5 19.5 5H4.5ZM4 7.5C4 7.22386 4.22386 7 4.5 7H11.5C11.7761 7 12 7.22386 12 7.5V9C12 9.27614 11.7761 9.5 11.5 9.5H6.75V16.5C6.75 16.7761 6.52614 17 6.25 17H4.5C4.22386 17 4 16.7761 4 16.5V7.5ZM14 7.5C14 7.22386 14.2239 7 14.5 7H19.5C19.7761 7 20 7.22386 20 7.5V11.25C20 11.5261 19.7761 11.75 19.5 11.75H14.5C14.2239 11.75 14 11.5261 14 11.25V7.5Z" fill="currentColor" />
             </svg>
@@ -1857,7 +1924,7 @@ const accessibilityMenuHTML = `
 
         <!--text align-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-text-align-icon>
               <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
             </svg>
@@ -1875,7 +1942,7 @@ const accessibilityMenuHTML = `
 
         <!--contrast-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="contrast">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="contrast">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-transparency" viewBox="0 0 16 16">
               <path d="M0 6.5a6.5 6.5 0 0 1 12.346-2.846 6.5 6.5 0 1 1-8.691 8.691A6.5 6.5 0 0 1 0 6.5m5.144 6.358a5.5 5.5 0 1 0 7.714-7.714 6.5 6.5 0 0 1-7.714 7.714m-.733-1.269q.546.226 1.144.33l-1.474-1.474q.104.597.33 1.144m2.614.386a5.5 5.5 0 0 0 1.173-.242L4.374 7.91a6 6 0 0 0-.296 1.118zm2.157-.672q.446-.25.838-.576L5.418 6.126a6 6 0 0 0-.587.826zm1.545-1.284q.325-.39.576-.837L6.953 4.83a6 6 0 0 0-.827.587l4.6 4.602Zm1.006-1.822q.183-.562.242-1.172L9.028 4.078q-.58.096-1.118.296l3.823 3.824Zm.186-2.642a5.5 5.5 0 0 0-.33-1.144 5.5 5.5 0 0 0-1.144-.33z" />
             </svg>
@@ -1890,7 +1957,7 @@ const accessibilityMenuHTML = `
 
         <!--hide images-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-images">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-images">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.8,4L4.8,4l1,1L4.8,4z M19.7,19L19.7,19l0.8,0.8L19.7,19z" />
               <path d="M18,7h-2c-0.5,0-1,0.5-1,1v2c0,0.5,0.5,1,1,1h2c0.5,0,1-0.5,1-1V8C19,7.5,18.5,7,18,7z M18,10h-2V8h2V10z" />
@@ -1903,7 +1970,7 @@ const accessibilityMenuHTML = `
 
         <!--hide video-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-video">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-video">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-off" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M10.961 12.365a2 2 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518zM1.428 4.18A1 1 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634zM15 11.73l-3.5-1.555v-4.35L15 4.269zm-4.407 3.56-10-14 .814-.58 10 14z" />
             </svg>
@@ -1913,7 +1980,7 @@ const accessibilityMenuHTML = `
 
         <!--reduce motion-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="reduce-motion" aria-describedby="reduce-motion-description">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="reduce-motion" aria-describedby="reduce-motion-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-2.5-11.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Zm5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Z" fill="currentColor" />
             </svg>
@@ -1924,7 +1991,7 @@ const accessibilityMenuHTML = `
 
         <!--change cursor-->
         <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="change-cursor">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="change-cursor">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.85333 19.8536C8.58758 20.1193 8.13463 20.0079 8.02253 19.6492L3.02253 3.64915C2.90221 3.26413 3.26389 2.90246 3.64891 3.02278L19.6489 8.02278C20.0076 8.13487 20.1191 8.58782 19.8533 8.85357L16.2069 12.5L20.8533 17.1465C21.0486 17.3417 21.0486 17.6583 20.8533 17.8536L17.8533 20.8536C17.6581 21.0488 17.3415 21.0488 17.1462 20.8536L12.4998 16.2071L8.85333 19.8536ZM4.26173 4.26197L8.73053 18.5621L12.1462 15.1465C12.3415 14.9512 12.6581 14.9512 12.8533 15.1465L17.4998 19.7929L19.7927 17.5L15.1462 12.8536C14.951 12.6583 14.951 12.3417 15.1462 12.1465L18.5619 8.73078L4.26173 4.26197Z" fill="currentColor" />
             </svg>
@@ -1946,7 +2013,7 @@ const accessibilityMenuHTML = `
       <div id="acc-footer" class="flex flex-col gap-4 border-t border-slate-900/10 bg-white/90 px-6 py-5 shadow-inner shadow-slate-900/5">
 
         <!--reset all-->
-        <button id="reset-all" class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-900/30 transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.resetAll.label">
+        <button id="reset-all" class="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold shadow-lg shadow-slate-900/30 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.resetAll.label">
           Reset All
         </button>
 
@@ -1955,7 +2022,7 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-left"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the left edge"
             title="Dock widget to the left edge"
@@ -1967,7 +2034,7 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-top"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the top edge"
             title="Dock widget to the top edge"
@@ -1979,7 +2046,7 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-bottom"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom edge"
             title="Dock widget to the bottom edge"
@@ -1991,7 +2058,7 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-bottom-left"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom-left corner"
             title="Dock widget to the bottom-left corner"
@@ -2004,7 +2071,7 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-bottom-right"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom-right corner"
             title="Dock widget to the bottom-right corner"
@@ -2017,7 +2084,7 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-right"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the right edge"
             title="Dock widget to the right edge"
@@ -2042,6 +2109,9 @@ function resolveWidgetScriptConfig() {
         mode: 'production',
         colorButtonActive: '#0f172a',
         colorButton: '#f8fafc',
+        colorButtonHover: '',
+        colorText: '',
+        colorHeaderText: '',
         voce1: '',
         voce2: '',
         localesPath: '',
@@ -2096,6 +2166,18 @@ function resolveWidgetScriptConfig() {
 
     if (typeof script.dataset.colorButton === 'string' && script.dataset.colorButton.trim()) {
         config.colorButton = script.dataset.colorButton.trim();
+    }
+
+    if (typeof script.dataset.colorButtonHover === 'string' && script.dataset.colorButtonHover.trim()) {
+        config.colorButtonHover = script.dataset.colorButtonHover.trim();
+    }
+
+    if (typeof script.dataset.colorText === 'string' && script.dataset.colorText.trim()) {
+        config.colorText = script.dataset.colorText.trim();
+    }
+
+    if (typeof script.dataset.colorHeaderText === 'string' && script.dataset.colorHeaderText.trim()) {
+        config.colorHeaderText = script.dataset.colorHeaderText.trim();
     }
 
     if (typeof script.dataset.voce1 === 'string' && script.dataset.voce1.trim()) {
@@ -2852,6 +2934,174 @@ function sanitiseWidgetColor(value, fallback) {
     return fallback;
 }
 
+function clamp(value, minimum, maximum) {
+    return Math.min(Math.max(value, minimum), maximum);
+}
+
+function parseCssColor(value) {
+    if (typeof document === 'undefined' || !document.body || typeof value !== 'string' || !value.trim()) {
+        return null;
+    }
+    const probe = document.createElement('span');
+    probe.style.color = value;
+    probe.style.position = 'absolute';
+    probe.style.left = '-9999px';
+    probe.style.top = '-9999px';
+    probe.style.pointerEvents = 'none';
+    document.body.appendChild(probe);
+    const computed = window.getComputedStyle(probe).color;
+    probe.remove();
+    const match = computed.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\)/i);
+    if (!match) {
+        return null;
+    }
+    return {
+        r: Number.parseInt(match[1], 10),
+        g: Number.parseInt(match[2], 10),
+        b: Number.parseInt(match[3], 10),
+        a: match[4] !== undefined ? Number.parseFloat(match[4]) : 1
+    };
+}
+
+function rgbToHsl(r, g, b) {
+    const red = r / 255;
+    const green = g / 255;
+    const blue = b / 255;
+    const max = Math.max(red, green, blue);
+    const min = Math.min(red, green, blue);
+    let hue = 0;
+    let saturation = 0;
+    const lightness = (max + min) / 2;
+
+    if (max !== min) {
+        const delta = max - min;
+        saturation = lightness > 0.5 ? delta / (2 - max - min) : delta / (max + min);
+        switch (max) {
+        case red:
+            hue = ((green - blue) / delta + (green < blue ? 6 : 0));
+            break;
+        case green:
+            hue = ((blue - red) / delta + 2);
+            break;
+        default:
+            hue = ((red - green) / delta + 4);
+            break;
+        }
+        hue /= 6;
+    }
+
+    return { h: hue, s: saturation, l: lightness };
+}
+
+function hslToRgb(h, s, l) {
+    if (s === 0) {
+        const value = Math.round(l * 255);
+        return { r: value, g: value, b: value };
+    }
+
+    const hueToRgb = (p, q, t) => {
+        let temp = t;
+        if (temp < 0) {
+            temp += 1;
+        }
+        if (temp > 1) {
+            temp -= 1;
+        }
+        if (temp < 1 / 6) {
+            return p + (q - p) * 6 * temp;
+        }
+        if (temp < 1 / 2) {
+            return q;
+        }
+        if (temp < 2 / 3) {
+            return p + (q - p) * (2 / 3 - temp) * 6;
+        }
+        return p;
+    };
+
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+
+    return {
+        r: Math.round(hueToRgb(p, q, h + 1 / 3) * 255),
+        g: Math.round(hueToRgb(p, q, h) * 255),
+        b: Math.round(hueToRgb(p, q, h - 1 / 3) * 255)
+    };
+}
+
+function formatColor({ r, g, b, a }) {
+    const red = clamp(Math.round(r), 0, 255);
+    const green = clamp(Math.round(g), 0, 255);
+    const blue = clamp(Math.round(b), 0, 255);
+    if (typeof a === 'number' && a >= 0 && a < 1) {
+        const alpha = Math.round(a * 1000) / 1000;
+        return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+    }
+    const toHex = (component) => component.toString(16).padStart(2, '0');
+    return `#${toHex(red)}${toHex(green)}${toHex(blue)}`;
+}
+
+function adjustColorLightness(color, amount) {
+    const parsed = typeof color === 'string' ? parseCssColor(color) : color;
+    if (!parsed) {
+        return null;
+    }
+    const { h, s, l } = rgbToHsl(parsed.r, parsed.g, parsed.b);
+    const adjustedLightness = clamp(l + amount, 0, 1);
+    const rgb = hslToRgb(h, s, adjustedLightness);
+    return formatColor({ ...rgb, a: parsed.a });
+}
+
+function relativeLuminance({ r, g, b }) {
+    const normalised = [r, g, b].map(component => {
+        const channel = component / 255;
+        return channel <= 0.03928 ? channel / 12.92 : Math.pow((channel + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * normalised[0] + 0.7152 * normalised[1] + 0.0722 * normalised[2];
+}
+
+function contrastRatio(luminosityA, luminosityB) {
+    const lighter = Math.max(luminosityA, luminosityB);
+    const darker = Math.min(luminosityA, luminosityB);
+    return (lighter + 0.05) / (darker + 0.05);
+}
+
+function deriveHoverColor(baseColor) {
+    const parsed = parseCssColor(baseColor);
+    if (!parsed) {
+        return baseColor;
+    }
+    const luminosity = relativeLuminance(parsed);
+    const adjustment = luminosity > 0.55 ? -0.15 : 0.15;
+    const adjusted = adjustColorLightness(parsed, adjustment);
+    return adjusted || baseColor;
+}
+
+function deriveReadableTextColor(backgroundColor, candidates = []) {
+    const background = parseCssColor(backgroundColor);
+    if (!background) {
+        return candidates.find(Boolean) || '#ffffff';
+    }
+    const backgroundLuminosity = relativeLuminance(background);
+    let bestCandidate = null;
+    let bestRatio = 0;
+    candidates.filter(Boolean).forEach(candidate => {
+        const parsedCandidate = parseCssColor(candidate);
+        if (!parsedCandidate) {
+            return;
+        }
+        const ratio = contrastRatio(backgroundLuminosity, relativeLuminance(parsedCandidate));
+        if (ratio > bestRatio) {
+            bestRatio = ratio;
+            bestCandidate = candidate;
+        }
+    });
+    if (bestCandidate) {
+        return bestCandidate;
+    }
+    return backgroundLuminosity > 0.55 ? '#0f172a' : '#f8fafc';
+}
+
 // Ensure Tailwind CSS is available for the redesigned panel.
 function ensureTailwindCSSLoaded() {
     if (typeof window !== 'undefined' && (window.tailwind || document.getElementById('stiac-accessibility-tailwind'))) {
@@ -2881,9 +3131,36 @@ document.addEventListener("DOMContentLoaded", function() {
         active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#0f172a'),
         inactive: sanitiseWidgetColor(widgetScriptConfig.colorButton, '#f8fafc')
     };
+
+    const hoverPreference = sanitiseWidgetColor(widgetScriptConfig.colorButtonHover, null);
+    const textPreference = sanitiseWidgetColor(widgetScriptConfig.colorText, null);
+    const headerTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderText, null);
+    const hoverColor = hoverPreference || deriveHoverColor(resolvedColors.active) || resolvedColors.active;
+    const textColor = textPreference || 'rgba(15, 23, 42, 0.85)';
+    const headerTextColor = headerTextPreference
+        || deriveReadableTextColor(resolvedColors.active, [
+            textPreference,
+            resolvedColors.inactive,
+            '#ffffff',
+            '#000000',
+            textColor
+        ]);
+    const hoverTextColor = deriveReadableTextColor(hoverColor, [
+        headerTextPreference,
+        headerTextColor,
+        resolvedColors.inactive,
+        textColor,
+        '#ffffff',
+        '#000000'
+    ]);
+
     if (document.documentElement && document.documentElement.style) {
         document.documentElement.style.setProperty('--acc_color_1', resolvedColors.active);
         document.documentElement.style.setProperty('--acc_color_2', resolvedColors.inactive);
+        document.documentElement.style.setProperty('--acc_hover_color', hoverColor);
+        document.documentElement.style.setProperty('--acc_hover_text_color', hoverTextColor);
+        document.documentElement.style.setProperty('--acc_text_color', textColor);
+        document.documentElement.style.setProperty('--acc_header_text_color', headerTextColor);
     }
 
     ensureTailwindCSSLoaded();
@@ -3253,12 +3530,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const resetAllButton = document.getElementById('reset-all');
     if (resetAllButton) {
         resetAllButton.style.backgroundColor = resolvedColors.active;
-        resetAllButton.style.color = resolvedColors.inactive;
+        resetAllButton.style.color = headerTextColor;
     }
 
     if (closeBtn) {
         closeBtn.style.backgroundColor = resolvedColors.active;
-        closeBtn.style.color = resolvedColors.inactive;
+        closeBtn.style.color = headerTextColor;
     }
 
     // Trigger the refined reveal transition once the modal has been added to the DOM.
@@ -4079,8 +4356,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         element.classList.toggle('active', isActive);
         element.setAttribute('aria-pressed', String(Boolean(isActive)));
-        element.querySelectorAll('path').forEach(icon => {
-            icon.style.fill = isActive ? 'var(--acc_color_2)' : 'var(--acc_color_1)';
+        const targetColor = isActive ? 'var(--acc_header_text_color)' : 'var(--acc_text_color)';
+        element.style.color = targetColor;
+        element.querySelectorAll('svg').forEach(icon => {
+            icon.style.color = targetColor;
+            icon.style.fill = 'currentColor';
         });
     }
 
@@ -4957,8 +5237,15 @@ document.addEventListener("DOMContentLoaded", function() {
     syncControls();
 
     accItems.forEach(item => {
-        item.querySelectorAll('path').forEach(icon => {
-            icon.style.fill = item.querySelector('.acc-child').classList.contains('active') ? 'var(--acc_color_2)' : 'var(--acc_color_1)';
+        const trigger = item.querySelector('.acc-child');
+        if (!trigger) {
+            return;
+        }
+        const targetColor = trigger.classList.contains('active') ? 'var(--acc_header_text_color)' : 'var(--acc_text_color)';
+        trigger.style.color = targetColor;
+        trigger.querySelectorAll('svg').forEach(icon => {
+            icon.style.color = targetColor;
+            icon.style.fill = 'currentColor';
         });
     });
 

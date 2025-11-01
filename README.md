@@ -8,8 +8,14 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.10`
+- **Current Version:** `1.5.11`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.11
+
+- Added `data-color-button-hover`, `data-color-text`, and `data-color-header-text` script attributes so integrators can brand hover states and typography without editing the bundle.
+- Updated the widget header, reset button, and control cards to pull their backgrounds, hover states, and icon fills from the configured palette with automatic contrast-aware fallbacks.
+- Ensured the header banner now honours `data-color-button-active` so branding colours propagate across the entire launcher surface.
 
 ## What's New in 1.5.10
 
@@ -132,7 +138,7 @@ You can use `min.js` file _as your requirement_
 ### Styling
 
 - The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads.
-- Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1` and `--acc_color_2`) at the top of `accessibility-menu.js`.
+- Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1`, `--acc_color_2`, `--acc_hover_color`, `--acc_hover_text_color`, `--acc_text_color`, `--acc_header_text_color`) at the top of `accessibility-menu.js`.
 
 ### Script data attributes
 
@@ -156,7 +162,10 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 | `data-default-language` | Sets the UI language for headings, card labels, and screen-reader helpers. | `en`, `it` (other values fall back to English) | `en` |
 | `data-mode` | Enables additional console output to verify the resolved configuration. | `production`, `debug` | `production` |
 | `data-color-button-active` | CSS colour used for active cards, the close button, and the reset button background. | Any valid CSS colour (`#hex`, `rgb()`, etc.) | `#0f172a` |
-| `data-color-button` | CSS colour used for icon/text colour on the elements above. | Any valid CSS colour | `#f8fafc` |
+| `data-color-button` | CSS colour used for the idle background of cards, the header banner, and other neutral surfaces. | Any valid CSS colour | `#f8fafc` |
+| `data-color-button-hover` | Optional CSS colour used for hover backgrounds. When omitted, the widget derives an accessible shade from `data-color-button-active`. | Any valid CSS colour | Derived automatically |
+| `data-color-text` | Primary text and icon colour for idle controls and body copy inside the widget. | Any valid CSS colour | `rgba(15, 23, 42, 0.85)` |
+| `data-color-header-text` | Overrides the text colour used by the header banner and active buttons. Falls back to the most legible option if omitted. | Any valid CSS colour | Derived from palette |
 | `data-voce1` | Overrides the main heading inside the widget (useful for localisation/branding). | Free text | `Accessibility Tools` / translated value |
 | `data-voce2` | Overrides the sub-heading tagline beneath the title. | Free text | `Fine-tune colours…` / translated value |
 | `data-locales-path` | Overrides the folder that contains JSON locale files. Use when hosting the bundles outside the script directory. | Relative or absolute path ending in the folder containing locale JSON files. | `<script dir>/locales` when same origin, otherwise the host site's `/locales` folder |
