@@ -14,6 +14,7 @@
 - 2025-11-21 — Hardened locale loading to prefer same-origin bundles when scripts are served cross-origin, documenting mitigation steps for CDN integrations (AI assistant)
 - 2025-11-20 — Added the asynchronous i18n loader, JSON locale bundles for six languages, and an in-widget language selector with polite announcements (AI assistant)
 - 2025-11-19 — Enabled script-level configuration for language, palette, and debug output via data attributes while wiring Italian/English copy bundles (AI assistant)
+- 2025-11-20 — Added the asynchronous i18n loader, JSON locale bundles for six languages, and an in-widget language selector with polite announcements (AI assistant)
 - 2025-11-18 — Embedded OpenDyslexic regular and bold fonts as data URIs so the dyslexia-friendly toggle no longer depends on cross-origin hosts or trips CORS policies (AI assistant)
 - 2025-11-17 — Pointed the dyslexia-friendly font loader at the upstream Forge repository so OpenDyslexic downloads succeed without 404s while retaining swap behaviour (AI assistant)
 - 2025-11-16 — Re-routed the dyslexia-friendly font loader to GitHub-hosted OpenDyslexic assets so the toggle no longer produces 404 errors and typography switches immediately (AI assistant)
