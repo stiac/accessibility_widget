@@ -1,4 +1,47 @@
 # Changelog
+# [1.5.17] - 2025-12-07
+
+### Added
+- None.
+
+### Changed
+- Defaulted the `data-color-header-text` and `data-color-control-active-text` script attributes to white (`#ffffff`) so header and active control typography stays readable without custom configuration.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.16] - 2025-12-06
+
+### Added
+- None.
+
+### Changed
+- Updated the default accent palette so the close toggle, Reset All button, and hover states inherit the blue `#036cff` header scheme by default.
+
+### Fixed
+- Ensured the close toggle and Reset All button apply the configured header colours instead of the generic accent fallback.
+- Applied hover background, text, and icon fill overrides when hovering the `.acc-item.group` wrapper so cards reflect the chosen palette consistently.
+
+### Removed
+- None.
+
+# [1.5.15] - 2025-12-05
+
+### Added
+- Dataset controls (`data-color-header-background`, `data-color-control-active`, and their text counterparts) that let integrators tune header and active card palettes independently.
+
+### Changed
+- Swapped the default header, Reset button, and active position toggle styling to a blue `#036cff` background with white text for clearer contrast.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.14] - 2025-12-04
 
 ### Added
