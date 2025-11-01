@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.6] - 2025-11-26
+
+### Added
+- Introduced SVG-backed language icons and a configurable `data-translate-language-names` flag so integrators can opt into locale-translated names when needed.
+
+### Changed
+- Rebuilt the language selector as a Tailwind-styled dropdown listbox with improved keyboard support and richer layout.
+
+### Fixed
+- Kept language names in their native form by default (e.g., "Italiano") to prevent unwanted translations across locales.
+
+### Removed
+- None.
+
 # [1.5.5] - 2025-11-25
 
 ### Added

@@ -1692,8 +1692,29 @@ const accessibilityMenuHTML = `
         <span class="text-sm font-normal text-slate-300" data-i18n="controls.heading.subtitle">Fine-tune colours, typography and focus helpers with a refreshed look.</span>
       </div>
       <div id="language-selector" class="mx-6 -mt-2 flex flex-col gap-2 rounded-2xl bg-white/80 px-6 py-4 text-slate-700 ring-1 ring-inset ring-slate-900/10">
-        <label for="acc-language-select" class="text-xs font-semibold uppercase tracking-wide text-slate-600" data-i18n="language.selectorLabel">Language</label>
-        <select id="acc-language-select" class="w-full rounded-xl border border-slate-900/10 bg-white px-3 py-2 text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-describedby="acc-language-help"></select>
+        <label id="acc-language-label" for="acc-language-select" class="text-xs font-semibold uppercase tracking-wide text-slate-600" data-i18n="language.selectorLabel">Language</label>
+        <div class="relative mt-1">
+          <button id="acc-language-trigger" type="button" class="acc-language-trigger inline-flex w-full items-center justify-between gap-3 rounded-xl border border-slate-900/10 bg-white/95 px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-haspopup="listbox" aria-expanded="false" aria-describedby="acc-language-help" aria-labelledby="acc-language-label acc-language-active-label" aria-controls="acc-language-dropdown">
+            <span class="flex items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 ring-1 ring-inset ring-slate-900/10" data-language-active-icon>
+                <svg class="h-6 w-6 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M3 12h18"></path>
+                  <path d="M12 3a15 15 0 0 1 0 18"></path>
+                  <path d="M12 3a15 15 0 0 0 0 18"></path>
+                </svg>
+              </span>
+              <span id="acc-language-active-label" class="text-sm font-medium text-slate-700" data-language-active-label>English</span>
+            </span>
+            <svg class="h-4 w-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div id="acc-language-dropdown" class="acc-language-dropdown absolute left-0 right-0 z-20 mt-3 hidden rounded-2xl border border-slate-900/10 bg-white/95 shadow-xl shadow-slate-900/20 backdrop-blur" data-language-dropdown>
+            <ul class="max-h-60 overflow-y-auto py-2" role="listbox" aria-labelledby="acc-language-label" data-language-options></ul>
+          </div>
+        </div>
+        <select id="acc-language-select" class="acc-sr-only" aria-describedby="acc-language-help"></select>
         <p id="acc-language-help" class="text-xs text-slate-500" data-i18n="language.selectorDescription">Choose the language used for the accessibility tools interface.</p>
       </div>
       <div id="accessibility-tools" class="grid max-h-[45vh] grid-cols-1 gap-4 overflow-y-auto px-6 pb-6 sm:grid-cols-2">
@@ -1947,7 +1968,8 @@ function resolveWidgetScriptConfig() {
         colorButton: '#f8fafc',
         voce1: '',
         voce2: '',
-        localesPath: ''
+        localesPath: '',
+        translateLanguageNames: false
     };
 
     if (typeof document === 'undefined') {
@@ -2009,6 +2031,17 @@ function resolveWidgetScriptConfig() {
 
     if (typeof script.dataset.localesPath === 'string' && script.dataset.localesPath.trim()) {
         config.localesPath = script.dataset.localesPath.trim();
+    }
+
+    if (typeof script.dataset.translateLanguageNames === 'string' && script.dataset.translateLanguageNames.trim()) {
+        const rawPreference = script.dataset.translateLanguageNames.trim().toLowerCase();
+        const truthyValues = ['1', 'true', 'yes', 'on'];
+        const falsyValues = ['0', 'false', 'no', 'off'];
+        if (truthyValues.includes(rawPreference)) {
+            config.translateLanguageNames = true;
+        } else if (falsyValues.includes(rawPreference)) {
+            config.translateLanguageNames = false;
+        }
     }
 
     return config;
@@ -2561,6 +2594,22 @@ const FALLBACK_LANGUAGE_NAMES = {
     es: 'Spanish',
     pt: 'Portuguese'
 };
+const NATIVE_LANGUAGE_NAMES = {
+    en: 'English',
+    it: 'Italiano',
+    fr: 'Français',
+    de: 'Deutsch',
+    es: 'Español',
+    pt: 'Português'
+};
+const LANGUAGE_ICONS = {
+    en: '<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">\n            <rect width="24" height="24" rx="12" fill="#0f172a"></rect>\n            <path d="M5 9h14" stroke="#f8fafc" stroke-width="1.5" stroke-linecap="round"></path>\n            <path d="M5 12h14" stroke="#f8fafc" stroke-width="1.5" stroke-linecap="round" opacity="0.85"></path>\n            <path d="M5 15h14" stroke="#f8fafc" stroke-width="1.5" stroke-linecap="round" opacity="0.65"></path>\n        </svg>',
+    it: '<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">\n            <rect width="24" height="24" rx="12" fill="#ffffff"></rect>\n            <path d="M4 4h6v16H4z" fill="#16a34a"></path>\n            <path d="M14 4h6v16h-6z" fill="#dc2626"></path>\n        </svg>',
+    fr: '<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">\n            <rect width="24" height="24" rx="12" fill="#ffffff"></rect>\n            <path d="M4 4h6v16H4z" fill="#2563eb"></path>\n            <path d="M14 4h6v16h-6z" fill="#dc2626"></path>\n        </svg>',
+    de: '<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">\n            <rect width="24" height="24" rx="12" fill="#111827"></rect>\n            <path d="M4 9h16v6H4z" fill="#dc2626"></path>\n            <path d="M4 15h16v5H4z" fill="#facc15"></path>\n        </svg>',
+    es: '<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">\n            <rect width="24" height="24" rx="12" fill="#dc2626"></rect>\n            <path d="M4 9h16v6H4z" fill="#facc15"></path>\n        </svg>',
+    pt: '<svg class="h-8 w-8" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">\n            <rect width="24" height="24" rx="12" fill="#15803d"></rect>\n            <path d="M12 12 4 4v16l8-8z" fill="#dc2626"></path>\n            <circle cx="12" cy="12" r="3" fill="#facc15"></circle>\n        </svg>'
+};
 const FALLBACK_TEXT_ALIGN_STATUS = {
     start: 'the start edge',
     center: 'the center',
@@ -2590,10 +2639,13 @@ function formatWidgetTemplate(template, params = {}) {
 }
 
 function getLanguageNames() {
+    if (!widgetScriptConfig.translateLanguageNames) {
+        return NATIVE_LANGUAGE_NAMES;
+    }
     if (activeTranslations && activeTranslations.languageNames) {
         return activeTranslations.languageNames;
     }
-    return {};
+    return FALLBACK_LANGUAGE_NAMES;
 }
 
 function describeTextAlignValue(value) {
@@ -2706,6 +2758,179 @@ document.addEventListener("DOMContentLoaded", function() {
     const headingSubtitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.subtitle"]') : null;
     const languageSelectElement = document.getElementById('acc-language-select');
     const languageAnnouncementElement = document.getElementById('acc-language-announcement');
+    const languageSelectorContainer = document.getElementById('language-selector');
+    const languageTriggerButton = document.getElementById('acc-language-trigger');
+    const languageDropdownElement = document.getElementById('acc-language-dropdown');
+    const languageOptionsListElement = languageDropdownElement ? languageDropdownElement.querySelector('[data-language-options]') : null;
+    const languageActiveLabelElement = document.querySelector('[data-language-active-label]');
+    const languageActiveIconElement = document.querySelector('[data-language-active-icon]');
+    let languageDropdownOpen = false;
+    let focusedLanguageIndex = -1;
+
+    const getLanguageOptionElements = () => {
+        if (!languageOptionsListElement) {
+            return [];
+        }
+        return Array.from(languageOptionsListElement.querySelectorAll('[data-language-option]'));
+    };
+
+    const updateActiveLanguageDisplay = (languageCode, names) => {
+        if (!languageActiveLabelElement) {
+            return;
+        }
+        const labelSource = names && typeof names[languageCode] === 'string'
+            ? names[languageCode]
+            : FALLBACK_LANGUAGE_NAMES[languageCode] || languageCode;
+        languageActiveLabelElement.textContent = labelSource;
+        if (languageActiveIconElement) {
+            const iconMarkup = LANGUAGE_ICONS[languageCode] || LANGUAGE_ICONS.en;
+            languageActiveIconElement.innerHTML = iconMarkup;
+        }
+    };
+
+    const closeLanguageDropdown = (options = {}) => {
+        if (!languageDropdownElement || !languageTriggerButton) {
+            return;
+        }
+        languageDropdownElement.classList.add('hidden');
+        languageTriggerButton.setAttribute('aria-expanded', 'false');
+        languageDropdownOpen = false;
+        focusedLanguageIndex = -1;
+        if (options.focusTrigger) {
+            languageTriggerButton.focus();
+        }
+    };
+
+    const openLanguageDropdown = () => {
+        if (!languageDropdownElement || !languageTriggerButton) {
+            return;
+        }
+        languageDropdownElement.classList.remove('hidden');
+        languageTriggerButton.setAttribute('aria-expanded', 'true');
+        languageDropdownOpen = true;
+    };
+
+    const focusLanguageOption = (index) => {
+        const options = getLanguageOptionElements();
+        if (!options.length) {
+            return;
+        }
+        const safeIndex = (index + options.length) % options.length;
+        const option = options[safeIndex];
+        if (option) {
+            option.focus();
+            focusedLanguageIndex = safeIndex;
+            if (languageOptionsListElement) {
+                languageOptionsListElement.setAttribute('aria-activedescendant', option.id);
+            }
+        }
+    };
+
+    const selectLanguageFromDropdown = (languageCode) => {
+        if (!languageSelectElement) {
+            return;
+        }
+        languageSelectElement.value = languageCode;
+        updateActiveLanguageDisplay(languageCode, getLanguageNames());
+        const changeEvent = new Event('change', { bubbles: true });
+        languageSelectElement.dispatchEvent(changeEvent);
+    };
+
+    const handleLanguageTriggerKeydown = (event) => {
+        if (!languageDropdownElement) {
+            return;
+        }
+        if (event.key === 'ArrowDown' || event.key === 'Down') {
+            event.preventDefault();
+            if (!languageDropdownOpen) {
+                openLanguageDropdown();
+            }
+            const options = getLanguageOptionElements();
+            const selectedIndex = options.findIndex((option) => option.getAttribute('aria-selected') === 'true');
+            focusLanguageOption(selectedIndex >= 0 ? selectedIndex : 0);
+        } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+            event.preventDefault();
+            if (!languageDropdownOpen) {
+                openLanguageDropdown();
+            }
+            const options = getLanguageOptionElements();
+            const selectedIndex = options.findIndex((option) => option.getAttribute('aria-selected') === 'true');
+            const targetIndex = selectedIndex >= 0 ? selectedIndex : options.length - 1;
+            focusLanguageOption(targetIndex);
+        } else if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            if (languageDropdownOpen) {
+                closeLanguageDropdown({ focusTrigger: false });
+            } else {
+                openLanguageDropdown();
+                const options = getLanguageOptionElements();
+                const selectedIndex = options.findIndex((option) => option.getAttribute('aria-selected') === 'true');
+                focusLanguageOption(selectedIndex >= 0 ? selectedIndex : 0);
+            }
+        } else if (event.key === 'Escape' && languageDropdownOpen) {
+            event.preventDefault();
+            closeLanguageDropdown({ focusTrigger: true });
+        }
+    };
+
+    const handleLanguageDropdownKeydown = (event) => {
+        if (!languageDropdownOpen) {
+            return;
+        }
+        if (event.key === 'ArrowDown' || event.key === 'Down') {
+            event.preventDefault();
+            focusLanguageOption(focusedLanguageIndex + 1);
+        } else if (event.key === 'ArrowUp' || event.key === 'Up') {
+            event.preventDefault();
+            focusLanguageOption(focusedLanguageIndex - 1);
+        } else if (event.key === 'Home') {
+            event.preventDefault();
+            focusLanguageOption(0);
+        } else if (event.key === 'End') {
+            event.preventDefault();
+            const options = getLanguageOptionElements();
+            focusLanguageOption(options.length - 1);
+        } else if (event.key === 'Escape') {
+            event.preventDefault();
+            closeLanguageDropdown({ focusTrigger: true });
+        } else if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            const options = getLanguageOptionElements();
+            const activeOption = options[focusedLanguageIndex];
+            if (activeOption) {
+                selectLanguageFromDropdown(activeOption.getAttribute('data-language-option'));
+                closeLanguageDropdown({ focusTrigger: true });
+            }
+        }
+    };
+
+    const handleDocumentClick = (event) => {
+        if (!languageDropdownOpen || !languageSelectorContainer) {
+            return;
+        }
+        if (!languageSelectorContainer.contains(event.target)) {
+            closeLanguageDropdown({ focusTrigger: false });
+        }
+    };
+
+    if (languageTriggerButton) {
+        languageTriggerButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (languageDropdownOpen) {
+                closeLanguageDropdown({ focusTrigger: false });
+            } else {
+                openLanguageDropdown();
+                const options = getLanguageOptionElements();
+                const selectedIndex = options.findIndex((option) => option.getAttribute('aria-selected') === 'true');
+                focusLanguageOption(selectedIndex >= 0 ? selectedIndex : 0);
+            }
+        });
+        languageTriggerButton.addEventListener('keydown', handleLanguageTriggerKeydown);
+    }
+
+    if (typeof document !== 'undefined' && document.addEventListener) {
+        document.addEventListener('click', handleDocumentClick, true);
+    }
 
     const applyWidgetOverrides = () => {
         if (headingTitleElement && widgetScriptConfig.voce1) {
@@ -2721,18 +2946,63 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         const names = getLanguageNames();
-        const fragment = document.createDocumentFragment();
-        SUPPORTED_LANGUAGES.forEach((code) => {
+        const selectFragment = document.createDocumentFragment();
+        const dropdownFragment = document.createDocumentFragment();
+        const resolvedLanguage = SUPPORTED_LANGUAGES.includes(languageCode)
+            ? languageCode
+            : (SUPPORTED_LANGUAGES.includes(widgetScriptConfig.defaultLanguage) ? widgetScriptConfig.defaultLanguage : SUPPORTED_LANGUAGES[0]);
+
+        SUPPORTED_LANGUAGES.forEach((code, index) => {
             const option = document.createElement('option');
             option.value = code;
             option.textContent = names[code] || FALLBACK_LANGUAGE_NAMES[code] || code;
-            fragment.appendChild(option);
+            selectFragment.appendChild(option);
+
+            if (languageOptionsListElement) {
+                const listItem = document.createElement('li');
+                listItem.setAttribute('role', 'presentation');
+
+                const optionButton = document.createElement('button');
+                optionButton.type = 'button';
+                optionButton.className = 'acc-language-option flex w-full items-center justify-between gap-3 px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/40';
+                optionButton.setAttribute('role', 'option');
+                optionButton.setAttribute('id', `acc-language-option-${code}`);
+                optionButton.setAttribute('data-language-option', code);
+                optionButton.setAttribute('aria-selected', code === resolvedLanguage ? 'true' : 'false');
+                optionButton.innerHTML = `
+                    <span class="flex flex-1 items-center gap-3">
+                        <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 ring-1 ring-inset ring-slate-900/10">${LANGUAGE_ICONS[code] || LANGUAGE_ICONS.en}</span>
+                        <span class="flex-1 text-left font-medium ${code === resolvedLanguage ? 'text-slate-900' : 'text-slate-600'}">${names[code] || FALLBACK_LANGUAGE_NAMES[code] || code}</span>
+                    </span>
+                    <span class="text-slate-400 ${code === resolvedLanguage ? 'opacity-100' : 'opacity-0'}" aria-hidden="true">✓</span>
+                `;
+                if (code === resolvedLanguage) {
+                    optionButton.classList.add('bg-slate-100', 'text-slate-900');
+                }
+                optionButton.addEventListener('click', () => {
+                    selectLanguageFromDropdown(code);
+                    closeLanguageDropdown({ focusTrigger: true });
+                });
+                optionButton.addEventListener('focus', () => {
+                    focusedLanguageIndex = index;
+                });
+                optionButton.addEventListener('keydown', handleLanguageDropdownKeydown);
+                listItem.appendChild(optionButton);
+                dropdownFragment.appendChild(listItem);
+            }
         });
+
         languageSelectElement.innerHTML = '';
-        languageSelectElement.appendChild(fragment);
-        if (languageCode && SUPPORTED_LANGUAGES.includes(languageCode)) {
-            languageSelectElement.value = languageCode;
+        languageSelectElement.appendChild(selectFragment);
+        languageSelectElement.value = resolvedLanguage;
+
+        if (languageOptionsListElement) {
+            languageOptionsListElement.innerHTML = '';
+            languageOptionsListElement.appendChild(dropdownFragment);
+            languageOptionsListElement.setAttribute('aria-activedescendant', `acc-language-option-${resolvedLanguage}`);
         }
+
+        updateActiveLanguageDisplay(resolvedLanguage, names);
     };
 
     const i18nApi = typeof window !== 'undefined' ? window.AccessibilityI18n : null;
