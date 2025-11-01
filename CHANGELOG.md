@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.21] - 2025-12-11
+
+### Added
+- None.
+
+### Changed
+- Moved the top-left alignment control so it renders immediately after the top alignment button, matching the modal placement order.
+
+### Fixed
+- Rotated the top-left alignment icon by 45° so it points toward the modal's new docking corner.
+
+### Removed
+- None.
+
 # [1.5.20] - 2025-12-10
 
 ### Added

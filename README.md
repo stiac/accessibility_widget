@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.20`
+- **Current Version:** `1.5.21`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.21
+
+- Rotated the top-left dock icon 45 degrees and repositioned its control next to the top alignment button so the visual order mirrors the widget placements.
 
 ## What's New in 1.5.20
 
