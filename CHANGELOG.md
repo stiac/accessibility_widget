@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.3] - 2025-11-23
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Retooled the locale discovery sequence so CDN-hosted builds try fetching JSON from the script directory before falling back to the host site's `/locales` folder, resolving `net::ERR_EMPTY_RESPONSE` errors triggered by versioned CDN paths.
+
+### Removed
+- None.
+
 ## [1.5.2] - 2025-11-22
 
 ### Added
