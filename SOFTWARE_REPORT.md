@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.25
+- **Version**: 1.4.26
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-17
+- **Last Update**: 2025-11-18
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-11-18 — Embedded OpenDyslexic regular and bold fonts as data URIs so the dyslexia-friendly toggle no longer depends on cross-origin hosts or trips CORS policies (AI assistant)
 - 2025-11-17 — Pointed the dyslexia-friendly font loader at the upstream Forge repository so OpenDyslexic downloads succeed without 404s while retaining swap behaviour (AI assistant)
 - 2025-11-16 — Re-routed the dyslexia-friendly font loader to GitHub-hosted OpenDyslexic assets so the toggle no longer produces 404 errors and typography switches immediately (AI assistant)
 - 2025-11-15 — Delivered a dyslexia-friendly font toggle that loads OpenDyslexic from CDN, applies the stack to host content only, and persists the preference to meet WCAG 2.1 Level A/EAA expectations (AI assistant)

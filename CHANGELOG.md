@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.26] - 2025-11-18
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Embedded OpenDyslexic regular and bold fonts as data URIs so enabling the dyslexia-friendly toggle no longer triggers cross-origin errors or blocked downloads.
+
+### Removed
+- None.
+
 ## [1.4.25] - 2025-11-17
 
 ### Added
