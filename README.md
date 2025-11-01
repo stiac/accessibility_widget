@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.20`
+- **Current Version:** `1.4.21`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.21
+
+- Removed the "Click to cycle alignment" helper text from the Text Align card while retaining the screen-reader guidance so the layout stays streamlined without losing accessibility support.
 
 ## What's New in 1.4.20
 

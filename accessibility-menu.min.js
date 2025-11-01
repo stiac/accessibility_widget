@@ -572,7 +572,6 @@ const accessibilityMenuHTML = `
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" id="text-align-label">Text Align</p>
             <p id="text-align-description" class="acc-sr-only">Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.</p>
-            <p class="text-[11px] font-normal uppercase tracking-wide text-slate-500">Click to cycle alignment</p>
             <p class="acc-sr-only" data-text-align-status role="status" aria-live="polite"></p>
             <div class="acc-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
               <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>

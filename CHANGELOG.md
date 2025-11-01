@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.21] - 2025-11-13
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- Dropped the visible "Click to cycle alignment" helper text from the Text Align card now that the control's behavior is self-evident and reinforced via screen reader guidance.
+
 ## [1.4.20] - 2025-11-12
 
 ### Added
