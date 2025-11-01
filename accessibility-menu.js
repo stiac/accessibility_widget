@@ -1858,6 +1858,157 @@ const accessibilityMenuHTML = `
       </div>
     </div>
 `;
+
+function resolveWidgetScriptConfig() {
+    const defaults = {
+        defaultLanguage: 'en',
+        mode: 'production',
+        colorButtonActive: '#0f172a',
+        colorButton: '#f8fafc',
+        voce1: '',
+        voce2: ''
+    };
+
+    if (typeof document === 'undefined') {
+        return defaults;
+    }
+
+    const locateScript = () => {
+        if (document.currentScript) {
+            return document.currentScript;
+        }
+        const scripts = document.querySelectorAll('script[src]');
+        for (let index = scripts.length - 1; index >= 0; index -= 1) {
+            const candidate = scripts[index];
+            if (!candidate || typeof candidate.src !== 'string') {
+                continue;
+            }
+            const srcName = candidate.src.split('?')[0].split('#')[0];
+            if (!srcName) {
+                continue;
+            }
+            const fileName = srcName.substring(srcName.lastIndexOf('/') + 1);
+            if (fileName.includes('accessibility-menu')) {
+                return candidate;
+            }
+        }
+        return null;
+    };
+
+    const script = locateScript();
+    if (!script || !script.dataset) {
+        return defaults;
+    }
+
+    const config = { ...defaults };
+
+    if (typeof script.dataset.defaultLanguage === 'string' && script.dataset.defaultLanguage.trim()) {
+        config.defaultLanguage = script.dataset.defaultLanguage.trim().toLowerCase();
+    }
+
+    if (typeof script.dataset.mode === 'string' && script.dataset.mode.trim()) {
+        config.mode = script.dataset.mode.trim().toLowerCase();
+    }
+
+    if (typeof script.dataset.colorButtonActive === 'string' && script.dataset.colorButtonActive.trim()) {
+        config.colorButtonActive = script.dataset.colorButtonActive.trim();
+    }
+
+    if (typeof script.dataset.colorButton === 'string' && script.dataset.colorButton.trim()) {
+        config.colorButton = script.dataset.colorButton.trim();
+    }
+
+    if (typeof script.dataset.voce1 === 'string' && script.dataset.voce1.trim()) {
+        config.voce1 = script.dataset.voce1.trim();
+    }
+
+    if (typeof script.dataset.voce2 === 'string' && script.dataset.voce2.trim()) {
+        config.voce2 = script.dataset.voce2.trim();
+    }
+
+    return config;
+}
+
+const widgetScriptConfig = resolveWidgetScriptConfig();
+
+const widgetLanguageBundles = {
+    en: {
+        headingTitle: 'Accessibility Tools',
+        headingSubtitle: 'Fine-tune colours, typography and focus helpers with a refreshed look.',
+        invertColours: 'Invert Colours',
+        grayscale: 'Grayscale',
+        lowSaturation: 'Low Saturation',
+        linksHighlight: 'Links Highlight',
+        fontSize: 'Font Size',
+        lineHeight: 'Line Height',
+        letterSpacing: 'Letter Spacing',
+        fontDyslexia: 'Font Dyslexia',
+        fontDyslexiaDescription: 'Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu.',
+        textAlign: 'Text Align',
+        textAlignDescription: 'Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.',
+        contrast: 'Contrast',
+        hideImages: 'Hide Image',
+        hideVideo: 'Hide Video',
+        reduceMotion: 'Reduce Motion',
+        reduceMotionDescription: 'Stop animated, blinking, and flashing visuals from playing automatically across the page.',
+        changeCursors: 'Change Cursors',
+        resetAll: 'Reset All',
+        togglePanelLabel: 'Toggle accessibility panel'
+    },
+    it: {
+        headingTitle: 'Strumenti di Accessibilità',
+        headingSubtitle: "Personalizza colori, tipografia e aiuti al focus con un'interfaccia aggiornata.",
+        invertColours: 'Inverti Colori',
+        grayscale: 'Scala di grigi',
+        lowSaturation: 'Bassa Saturazione',
+        linksHighlight: 'Evidenzia Link',
+        fontSize: 'Dimensione Testo',
+        lineHeight: 'Interlinea',
+        letterSpacing: 'Spaziatura Lettere',
+        fontDyslexia: 'Font per Dislessia',
+        fontDyslexiaDescription: "Attiva un set di caratteri adatto alla dislessia sull'intera pagina senza modificare il menu di accessibilità.",
+        textAlign: 'Allineamento Testo',
+        textAlignDescription: "Scegli come allineare il testo nella pagina. Clicca più volte per scorrere le opzioni disponibili; dopo l'ultima, l'allineamento torna al valore del sito.",
+        contrast: 'Contrasto',
+        hideImages: 'Nascondi Immagini',
+        hideVideo: 'Nascondi Video',
+        reduceMotion: 'Riduci Animazioni',
+        reduceMotionDescription: 'Blocca automaticamente animazioni, lampeggi e contenuti in movimento presenti nella pagina.',
+        changeCursors: 'Cambia Cursori',
+        resetAll: 'Reimposta Tutto',
+        togglePanelLabel: 'Apri o chiudi il pannello di accessibilità'
+    }
+};
+
+function sanitiseWidgetColor(value, fallback) {
+    if (typeof value !== 'string' || !value.trim()) {
+        return fallback;
+    }
+    const trimmed = value.trim();
+    const hexPattern = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+    if (hexPattern.test(trimmed)) {
+        return trimmed;
+    }
+    if (typeof window !== 'undefined' && window.CSS && typeof window.CSS.supports === 'function') {
+        if (window.CSS.supports('color', trimmed)) {
+            return trimmed;
+        }
+    }
+    return fallback;
+}
+
+function resolveWidgetText(config) {
+    const fallbackBundle = widgetLanguageBundles.en;
+    const requestedBundle = config && config.defaultLanguage ? widgetLanguageBundles[config.defaultLanguage] : null;
+    const bundle = { ...fallbackBundle, ...(requestedBundle || {}) };
+    if (config && config.voce1) {
+        bundle.headingTitle = config.voce1;
+    }
+    if (config && config.voce2) {
+        bundle.headingSubtitle = config.voce2;
+    }
+    return bundle;
+}
 // Ensure Tailwind CSS is available for the redesigned panel.
 function ensureTailwindCSSLoaded() {
     if (typeof window !== 'undefined' && (window.tailwind || document.getElementById('stiac-accessibility-tailwind'))) {
@@ -1883,6 +2034,17 @@ function ensureTailwindCSSLoaded() {
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    const resolvedColors = {
+        active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#0f172a'),
+        inactive: sanitiseWidgetColor(widgetScriptConfig.colorButton, '#f8fafc')
+    };
+    const resolvedText = resolveWidgetText(widgetScriptConfig);
+
+    if (document.documentElement && document.documentElement.style) {
+        document.documentElement.style.setProperty('--acc_color_1', resolvedColors.active);
+        document.documentElement.style.setProperty('--acc_color_2', resolvedColors.inactive);
+    }
+
     ensureTailwindCSSLoaded();
 
     const accessibilityMenuStyleElement = document.createElement("style");
@@ -1906,8 +2068,58 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeBtn = document.getElementById('closeBtn');
     const accessibilityTools = document.getElementById('accessibility-tools');
 
+    if (widgetScriptConfig.mode === 'debug' && typeof console !== 'undefined' && console && typeof console.debug === 'function') {
+        console.debug('[Accessibility Widget] configuration', widgetScriptConfig);
+    }
+
+    const assignTextContent = (selector, key) => {
+        if (!selector || !key || !resolvedText[key]) {
+            return;
+        }
+        const scope = accessibilityModal || document;
+        const target = scope.querySelector(selector) || document.querySelector(selector);
+        if (target) {
+            target.textContent = resolvedText[key];
+        }
+    };
+
+    assignTextContent('#headerContent p.text-lg', 'headingTitle');
+    assignTextContent('#headerContent span.text-sm', 'headingSubtitle');
+    assignTextContent('#invert-colors .acc-child p.text-xs', 'invertColours');
+    assignTextContent('#grayscale .acc-child p.text-xs', 'grayscale');
+    assignTextContent('#saturation .acc-child p.text-xs', 'lowSaturation');
+    assignTextContent('#underline .acc-child p.text-xs', 'linksHighlight');
+    assignTextContent('#font-size .acc-child p.text-xs', 'fontSize');
+    assignTextContent('#line-height .acc-child p.text-xs', 'lineHeight');
+    assignTextContent('#letter-spacing .acc-child p.text-xs', 'letterSpacing');
+    assignTextContent('#font-dyslexia .acc-child p.text-xs', 'fontDyslexia');
+    assignTextContent('#font-dyslexia-description', 'fontDyslexiaDescription');
+    assignTextContent('#text-align .acc-child p.text-xs', 'textAlign');
+    assignTextContent('#text-align-description', 'textAlignDescription');
+    assignTextContent('#contrast .acc-child p.text-xs', 'contrast');
+    assignTextContent('#hide-images .acc-child p.text-xs', 'hideImages');
+    assignTextContent('#hide-video .acc-child p.text-xs', 'hideVideo');
+    assignTextContent('#reduce-motion .acc-child p.text-xs', 'reduceMotion');
+    assignTextContent('#reduce-motion-description', 'reduceMotionDescription');
+    assignTextContent('#change-cursor .acc-child p.text-xs', 'changeCursors');
+    assignTextContent('#reset-all', 'resetAll');
+
     accessibilityModal.classList.add('stiac-sws-protected');
     accessibilityModal.setAttribute('data-stiac-owner', 'Stiac Web Services');
+
+    const resetAllButton = document.getElementById('reset-all');
+    if (resetAllButton) {
+        resetAllButton.style.backgroundColor = resolvedColors.active;
+        resetAllButton.style.color = resolvedColors.inactive;
+    }
+
+    if (closeBtn) {
+        if (resolvedText.togglePanelLabel) {
+            closeBtn.setAttribute('aria-label', resolvedText.togglePanelLabel);
+        }
+        closeBtn.style.backgroundColor = resolvedColors.active;
+        closeBtn.style.color = resolvedColors.inactive;
+    }
 
     // Trigger the refined reveal transition once the modal has been added to the DOM.
     requestAnimationFrame(() => {

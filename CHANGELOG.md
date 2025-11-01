@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.27] - 2025-11-19
+
+### Added
+- Exposed `<script>` `data-*` options so integrators can set the default language, toggle debug logging, and override active button colours without editing the source bundle.
+- Bundled English and Italian copy decks that automatically populate card labels and screen-reader helpers based on `data-default-language` or custom heading overrides.
+
+### Changed
+- The close and reset buttons now read the configured colour palette, keeping their backgrounds/text in sync with `data-color-button-active` and `data-color-button`.
+
+### Fixed
+- None.
+
+### Removed
+- None.
 ## [1.4.26] - 2025-11-18
 
 ### Added

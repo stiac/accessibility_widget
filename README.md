@@ -8,8 +8,14 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.26`
+- **Current Version:** `1.4.27`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.27
+
+- Added `<script>` `data-*` attributes so integrators can localise headings, switch the default language, and tune widget colours without editing the bundle.
+- Introduced built-in Italian and English text bundles that auto-populate card labels and screen-reader helpers based on `data-default-language`.
+- Added a lightweight debug mode (`data-mode="debug"`) that prints the resolved configuration to the console for quick verification during embedding.
 
 ## What's New in 1.4.26
 
@@ -211,6 +217,33 @@ You can use `min.js` file _as your requirement_
 
 - The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads.
 - Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1` and `--acc_color_2`) at the top of `accessibility-menu.js`.
+
+### Script data attributes
+
+You can fine-tune the widget without editing the bundle by adding configuration attributes to the embedding `<script>` tag:
+
+```html
+<script
+  src="/assets/accessibility-menu.js"
+  data-default-language="it"
+  data-mode="debug"
+  data-color-button-active="#0f172a"
+  data-color-button="#ffffff"
+  data-voce1="Strumenti di Accessibilità"
+  data-voce2="Personalizza colori e tipografia in un clic"
+></script>
+```
+
+| Attribute | Purpose | Accepted values | Default |
+| --- | --- | --- | --- |
+| `data-default-language` | Sets the UI language for headings, card labels, and screen-reader helpers. | `en`, `it` (other values fall back to English) | `en` |
+| `data-mode` | Enables additional console output to verify the resolved configuration. | `production`, `debug` | `production` |
+| `data-color-button-active` | CSS colour used for active cards, the close button, and the reset button background. | Any valid CSS colour (`#hex`, `rgb()`, etc.) | `#0f172a` |
+| `data-color-button` | CSS colour used for icon/text colour on the elements above. | Any valid CSS colour | `#f8fafc` |
+| `data-voce1` | Overrides the main heading inside the widget (useful for localisation/branding). | Free text | `Accessibility Tools` / translated value |
+| `data-voce2` | Overrides the sub-heading tagline beneath the title. | Free text | `Fine-tune colours…` / translated value |
+
+All attributes are optional; omit any value to keep the default behaviour. Colours are validated at runtime, so unsupported values gracefully fall back to the defaults.
 
 ### Fine-tune Video Visibility
 
