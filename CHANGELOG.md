@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.14] - 2025-12-04
+
+### Added
+- None.
+
+### Changed
+- Rendered every Change Positions arrow SVG as a block-level icon so the glyphs stay perfectly centered inside their buttons.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.13] - 2025-12-03
 
 ### Added

@@ -2027,7 +2027,14 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the left edge"
             title="Dock widget to the left edge"
             data-i18n-attr="aria-label:controls.position.left, title:controls.position.left"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
                 fill="currentColor"
@@ -2041,7 +2048,14 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the top edge"
             title="Dock widget to the top edge"
             data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M4.47 10.53a.75.75 0 0 0 1.06 0L9.25 6.81V19a.75.75 0 0 0 1.5 0V6.81l3.72 3.72a.75.75 0 1 0 1.06-1.06l-5-5a.75.75 0 0 0-1.06 0l-5 5a.75.75 0 0 0 0 1.06Z"
                 fill="currentColor"
@@ -2055,7 +2069,14 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom edge"
             title="Dock widget to the bottom edge"
             data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
@@ -2069,7 +2090,14 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom-left corner"
             title="Dock widget to the bottom-left corner"
             data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
@@ -2084,7 +2112,14 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom-right corner"
             title="Dock widget to the bottom-right corner"
             data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
@@ -2099,7 +2134,14 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the right edge"
             title="Dock widget to the right edge"
             data-i18n-attr="aria-label:controls.position.right, title:controls.position.right"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
               <path
                 d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
                 fill="currentColor"
