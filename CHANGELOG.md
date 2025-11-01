@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.22] - 2025-11-14
+
+### Added
+- Introduced a Reduce Motion control that freezes CSS-driven motion, pauses autoplaying media, and stops marquee content to meet WCAG 2.1 Level A and European Accessibility Act expectations, with an opt-out via `data-acc-preserve-motion` for essential animations.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 ## [1.4.21] - 2025-11-13
 
 ### Added

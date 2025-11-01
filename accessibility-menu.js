@@ -371,6 +371,31 @@ const accessibilityMenuStyles = `
       display: initial !important;
     }
 
+    /*
+     * Reduce Motion applies a WCAG 2.1 Level A friendly blanket to the host page by
+     * pausing CSS driven transitions/animations, disabling smooth scrolling, and
+     * allowing the widget itself to continue operating normally.
+     */
+    html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *)),
+    html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::before,
+    html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      animation-name: none !important;
+      animation-play-state: paused !important;
+      transition-delay: 0s !important;
+      transition-duration: 0.001ms !important;
+      transition-property: none !important;
+      scroll-behavior: auto !important;
+    }
+
+    html.reduce-motion body marquee,
+    html.reduce-motion body blink {
+      animation: none !important;
+      -webkit-animation: none !important;
+      scroll-behavior: auto !important;
+    }
+
     .line-height-0 * {
       line-height: 1.5;
     }
@@ -617,6 +642,17 @@ const accessibilityMenuHTML = `
               <path fill-rule="evenodd" d="M10.961 12.365a2 2 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518zM1.428 4.18A1 1 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634zM15 11.73l-3.5-1.555v-4.35L15 4.269zm-4.407 3.56-10-14 .814-.58 10 14z" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide">Hide Video</p>
+          </div>
+        </div>
+
+        <!--reduce motion-->
+        <div class="acc-item group">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="reduce-motion" aria-describedby="reduce-motion-description">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-2.5-11.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Zm5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Z" fill="currentColor" />
+            </svg>
+            <p class="text-xs font-semibold uppercase tracking-wide">Reduce Motion</p>
+            <p id="reduce-motion-description" class="acc-sr-only">Stop animated, blinking, and flashing visuals from playing automatically across the page.</p>
           </div>
         </div>
 
@@ -976,6 +1012,198 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             disconnectHideImagesObserver();
             resetHideImagesBackgrounds();
+        }
+    }
+
+    // Track motion-heavy media so Reduce Motion can pause and resume them safely.
+    const reduceMotionPausedMedia = new Set();
+    const reduceMotionMarquees = new Set();
+    let reduceMotionObserver = null;
+
+    function shouldProcessMotionTarget(element) {
+        if (!element || element.nodeType !== Node.ELEMENT_NODE) {
+            return false;
+        }
+        if (elementIsInsideAccessibilityWidget(element)) {
+            return false;
+        }
+        if (element.closest && element.closest('[data-acc-preserve-motion]')) {
+            return false;
+        }
+        return true;
+    }
+
+    function collectMotionTargets(root) {
+        if (!root || root.nodeType !== Node.ELEMENT_NODE) {
+            return [];
+        }
+
+        const selectors = 'video, audio, marquee';
+        const candidates = [];
+
+        if (root.matches && root.matches(selectors) && shouldProcessMotionTarget(root)) {
+            candidates.push(root);
+        }
+
+        if (typeof root.querySelectorAll === 'function') {
+            root.querySelectorAll(selectors).forEach((element) => {
+                if (shouldProcessMotionTarget(element)) {
+                    candidates.push(element);
+                }
+            });
+        }
+
+        return candidates;
+    }
+
+    function pauseMotionTargets(root) {
+        collectMotionTargets(root).forEach((element) => {
+            if (element instanceof HTMLMediaElement) {
+                const wasPlaying = !element.paused;
+                if (wasPlaying && typeof element.pause === 'function') {
+                    element.pause();
+                }
+
+                if (element.loop) {
+                    element.dataset.accReduceMotionWasLooping = 'true';
+                    element.loop = false;
+                }
+
+                if (element.autoplay) {
+                    element.dataset.accReduceMotionWasAutoplay = 'true';
+                    if (element.hasAttribute('autoplay')) {
+                        element.dataset.accReduceMotionHadAutoplayAttr = 'true';
+                    }
+                    element.autoplay = false;
+                    element.removeAttribute('autoplay');
+                }
+
+                if (wasPlaying) {
+                    element.dataset.accReduceMotionPaused = 'true';
+                }
+
+                reduceMotionPausedMedia.add(element);
+            } else if (element.tagName && element.tagName.toLowerCase() === 'marquee') {
+                if (!reduceMotionMarquees.has(element)) {
+                    element.dataset.accReduceMotionScrollAmount = element.getAttribute('scrollamount') || '';
+                    element.dataset.accReduceMotionBehavior = element.getAttribute('behavior') || '';
+                    element.setAttribute('scrollamount', '0');
+                    if (typeof element.stop === 'function') {
+                        element.stop();
+                    }
+                    reduceMotionMarquees.add(element);
+                }
+            }
+        });
+    }
+
+    function resumeMotionTargets() {
+        reduceMotionPausedMedia.forEach((element) => {
+            if (!(element instanceof HTMLMediaElement)) {
+                return;
+            }
+
+            const wasLooping = element.dataset.accReduceMotionWasLooping === 'true';
+            const wasAutoplay = element.dataset.accReduceMotionWasAutoplay === 'true';
+            const hadAutoplayAttr = element.dataset.accReduceMotionHadAutoplayAttr === 'true';
+            const shouldResume = element.dataset.accReduceMotionPaused === 'true';
+
+            if (wasLooping) {
+                element.loop = true;
+            }
+
+            if (wasAutoplay) {
+                element.autoplay = true;
+            }
+
+            if (hadAutoplayAttr) {
+                element.setAttribute('autoplay', '');
+            }
+
+            delete element.dataset.accReduceMotionWasLooping;
+            delete element.dataset.accReduceMotionWasAutoplay;
+            delete element.dataset.accReduceMotionHadAutoplayAttr;
+            delete element.dataset.accReduceMotionPaused;
+
+            if (shouldResume && typeof element.play === 'function') {
+                const playPromise = element.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    // Browsers may block autoplay after user intervention requirements; ignore those rejections silently.
+                    playPromise.catch(() => {});
+                }
+            }
+        });
+        reduceMotionPausedMedia.clear();
+
+        reduceMotionMarquees.forEach((element) => {
+            const storedAmount = element.dataset.accReduceMotionScrollAmount || '';
+            const storedBehavior = element.dataset.accReduceMotionBehavior || '';
+
+            if (storedAmount) {
+                element.setAttribute('scrollamount', storedAmount);
+            } else {
+                element.removeAttribute('scrollamount');
+            }
+
+            if (storedBehavior) {
+                element.setAttribute('behavior', storedBehavior);
+            } else {
+                element.removeAttribute('behavior');
+            }
+
+            if (typeof element.start === 'function') {
+                element.start();
+            }
+
+            delete element.dataset.accReduceMotionScrollAmount;
+            delete element.dataset.accReduceMotionBehavior;
+        });
+        reduceMotionMarquees.clear();
+    }
+
+    function ensureReduceMotionObserver() {
+        if (reduceMotionObserver) {
+            return;
+        }
+
+        reduceMotionObserver = new MutationObserver((mutations) => {
+            if (!docElement.classList.contains('reduce-motion')) {
+                return;
+            }
+
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        pauseMotionTargets(node);
+                    }
+                });
+            });
+        });
+
+        reduceMotionObserver.observe(docElement, { childList: true, subtree: true });
+    }
+
+    function disconnectReduceMotionObserver() {
+        if (!reduceMotionObserver) {
+            return;
+        }
+
+        reduceMotionObserver.disconnect();
+        reduceMotionObserver = null;
+    }
+
+    function setReduceMotionActive(active) {
+        const shouldActivate = Boolean(active);
+        docElement.classList.toggle('reduce-motion', shouldActivate);
+
+        if (shouldActivate) {
+            docElement.setAttribute('data-acc-reduce-motion', 'true');
+            pauseMotionTargets(docElement);
+            ensureReduceMotionObserver();
+        } else {
+            docElement.removeAttribute('data-acc-reduce-motion');
+            resumeMotionTargets();
+            disconnectReduceMotionObserver();
         }
     }
 
@@ -1676,6 +1904,14 @@ document.addEventListener("DOMContentLoaded", function() {
         saveSettings();
     });
 
+    document.querySelector('#reduce-motion').addEventListener('click', () => {
+        const item = document.querySelector('#reduce-motion');
+        const nextState = !docElement.classList.contains('reduce-motion');
+        setReduceMotionActive(nextState);
+        setControlActiveState(item, nextState);
+        saveSettings();
+    });
+
     let cursorClickCount = 0;
     // Rotate between the three custom cursor styles and ensure the browser cursor/guide triangle reset appropriately.
     document.querySelector('#change-cursor').addEventListener('click', () => {
@@ -1787,6 +2023,7 @@ document.addEventListener("DOMContentLoaded", function() {
         syncTextAlignUI();
         setHideImagesActive(false);
         docElement.classList.remove('hide-video');
+        setReduceMotionActive(false);
 
         if (cursorElement) {
             cursorElement.classList.remove('cursor-0', 'cursor-1', 'cursor-2');
@@ -1813,7 +2050,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //save the user's settings in local storage
     function saveSettings() {
         const settings = {
-            version: 2,
+            version: 3,
             filters: {
                 invert: filterState.invert,
                 grayscale: filterState.grayscale,
@@ -1827,6 +2064,7 @@ document.addEventListener("DOMContentLoaded", function() {
             textAlign: getDocumentTextAlign(),
             hideImages: docElement.classList.contains('hide-images'),
             hideVideo: docElement.classList.contains('hide-video'),
+            reduceMotion: docElement.classList.contains('reduce-motion'),
             cursor: cursor.classList.contains('cursor-2') ? 'guide' : cursor.classList.contains('cursor-1') ? 'mask' : cursor.classList.contains('cursor-0') ? 'focus' : 'default',
             position: accessibilityModal.classList.contains('left') ? 'left' : accessibilityModal.classList.contains('top') ? 'top' : accessibilityModal.classList.contains('bottom') ? 'bottom' : 'right'
         };
@@ -1843,7 +2081,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return null;
         }
         return {
-            version: 2,
+            version: 3,
             filters: {
                 invert: Boolean(legacy.invertColors),
                 grayscale: Boolean(legacy.grayscale),
@@ -1857,6 +2095,7 @@ document.addEventListener("DOMContentLoaded", function() {
             textAlign: legacy.textAlign || '',
             hideImages: Boolean(legacy.hideImages),
             hideVideo: Boolean(legacy.hideVideo),
+            reduceMotion: Boolean(legacy.reduceMotion),
             cursor: legacy.cursor2 ? 'guide' : legacy.cursor1 ? 'mask' : legacy.cursor0 ? 'focus' : 'default',
             position: legacy.accPosition || 'right'
         };
@@ -1884,6 +2123,7 @@ document.addEventListener("DOMContentLoaded", function() {
         setDocumentTextAlign(settings.textAlign || '');
         setHideImagesActive(Boolean(settings.hideImages));
         docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
+        setReduceMotionActive(Boolean(settings.reduceMotion));
 
         cursor.classList.toggle('cursor-0', settings.cursor === 'focus');
         cursor.classList.toggle('cursor-1', settings.cursor === 'mask');
@@ -2057,6 +2297,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const hideVideoItem = document.querySelector('#hide-video');
         const hideVideoActive = docElement.classList.contains('hide-video');
         setControlActiveState(hideVideoItem, hideVideoActive);
+
+        const reduceMotionItem = document.querySelector('#reduce-motion');
+        const reduceMotionActive = docElement.classList.contains('reduce-motion');
+        setControlActiveState(reduceMotionItem, reduceMotionActive);
 
         const cursorItem = document.querySelector('#change-cursor');
         const triangle = document.getElementById('triangle-cursor');
