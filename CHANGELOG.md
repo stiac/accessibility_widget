@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.5] - 2025-11-25
+
+### Added
+- Auto-activated the Reduce Motion mode when the operating system prefers reduced motion and introduced a CSS media-query fallback that cancels the reveal animation pre-initialisation.
+
+### Changed
+- Replaced the clip-path driven reveal with a border-radius animation that preserves the launcher shadow and delivers a smoother, accessible panel expansion.
+
+### Fixed
+- Restored the launcher bubble's drop shadow in its closed state so the toggle button retains depth cues when the menu is hidden.
+
+### Removed
+- None.
+
 # [1.5.4] - 2025-11-24
 
 ### Added
