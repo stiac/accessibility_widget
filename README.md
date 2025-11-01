@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.21`
+- **Current Version:** `1.4.22`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.22
+
+- Added a dedicated **Reduce Motion** control that halts CSS animations, smooth scrolling, and autoplaying media so blinking or flashing visuals stop in line with WCAG 2.1 Level A and EAA expectations.
 
 ## What's New in 1.4.21
 
@@ -145,6 +149,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Extra Contrast**: Increases the contrast of the page even further to improve readability for users with visual impairments.
 - **Hide Images**: Hides all images on the page to improve readability for users with visual impairments.
 - **Hide Videos**: Hides native video tags, common iframe players, and plugin embeds (with an opt-out via `data-acc-preserve-video`) to reduce motion for users who prefer a still experience.
+- **Reduce Motion**: Disables CSS animations and smooth scrolling while pausing autoplaying media and marquees to eliminate blinking or flashing movement on demand (use `data-acc-preserve-motion` to opt specific widgets out).
 - **Big Circle Cursor**: Changes the cursor to a big circle to improve visibility for users with visual impairments.
 - **Reading Mask**: Highlights the current line of text being read to improve focus for users with visual impairments.
 - **Reading Guide**: Makes it easier to read long lines of text by Long Highlight Cursor.
