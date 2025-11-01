@@ -12,7 +12,7 @@ const accessibilityMenuStyles = `
     /*
      * Provide OpenDyslexic as the primary dyslexia-friendly typeface with
      * a bold companion so text retains hierarchy when the control is active.
-     * The font files are served from a public CDN and loaded with swap
+     * The font files are served from GitHub's raw CDN and loaded with swap
      * behaviour so content remains visible while the resource downloads.
      */
     @font-face {
@@ -20,7 +20,7 @@ const accessibilityMenuStyles = `
       font-style: normal;
       font-weight: 400;
       font-display: swap;
-      src: url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/alternatives/OpenDyslexic-Regular.woff2") format("woff2");
+      src: url("https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/woff/OpenDyslexic-Regular.woff") format("woff");
     }
 
     @font-face {
@@ -28,7 +28,7 @@ const accessibilityMenuStyles = `
       font-style: normal;
       font-weight: 700;
       font-display: swap;
-      src: url("https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/alternatives/OpenDyslexic-Bold.woff2") format("woff2");
+      src: url("https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/woff/OpenDyslexic-Bold.woff") format("woff");
     }
 
     html[data-acc-font-scale-active] {

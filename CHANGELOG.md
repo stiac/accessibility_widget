@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.24] - 2025-11-16
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Re-pointed the Font Dyslexia toggle to GitHub-hosted OpenDyslexic font files so enabling the control no longer triggers 404 errors and dyslexia-friendly typography renders reliably.
+
+### Removed
+- None.
+
 ## [1.4.23] - 2025-11-15
 
 ### Added
