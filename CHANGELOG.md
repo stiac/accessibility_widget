@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.12] - 2025-12-02
+
+### Added
+- Added concise `controls.positionLabels` strings across every bundled locale so the position buttons can surface readable captions without hard-coding text.
+
+### Changed
+- Restyled the Change Position controls with stacked icons and labels to make each docking option easier to recognise at a glance.
+
+### Fixed
+- Ensured the close button retains its universal close icon when the widget is docked to the bottom-left or bottom-right corners instead of adopting placement glyphs.
+
+### Removed
+- None.
+
 # [1.5.11] - 2025-12-01
 
 ### Added

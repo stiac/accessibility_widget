@@ -76,6 +76,14 @@
       "bottomLeft": "Épingler le widget dans le coin inférieur gauche",
       "bottomRight": "Épingler le widget dans le coin inférieur droit",
       "right": "Épingler le widget au bord droit"
+    },
+    "positionLabels": {
+      "left": "Gauche",
+      "top": "Haut",
+      "bottom": "Bas",
+      "bottomLeft": "Bas gauche",
+      "bottomRight": "Bas droite",
+      "right": "Droite"
     }
   },
   "announcements": {

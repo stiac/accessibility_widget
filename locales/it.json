@@ -76,6 +76,14 @@
       "bottomLeft": "Ancorare il widget all'angolo in basso a sinistra",
       "bottomRight": "Ancorare il widget all'angolo in basso a destra",
       "right": "Ancorare il widget al bordo destro"
+    },
+    "positionLabels": {
+      "left": "Sinistra",
+      "top": "Alto",
+      "bottom": "Basso",
+      "bottomLeft": "Basso a sinistra",
+      "bottomRight": "Basso a destra",
+      "right": "Destra"
     }
   },
   "announcements": {

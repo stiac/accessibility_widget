@@ -76,6 +76,14 @@
       "bottomLeft": "Anclar el widget a la esquina inferior izquierda",
       "bottomRight": "Anclar el widget a la esquina inferior derecha",
       "right": "Anclar el widget al borde derecho"
+    },
+    "positionLabels": {
+      "left": "Izquierda",
+      "top": "Arriba",
+      "bottom": "Abajo",
+      "bottomLeft": "Abajo izquierda",
+      "bottomRight": "Abajo derecha",
+      "right": "Derecha"
     }
   },
   "announcements": {
