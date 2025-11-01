@@ -8,8 +8,16 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.22`
+- **Current Version:** `1.5.25`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.25
+
+- Updated the launcher so it shows the universal accessibility glyph while the panel is closed and switches to the "X" close icon after opening.
+
+## What's New in 1.5.24
+
+- Updated the close toggle to always render a clear "X" icon so the launcher looks consistent across every alignment and state.
 
 ## What's New in 1.5.22
 
