@@ -24,7 +24,8 @@
         liveRegionCandidate: null,
         onLanguageApplied: null,
         basePath: null,
-        documentLocalesRoot: null
+        documentLocalesRoot: null,
+        languageRequestId: 0
     };
 
     function getScriptElement() {
@@ -467,14 +468,22 @@
         if (root && typeof root.querySelectorAll === 'function') {
             state.root = root;
         }
+        const requestId = state.languageRequestId + 1;
+        state.languageRequestId = requestId;
         let target = normaliseLanguage(requestedLanguage) || state.fallbackLanguage;
         if (!state.supportedLanguages.includes(target)) {
             target = state.fallbackLanguage;
         }
         let translations = await fetchLocale(target);
+        if (requestId !== state.languageRequestId) {
+            return null;
+        }
         let activeLanguage = target;
         if (!translations && target !== state.fallbackLanguage) {
             translations = await fetchLocale(state.fallbackLanguage);
+            if (requestId !== state.languageRequestId) {
+                return null;
+            }
             activeLanguage = state.fallbackLanguage;
         }
         if (!translations) {
