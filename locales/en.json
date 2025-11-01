@@ -76,14 +76,6 @@
       "bottomLeft": "Dock widget to the bottom-left corner",
       "bottomRight": "Dock widget to the bottom-right corner",
       "right": "Dock widget to the right edge"
-    },
-    "positionLabels": {
-      "left": "Left",
-      "top": "Top",
-      "bottom": "Bottom",
-      "bottomLeft": "Bottom Left",
-      "bottomRight": "Bottom Right",
-      "right": "Right"
     }
   },
   "announcements": {

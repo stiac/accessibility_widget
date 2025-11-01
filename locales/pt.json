@@ -76,14 +76,6 @@
       "bottomLeft": "Fixar o widget no canto inferior esquerdo",
       "bottomRight": "Fixar o widget no canto inferior direito",
       "right": "Fixar o widget na borda direita"
-    },
-    "positionLabels": {
-      "left": "Esquerda",
-      "top": "Topo",
-      "bottom": "Inferior",
-      "bottomLeft": "Inferior esquerda",
-      "bottomRight": "Inferior direita",
-      "right": "Direita"
     }
   },
   "announcements": {

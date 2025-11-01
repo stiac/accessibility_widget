@@ -2022,95 +2022,77 @@ const accessibilityMenuHTML = `
           <button
             id="align-acc-left"
             type="button"
-            class="flex w-28 flex-col items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-600 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the left edge"
             title="Dock widget to the left edge"
             data-i18n-attr="aria-label:controls.position.left, title:controls.position.left"
-          ><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/5" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-start" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
-                <path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
-              </svg>
-            </span>
-            <span data-i18n="controls.positionLabels.left">Left</span></button>
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-start" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
+              <path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+            </svg></button>
           <button
             id="align-acc-top"
             type="button"
-            class="flex w-28 flex-col items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-600 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the top edge"
             title="Dock widget to the top edge"
             data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
-          ><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/5" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
-                <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)" />
-                <path d="M1.5 2a.5.5 0 0 1 0-1zm13-1a.5.5 0 0 1 0 1zm-13 0h13v1h-13z" />
-              </svg>
-            </span>
-            <span data-i18n="controls.positionLabels.top">Top</span></button>
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
+              <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)" />
+              <path d="M1.5 2a.5.5 0 0 1 0-1zm13-1a.5.5 0 0 1 0 1zm-13 0h13v1h-13z" />
+            </svg></button>
           <button
             id="align-acc-bottom"
             type="button"
-            class="flex w-28 flex-col items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-600 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom edge"
             title="Dock widget to the bottom edge"
             data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
-          ><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/5" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-bottom" viewBox="0 0 16 16">
-                <rect width="4" height="12" x="6" y="1" rx="1" />
-                <path d="M1.5 14a.5.5 0 0 0 0 1zm13 1a.5.5 0 0 0 0-1zm-13 0h13v-1h-13z" />
-              </svg>
-            </span>
-            <span data-i18n="controls.positionLabels.bottom">Bottom</span></button>
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-bottom" viewBox="0 0 16 16">
+              <rect width="4" height="12" x="6" y="1" rx="1" />
+              <path d="M1.5 14a.5.5 0 0 0 0 1zm13 1a.5.5 0 0 0 0-1zm-13 0h13v-1h-13z" />
+            </svg></button>
           <button
             id="align-acc-bottom-left"
             type="button"
-            class="flex w-28 flex-col items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-600 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom-left corner"
             title="Dock widget to the bottom-left corner"
             data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
-          ><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/5" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5" />
-                <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
-                <rect x="2.5" y="9" width="6" height="4" rx="1" />
-              </svg>
-            </span>
-            <span data-i18n="controls.positionLabels.bottomLeft">Bottom Left</span></button>
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5" />
+              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
+              <rect x="2.5" y="9" width="6" height="4" rx="1" />
+            </svg></button>
           <button
             id="align-acc-bottom-right"
             type="button"
-            class="flex w-28 flex-col items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-600 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom-right corner"
             title="Dock widget to the bottom-right corner"
             data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
-          ><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/5" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5" />
-                <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
-                <rect x="7.5" y="9" width="6" height="4" rx="1" />
-              </svg>
-            </span>
-            <span data-i18n="controls.positionLabels.bottomRight">Bottom Right</span></button>
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5" />
+              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
+              <rect x="7.5" y="9" width="6" height="4" rx="1" />
+            </svg></button>
           <button
             id="align-acc-right"
             type="button"
-            class="flex w-28 flex-col items-center justify-center gap-2 rounded-xl px-3 py-3 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-600 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the right edge"
             title="Dock widget to the right edge"
             data-i18n-attr="aria-label:controls.position.right, title:controls.position.right"
-          ><span class="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/5" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5" />
-                <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1z" />
-              </svg>
-            </span>
-            <span data-i18n="controls.positionLabels.right">Right</span></button>
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5" />
+              <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1z" />
+            </svg></button>
         </div>
         <p id="acc-language-announcement" class="acc-sr-only" aria-live="polite" role="status"></p>
         <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500" role="note" aria-label="Software protetto da Stiac Web Services">
@@ -3573,9 +3555,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function getCloseButtonIconMarkup(position) {
-        const closeIconMarkup = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">\n'
-            + '  <path d="M2.146 2.146a.5.5 0 0 1 .708 0L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854a.5.5 0 0 1 0-.708"/>\n'
-            + '</svg>';
         if (position === 'top') {
             return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">\n' +
                 '  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>\n' +
@@ -3597,12 +3576,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 '</svg>';
         }
         if (position === 'bottom-left') {
-            return closeIconMarkup;
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">\n' +
+                '  <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5"/>\n' +
+                '  <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5"/>\n' +
+                '  <rect x="2.5" y="9" width="6" height="4" rx="1"/>\n' +
+                '</svg>';
         }
         if (position === 'bottom-right') {
-            return closeIconMarkup;
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">\n' +
+                '  <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5"/>\n' +
+                '  <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5"/>\n' +
+                '  <rect x="7.5" y="9" width="6" height="4" rx="1"/>\n' +
+                '</svg>';
         }
-        return closeIconMarkup;
+        return '';
     }
 
     function updateCloseButtonIcon() {

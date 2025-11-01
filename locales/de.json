@@ -76,14 +76,6 @@
       "bottomLeft": "Widget in der unteren linken Ecke andocken",
       "bottomRight": "Widget in der unteren rechten Ecke andocken",
       "right": "Widget am rechten Rand andocken"
-    },
-    "positionLabels": {
-      "left": "Links",
-      "top": "Oben",
-      "bottom": "Unten",
-      "bottomLeft": "Unten links",
-      "bottomRight": "Unten rechts",
-      "right": "Rechts"
     }
   },
   "announcements": {
