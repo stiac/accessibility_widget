@@ -1,4 +1,32 @@
 # Changelog
+# [1.5.8] - 2025-11-28
+
+### Added
+- Documented the `data-preserve-language-icons` override in the README so integrators can intentionally surface flags while Hide Images is active.
+
+### Changed
+- Updated every embedded language selector SVG to match the official Italian, German, English, Spanish, French, and Portuguese artwork.
+
+### Fixed
+- Ensured the Hide Images preference suppresses language dropdown icons by default while still honouring the preservation override when present.
+
+### Removed
+- None.
+
+# [1.5.7] - 2025-11-27
+
+### Added
+- Introduced a `data-preserve-language-icons` attribute so integrators can keep language dropdown icons visible even when Hide Images is active.
+
+### Changed
+- Replaced all language selector icons with updated 32px SVG artwork for improved fidelity.
+
+### Fixed
+- Synced the Hide Images control with the language dropdown so icons are hidden alongside other imagery unless explicitly preserved.
+
+### Removed
+- None.
+
 # [1.5.6] - 2025-11-26
 
 ### Added
