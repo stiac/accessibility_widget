@@ -2027,9 +2027,11 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the left edge"
             title="Dock widget to the left edge"
             data-i18n-attr="aria-label:controls.position.left, title:controls.position.left"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-start" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
-              <path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
+          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
+                fill="currentColor"
+              />
             </svg></button>
           <button
             id="align-acc-top"
@@ -2039,9 +2041,11 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the top edge"
             title="Dock widget to the top edge"
             data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
-              <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)" />
-              <path d="M1.5 2a.5.5 0 0 1 0-1zm13-1a.5.5 0 0 1 0 1zm-13 0h13v1h-13z" />
+          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M4.47 10.53a.75.75 0 0 0 1.06 0L9.25 6.81V19a.75.75 0 0 0 1.5 0V6.81l3.72 3.72a.75.75 0 1 0 1.06-1.06l-5-5a.75.75 0 0 0-1.06 0l-5 5a.75.75 0 0 0 0 1.06Z"
+                fill="currentColor"
+              />
             </svg></button>
           <button
             id="align-acc-bottom"
@@ -2051,9 +2055,11 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom edge"
             title="Dock widget to the bottom edge"
             data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-bottom" viewBox="0 0 16 16">
-              <rect width="4" height="12" x="6" y="1" rx="1" />
-              <path d="M1.5 14a.5.5 0 0 0 0 1zm13 1a.5.5 0 0 0 0-1zm-13 0h13v-1h-13z" />
+          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
+                fill="currentColor"
+              />
             </svg></button>
           <button
             id="align-acc-bottom-left"
@@ -2063,10 +2069,11 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom-left corner"
             title="Dock widget to the bottom-left corner"
             data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5" />
-              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
-              <rect x="2.5" y="9" width="6" height="4" rx="1" />
+          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M8.75 14.5h-3.5a.75.75 0 0 1-.75-.75v-3.5a.75.75 0 0 1 1.5 0v1.94l8.22-8.22a.75.75 0 0 1 1.06 1.06l-8.22 8.22h1.94a.75.75 0 0 1 0 1.5Z"
+                fill="currentColor"
+              />
             </svg></button>
           <button
             id="align-acc-bottom-right"
@@ -2076,10 +2083,11 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the bottom-right corner"
             title="Dock widget to the bottom-right corner"
             data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5" />
-              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
-              <rect x="7.5" y="9" width="6" height="4" rx="1" />
+          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M15.25 14.5h3.5a.75.75 0 0 0 .75-.75v-3.5a.75.75 0 0 0-1.5 0v1.94l-8.22-8.22a.75.75 0 0 0-1.06 1.06l8.22 8.22h-1.94a.75.75 0 1 0 0 1.5Z"
+                fill="currentColor"
+              />
             </svg></button>
           <button
             id="align-acc-right"
@@ -2089,9 +2097,11 @@ const accessibilityMenuHTML = `
             aria-label="Dock widget to the right edge"
             title="Dock widget to the right edge"
             data-i18n-attr="aria-label:controls.position.right, title:controls.position.right"
-          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5" />
-              <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1z" />
+          ><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
+                fill="currentColor"
+              />
             </svg></button>
         </div>
         <p id="acc-language-announcement" class="acc-sr-only" aria-live="polite" role="status"></p>

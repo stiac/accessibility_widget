@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.11
+- **Version**: 1.5.12
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-01
+- **Last Update**: 2025-12-02
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,6 +11,7 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
+- 2025-12-02 — Replaced the Change Positions icons with directional arrows so users immediately understand each docking option (AI assistant)
 - 2025-12-01 — Added hover/text colour configuration (including automatic contrast fallbacks) and ensured header/icons follow the palette defined via script data attributes (AI assistant)
 - 2025-11-30 — Localised the Change Position buttons and wired their pressed state so bottom-corner placements are announced correctly by assistive tech (AI assistant)
 - 2025-11-29 — Added bottom-left and bottom-right placement controls with synchronized icons and storage so the launcher can occupy any corner (AI assistant)
