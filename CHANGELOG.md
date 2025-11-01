@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.23] - 2025-12-13
+
+### Added
+- None.
+
+### Changed
+- Rotated the bottom-left and bottom-right close button icons so they mirror the Bootstrap chevron styling while pointing toward their respective docking corners.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.22] - 2025-12-12
 
 ### Added
