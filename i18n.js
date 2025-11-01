@@ -139,21 +139,6 @@
         return value.endsWith('/') ? value : `${value}/`;
     }
 
-    function isCrossOrigin(url) {
-        if (!url || typeof url !== 'string') {
-            return false;
-        }
-        if (typeof window === 'undefined' || !window.location) {
-            return false;
-        }
-        try {
-            const resolved = new URL(url, window.location.href);
-            return resolved.origin !== window.location.origin;
-        } catch (error) {
-            return false;
-        }
-    }
-
     function computeDocumentLocaleRoot() {
         if (typeof state.documentLocalesRoot === 'string' && state.documentLocalesRoot) {
             return state.documentLocalesRoot;
@@ -189,20 +174,53 @@
         return state.documentLocalesRoot;
     }
 
-    function computeLocaleUrl(language) {
-        let rootPath = '';
-        if (typeof state.localesPath === 'string' && state.localesPath.trim()) {
-            rootPath = state.localesPath.trim();
-        } else {
-            const base = deriveBasePath();
-            if (base && !isCrossOrigin(base)) {
-                rootPath = `${ensureTrailingSlash(base)}locales/`;
-            } else {
-                rootPath = computeDocumentLocaleRoot();
+    /**
+     * Build an ordered list of candidate locale URLs so we can try the script directory first
+     * (ideal for CDN installs) and gracefully fall back to the host site's `/locales` folder
+     * when cross-origin requests fail or integrators bundle JSON locally.
+     *
+     * @param {string} language - Language code being requested (e.g. `en`).
+     * @returns {string[]} Fully-qualified or relative URLs that should be fetched in order.
+     */
+    function computeLocaleUrls(language) {
+        const urls = [];
+        const seen = new Set();
+
+        function addPath(path) {
+            if (!path || typeof path !== 'string') {
+                return;
             }
+            const trimmed = path.trim();
+            if (!trimmed) {
+                return;
+            }
+            const normalised = ensureTrailingSlash(trimmed);
+            if (seen.has(normalised)) {
+                return;
+            }
+            seen.add(normalised);
+            urls.push(`${normalised}${language}.json`);
         }
-        rootPath = ensureTrailingSlash(rootPath);
-        return `${rootPath}${language}.json`;
+
+        if (typeof state.localesPath === 'string' && state.localesPath.trim()) {
+            addPath(state.localesPath);
+        }
+
+        const base = deriveBasePath();
+        if (base) {
+            addPath(`${ensureTrailingSlash(base)}locales`);
+        }
+
+        const documentLocales = computeDocumentLocaleRoot();
+        if (documentLocales) {
+            addPath(documentLocales);
+        }
+
+        if (!urls.length) {
+            addPath('locales');
+        }
+
+        return urls;
     }
 
     async function fetchLocale(language) {
@@ -216,22 +234,29 @@
             localeCache.set(language, null);
             return null;
         }
-        const url = computeLocaleUrl(language);
-        try {
-            const response = await fetch(url, { cache: 'no-cache' });
-            if (!response.ok) {
-                throw new Error(`Failed to load locale: ${url}`);
+        const urls = computeLocaleUrls(language);
+        const errors = [];
+        for (let index = 0; index < urls.length; index += 1) {
+            const url = urls[index];
+            try {
+                const response = await fetch(url, { cache: 'no-cache' });
+                if (!response.ok) {
+                    errors.push(new Error(`Failed to load locale (${response.status}) from ${url}`));
+                    continue;
+                }
+                const data = await response.json();
+                localeCache.set(language, data);
+                return data;
+            } catch (error) {
+                errors.push(error instanceof Error ? error : new Error(String(error)));
             }
-            const data = await response.json();
-            localeCache.set(language, data);
-            return data;
-        } catch (error) {
-            if (typeof console !== 'undefined' && console && typeof console.warn === 'function') {
-                console.warn('[AccessibilityI18n] Unable to load locale', language, error);
-            }
-            localeCache.set(language, null);
-            return null;
         }
+        if (typeof console !== 'undefined' && console && typeof console.warn === 'function') {
+            const lastError = errors.length ? errors[errors.length - 1] : null;
+            console.warn('[AccessibilityI18n] Unable to load locale', language, lastError, 'Attempted URLs:', urls);
+        }
+        localeCache.set(language, null);
+        return null;
     }
 
     function resolveNestedValue(source, path) {
