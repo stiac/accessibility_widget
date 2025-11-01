@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.1
+- **Version**: 1.5.2
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-21
+- **Last Update**: 2025-11-22
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,6 +11,7 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
+- 2025-11-22 — Smoothed the accessibility modal reveal with a spring-inspired animation that honours Reduce Motion preferences for gentler open transitions (AI assistant)
 - 2025-11-21 — Hardened locale loading to prefer same-origin bundles when scripts are served cross-origin, documenting mitigation steps for CDN integrations (AI assistant)
 - 2025-11-20 — Added the asynchronous i18n loader, JSON locale bundles for six languages, and an in-widget language selector with polite announcements (AI assistant)
 - 2025-11-19 — Enabled script-level configuration for language, palette, and debug output via data attributes while wiring Italian/English copy bundles (AI assistant)

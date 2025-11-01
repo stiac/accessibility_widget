@@ -1274,11 +1274,39 @@ const accessibilityMenuStyles = `
       transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.35s ease, width 0.35s ease, height 0.35s ease, opacity 0.35s ease;
       opacity: 0;
       transform: translate3d(var(--acc-translate-x), 16px, 0) scale(0.96);
+      filter: saturate(100%) blur(0);
     }
 
     #accessibility-modal.is-ready {
       opacity: 1;
       transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+    }
+
+    /*
+     * Animate the modal with a gentle overshoot so the expansion from the
+     * launcher bubble feels responsive without being jarring.
+     */
+    #accessibility-modal.is-ready:not(.close) {
+      animation: acc-modal-open 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      animation-fill-mode: both;
+    }
+
+    @keyframes acc-modal-open {
+      0% {
+        opacity: 0;
+        transform: translate3d(var(--acc-translate-x), 22px, 0) scale(0.9);
+        filter: saturate(92%) blur(8px);
+      }
+      55% {
+        opacity: 1;
+        transform: translate3d(var(--acc-translate-x), -6px, 0) scale(1.02);
+        filter: saturate(110%) blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+        filter: saturate(100%) blur(0);
+      }
     }
 
     #accessibility-modal svg {
@@ -1295,6 +1323,7 @@ const accessibilityMenuStyles = `
       overflow: hidden;
       opacity: 1;
       transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+      filter: saturate(100%) blur(0);
     }
 
     #accessibility-modal.is-ready.close {
@@ -1524,6 +1553,10 @@ const accessibilityMenuStyles = `
       transition-duration: 0.001ms !important;
       transition-property: none !important;
       scroll-behavior: auto !important;
+    }
+
+    html.reduce-motion #accessibility-modal.is-ready:not(.close) {
+      animation: none !important;
     }
 
     html.reduce-motion body marquee,
