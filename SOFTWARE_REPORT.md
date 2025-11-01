@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.4.22
+- **Version**: 1.4.23
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-14
+- **Last Update**: 2025-11-15
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-11-15 — Delivered a dyslexia-friendly font toggle that loads OpenDyslexic from CDN, applies the stack to host content only, and persists the preference to meet WCAG 2.1 Level A/EAA expectations (AI assistant)
 - 2025-11-14 — Added a Reduce Motion control that pauses CSS animations, smooth scrolling, and autoplaying media to block blinking/flashing elements in line with WCAG 2.1/EAA guidance (AI assistant)
 - 2025-11-11 — Ensured Text Align options no longer reflow the accessibility modal by excluding it from alignment helpers while keeping WCAG/EAA behaviour and announcements (AI assistant)
 - 2025-11-10 — Rebuilt Text Align as a WCAG 2.1 Level A/EAA compliant button group with start/center/end/justify options, document-level helpers, and migrated saved preferences (AI assistant)

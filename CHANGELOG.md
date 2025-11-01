@@ -1,4 +1,18 @@
 # Changelog
+## [1.4.23] - 2025-11-15
+
+### Added
+- Introduced a Font Dyslexia toggle that applies an OpenDyslexic-led font stack across the host page, giving dyslexic readers a WCAG 2.1 Level A and EAA compliant typography option while keeping the widget interface unchanged.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 ## [1.4.22] - 2025-11-14
 
 ### Added
