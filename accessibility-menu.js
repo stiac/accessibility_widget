@@ -2031,6 +2031,8 @@ const accessibilityMenuHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="block h-5 w-5"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -2052,6 +2054,8 @@ const accessibilityMenuHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="block h-5 w-5"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -2073,6 +2077,8 @@ const accessibilityMenuHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="block h-5 w-5"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -2094,6 +2100,8 @@ const accessibilityMenuHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="block h-5 w-5"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -2116,6 +2124,8 @@ const accessibilityMenuHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="block h-5 w-5"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -2138,6 +2148,8 @@ const accessibilityMenuHTML = `
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="block h-5 w-5"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
