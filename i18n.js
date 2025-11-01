@@ -23,7 +23,8 @@
         liveRegion: null,
         liveRegionCandidate: null,
         onLanguageApplied: null,
-        basePath: null
+        basePath: null,
+        documentLocalesRoot: null
     };
 
     function getScriptElement() {
@@ -131,17 +132,76 @@
         }
     }
 
+    function ensureTrailingSlash(value) {
+        if (!value || typeof value !== 'string') {
+            return '';
+        }
+        return value.endsWith('/') ? value : `${value}/`;
+    }
+
+    function isCrossOrigin(url) {
+        if (!url || typeof url !== 'string') {
+            return false;
+        }
+        if (typeof window === 'undefined' || !window.location) {
+            return false;
+        }
+        try {
+            const resolved = new URL(url, window.location.href);
+            return resolved.origin !== window.location.origin;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function computeDocumentLocaleRoot() {
+        if (typeof state.documentLocalesRoot === 'string' && state.documentLocalesRoot) {
+            return state.documentLocalesRoot;
+        }
+        if (typeof window === 'undefined' || !window.location) {
+            state.documentLocalesRoot = 'locales/';
+            return state.documentLocalesRoot;
+        }
+
+        let baseHref = window.location.href;
+        if (typeof document !== 'undefined') {
+            const baseElement = document.querySelector('base[href]');
+            if (baseElement && typeof baseElement.getAttribute === 'function') {
+                const candidate = baseElement.getAttribute('href');
+                if (candidate && candidate.trim()) {
+                    baseHref = candidate.trim();
+                }
+            }
+        }
+
+        try {
+            const resolvedBase = new URL(baseHref, window.location.href);
+            const localesUrl = new URL('locales/', resolvedBase);
+            state.documentLocalesRoot = localesUrl.href;
+        } catch (error) {
+            try {
+                const fallbackUrl = new URL('locales/', window.location.href);
+                state.documentLocalesRoot = fallbackUrl.href;
+            } catch (fallbackError) {
+                state.documentLocalesRoot = 'locales/';
+            }
+        }
+        return state.documentLocalesRoot;
+    }
+
     function computeLocaleUrl(language) {
         let rootPath = '';
         if (typeof state.localesPath === 'string' && state.localesPath.trim()) {
             rootPath = state.localesPath.trim();
         } else {
             const base = deriveBasePath();
-            rootPath = base ? `${base}locales/` : 'locales/';
+            if (base && !isCrossOrigin(base)) {
+                rootPath = `${ensureTrailingSlash(base)}locales/`;
+            } else {
+                rootPath = computeDocumentLocaleRoot();
+            }
         }
-        if (!rootPath.endsWith('/')) {
-            rootPath += '/';
-        }
+        rootPath = ensureTrailingSlash(rootPath);
         return `${rootPath}${language}.json`;
     }
 
@@ -465,6 +525,9 @@
     }
 
     async function init(options = {}) {
+        state.basePath = null;
+        state.documentLocalesRoot = null;
+        state.localesPath = '';
         const supported = Array.isArray(options.supportedLanguages) && options.supportedLanguages.length
             ? options.supportedLanguages.map((language) => language.toLowerCase())
             : DEFAULT_SUPPORTED.slice();

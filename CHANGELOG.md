@@ -1,4 +1,17 @@
 # Changelog
+## [1.5.1] - 2025-11-21
+
+### Added
+- Documented locale hosting strategies so integrators understand how to point the loader at same-origin bundles or override the lookup path when required.
+
+### Changed
+- None.
+
+### Fixed
+- Adjusted the locale fetcher to fall back to the embedding site's `/locales` directory when the script origin differs from the page origin, resolving CDN-driven CORS errors such as blocked requests to `https://cnd.stiac.it/.../locales/<lang>.json`.
+
+### Removed
+- None.
 ## [1.5.0] - 2025-11-20
 
 ### Added
