@@ -8,13 +8,8 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.20`
+- **Current Version:** `1.4.19`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
-
-## What's New in 1.4.20
-
-- Restored the Text Align control to a single card that cycles Start, Center, End, and Justify like other tools while keeping keyboard shortcuts and polite announcements intact.
-- Updated the helper copy so users immediately know whether they are using the default alignment or an override.
 
 ## What's New in 1.4.19
 
