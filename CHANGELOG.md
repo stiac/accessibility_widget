@@ -1,4 +1,32 @@
 # Changelog
+# [1.5.23] - 2025-12-13
+
+### Added
+- None.
+
+### Changed
+- Grouped the Change Positions controls beside the Reset All action with a labelled section so the footer reads naturally and users understand the relationship between the buttons at a glance.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.22] - 2025-12-12
+
+### Added
+- None.
+
+### Changed
+- Reordered the Change Positions controls into a logical grid that mirrors each docking corner before presenting the Reset All action.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.21] - 2025-12-11
 
 ### Added

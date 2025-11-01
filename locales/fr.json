@@ -70,6 +70,7 @@
       "label": "Tout réinitialiser"
     },
     "position": {
+      "groupLabel": "Choisissez la position du widget",
       "left": "Épingler le widget au bord gauche",
       "top": "Épingler le widget au bord supérieur",
       "topLeft": "Épingler le widget dans le coin supérieur gauche",

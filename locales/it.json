@@ -70,6 +70,7 @@
       "label": "Reimposta Tutto"
     },
     "position": {
+      "groupLabel": "Scegli la posizione del widget",
       "left": "Ancorare il widget al bordo sinistro",
       "top": "Ancorare il widget al bordo superiore",
       "topLeft": "Ancorare il widget all'angolo in alto a sinistra",

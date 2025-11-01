@@ -70,6 +70,7 @@
       "label": "Reset All"
     },
     "position": {
+      "groupLabel": "Choose widget position",
       "left": "Dock widget to the left edge",
       "top": "Dock widget to the top edge",
       "topLeft": "Dock widget to the top-left corner",

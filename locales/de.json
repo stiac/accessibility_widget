@@ -70,6 +70,7 @@
       "label": "Alles zurücksetzen"
     },
     "position": {
+      "groupLabel": "Wählen Sie die Widget-Position",
       "left": "Widget am linken Rand andocken",
       "top": "Widget am oberen Rand andocken",
       "topLeft": "Widget in der oberen linken Ecke andocken",
