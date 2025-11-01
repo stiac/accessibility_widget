@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.15] - 2025-12-05
+
+### Added
+- Dataset controls (`data-color-header-background`, `data-color-control-active`, and their text counterparts) that let integrators tune header and active card palettes independently.
+
+### Changed
+- Swapped the default header, Reset button, and active position toggle styling to a blue `#036cff` background with white text for clearer contrast.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.14] - 2025-12-04
 
 ### Added

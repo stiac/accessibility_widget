@@ -1110,7 +1110,10 @@ const accessibilityMenuStyles = `
       --acc_hover_color: #1c2c4d;
       --acc_hover_text_color: #f8fafc;
       --acc_text_color: rgba(15, 23, 42, 0.85);
-      --acc_header_text_color: #f8fafc;
+      --acc_header_bg_color: #036cff;
+      --acc_header_text_color: #ffffff;
+      --acc_control_active_bg_color: #036cff;
+      --acc_control_active_text_color: #ffffff;
       --border_radius: 24px;
       --acc-font-scale: 1;
     }
@@ -1479,8 +1482,8 @@ const accessibilityMenuStyles = `
     }
 
     .acc-child.active {
-      background: var(--acc_color_1);
-      color: var(--acc_header_text_color);
+      background: var(--acc_control_active_bg_color);
+      color: var(--acc_control_active_text_color);
       border-color: transparent;
     }
 
@@ -1510,7 +1513,7 @@ const accessibilityMenuStyles = `
     }
 
     #headerContent {
-      background: var(--acc_color_1) !important;
+      background: var(--acc_header_bg_color) !important;
       color: var(--acc_header_text_color) !important;
     }
 
@@ -1536,7 +1539,7 @@ const accessibilityMenuStyles = `
     }
 
     #reset-all {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
@@ -1565,7 +1568,7 @@ const accessibilityMenuStyles = `
     }
 
     #change-positions button.active {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       box-shadow: none;
     }
@@ -2165,7 +2168,10 @@ function resolveWidgetScriptConfig() {
         colorButton: '#f8fafc',
         colorButtonHover: '',
         colorText: '',
+        colorHeaderBackground: '',
         colorHeaderText: '',
+        colorControlActive: '',
+        colorControlActiveText: '',
         voce1: '',
         voce2: '',
         localesPath: '',
@@ -2230,8 +2236,20 @@ function resolveWidgetScriptConfig() {
         config.colorText = script.dataset.colorText.trim();
     }
 
+    if (typeof script.dataset.colorHeaderBackground === 'string' && script.dataset.colorHeaderBackground.trim()) {
+        config.colorHeaderBackground = script.dataset.colorHeaderBackground.trim();
+    }
+
     if (typeof script.dataset.colorHeaderText === 'string' && script.dataset.colorHeaderText.trim()) {
         config.colorHeaderText = script.dataset.colorHeaderText.trim();
+    }
+
+    if (typeof script.dataset.colorControlActive === 'string' && script.dataset.colorControlActive.trim()) {
+        config.colorControlActive = script.dataset.colorControlActive.trim();
+    }
+
+    if (typeof script.dataset.colorControlActiveText === 'string' && script.dataset.colorControlActiveText.trim()) {
+        config.colorControlActiveText = script.dataset.colorControlActiveText.trim();
     }
 
     if (typeof script.dataset.voce1 === 'string' && script.dataset.voce1.trim()) {
@@ -3188,16 +3206,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const hoverPreference = sanitiseWidgetColor(widgetScriptConfig.colorButtonHover, null);
     const textPreference = sanitiseWidgetColor(widgetScriptConfig.colorText, null);
+    const headerBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderBackground, null);
     const headerTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderText, null);
+    const controlActiveBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActive, null);
+    const controlActiveTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActiveText, null);
     const hoverColor = hoverPreference || deriveHoverColor(resolvedColors.active) || resolvedColors.active;
     const textColor = textPreference || 'rgba(15, 23, 42, 0.85)';
+    const headerBackgroundColor = headerBackgroundPreference || '#036cff';
     const headerTextColor = headerTextPreference
-        || deriveReadableTextColor(resolvedColors.active, [
+        || deriveReadableTextColor(headerBackgroundColor, [
             textPreference,
             resolvedColors.inactive,
             '#ffffff',
             '#000000',
             textColor
+        ]);
+    const controlActiveBackgroundColor = controlActiveBackgroundPreference || headerBackgroundColor;
+    const controlActiveTextColor = controlActiveTextPreference
+        || deriveReadableTextColor(controlActiveBackgroundColor, [
+            headerTextPreference,
+            headerTextColor,
+            resolvedColors.inactive,
+            textColor,
+            '#ffffff',
+            '#000000'
         ]);
     const hoverTextColor = deriveReadableTextColor(hoverColor, [
         headerTextPreference,
@@ -3214,7 +3246,10 @@ document.addEventListener("DOMContentLoaded", function() {
         document.documentElement.style.setProperty('--acc_hover_color', hoverColor);
         document.documentElement.style.setProperty('--acc_hover_text_color', hoverTextColor);
         document.documentElement.style.setProperty('--acc_text_color', textColor);
+        document.documentElement.style.setProperty('--acc_header_bg_color', headerBackgroundColor);
         document.documentElement.style.setProperty('--acc_header_text_color', headerTextColor);
+        document.documentElement.style.setProperty('--acc_control_active_bg_color', controlActiveBackgroundColor);
+        document.documentElement.style.setProperty('--acc_control_active_text_color', controlActiveTextColor);
     }
 
     ensureTailwindCSSLoaded();
