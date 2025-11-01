@@ -1,4 +1,32 @@
 # Changelog
+# [1.5.13] - 2025-12-03
+
+### Added
+- None.
+
+### Changed
+- Rotated the bottom-left and bottom-right Change Positions arrows to reuse the shared directional glyph for visual consistency.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+# [1.5.12] - 2025-12-02
+
+### Added
+- None.
+
+### Changed
+- Swapped the Change Positions button glyphs for clear directional arrows that illustrate where the widget will dock.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.11] - 2025-12-01
 
 ### Added
