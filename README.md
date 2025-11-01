@@ -13,7 +13,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 
 ## What's New in 1.5.17
 
-- Corrected the Change Position corner controls so their IDs, icons, and translations point to the actual top-left and top-right docking locations.
+- Default the header banner and active control text datasets to white so integrators automatically get high-contrast typography without specifying `data-color-header-text` or `data-color-control-active-text`.
 
 ## What's New in 1.5.16
 

@@ -2,13 +2,13 @@
 # [1.5.17] - 2025-12-07
 
 ### Added
-- Added top-left and top-right localisation strings for the Change Position controls across every bundled language.
+- None.
 
 ### Changed
-- Renamed the Change Position top-corner controls to `align-acc-top-left`/`align-acc-top-right` so their identifiers match the widget's actual docking points.
+- Defaulted the `data-color-header-text` and `data-color-control-active-text` script attributes to white (`#ffffff`) so header and active control typography stays readable without custom configuration.
 
 ### Fixed
-- Corrected the Change Position corner arrow rotations so the top and bottom buttons display the proper direction for each docking option.
+- None.
 
 ### Removed
 - None.
