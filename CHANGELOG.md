@@ -1,4 +1,20 @@
 # Changelog
+## [1.5.0] - 2025-11-20
+
+### Added
+- Delivered a standalone `i18n.js` helper that loads JSON locale files asynchronously, persists language choices, updates `<html lang>`, and emits polite announcements through a shared live region.
+- Bundled six locale JSON files (English, Italian, French, German, Spanish, Portuguese) together with a scalable directory structure for future languages.
+- Injected a keyboard-accessible language selector inside the widget so visitors can switch languages without leaving the panel.
+
+### Changed
+- Replaced hard-coded copy with `data-i18n`/`data-i18n-attr` hooks across the interface so translations are applied consistently and ARIA labels localise automatically.
+- Synced text-alignment announcements, headings, and helper descriptions with the active locale while keeping script-level heading overrides intact.
+
+### Fixed
+- Ensured text-alignment status updates reuse translated strings so screen readers hear announcements in the selected language.
+
+### Removed
+- None.
 ## [1.4.27] - 2025-11-19
 
 ### Added
