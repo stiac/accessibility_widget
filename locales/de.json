@@ -68,6 +68,14 @@
     },
     "resetAll": {
       "label": "Alles zurücksetzen"
+    },
+    "position": {
+      "left": "Widget am linken Rand andocken",
+      "top": "Widget am oberen Rand andocken",
+      "bottom": "Widget am unteren Rand andocken",
+      "bottomLeft": "Widget in der unteren linken Ecke andocken",
+      "bottomRight": "Widget in der unteren rechten Ecke andocken",
+      "right": "Widget am rechten Rand andocken"
     }
   },
   "announcements": {

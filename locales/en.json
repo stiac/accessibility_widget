@@ -68,6 +68,14 @@
     },
     "resetAll": {
       "label": "Reset All"
+    },
+    "position": {
+      "left": "Dock widget to the left edge",
+      "top": "Dock widget to the top edge",
+      "bottom": "Dock widget to the bottom edge",
+      "bottomLeft": "Dock widget to the bottom-left corner",
+      "bottomRight": "Dock widget to the bottom-right corner",
+      "right": "Dock widget to the right edge"
     }
   },
   "announcements": {

@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.7
+- **Version**: 1.5.10
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-11-27
+- **Last Update**: 2025-11-30
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,6 +11,8 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
+- 2025-11-30 — Localised the Change Position buttons and wired their pressed state so bottom-corner placements are announced correctly by assistive tech (AI assistant)
+- 2025-11-29 — Added bottom-left and bottom-right placement controls with synchronized icons and storage so the launcher can occupy any corner (AI assistant)
 - 2025-11-27 — Refreshed the language selector icons with higher fidelity SVG flags and linked the Hide Images toggle to the dropdown with an opt-out dataset override (AI assistant)
 - 2025-11-26 — Rebuilt the language dropdown with Tailwind styling, inline SVG flags, and native language labels by default with an optional translation toggle (AI assistant)
 - 2025-11-25 — Restored the launcher shadow, replaced clip-path morphing with an accessible radius-based reveal, and auto-enabled Reduce Motion when the OS requests it (AI assistant)

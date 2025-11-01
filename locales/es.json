@@ -68,6 +68,14 @@
     },
     "resetAll": {
       "label": "Restablecer todo"
+    },
+    "position": {
+      "left": "Anclar el widget al borde izquierdo",
+      "top": "Anclar el widget al borde superior",
+      "bottom": "Anclar el widget al borde inferior",
+      "bottomLeft": "Anclar el widget a la esquina inferior izquierda",
+      "bottomRight": "Anclar el widget a la esquina inferior derecha",
+      "right": "Anclar el widget al borde derecho"
     }
   },
   "announcements": {

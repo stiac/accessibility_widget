@@ -68,6 +68,14 @@
     },
     "resetAll": {
       "label": "Repor tudo"
+    },
+    "position": {
+      "left": "Fixar o widget na borda esquerda",
+      "top": "Fixar o widget na borda superior",
+      "bottom": "Fixar o widget na borda inferior",
+      "bottomLeft": "Fixar o widget no canto inferior esquerdo",
+      "bottomRight": "Fixar o widget no canto inferior direito",
+      "right": "Fixar o widget na borda direita"
     }
   },
   "announcements": {

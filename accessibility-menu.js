@@ -1424,6 +1424,24 @@ const accessibilityMenuStyles = `
       --acc-transform-origin: bottom center;
     }
 
+    #accessibility-modal.bottom-left {
+      top: auto;
+      bottom: 1rem;
+      left: 1rem;
+      right: auto;
+      --acc-translate-x: 0;
+      --acc-transform-origin: bottom left;
+    }
+
+    #accessibility-modal.bottom-right {
+      top: auto;
+      bottom: 1rem;
+      right: 1rem;
+      left: auto;
+      --acc-translate-x: 0;
+      --acc-transform-origin: bottom right;
+    }
+
     #accessibility-modal #accessibility-tools {
       scrollbar-width: thin;
     }
@@ -1934,19 +1952,77 @@ const accessibilityMenuHTML = `
 
         <!--change positions-->
         <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
-          <button id="align-acc-left" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-start" viewBox="0 0 16 16">
+          <button
+            id="align-acc-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the left edge"
+            title="Dock widget to the left edge"
+            data-i18n-attr="aria-label:controls.position.left, title:controls.position.left"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-start" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5" />
               <path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" />
             </svg></button>
-          <button id="align-acc-top" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
+          <button
+            id="align-acc-top"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top edge"
+            title="Dock widget to the top edge"
+            data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
               <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)" />
               <path d="M1.5 2a.5.5 0 0 1 0-1zm13-1a.5.5 0 0 1 0 1zm-13 0h13v1h-13z" />
             </svg></button>
-          <button id="align-acc-bottom" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-bottom" viewBox="0 0 16 16">
+          <button
+            id="align-acc-bottom"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom edge"
+            title="Dock widget to the bottom edge"
+            data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-bottom" viewBox="0 0 16 16">
               <rect width="4" height="12" x="6" y="1" rx="1" />
               <path d="M1.5 14a.5.5 0 0 0 0 1zm13 1a.5.5 0 0 0 0-1zm-13 0h13v-1h-13z" />
             </svg></button>
-          <button id="align-acc-right" class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
+          <button
+            id="align-acc-bottom-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom-left corner"
+            title="Dock widget to the bottom-left corner"
+            data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5" />
+              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
+              <rect x="2.5" y="9" width="6" height="4" rx="1" />
+            </svg></button>
+          <button
+            id="align-acc-bottom-right"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom-right corner"
+            title="Dock widget to the bottom-right corner"
+            data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5" />
+              <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5" />
+              <rect x="7.5" y="9" width="6" height="4" rx="1" />
+            </svg></button>
+          <button
+            id="align-acc-right"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/90 text-slate-700 shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition hover:bg-slate-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the right edge"
+            title="Dock widget to the right edge"
+            data-i18n-attr="aria-label:controls.position.right, title:controls.position.right"
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-align-end" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5" />
               <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1z" />
             </svg></button>
@@ -3198,18 +3274,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function accessibilityModalOpenCloseToggle() {
         accessibilityModal.classList.toggle('close');
-        closeBtn.innerHTML = accessibilityModal.classList.contains('close') ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">\n' +
-            '  <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"/>\n' +
-            '  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8"/>\n' +
-            '</svg>' : accessibilityModal.classList.contains('top') ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">\n' +
-            '  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>\n' +
-            '</svg>' : accessibilityModal.classList.contains('bottom') ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">\n' +
-            '  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>\n' +
-            '</svg>' : accessibilityModal.classList.contains('left') ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">\n' +
-            '  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>\n' +
-            '</svg>' : accessibilityModal.classList.contains('right') ? '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">\n' +
-            '  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>\n' +
-            '</svg>' : '';
+        updateCloseButtonIcon();
+    }
+
+    function getCloseButtonIconMarkup(position) {
+        if (position === 'top') {
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">\n' +
+                '  <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>\n' +
+                '</svg>';
+        }
+        if (position === 'bottom') {
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">\n' +
+                '  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>\n' +
+                '</svg>';
+        }
+        if (position === 'left') {
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">\n' +
+                '  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>\n' +
+                '</svg>';
+        }
+        if (position === 'right') {
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">\n' +
+                '  <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>\n' +
+                '</svg>';
+        }
+        if (position === 'bottom-left') {
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">\n' +
+                '  <path d="M1.5 1a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-1 0v-12a.5.5 0 0 1 .5-.5"/>\n' +
+                '  <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5"/>\n' +
+                '  <rect x="2.5" y="9" width="6" height="4" rx="1"/>\n' +
+                '</svg>';
+        }
+        if (position === 'bottom-right') {
+            return '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">\n' +
+                '  <path d="M14.5 1a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 1 0v-12a.5.5 0 0 0-.5-.5"/>\n' +
+                '  <path d="M1 14.5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1h-12a.5.5 0 0 1-.5-.5"/>\n' +
+                '  <rect x="7.5" y="9" width="6" height="4" rx="1"/>\n' +
+                '</svg>';
+        }
+        return '';
+    }
+
+    function updateCloseButtonIcon() {
+        if (!closeBtn) {
+            return;
+        }
+        if (accessibilityModal.classList.contains('close')) {
+            closeBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">\n' +
+                '  <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"/>\n' +
+                '  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8"/>\n' +
+                '</svg>';
+            return;
+        }
+        const currentPosition = getCurrentPosition();
+        closeBtn.innerHTML = getCloseButtonIconMarkup(currentPosition);
     }
 
     const accItems = document.querySelectorAll('.acc-item');
@@ -3988,73 +4106,60 @@ document.addEventListener("DOMContentLoaded", function() {
     const alignAccLeft = document.getElementById('align-acc-left');
     const alignAccTop = document.getElementById('align-acc-top');
     const alignAccBottom = document.getElementById('align-acc-bottom');
+    const alignAccBottomLeft = document.getElementById('align-acc-bottom-left');
+    const alignAccBottomRight = document.getElementById('align-acc-bottom-right');
     const alignAccRight = document.getElementById('align-acc-right');
 
-    positionActiveStatus();
+    const positionClasses = ['left', 'top', 'bottom', 'right', 'bottom-left', 'bottom-right'];
+    const positionControls = [
+        { element: alignAccLeft, className: 'left' },
+        { element: alignAccTop, className: 'top' },
+        { element: alignAccBottom, className: 'bottom' },
+        { element: alignAccBottomLeft, className: 'bottom-left' },
+        { element: alignAccBottomRight, className: 'bottom-right' },
+        { element: alignAccRight, className: 'right' }
+    ];
 
-    alignAccLeft.addEventListener('click', () => {
-        accessibilityModalOpenCloseToggle()
-        accessibilityModal.classList.remove('top');
-        accessibilityModal.classList.remove('bottom');
-        accessibilityModal.classList.remove('right');
-        accessibilityModal.classList.add('left');
-        positionActiveStatus();
-        saveSettings();
-    });
-
-    alignAccTop.addEventListener('click', () => {
-        accessibilityModalOpenCloseToggle()
-        accessibilityModal.classList.remove('left');
-        accessibilityModal.classList.remove('bottom');
-        accessibilityModal.classList.remove('right');
-        accessibilityModal.classList.add('top');
-        positionActiveStatus();
-        saveSettings();
-    });
-
-    alignAccBottom.addEventListener('click', () => {
-        accessibilityModalOpenCloseToggle()
-        accessibilityModal.classList.remove('left');
-        accessibilityModal.classList.remove('top');
-        accessibilityModal.classList.remove('right');
-        accessibilityModal.classList.add('bottom');
-        positionActiveStatus();
-        saveSettings();
-    });
-
-    alignAccRight.addEventListener('click', () => {
-        accessibilityModalOpenCloseToggle()
-        accessibilityModal.classList.remove('left');
-        accessibilityModal.classList.remove('top');
-        accessibilityModal.classList.remove('bottom');
-        accessibilityModal.classList.add('right');
-        positionActiveStatus();
-        saveSettings();
-    });
-
-    function positionActiveStatus() {
-        if (accessibilityModal.classList.contains('left')) {
-            alignAccLeft.classList.add('active');
-            alignAccTop.classList.remove('active');
-            alignAccBottom.classList.remove('active');
-            alignAccRight.classList.remove('active');
-        } else if (accessibilityModal.classList.contains('top')) {
-            alignAccTop.classList.add('active');
-            alignAccLeft.classList.remove('active');
-            alignAccBottom.classList.remove('active');
-            alignAccRight.classList.remove('active');
-        } else if (accessibilityModal.classList.contains('bottom')) {
-            alignAccBottom.classList.add('active');
-            alignAccTop.classList.remove('active');
-            alignAccLeft.classList.remove('active');
-            alignAccRight.classList.remove('active');
-        } else if (accessibilityModal.classList.contains('right')) {
-            alignAccRight.classList.add('active');
-            alignAccTop.classList.remove('active');
-            alignAccBottom.classList.remove('active');
-            alignAccLeft.classList.remove('active');
-        }
+    function getCurrentPosition() {
+        const activeClass = positionClasses.find(positionClass => accessibilityModal.classList.contains(positionClass));
+        return activeClass || 'right';
     }
+
+    function updatePositionControls() {
+        const currentPosition = getCurrentPosition();
+        positionControls.forEach(control => {
+            if (!control.element) {
+                return;
+            }
+            const isActive = control.className === currentPosition;
+            control.element.classList.toggle('active', isActive);
+            // Keep pressed state in sync so assistive technologies announce the active placement.
+            control.element.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+    }
+
+    function setModalPosition(positionClass) {
+        accessibilityModalOpenCloseToggle();
+        positionClasses.forEach(existingClass => {
+            accessibilityModal.classList.remove(existingClass);
+        });
+        accessibilityModal.classList.add(positionClass);
+        updatePositionControls();
+        updateCloseButtonIcon();
+        saveSettings();
+    }
+
+    updatePositionControls();
+    updateCloseButtonIcon();
+
+    positionControls.forEach(control => {
+        if (!control.element) {
+            return;
+        }
+        control.element.addEventListener('click', () => {
+            setModalPosition(control.className);
+        });
+    });
 
     document.querySelector('#invert-colors').addEventListener('click', () => {
         const item = document.querySelector('#invert-colors');
@@ -4523,7 +4628,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hideVideo: docElement.classList.contains('hide-video'),
             reduceMotion: docElement.classList.contains('reduce-motion'),
             cursor: cursor.classList.contains('cursor-2') ? 'guide' : cursor.classList.contains('cursor-1') ? 'mask' : cursor.classList.contains('cursor-0') ? 'focus' : 'default',
-            position: accessibilityModal.classList.contains('left') ? 'left' : accessibilityModal.classList.contains('top') ? 'top' : accessibilityModal.classList.contains('bottom') ? 'bottom' : 'right'
+            position: getCurrentPosition()
         };
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
@@ -4613,8 +4718,15 @@ document.addEventListener("DOMContentLoaded", function() {
             triangle.style.display = settings.cursor === 'guide' ? 'block' : 'none';
         }
 
-        accessibilityModal.classList.remove('left', 'top', 'bottom', 'right');
-        accessibilityModal.classList.add(settings.position || 'right');
+        positionClasses.forEach(positionClass => {
+            accessibilityModal.classList.remove(positionClass);
+        });
+        const restoredPosition = settings.position && positionClasses.includes(settings.position)
+            ? settings.position
+            : 'right';
+        accessibilityModal.classList.add(restoredPosition);
+        updatePositionControls();
+        updateCloseButtonIcon();
     }
 
     function syncControls() {
@@ -4817,7 +4929,7 @@ document.addEventListener("DOMContentLoaded", function() {
             setControlActiveState(cursorItem, false);
         }
 
-        positionActiveStatus();
+        updatePositionControls();
     }
 
     const savedSettingsRaw = localStorage.getItem(STORAGE_KEY);
