@@ -8,8 +8,13 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.3`
+- **Current Version:** `1.5.4`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.4
+
+- Bundled the six default locale files directly inside the widget and taught `i18n.js` to read them before issuing network
+  requests, so language switching works even when CDN-hosted JSON is blocked by CORS or unavailable.
 
 ## What's New in 1.5.3
 
@@ -132,7 +137,7 @@ All attributes are optional; omit any value to keep the default behaviour. Colou
 ### Internationalisation
 
 - Load the `i18n.js` helper **before** `accessibility-menu.js`. The helper auto-detects the browser language (`navigator.language`), falls back to English, and stores the user's manual selection in `localStorage` (`stiacAccessibilityLanguage`).
-- Locale files live under `/locales/<lang>.json` by default (e.g., `/locales/en.json`). The loader now attempts to fetch from the script directory (ideal for CDN/versioned builds) and, if that fails, gracefully falls back to the host site's `/locales` directory; adjust `data-locales-path` if your bundles live elsewhere. Each file mirrors the same structure so you can add new languages by dropping another JSON document and extending `SUPPORTED_LANGUAGES` in `accessibility-menu.js`.
+- Locale files live under `/locales/<lang>.json` by default (e.g., `/locales/en.json`). The loader now checks the widget's embedded copies first, then attempts to fetch from the script directory (ideal for CDN/versioned builds) and, if that fails, gracefully falls back to the host site's `/locales` directory; adjust `data-locales-path` if your bundles live elsewhere. Each file mirrors the same structure so you can add new languages by dropping another JSON document and extending `SUPPORTED_LANGUAGES` in `accessibility-menu.js`.
 - Use the built-in language selector inside the widget to switch languages. The control is fully keyboard accessible, updates the `<html lang>` attribute, and announces changes with `aria-live="polite"`.
 - Every translatable string inside the widget is decorated with `data-i18n` or `data-i18n-attr`. If you render custom markup alongside the menu, you can reuse the helper by applying the same attributes to your elements and calling `window.AccessibilityI18n.applyTranslations()`.
 - If you host locale files in a different directory, set `data-locales-path` on the `<script>` tag or pass `localesPath` when calling `AccessibilityI18n.init`.

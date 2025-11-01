@@ -10,6 +10,53 @@
     const STORAGE_KEY = 'stiacAccessibilityLanguage';
     const DEFAULT_LANGUAGE = 'en';
     const DEFAULT_SUPPORTED = ['en', 'it', 'fr', 'de', 'es', 'pt'];
+
+    /**
+     * Attempt to locate any embedded locale definitions injected by the widget bundle.
+     * Integrators that cannot host standalone JSON files (for example due to CORS limits)
+     * can rely on these preloaded translations instead of remote fetches.
+     */
+    function getEmbeddedLocalesContainer() {
+        const sources = [];
+        if (global && typeof global === 'object') {
+            if (global.AccessibilityWidgetEmbeddedLocales
+                && typeof global.AccessibilityWidgetEmbeddedLocales === 'object') {
+                sources.push(global.AccessibilityWidgetEmbeddedLocales);
+            }
+            if (global.STIAC_ACCESSIBILITY_LOCALES && typeof global.STIAC_ACCESSIBILITY_LOCALES === 'object') {
+                sources.push(global.STIAC_ACCESSIBILITY_LOCALES);
+            }
+        }
+        if (!sources.length) {
+            return null;
+        }
+        if (sources.length === 1) {
+            return sources[0];
+        }
+        return Object.assign({}, ...sources);
+    }
+
+    function getEmbeddedLocale(language) {
+        if (!language) {
+            return null;
+        }
+        const container = getEmbeddedLocalesContainer();
+        if (!container) {
+            return null;
+        }
+        const normalised = typeof language === 'string' ? language.toLowerCase() : language;
+        if (normalised && typeof container[normalised] === 'object') {
+            return container[normalised];
+        }
+        const entries = Object.keys(container);
+        for (let index = 0; index < entries.length; index += 1) {
+            const key = entries[index];
+            if (typeof key === 'string' && key.toLowerCase() === normalised && typeof container[key] === 'object') {
+                return container[key];
+            }
+        }
+        return null;
+    }
     const localeCache = new Map();
     const listeners = new Set();
 
@@ -229,6 +276,11 @@
         }
         if (localeCache.has(language)) {
             return localeCache.get(language);
+        }
+        const embedded = getEmbeddedLocale(language);
+        if (embedded) {
+            localeCache.set(language, embedded);
+            return embedded;
         }
         if (typeof fetch !== 'function') {
             localeCache.set(language, null);
