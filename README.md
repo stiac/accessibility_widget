@@ -8,8 +8,16 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.4.22`
+- **Current Version:** `1.4.24`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.4.24
+
+- Patched the **Font Dyslexia** toggle to load OpenDyslexic weights from GitHub's raw CDN so the resources no longer 404 and dyslexia-friendly text is immediately available when the preference is enabled.
+
+## What's New in 1.4.23
+
+- Added a dedicated **Font Dyslexia** toggle that swaps the host page to an OpenDyslexic-led font stack while preserving the widget UI, helping readers with dyslexia in line with WCAG 2.1 Level A and EAA obligations.
 
 ## What's New in 1.4.22
 
@@ -143,6 +151,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Font Size**: Increases the font size of the page to improve readability for users with visual impairments.
 - **Line Height**: Increases the line height of the page to improve readability for users with visual impairments.
 - **Letter Spacing**: Increases the letter spacing of the page to improve readability for users with visual impairments.
+- **Font Dyslexia**: Replaces the host page typography with a dyslexia-friendly font stack powered by OpenDyslexic and supportive fallbacks without affecting the accessibility menu layout.
 - **Text Alignment**: Cycle through Start, Center, End, and Justify by clicking the card; the preference overrides host styles while active and resets to default after the final option.
 - **Low Contrast**: Reduces the contrast of the page to improve readability for users with visual impairments.
 - **High Contrast**: Increases the contrast of the page to improve readability for users with visual impairments.

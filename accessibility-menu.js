@@ -9,12 +9,44 @@ const accessibilityMenuStyles = `
       --acc-font-scale: 1;
     }
 
+    /*
+     * Provide OpenDyslexic as the primary dyslexia-friendly typeface with
+     * a bold companion so text retains hierarchy when the control is active.
+     * The font files are served from GitHub's raw CDN and loaded with swap
+     * behaviour so content remains visible while the resource downloads.
+     */
+    @font-face {
+      font-family: "OpenDyslexic";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/woff/OpenDyslexic-Regular.woff") format("woff");
+    }
+
+    @font-face {
+      font-family: "OpenDyslexic";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/woff/OpenDyslexic-Bold.woff") format("woff");
+    }
+
     html[data-acc-font-scale-active] {
       font-size: var(--acc-root-font-size, 100%) !important;
     }
 
     html[data-acc-font-scale-active] body {
       font-size: var(--acc-body-font-size, inherit) !important;
+    }
+
+    /*
+     * Apply dyslexia-supportive font stack across the host page when the
+     * dedicated control is active while leaving the widget typography
+     * untouched for consistent UI rendering.
+     */
+    html[data-acc-dyslexia-font] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+      font-family: "OpenDyslexic", "OpenDyslexic3", "Atkinson Hyperlegible", "Lexend Deca", "Lexend", "Arial", "Verdana", sans-serif !important;
+      letter-spacing: 0.02em;
     }
 
     /*
@@ -586,6 +618,17 @@ const accessibilityMenuHTML = `
               <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
               <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
             </div>
+          </div>
+        </div>
+
+        <!--dyslexia friendly font toggle-->
+        <div class="acc-item group">
+          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl bg-white/90 p-5 text-center text-sm font-semibold text-slate-700 shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-dyslexia" aria-describedby="font-dyslexia-description">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.5 5C3.11929 5 2 6.11929 2 7.5V16.5C2 17.8807 3.11929 19 4.5 19H11.75C13.1307 19 14.25 17.8807 14.25 16.5V13.75H19.5C20.8807 13.75 22 12.6307 22 11.25V7.5C22 6.11929 20.8807 5 19.5 5H4.5ZM4 7.5C4 7.22386 4.22386 7 4.5 7H11.5C11.7761 7 12 7.22386 12 7.5V9C12 9.27614 11.7761 9.5 11.5 9.5H6.75V16.5C6.75 16.7761 6.52614 17 6.25 17H4.5C4.22386 17 4 16.7761 4 16.5V7.5ZM14 7.5C14 7.22386 14.2239 7 14.5 7H19.5C19.7761 7 20 7.22386 20 7.5V11.25C20 11.5261 19.7761 11.75 19.5 11.75H14.5C14.2239 11.75 14 11.5261 14 11.25V7.5Z" fill="currentColor" />
+            </svg>
+            <p class="text-xs font-semibold uppercase tracking-wide">Font Dyslexia</p>
+            <p id="font-dyslexia-description" class="acc-sr-only">Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu.</p>
           </div>
         </div>
 
@@ -1838,6 +1881,20 @@ document.addEventListener("DOMContentLoaded", function() {
         saveSettings();
     });
 
+    const dyslexiaFontControl = document.querySelector('#font-dyslexia');
+    if (dyslexiaFontControl) {
+        dyslexiaFontControl.addEventListener('click', () => {
+            const nextState = !docElement.dataset.accDyslexiaFont;
+            if (nextState) {
+                docElement.dataset.accDyslexiaFont = 'true';
+            } else {
+                delete docElement.dataset.accDyslexiaFont;
+            }
+            setControlActiveState(dyslexiaFontControl, nextState);
+            saveSettings();
+        });
+    }
+
     if (textAlignControl) {
         // Cycle the document text alignment each time the card is activated.
         textAlignControl.addEventListener('click', () => {
@@ -2021,6 +2078,7 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.style.letterSpacing = '';
         setDocumentTextAlign('');
         syncTextAlignUI();
+        delete docElement.dataset.accDyslexiaFont;
         setHideImagesActive(false);
         docElement.classList.remove('hide-video');
         setReduceMotionActive(false);
@@ -2050,7 +2108,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //save the user's settings in local storage
     function saveSettings() {
         const settings = {
-            version: 3,
+            version: 4,
             filters: {
                 invert: filterState.invert,
                 grayscale: filterState.grayscale,
@@ -2062,6 +2120,7 @@ document.addEventListener("DOMContentLoaded", function() {
             lineHeight: docElement.classList.contains('line-height-2') ? 'line-height-2' : docElement.classList.contains('line-height-1') ? 'line-height-1' : docElement.classList.contains('line-height-0') ? 'line-height-0' : 'default',
             letterSpacing: docElement.style.letterSpacing || '',
             textAlign: getDocumentTextAlign(),
+            dyslexiaFont: Boolean(docElement.dataset.accDyslexiaFont),
             hideImages: docElement.classList.contains('hide-images'),
             hideVideo: docElement.classList.contains('hide-video'),
             reduceMotion: docElement.classList.contains('reduce-motion'),
@@ -2081,7 +2140,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return null;
         }
         return {
-            version: 3,
+            version: 4,
             filters: {
                 invert: Boolean(legacy.invertColors),
                 grayscale: Boolean(legacy.grayscale),
@@ -2093,6 +2152,7 @@ document.addEventListener("DOMContentLoaded", function() {
             lineHeight: legacy.lineHeight2 ? 'line-height-2' : legacy.lineHeight1 ? 'line-height-1' : legacy.lineHeight0 ? 'line-height-0' : 'default',
             letterSpacing: legacy.letterSpacing || '',
             textAlign: legacy.textAlign || '',
+            dyslexiaFont: Boolean(legacy.dyslexiaFont),
             hideImages: Boolean(legacy.hideImages),
             hideVideo: Boolean(legacy.hideVideo),
             reduceMotion: Boolean(legacy.reduceMotion),
@@ -2104,6 +2164,9 @@ document.addEventListener("DOMContentLoaded", function() {
     function applySavedSettings(settings) {
         if (!settings) {
             return;
+        }
+        if (typeof settings.version === 'number' && settings.version < 4 && typeof settings.dyslexiaFont === 'undefined') {
+            settings.dyslexiaFont = false;
         }
         if (settings.filters) {
             filterState.invert = Boolean(settings.filters.invert);
@@ -2121,6 +2184,11 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.classList.toggle('line-height-2', settings.lineHeight === 'line-height-2');
         docElement.style.letterSpacing = settings.letterSpacing || '';
         setDocumentTextAlign(settings.textAlign || '');
+        if (settings.dyslexiaFont) {
+            docElement.dataset.accDyslexiaFont = 'true';
+        } else {
+            delete docElement.dataset.accDyslexiaFont;
+        }
         setHideImagesActive(Boolean(settings.hideImages));
         docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
         setReduceMotionActive(Boolean(settings.reduceMotion));
@@ -2270,6 +2338,11 @@ document.addEventListener("DOMContentLoaded", function() {
             updateProgress(letterSpacingItem, -1);
             setControlActiveState(letterSpacingItem, false);
         }
+
+        const dyslexiaFontItem = document.querySelector('#font-dyslexia');
+        const dyslexiaActive = Boolean(docElement.dataset.accDyslexiaFont);
+        setControlActiveState(dyslexiaFontItem, dyslexiaActive);
+        updateProgress(dyslexiaFontItem, -1);
 
         syncTextAlignUI();
 
