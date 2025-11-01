@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.18] - 2025-12-08
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Synced the accessibility tools grid padding with the scrollbar width so the navigation column stays visually centred even when the vertical scrollbar is visible.
+
+### Removed
+- None.
+
 # [1.5.17] - 2025-12-07
 
 ### Added

@@ -1451,6 +1451,9 @@ const accessibilityMenuStyles = `
 
     #accessibility-modal #accessibility-tools {
       scrollbar-width: thin;
+      /* Reserve horizontal space so the scrollbar doesn't offset the grid content. */
+      --acc-scrollbar-width: 0px;
+      padding-right: calc(1.5rem + var(--acc-scrollbar-width, 0px));
     }
 
     #accessibility-modal #accessibility-tools::-webkit-scrollbar {
@@ -3284,6 +3287,34 @@ document.addEventListener("DOMContentLoaded", function() {
     const accessibilityModal = document.getElementById('accessibility-modal');
     const closeBtn = document.getElementById('closeBtn');
     const accessibilityTools = document.getElementById('accessibility-tools');
+
+    const applyAccessibilityToolsScrollbarPadding = () => {
+        if (!accessibilityTools) {
+            return;
+        }
+
+        const scrollbarWidth = accessibilityTools.offsetWidth - accessibilityTools.clientWidth;
+        const resolvedWidth = scrollbarWidth > 0 ? scrollbarWidth : 0;
+
+        // Store the computed width in a CSS variable so Tailwind's px-6 padding
+        // can expand and keep the grid visually centred beside the navigation column.
+        accessibilityTools.style.setProperty('--acc-scrollbar-width', `${resolvedWidth}px`);
+    };
+
+    applyAccessibilityToolsScrollbarPadding();
+
+    if (accessibilityTools) {
+        if (typeof ResizeObserver !== 'undefined') {
+            const toolsResizeObserver = new ResizeObserver(() => {
+                applyAccessibilityToolsScrollbarPadding();
+            });
+
+            toolsResizeObserver.observe(accessibilityTools);
+            accessibilityTools.__accToolsResizeObserver = toolsResizeObserver;
+        } else {
+            window.addEventListener('resize', applyAccessibilityToolsScrollbarPadding);
+        }
+    }
     const headingTitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.title"]') : null;
     const headingSubtitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.subtitle"]') : null;
     const languageSelectElement = document.getElementById('acc-language-select');
