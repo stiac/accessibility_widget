@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.24] - 2025-12-14
+
+### Added
+- None.
+
+### Changed
+- Replaced the close toggle icon with a consistent "X" glyph so it no longer switches to directional chevrons when the widget alignment changes.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.23] - 2025-12-13
 
 ### Added
