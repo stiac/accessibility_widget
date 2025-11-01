@@ -2023,13 +2023,33 @@ const accessibilityMenuHTML = `
       <!--accessibility modal footer-->
       <div id="acc-footer" class="flex flex-col gap-4 border-t border-slate-900/10 bg-white/90 px-6 py-5 shadow-inner shadow-slate-900/5">
 
-        <!--reset all-->
-        <button id="reset-all" class="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold shadow-lg shadow-slate-900/30 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.resetAll.label">
-          Reset All
-        </button>
-
         <!--change positions-->
-        <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
+        <div
+          id="change-positions"
+          class="grid grid-cols-2 gap-3 sm:grid-cols-3"
+        ><!-- Arrange the docking buttons so their visual layout mirrors the widget corners. -->
+          <button
+            id="align-acc-top-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top-left corner"
+            title="Dock widget to the top-left corner"
+            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
+                fill="currentColor"
+                transform="rotate(45 12 12)"
+              />
+            </svg></button>
           <button
             id="align-acc-top"
             type="button"
@@ -2052,13 +2072,13 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-top-left"
+            id="align-acc-top-right"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
-            aria-label="Dock widget to the top-left corner"
-            title="Dock widget to the top-left corner"
-            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
+            aria-label="Dock widget to the top-right corner"
+            title="Dock widget to the top-right corner"
+            data-i18n-attr="aria-label:controls.position.topRight, title:controls.position.topRight"
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -2068,7 +2088,29 @@ const accessibilityMenuHTML = `
               aria-hidden="true"
             >
               <path
-                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
+                d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
+                fill="currentColor"
+                transform="rotate(-45 12 12)"
+              />
+            </svg></button>
+          <button
+            id="align-acc-bottom-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom-left corner"
+            title="Dock widget to the bottom-left corner"
+            data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
                 fill="currentColor"
                 transform="rotate(45 12 12)"
               />
@@ -2095,28 +2137,6 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-bottom-left"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the bottom-left corner"
-            title="Dock widget to the bottom-left corner"
-            data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
-                fill="currentColor"
-                transform="rotate(45 12 12)"
-              />
-            </svg></button>
-          <button
             id="align-acc-bottom-right"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
@@ -2138,29 +2158,12 @@ const accessibilityMenuHTML = `
                 transform="rotate(-45 12 12)"
               />
             </svg></button>
-          <button
-            id="align-acc-top-right"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the top-right corner"
-            title="Dock widget to the top-right corner"
-            data-i18n-attr="aria-label:controls.position.topRight, title:controls.position.topRight"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
-                fill="currentColor"
-                transform="rotate(-45 12 12)"
-              />
-            </svg></button>
         </div>
+
+        <!--reset all-->
+        <button id="reset-all" class="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold shadow-lg shadow-slate-900/30 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.resetAll.label">
+          Reset All
+        </button>
         <p id="acc-language-announcement" class="acc-sr-only" aria-live="polite" role="status"></p>
         <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500" role="note" aria-label="Software protetto da Stiac Web Services">
           <strong class="block text-xs tracking-[0.35em] text-slate-600">Stiac Web Services</strong>

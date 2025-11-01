@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.21`
+- **Current Version:** `1.5.22`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.22
+
+- Re-arranged the Change Positions controls into a spatial grid and parked the Reset button at the bottom of the footer so users can scan the dock options before reaching destructive actions.
 
 ## What's New in 1.5.21
 

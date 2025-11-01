@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.22] - 2025-12-12
+
+### Added
+- None.
+
+### Changed
+- Reordered the Change Positions controls into a logical grid that mirrors each docking corner before presenting the Reset All action.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.21] - 2025-12-11
 
 ### Added
