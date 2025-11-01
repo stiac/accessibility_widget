@@ -2031,28 +2031,6 @@ const accessibilityMenuHTML = `
         <!--change positions-->
         <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
           <button
-            id="align-acc-top-left"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the top-left corner"
-            title="Dock widget to the top-left corner"
-            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
-                fill="currentColor"
-                transform="rotate(-45 12 12)"
-              />
-            </svg></button>
-          <button
             id="align-acc-top"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
@@ -2071,6 +2049,28 @@ const accessibilityMenuHTML = `
               <path
                 d="M4.47 10.53a.75.75 0 0 0 1.06 0L9.25 6.81V19a.75.75 0 0 0 1.5 0V6.81l3.72 3.72a.75.75 0 1 0 1.06-1.06l-5-5a.75.75 0 0 0-1.06 0l-5 5a.75.75 0 0 0 0 1.06Z"
                 fill="currentColor"
+              />
+            </svg></button>
+          <button
+            id="align-acc-top-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top-left corner"
+            title="Dock widget to the top-left corner"
+            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
+                fill="currentColor"
+                transform="rotate(45 12 12)"
               />
             </svg></button>
           <button
