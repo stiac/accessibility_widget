@@ -1,16 +1,18 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.19
+- **Version**: 1.5.20
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-09
+- **Last Update**: 2025-12-10
 
 ## Module Status
 - **Menu Rendering**: Completed
 - **Control Handlers**: Completed (refreshed in v1.3.0)
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
+
 ## Recent Activities
+- 2025-12-10 — Hard-set the accessibility tools container to a 0.9rem right padding so it lines up with the navigation even when a scrollbar is visible (AI assistant)
 - 2025-12-09 — Re-triggered the scrollbar-aware padding logic when reopening the widget so the tools grid remains centred after toggling from the launcher (AI assistant)
 - 2025-12-08 — Reserved additional right padding inside the accessibility tools grid so the navigation column stays visually centred when the scrollbar appears (AI assistant)
 - 2025-12-07 — Defaulted header and active control text datasets to white so scripts inherit accessible typography without manual overrides (AI assistant)

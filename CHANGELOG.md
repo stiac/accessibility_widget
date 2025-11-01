@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.20] - 2025-12-10
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Set a constant 0.9rem right padding on `#accessibility-tools` so the grid remains centred beside the navigation even when the scrollbar renders.
+
+### Removed
+- None.
+
 # [1.5.19] - 2025-12-09
 
 ### Added
