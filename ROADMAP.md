@@ -7,6 +7,8 @@
 - Introduce a lightweight lint/check step to catch syntax errors before publishing script updates.
 - Add a smoke test ensuring the modal's baseline font variables keep widget UI elements excluded from global font-size scaling routines.
 - Add regression coverage to ensure the embedded OpenDyslexic data URIs load reliably and surface graceful fallbacks if fonts are blocked locally.
+- Add automated checks that confirm each locale JSON file exposes all `data-i18n` keys and passes basic plural/interpolation tests.
+- Add integration coverage ensuring the locale loader falls back to the host site's `/locales` directory when scripts load from a CDN without CORS headers.
 
 ## Mid Term
 - Offer configuration API for customizing control order and visibility without editing source.

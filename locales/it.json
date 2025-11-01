@@ -1,0 +1,87 @@
+{
+  "language": {
+    "code": "it",
+    "name": "Italiano",
+    "selectorLabel": "Lingua",
+    "selectorDescription": "Scegli la lingua utilizzata per l'interfaccia degli strumenti di accessibilità.",
+    "announcement": "Lingua impostata su {{language}}."
+  },
+  "controls": {
+    "panelToggle": {
+      "ariaLabel": "Apri o chiudi il pannello di accessibilità"
+    },
+    "heading": {
+      "title": "Strumenti di Accessibilità",
+      "subtitle": "Personalizza colori, tipografia e aiuti al focus con un'interfaccia aggiornata."
+    },
+    "invertColours": {
+      "label": "Inverti Colori"
+    },
+    "grayscale": {
+      "label": "Scala di grigi"
+    },
+    "lowSaturation": {
+      "label": "Bassa Saturazione"
+    },
+    "linksHighlight": {
+      "label": "Evidenzia Link"
+    },
+    "fontSize": {
+      "label": "Dimensione Testo"
+    },
+    "lineHeight": {
+      "label": "Interlinea"
+    },
+    "letterSpacing": {
+      "label": "Spaziatura Lettere"
+    },
+    "fontDyslexia": {
+      "label": "Font per Dislessia",
+      "description": "Attiva un set di caratteri adatto alla dislessia sull'intera pagina senza modificare il menu di accessibilità."
+    },
+    "textAlign": {
+      "label": "Allineamento Testo",
+      "description": "Scegli come allineare il testo nella pagina. Clicca più volte per scorrere le opzioni disponibili; dopo l'ultima, l'allineamento torna al valore del sito.",
+      "status": {
+        "start": "il margine iniziale",
+        "center": "il centro",
+        "end": "il margine finale",
+        "justify": "la giustificazione completa",
+        "reset": "l'allineamento predefinito del sito"
+      }
+    },
+    "contrast": {
+      "label": "Contrasto"
+    },
+    "hideImages": {
+      "label": "Nascondi Immagini"
+    },
+    "hideVideo": {
+      "label": "Nascondi Video"
+    },
+    "reduceMotion": {
+      "label": "Riduci Animazioni",
+      "description": "Blocca automaticamente animazioni, lampeggi e contenuti in movimento presenti nella pagina."
+    },
+    "changeCursors": {
+      "label": "Cambia Cursori"
+    },
+    "resetAll": {
+      "label": "Reimposta Tutto"
+    }
+  },
+  "announcements": {
+    "textAlign": {
+      "set": "Allineamento del testo impostato su {{value}}.",
+      "reset": "Allineamento del testo ripristinato al valore predefinito del sito."
+    }
+  },
+  "languageNames": {
+    "en": "Inglese",
+    "it": "Italiano",
+    "fr": "Francese",
+    "de": "Tedesco",
+    "es": "Spagnolo",
+    "pt": "Portoghese"
+  }
+}

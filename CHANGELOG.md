@@ -1,4 +1,33 @@
 # Changelog
+## [1.5.1] - 2025-11-21
+
+### Added
+- Documented locale hosting strategies so integrators understand how to point the loader at same-origin bundles or override the lookup path when required.
+
+### Changed
+- None.
+
+### Fixed
+- Adjusted the locale fetcher to fall back to the embedding site's `/locales` directory when the script origin differs from the page origin, resolving CDN-driven CORS errors such as blocked requests to `https://cnd.stiac.it/.../locales/<lang>.json`.
+
+### Removed
+- None.
+## [1.5.0] - 2025-11-20
+
+### Added
+- Delivered a standalone `i18n.js` helper that loads JSON locale files asynchronously, persists language choices, updates `<html lang>`, and emits polite announcements through a shared live region.
+- Bundled six locale JSON files (English, Italian, French, German, Spanish, Portuguese) together with a scalable directory structure for future languages.
+- Injected a keyboard-accessible language selector inside the widget so visitors can switch languages without leaving the panel.
+
+### Changed
+- Replaced hard-coded copy with `data-i18n`/`data-i18n-attr` hooks across the interface so translations are applied consistently and ARIA labels localise automatically.
+- Synced text-alignment announcements, headings, and helper descriptions with the active locale while keeping script-level heading overrides intact.
+
+### Fixed
+- Ensured text-alignment status updates reuse translated strings so screen readers hear announcements in the selected language.
+
+### Removed
+- None.
 ## [1.4.27] - 2025-11-19
 
 ### Added
