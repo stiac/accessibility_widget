@@ -1,0 +1,95 @@
+{
+  "language": {
+    "code": "es",
+    "name": "Español",
+    "selectorLabel": "Idioma",
+    "selectorDescription": "Elija el idioma utilizado para la interfaz de las herramientas de accesibilidad.",
+    "announcement": "Idioma cambiado a {{language}}."
+  },
+  "controls": {
+    "panelToggle": {
+      "ariaLabel": "Abrir o cerrar el panel de accesibilidad"
+    },
+    "heading": {
+      "title": "Herramientas de accesibilidad",
+      "subtitle": "Ajuste colores, tipografía y ayudas de enfoque con una interfaz renovada."
+    },
+    "invertColours": {
+      "label": "Invertir colores"
+    },
+    "grayscale": {
+      "label": "Escala de grises"
+    },
+    "lowSaturation": {
+      "label": "Baja saturación"
+    },
+    "linksHighlight": {
+      "label": "Resaltar enlaces"
+    },
+    "fontSize": {
+      "label": "Tamaño de letra"
+    },
+    "lineHeight": {
+      "label": "Altura de línea"
+    },
+    "letterSpacing": {
+      "label": "Espaciado entre letras"
+    },
+    "fontDyslexia": {
+      "label": "Tipografía para dislexia",
+      "description": "Activa una tipografía apta para dislexia en toda la página sin modificar el menú de accesibilidad."
+    },
+    "textAlign": {
+      "label": "Alineación del texto",
+      "description": "Elija cómo debe alinearse el texto en la página. Pulse repetidamente para recorrer las opciones disponibles; después de la última, la alineación vuelve al valor predeterminado del sitio.",
+      "status": {
+        "start": "el borde inicial",
+        "center": "el centro",
+        "end": "el borde final",
+        "justify": "la justificación completa",
+        "reset": "la alineación predeterminada del sitio"
+      }
+    },
+    "contrast": {
+      "label": "Contraste"
+    },
+    "hideImages": {
+      "label": "Ocultar imágenes"
+    },
+    "hideVideo": {
+      "label": "Ocultar vídeos"
+    },
+    "reduceMotion": {
+      "label": "Reducir movimiento",
+      "description": "Detiene automáticamente las animaciones, los destellos y los contenidos en movimiento de la página."
+    },
+    "changeCursors": {
+      "label": "Cambiar cursores"
+    },
+    "resetAll": {
+      "label": "Restablecer todo"
+    },
+    "position": {
+      "left": "Anclar el widget al borde izquierdo",
+      "top": "Anclar el widget al borde superior",
+      "bottom": "Anclar el widget al borde inferior",
+      "bottomLeft": "Anclar el widget a la esquina inferior izquierda",
+      "bottomRight": "Anclar el widget a la esquina inferior derecha",
+      "right": "Anclar el widget al borde derecho"
+    }
+  },
+  "announcements": {
+    "textAlign": {
+      "set": "Alineación del texto establecida en {{value}}.",
+      "reset": "Alineación del texto restablecida al valor predeterminado del sitio."
+    }
+  },
+  "languageNames": {
+    "en": "Inglés",
+    "it": "Italiano",
+    "fr": "Francés",
+    "de": "Alemán",
+    "es": "Español",
+    "pt": "Portugués"
+  }
+}

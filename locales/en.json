@@ -1,0 +1,95 @@
+{
+  "language": {
+    "code": "en",
+    "name": "English",
+    "selectorLabel": "Language",
+    "selectorDescription": "Choose the language used for the accessibility tools interface.",
+    "announcement": "Language changed to {{language}}."
+  },
+  "controls": {
+    "panelToggle": {
+      "ariaLabel": "Toggle accessibility panel"
+    },
+    "heading": {
+      "title": "Accessibility Tools",
+      "subtitle": "Fine-tune colours, typography and focus helpers with a refreshed look."
+    },
+    "invertColours": {
+      "label": "Invert Colours"
+    },
+    "grayscale": {
+      "label": "Grayscale"
+    },
+    "lowSaturation": {
+      "label": "Low Saturation"
+    },
+    "linksHighlight": {
+      "label": "Links Highlight"
+    },
+    "fontSize": {
+      "label": "Font Size"
+    },
+    "lineHeight": {
+      "label": "Line Height"
+    },
+    "letterSpacing": {
+      "label": "Letter Spacing"
+    },
+    "fontDyslexia": {
+      "label": "Font Dyslexia",
+      "description": "Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu."
+    },
+    "textAlign": {
+      "label": "Text Align",
+      "description": "Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.",
+      "status": {
+        "start": "the start edge",
+        "center": "the center",
+        "end": "the end edge",
+        "justify": "full justification",
+        "reset": "the site default alignment"
+      }
+    },
+    "contrast": {
+      "label": "Contrast"
+    },
+    "hideImages": {
+      "label": "Hide Image"
+    },
+    "hideVideo": {
+      "label": "Hide Video"
+    },
+    "reduceMotion": {
+      "label": "Reduce Motion",
+      "description": "Stop animated, blinking, and flashing visuals from playing automatically across the page."
+    },
+    "changeCursors": {
+      "label": "Change Cursors"
+    },
+    "resetAll": {
+      "label": "Reset All"
+    },
+    "position": {
+      "left": "Dock widget to the left edge",
+      "top": "Dock widget to the top edge",
+      "bottom": "Dock widget to the bottom edge",
+      "bottomLeft": "Dock widget to the bottom-left corner",
+      "bottomRight": "Dock widget to the bottom-right corner",
+      "right": "Dock widget to the right edge"
+    }
+  },
+  "announcements": {
+    "textAlign": {
+      "set": "Text alignment set to {{value}}.",
+      "reset": "Text alignment restored to the site default."
+    }
+  },
+  "languageNames": {
+    "en": "English",
+    "it": "Italian",
+    "fr": "French",
+    "de": "German",
+    "es": "Spanish",
+    "pt": "Portuguese"
+  }
+}

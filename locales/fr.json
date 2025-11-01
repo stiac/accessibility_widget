@@ -1,0 +1,95 @@
+{
+  "language": {
+    "code": "fr",
+    "name": "Français",
+    "selectorLabel": "Langue",
+    "selectorDescription": "Choisissez la langue utilisée pour l'interface des outils d'accessibilité.",
+    "announcement": "Langue changée en {{language}}."
+  },
+  "controls": {
+    "panelToggle": {
+      "ariaLabel": "Ouvrir ou fermer le panneau d'accessibilité"
+    },
+    "heading": {
+      "title": "Outils d'accessibilité",
+      "subtitle": "Ajustez couleurs, typographie et aides au focus avec une nouvelle interface."
+    },
+    "invertColours": {
+      "label": "Inverser les couleurs"
+    },
+    "grayscale": {
+      "label": "Niveaux de gris"
+    },
+    "lowSaturation": {
+      "label": "Faible saturation"
+    },
+    "linksHighlight": {
+      "label": "Mettre les liens en évidence"
+    },
+    "fontSize": {
+      "label": "Taille de police"
+    },
+    "lineHeight": {
+      "label": "Interligne"
+    },
+    "letterSpacing": {
+      "label": "Espacement des lettres"
+    },
+    "fontDyslexia": {
+      "label": "Police dyslexie",
+      "description": "Activez une police adaptée à la dyslexie sur toute la page sans modifier le menu d'accessibilité."
+    },
+    "textAlign": {
+      "label": "Alignement du texte",
+      "description": "Choisissez l'alignement du texte sur la page. Cliquez plusieurs fois pour parcourir les options; après la dernière, l'alignement revient à celui du site.",
+      "status": {
+        "start": "le bord de début",
+        "center": "le centre",
+        "end": "le bord de fin",
+        "justify": "la justification complète",
+        "reset": "l'alignement par défaut du site"
+      }
+    },
+    "contrast": {
+      "label": "Contraste"
+    },
+    "hideImages": {
+      "label": "Masquer les images"
+    },
+    "hideVideo": {
+      "label": "Masquer les vidéos"
+    },
+    "reduceMotion": {
+      "label": "Réduire les animations",
+      "description": "Arrête automatiquement les animations, clignotements et effets en mouvement sur la page."
+    },
+    "changeCursors": {
+      "label": "Changer les curseurs"
+    },
+    "resetAll": {
+      "label": "Tout réinitialiser"
+    },
+    "position": {
+      "left": "Épingler le widget au bord gauche",
+      "top": "Épingler le widget au bord supérieur",
+      "bottom": "Épingler le widget au bord inférieur",
+      "bottomLeft": "Épingler le widget dans le coin inférieur gauche",
+      "bottomRight": "Épingler le widget dans le coin inférieur droit",
+      "right": "Épingler le widget au bord droit"
+    }
+  },
+  "announcements": {
+    "textAlign": {
+      "set": "Alignement du texte défini sur {{value}}.",
+      "reset": "Alignement du texte rétabli sur la valeur par défaut du site."
+    }
+  },
+  "languageNames": {
+    "en": "Anglais",
+    "it": "Italien",
+    "fr": "Français",
+    "de": "Allemand",
+    "es": "Espagnol",
+    "pt": "Portugais"
+  }
+}

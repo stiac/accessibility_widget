@@ -1,0 +1,95 @@
+{
+  "language": {
+    "code": "de",
+    "name": "Deutsch",
+    "selectorLabel": "Sprache",
+    "selectorDescription": "Wählen Sie die Sprache für die Oberfläche der Barrierefreiheits-Werkzeuge.",
+    "announcement": "Sprache auf {{language}} geändert."
+  },
+  "controls": {
+    "panelToggle": {
+      "ariaLabel": "Barrierefreiheitsmenü ein- oder ausblenden"
+    },
+    "heading": {
+      "title": "Barrierefreiheits-Werkzeuge",
+      "subtitle": "Optimieren Sie Farben, Typografie und Fokus-Hilfen mit einer überarbeiteten Oberfläche."
+    },
+    "invertColours": {
+      "label": "Farben invertieren"
+    },
+    "grayscale": {
+      "label": "Graustufen"
+    },
+    "lowSaturation": {
+      "label": "Geringe Sättigung"
+    },
+    "linksHighlight": {
+      "label": "Links hervorheben"
+    },
+    "fontSize": {
+      "label": "Schriftgröße"
+    },
+    "lineHeight": {
+      "label": "Zeilenhöhe"
+    },
+    "letterSpacing": {
+      "label": "Zeichenabstand"
+    },
+    "fontDyslexia": {
+      "label": "Schrift für Dyslexie",
+      "description": "Aktiviert eine dyslexiefreundliche Schrift auf der gesamten Seite, ohne das Barrierefreiheitsmenü zu verändern."
+    },
+    "textAlign": {
+      "label": "Textausrichtung",
+      "description": "Wählen Sie, wie der Text auf der Seite ausgerichtet wird. Klicken Sie wiederholt, um alle Optionen zu durchlaufen; nach der letzten kehrt die Ausrichtung zum Seitenstandard zurück.",
+      "status": {
+        "start": "den Anfangsrand",
+        "center": "die Mitte",
+        "end": "den Endrand",
+        "justify": "den Blocksatz",
+        "reset": "die Standardausrichtung der Seite"
+      }
+    },
+    "contrast": {
+      "label": "Kontrast"
+    },
+    "hideImages": {
+      "label": "Bilder ausblenden"
+    },
+    "hideVideo": {
+      "label": "Videos ausblenden"
+    },
+    "reduceMotion": {
+      "label": "Bewegungen reduzieren",
+      "description": "Stoppt automatisch Animationen, Blinken und bewegte Inhalte auf der Seite."
+    },
+    "changeCursors": {
+      "label": "Cursor ändern"
+    },
+    "resetAll": {
+      "label": "Alles zurücksetzen"
+    },
+    "position": {
+      "left": "Widget am linken Rand andocken",
+      "top": "Widget am oberen Rand andocken",
+      "bottom": "Widget am unteren Rand andocken",
+      "bottomLeft": "Widget in der unteren linken Ecke andocken",
+      "bottomRight": "Widget in der unteren rechten Ecke andocken",
+      "right": "Widget am rechten Rand andocken"
+    }
+  },
+  "announcements": {
+    "textAlign": {
+      "set": "Textausrichtung auf {{value}} gesetzt.",
+      "reset": "Textausrichtung auf die Standardwerte der Seite zurückgesetzt."
+    }
+  },
+  "languageNames": {
+    "en": "Englisch",
+    "it": "Italienisch",
+    "fr": "Französisch",
+    "de": "Deutsch",
+    "es": "Spanisch",
+    "pt": "Portugiesisch"
+  }
+}
