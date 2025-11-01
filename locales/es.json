@@ -72,6 +72,8 @@
     "position": {
       "left": "Anclar el widget al borde izquierdo",
       "top": "Anclar el widget al borde superior",
+      "topLeft": "Anclar el widget a la esquina superior izquierda",
+      "topRight": "Anclar el widget a la esquina superior derecha",
       "bottom": "Anclar el widget al borde inferior",
       "bottomLeft": "Anclar el widget a la esquina inferior izquierda",
       "bottomRight": "Anclar el widget a la esquina inferior derecha",

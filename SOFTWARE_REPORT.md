@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.16
+- **Version**: 1.5.17
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-06
+- **Last Update**: 2025-12-07
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,6 +11,7 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 ## Recent Activities
+- 2025-12-07 — Realigned the Change Position top-corner controls by renaming the IDs, fixing the arrow rotations, and localising the new labels across all bundled languages (AI assistant)
 - 2025-12-06 — Corrected the default close/reset palette and extended hover styling so grouped cards and icons follow the configured blue/white scheme (AI assistant)
 - 2025-12-05 — Split the header and active card palettes into dedicated dataset-controlled variables and refreshed the default blue/white styling for higher contrast (AI assistant)
 - 2025-12-04 — Forced the Change Positions icons to render as block-level SVGs so they stay centered within their buttons (AI assistant)
