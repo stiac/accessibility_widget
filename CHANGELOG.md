@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.11] - 2025-12-01
+
+### Added
+- Introduced `data-color-button-hover`, `data-color-text`, and `data-color-header-text` attributes so integrators can tailor hover backgrounds and typography without editing the bundle.
+
+### Changed
+- Refactored the header banner, buttons, and icons to honour the configured palette with contrast-aware hover defaults derived from `data-color-button-active`.
+
+### Fixed
+- Ensured the header background and control icons now follow `data-color-button-active`/`data-color-button`, keeping branding colours consistent across the widget.
+
+### Removed
+- None.
+
 # [1.5.10] - 2025-11-30
 
 ### Added
