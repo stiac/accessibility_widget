@@ -1105,12 +1105,15 @@ const openDyslexicBoldDataUri =
 
 const accessibilityMenuStyles = `
     :root {
-      --acc_color_1: #0f172a;
+      --acc_color_1: #036cff;
       --acc_color_2: #f8fafc;
-      --acc_hover_color: #1c2c4d;
+      --acc_hover_color: #1f5dff;
       --acc_hover_text_color: #f8fafc;
       --acc_text_color: rgba(15, 23, 42, 0.85);
-      --acc_header_text_color: #f8fafc;
+      --acc_header_bg_color: #036cff;
+      --acc_header_text_color: #ffffff;
+      --acc_control_active_bg_color: #036cff;
+      --acc_control_active_text_color: #ffffff;
       --border_radius: 24px;
       --acc-font-scale: 1;
     }
@@ -1479,15 +1482,21 @@ const accessibilityMenuStyles = `
     }
 
     .acc-child.active {
-      background: var(--acc_color_1);
-      color: var(--acc_header_text_color);
+      background: var(--acc_control_active_bg_color);
+      color: var(--acc_control_active_text_color);
       border-color: transparent;
     }
 
     .acc-child:not(.active):hover,
-    .acc-child.active:hover {
+    .acc-child.active:hover,
+    .acc-item.group:hover .acc-child {
       background: var(--acc_hover_color);
       color: var(--acc_hover_text_color);
+    }
+
+    .acc-item.group:hover .acc-child svg {
+      color: inherit;
+      fill: currentColor;
     }
 
     .acc-progress-parent {
@@ -1510,7 +1519,7 @@ const accessibilityMenuStyles = `
     }
 
     #headerContent {
-      background: var(--acc_color_1) !important;
+      background: var(--acc_header_bg_color) !important;
       color: var(--acc_header_text_color) !important;
     }
 
@@ -1519,7 +1528,7 @@ const accessibilityMenuStyles = `
     }
 
     #closeBtn {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
@@ -1536,7 +1545,7 @@ const accessibilityMenuStyles = `
     }
 
     #reset-all {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
@@ -1565,7 +1574,7 @@ const accessibilityMenuStyles = `
     }
 
     #change-positions button.active {
-      background: var(--acc_color_1);
+      background: var(--acc_header_bg_color);
       color: var(--acc_header_text_color);
       box-shadow: none;
     }
@@ -2161,11 +2170,14 @@ function resolveWidgetScriptConfig() {
     const defaults = {
         defaultLanguage: 'en',
         mode: 'production',
-        colorButtonActive: '#0f172a',
+        colorButtonActive: '#036cff',
         colorButton: '#f8fafc',
         colorButtonHover: '',
         colorText: '',
+        colorHeaderBackground: '',
         colorHeaderText: '',
+        colorControlActive: '',
+        colorControlActiveText: '',
         voce1: '',
         voce2: '',
         localesPath: '',
@@ -2230,8 +2242,20 @@ function resolveWidgetScriptConfig() {
         config.colorText = script.dataset.colorText.trim();
     }
 
+    if (typeof script.dataset.colorHeaderBackground === 'string' && script.dataset.colorHeaderBackground.trim()) {
+        config.colorHeaderBackground = script.dataset.colorHeaderBackground.trim();
+    }
+
     if (typeof script.dataset.colorHeaderText === 'string' && script.dataset.colorHeaderText.trim()) {
         config.colorHeaderText = script.dataset.colorHeaderText.trim();
+    }
+
+    if (typeof script.dataset.colorControlActive === 'string' && script.dataset.colorControlActive.trim()) {
+        config.colorControlActive = script.dataset.colorControlActive.trim();
+    }
+
+    if (typeof script.dataset.colorControlActiveText === 'string' && script.dataset.colorControlActiveText.trim()) {
+        config.colorControlActiveText = script.dataset.colorControlActiveText.trim();
     }
 
     if (typeof script.dataset.voce1 === 'string' && script.dataset.voce1.trim()) {
@@ -3182,23 +3206,39 @@ function ensureTailwindCSSLoaded() {
 document.addEventListener("DOMContentLoaded", function() {
 
     const resolvedColors = {
-        active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#0f172a'),
+        active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#036cff'),
         inactive: sanitiseWidgetColor(widgetScriptConfig.colorButton, '#f8fafc')
     };
 
     const hoverPreference = sanitiseWidgetColor(widgetScriptConfig.colorButtonHover, null);
     const textPreference = sanitiseWidgetColor(widgetScriptConfig.colorText, null);
+    const headerBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderBackground, null);
     const headerTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorHeaderText, null);
-    const hoverColor = hoverPreference || deriveHoverColor(resolvedColors.active) || resolvedColors.active;
+    const controlActiveBackgroundPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActive, null);
+    const controlActiveTextPreference = sanitiseWidgetColor(widgetScriptConfig.colorControlActiveText, null);
+    const headerBackgroundColor = headerBackgroundPreference || '#036cff';
     const textColor = textPreference || 'rgba(15, 23, 42, 0.85)';
+    const controlActiveBackgroundColor = controlActiveBackgroundPreference || headerBackgroundColor;
     const headerTextColor = headerTextPreference
-        || deriveReadableTextColor(resolvedColors.active, [
+        || deriveReadableTextColor(headerBackgroundColor, [
             textPreference,
             resolvedColors.inactive,
             '#ffffff',
             '#000000',
             textColor
         ]);
+    const controlActiveTextColor = controlActiveTextPreference
+        || deriveReadableTextColor(controlActiveBackgroundColor, [
+            headerTextPreference,
+            headerTextColor,
+            resolvedColors.inactive,
+            textColor,
+            '#ffffff',
+            '#000000'
+        ]);
+    const hoverColor = hoverPreference
+        || deriveHoverColor(controlActiveBackgroundColor)
+        || controlActiveBackgroundColor;
     const hoverTextColor = deriveReadableTextColor(hoverColor, [
         headerTextPreference,
         headerTextColor,
@@ -3214,7 +3254,10 @@ document.addEventListener("DOMContentLoaded", function() {
         document.documentElement.style.setProperty('--acc_hover_color', hoverColor);
         document.documentElement.style.setProperty('--acc_hover_text_color', hoverTextColor);
         document.documentElement.style.setProperty('--acc_text_color', textColor);
+        document.documentElement.style.setProperty('--acc_header_bg_color', headerBackgroundColor);
         document.documentElement.style.setProperty('--acc_header_text_color', headerTextColor);
+        document.documentElement.style.setProperty('--acc_control_active_bg_color', controlActiveBackgroundColor);
+        document.documentElement.style.setProperty('--acc_control_active_text_color', controlActiveTextColor);
     }
 
     ensureTailwindCSSLoaded();
@@ -3583,12 +3626,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const resetAllButton = document.getElementById('reset-all');
     if (resetAllButton) {
-        resetAllButton.style.backgroundColor = resolvedColors.active;
+        resetAllButton.style.backgroundColor = headerBackgroundColor;
         resetAllButton.style.color = headerTextColor;
     }
 
     if (closeBtn) {
-        closeBtn.style.backgroundColor = resolvedColors.active;
+        closeBtn.style.backgroundColor = headerBackgroundColor;
         closeBtn.style.color = headerTextColor;
     }
 
