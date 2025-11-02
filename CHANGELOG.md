@@ -1,4 +1,17 @@
 # Changelog
+# [1.5.30] - 2025-12-20
+
+### Added
+- None.
+
+### Changed
+- Switched the default accessibility modal docking point to the bottom-left corner to match the launcher placement used on most deployments while keeping script attributes for custom overrides.
+
+### Fixed
+- None.
+
+### Removed
+- None.
 # [1.5.29] - 2025-12-19
 
 ### Added

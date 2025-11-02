@@ -2206,7 +2206,7 @@ function resolveWidgetScriptConfig() {
         colorHeaderText: '#ffffff',
         colorControlActive: '',
         colorControlActiveText: '#ffffff',
-        defaultPosition: 'bottom',
+        defaultPosition: 'bottom-left',
         voce1: '',
         voce2: '',
         localesPath: '',
@@ -2333,7 +2333,7 @@ function resolveWidgetScriptConfig() {
 }
 
 const widgetScriptConfig = resolveWidgetScriptConfig();
-const DEFAULT_MODAL_POSITION = normalisePositionClass(widgetScriptConfig.defaultPosition, 'bottom');
+const DEFAULT_MODAL_POSITION = normalisePositionClass(widgetScriptConfig.defaultPosition, 'bottom-left');
 
 // Locale bundles embedded directly within the widget so we can serve translations without
 // depending on external JSON requests (useful when CORS is blocked or files cannot be hosted
