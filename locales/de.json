@@ -78,64 +78,6 @@
       "bottomLeft": "Widget in der unteren linken Ecke andocken",
       "bottomRight": "Widget in der unteren rechten Ecke andocken",
       "right": "Widget am rechten Rand andocken"
-    },
-    "status": {
-      "title": "Aktive Werkzeuge",
-      "empty": "Keine Anpassungen aktiv.",
-      "single": "{{count}} Anpassung aktiv.",
-      "multiple": "{{count}} Anpassungen aktiv.",
-      "ariaLabel": "Aktive Anpassungen",
-      "chipAriaLabel": "{{label}} deaktivieren"
-    },
-    "filters": {
-      "searchLabel": "Werkzeug suchen",
-      "searchPlaceholder": "Werkzeuge durchsuchen",
-      "groupLabel": "Werkzeugkategorien filtern",
-      "categories": {
-        "all": "Alle",
-        "vision": "Sehen",
-        "content": "Inhalt",
-        "navigation": "Navigation"
-      },
-      "empty": "Keine Werkzeuge entsprechen deiner Suche. Versuche es mit einem anderen Begriff oder einer Kategorie."
-    },
-    "layout": {
-      "title": "Layout-Optionen",
-      "toggleOpen": "Andock-Steuerung anzeigen",
-      "toggleClose": "Andock-Steuerung verbergen"
-    },
-    "favorites": {
-      "title": "Schnellzugriff",
-      "clear": "Leeren",
-      "activate": "{{label}} ein-/ausschalten"
-    },
-    "details": {
-      "persistence": "Deine Auswahl wird für zukünftige Besuche gespeichert, sofern Speicher verfügbar ist.",
-      "previewHeading": "Vorschau",
-      "open": "Mehr über dieses Werkzeug erfahren",
-      "statusActive": "Aktiv",
-      "statusInactive": "Inaktiv"
-    },
-    "sections": {
-      "vision": "Sehen",
-      "content": "Inhalt",
-      "navigation": "Navigation"
-    },
-    "descriptions": {
-      "invertColours": "Seitenfarben invertieren, um Blendung zu reduzieren und den Kontrast bei Lichtempfindlichkeit zu erhöhen.",
-      "grayscale": "Farben in Graustufen umwandeln für Leser, die neutrale Töne ohne Ablenkungen bevorzugen.",
-      "lowSaturation": "Zwischen gedämpfter und verstärkter Farbsättigung wechseln, um Fokus oder Sichtbarkeit zu verbessern.",
-      "contrast": "Kontrast erhöhen oder verringern, um ihn dem Umgebungslicht oder deinen Vorlieben anzupassen.",
-      "hideImages": "Dekorative Bilder vorübergehend ausblenden, damit du dich auf den Text konzentrieren kannst.",
-      "hideVideo": "Autostartende oder ablenkende Videos verbergen, bis du sie sehen möchtest.",
-      "reduceMotion": "Animierte Effekte und automatisch abspielende Medien pausieren, um Bewegungsempfindlichkeit vorzubeugen.",
-      "fontSize": "Schriftgröße in kleinen Schritten erhöhen, damit Absätze auf jedem Bildschirm gut lesbar bleiben.",
-      "lineHeight": "Mehr Zeilenabstand hinzufügen, um Leser mit Dyslexie oder Sehschwäche zu unterstützen.",
-      "letterSpacing": "Abstand zwischen Buchstaben vergrößern für bessere Lesbarkeit auf den ersten Blick.",
-      "fontDyslexia": "Zur Schriftart OpenDyslexic wechseln für klar erkennbare Buchstabenformen und entspanntes Lesen.",
-      "textAlign": "Zwischen links, zentriert, rechts und Blocksatz wechseln, ohne CSS zu bearbeiten.",
-      "linksHighlight": "Links mit deutlichen Unterstreichungen und Farben hervorheben, damit Tastatur- und Screenreader-Nutzer schnell scannen können.",
-      "changeCursors": "Zwischen Fokus-, Spotlight- und Leseführungscursor wechseln, um Inhalte beim Navigieren zu verfolgen."
     }
   },
   "announcements": {
