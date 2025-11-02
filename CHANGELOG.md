@@ -1,4 +1,21 @@
 # Changelog
+# [1.6.0] - 2025-12-24
+
+### Added
+- Shipped a standalone `open-dyslexic.css` stylesheet that the widget loads on demand when visitors enable the dyslexia-friendly font.
+- Introduced new script attributes (`data-assets-path`, `data-open-dyslexic-stylesheet`, `data-tailwind`, `data-tailwind-cdn`) so integrators can fine-tune asset hosting and Tailwind loading behaviour without editing the bundle.
+
+### Changed
+- Removed the embedded OpenDyslexic base64 payloads from `accessibility-menu.js` and load the font via CSS to dramatically cut the initial script size.
+- Fetch locale JSON files lazily so only the requested language is downloaded; English remains embedded as the offline fallback.
+- Tailwind CDN injection is now optional and configurable, preventing redundant network requests on hosts that already ship Tailwind.
+
+### Fixed
+- None.
+
+### Removed
+- Bundled non-English locale objects from the JavaScript file since they are now delivered via the on-demand loader.
+
 # [1.5.33] - 2025-12-23
 
 ### Added
