@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.27] - 2025-12-17
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Restore the scrollbar padding helper so opening the accessibility modal no longer throws a `ReferenceError` and the tools grid maintains its intended spacing.
+
+### Removed
+- None.
+
 # [1.5.26] - 2025-12-16
 
 ### Added

@@ -3683,6 +3683,34 @@ document.addEventListener("DOMContentLoaded", function() {
         accessibilityModalOpenCloseToggle();
     });
 
+    function applyAccessibilityToolsScrollbarPadding() {
+        const toolsContainer = document.getElementById('accessibility-tools');
+
+        if (!toolsContainer || typeof window === 'undefined' || typeof window.getComputedStyle !== 'function') {
+            return;
+        }
+
+        const computedStyle = window.getComputedStyle(toolsContainer);
+
+        if (!toolsContainer.dataset.accBasePaddingRight) {
+            const initialPadding = parseFloat(computedStyle.paddingRight);
+            toolsContainer.dataset.accBasePaddingRight = Number.isFinite(initialPadding) ? String(initialPadding) : '0';
+        }
+
+        const basePaddingRight = parseFloat(toolsContainer.dataset.accBasePaddingRight) || 0;
+        const scrollbarWidth = Math.max(toolsContainer.offsetWidth - toolsContainer.clientWidth, 0);
+
+        if (scrollbarWidth > 0) {
+            // Offset the right padding by the scrollbar width so the card grid remains centred.
+            toolsContainer.style.paddingRight = `${basePaddingRight + scrollbarWidth}px`;
+            toolsContainer.dataset.accScrollbarPaddingApplied = 'true';
+        } else if (toolsContainer.dataset.accScrollbarPaddingApplied) {
+            // Reset any inline padding so Tailwind's base spacing is restored when no scrollbar is present.
+            toolsContainer.style.paddingRight = '';
+            delete toolsContainer.dataset.accScrollbarPaddingApplied;
+        }
+    }
+
     function accessibilityModalOpenCloseToggle() {
         const isClosing = accessibilityModal.classList.toggle('close');
         updateCloseButtonIcon();
@@ -3691,6 +3719,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 applyAccessibilityToolsScrollbarPadding();
             });
         }
+    }
+
+    applyAccessibilityToolsScrollbarPadding();
+
+    if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+        window.addEventListener('resize', applyAccessibilityToolsScrollbarPadding);
     }
 
     function getCloseButtonIconMarkup(isClosed) {
