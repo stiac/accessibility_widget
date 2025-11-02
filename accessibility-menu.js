@@ -6,6 +6,7 @@
 // https://raw.githubusercontent.com/antijingoist/open-dyslexic/master/otf/.
 const OPEN_DYSLEXIC_STYLESHEET_ID = 'stiac-accessibility-open-dyslexic';
 const DEFAULT_OPEN_DYSLEXIC_STYLESHEET = 'open-dyslexic.css';
+const DEFAULT_TAILWIND_STYLESHEET = 'accessibility-tailwind.css';
 let openDyslexicStylesheetPromise = null;
 
 const accessibilityMenuStyles = `
@@ -1108,7 +1109,7 @@ function resolveWidgetScriptConfig() {
         assetBasePath: '',
         openDyslexicStylesheet: '',
         injectTailwind: true,
-        tailwindStylesheet: 'accessibility-tailwind.css',
+        tailwindStylesheet: '',
         tailwindCdnUrl: '',
         translateLanguageNames: false,
         preserveLanguageIcons: false,
@@ -1310,7 +1311,7 @@ function resolveTailwindAsset() {
             return { type: 'link', href: stylesheetPreference };
         }
         const basePath = widgetScriptConfig.assetBasePath || '';
-        const resolvedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+        const resolvedBase = basePath && !basePath.endsWith('/') ? `${basePath}/` : basePath;
         return { type: 'link', href: `${resolvedBase}${stylesheetPreference}` };
     }
 
@@ -1322,7 +1323,9 @@ function resolveTailwindAsset() {
         return { type: isStylesheet ? 'link' : 'script', href: cdnPreference };
     }
 
-    return null;
+    const basePath = widgetScriptConfig.assetBasePath || '';
+    const resolvedBase = basePath && !basePath.endsWith('/') ? `${basePath}/` : basePath;
+    return { type: 'link', href: `${resolvedBase}${DEFAULT_TAILWIND_STYLESHEET}` };
 }
 
 function ensureOpenDyslexicStylesheet() {
