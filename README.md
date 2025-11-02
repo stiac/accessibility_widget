@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.32`
+- **Current Version:** `1.5.33`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.33
+
+- Updated the footer badge to display a lowercase "powered by stiac web services" link that opens the official Stiac site in a new tab.
 
 ## What's New in 1.5.32
 
