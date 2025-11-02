@@ -78,6 +78,64 @@
       "bottomLeft": "Dock widget to the bottom-left corner",
       "bottomRight": "Dock widget to the bottom-right corner",
       "right": "Dock widget to the right edge"
+    },
+    "status": {
+      "title": "Active tools",
+      "empty": "No adjustments active.",
+      "single": "{{count}} adjustment active.",
+      "multiple": "{{count}} adjustments active.",
+      "ariaLabel": "Active adjustments",
+      "chipAriaLabel": "Deactivate {{label}}"
+    },
+    "filters": {
+      "searchLabel": "Find a tool",
+      "searchPlaceholder": "Search tools",
+      "groupLabel": "Filter tool categories",
+      "categories": {
+        "all": "All",
+        "vision": "Vision",
+        "content": "Content",
+        "navigation": "Navigation"
+      },
+      "empty": "No tools match your search. Try a different keyword or category."
+    },
+    "layout": {
+      "title": "Layout options",
+      "toggleOpen": "Show docking controls",
+      "toggleClose": "Hide docking controls"
+    },
+    "favorites": {
+      "title": "Quick access",
+      "clear": "Clear",
+      "activate": "Toggle {{label}}"
+    },
+    "details": {
+      "persistence": "Your selection is saved for future visits when storage is available.",
+      "previewHeading": "Preview",
+      "open": "Learn more about this tool",
+      "statusActive": "Active",
+      "statusInactive": "Inactive"
+    },
+    "sections": {
+      "vision": "Vision",
+      "content": "Content",
+      "navigation": "Navigation"
+    },
+    "descriptions": {
+      "invertColours": "Invert page colours to reduce glare and boost contrast for light sensitivity.",
+      "grayscale": "Convert colours to grayscale for readers who prefer neutral tones without distractions.",
+      "lowSaturation": "Cycle between muted and amplified colour saturation to improve focus or visibility.",
+      "contrast": "Increase or decrease contrast levels to match ambient light or personal comfort.",
+      "hideImages": "Temporarily remove decorative imagery so readers can concentrate on text content.",
+      "hideVideo": "Hide auto-playing or distracting video embeds until you are ready to interact with them.",
+      "reduceMotion": "Pause animated effects and autoplaying media to prevent motion sensitivity.",
+      "fontSize": "Increase body copy size in gentle steps so paragraphs stay readable on every screen.",
+      "lineHeight": "Add breathing room between lines of text to support dyslexia and low-vision readers.",
+      "letterSpacing": "Loosen the spacing between letters for improved legibility at a glance.",
+      "fontDyslexia": "Switch to the OpenDyslexic font stack for recognisable letter shapes and calmer reading.",
+      "textAlign": "Cycle through start, centre, end and justified text alignment without editing CSS manually.",
+      "linksHighlight": "Highlight links with strong underlines and colour so keyboard and screen reader users can skim quickly.",
+      "changeCursors": "Swap between focus, spotlight and reading guides to track content while navigating."
     }
   },
   "announcements": {

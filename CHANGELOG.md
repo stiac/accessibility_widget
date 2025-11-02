@@ -1,4 +1,19 @@
 # Changelog
+# [1.6.0] - 2025-12-24
+
+### Added
+- Status summary bar that lists active adjustments with quick actions to deactivate individual tools.
+- Search box, category filters, favorites rail, and detailed preview panel to streamline navigation on mobile and desktop.
+
+### Changed
+- Reorganised the tools layout to support collapsible sections and an inline toggle for the docking controls without crowding the grid.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.33] - 2025-12-23
 
 ### Added
