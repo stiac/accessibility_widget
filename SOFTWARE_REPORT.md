@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.6.0
+- **Version**: 1.5.32
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-24
+- **Last Update**: 2025-12-22
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,7 +12,6 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
-- 2025-12-24 — Added an active-status summary bar, searchable filters, favorites rail, and detailed previews to modernise the accessibility tools experience (AI assistant)
 - 2025-12-22 — Hid the Change Positions controls by default and added a dataset toggle so hosts can re-enable them when required (AI assistant)
 - 2025-12-20 — Defaulted the accessibility modal to the bottom-left corner to mirror the launcher placement used on customer sites while retaining data attribute overrides (AI assistant)
 - 2025-12-19 — Rebranded the accessibility widget by renaming every `acc-` class, ID, data attribute, and storage key to the new `a11y-stiac-` namespace for consistent STiac theming (AI assistant)

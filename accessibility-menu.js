@@ -1450,10 +1450,8 @@ const accessibilityMenuStyles = `
     }
 
     #accessibility-modal #accessibility-tools {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
       scrollbar-width: thin;
+      /* Keep the tools grid visually centred beside the navigation column. */
       padding-right: 0.9rem;
     }
 
@@ -1476,7 +1474,6 @@ const accessibilityMenuStyles = `
       border-radius: 20px;
       box-shadow: none;
       color: var(--a11y-stiac-text-color);
-      position: relative;
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
@@ -1665,368 +1662,6 @@ const accessibilityMenuStyles = `
 
     .hide-video [data-a11y-stiac-preserve-video] {
       display: initial !important;
-    }
-
-    .a11y-stiac-info-button {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.75rem;
-      height: 1.75rem;
-      border-radius: 9999px;
-      background: rgba(15, 23, 42, 0.08);
-      color: inherit;
-      border: 1px solid transparent;
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .a11y-stiac-info-button svg {
-      width: 0.9rem;
-      height: 0.9rem;
-    }
-
-    .a11y-stiac-info-button:hover,
-    .a11y-stiac-info-button:focus-visible {
-      background: rgba(15, 23, 42, 0.15);
-      border-color: rgba(15, 23, 42, 0.25);
-      transform: translateY(-1px);
-      outline: none;
-    }
-
-    .a11y-stiac-child.active .a11y-stiac-info-button {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: rgba(255, 255, 255, 0.45);
-    }
-
-    #a11y-stiac-status {
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      background: rgba(248, 250, 252, 0.85);
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    #a11y-stiac-status.has-active {
-      background: var(--a11y-stiac-control-active-bg-color);
-      border-color: transparent;
-      color: var(--a11y-stiac-control-active-text-color);
-      box-shadow: 0 22px 36px -24px rgba(15, 23, 42, 0.45);
-    }
-
-    #a11y-stiac-status.has-active p,
-    #a11y-stiac-status.has-active span,
-    #a11y-stiac-status.has-active button {
-      color: inherit;
-    }
-
-    .a11y-stiac-status-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      background: rgba(255, 255, 255, 0.16);
-      padding: 0.35rem 0.75rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    }
-
-    .a11y-stiac-status-chip:hover,
-    .a11y-stiac-status-chip:focus-visible {
-      background: rgba(255, 255, 255, 0.26);
-      border-color: rgba(255, 255, 255, 0.6);
-      outline: none;
-    }
-
-    .a11y-stiac-filter-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(15, 23, 42, 0.12);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.4rem 0.9rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(15, 23, 42, 0.65);
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .a11y-stiac-filter-pill:hover,
-    .a11y-stiac-filter-pill:focus-visible {
-      color: rgba(15, 23, 42, 0.85);
-      border-color: rgba(15, 23, 42, 0.25);
-      outline: none;
-    }
-
-    .a11y-stiac-filter-pill.active {
-      background: var(--a11y-stiac-control-active-bg-color);
-      color: var(--a11y-stiac-control-active-text-color);
-      border-color: transparent;
-      box-shadow: 0 18px 32px -22px rgba(15, 23, 42, 0.4);
-    }
-
-    .a11y-stiac-section {
-      border-radius: 24px;
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 0.5rem;
-      transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    .a11y-stiac-section[open] {
-      box-shadow: 0 24px 40px -28px rgba(15, 23, 42, 0.35);
-    }
-
-    .a11y-stiac-section summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      list-style: none;
-      cursor: pointer;
-      font-weight: 700;
-      color: rgba(15, 23, 42, 0.7);
-    }
-
-    .a11y-stiac-section summary::-webkit-details-marker,
-    .a11y-stiac-section summary::marker {
-      display: none;
-    }
-
-    .a11y-stiac-section-chevron {
-      width: 1.25rem;
-      height: 1.25rem;
-      transition: transform 0.2s ease;
-    }
-
-    .a11y-stiac-section[open] .a11y-stiac-section-chevron {
-      transform: rotate(180deg);
-    }
-
-    .a11y-stiac-section-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.75rem;
-      padding: 0.25rem 0.5rem 0.5rem;
-    }
-
-    #a11y-stiac-favorites-list {
-      scrollbar-width: thin;
-    }
-
-    #a11y-stiac-favorites-list::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    #a11y-stiac-favorites-list::-webkit-scrollbar-thumb {
-      background: rgba(148, 163, 184, 0.5);
-      border-radius: 9999px;
-    }
-
-    .a11y-stiac-favorite-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      border-radius: 16px;
-      border: 1px solid rgba(15, 23, 42, 0.12);
-      background: rgba(255, 255, 255, 0.92);
-      padding: 0.45rem 0.85rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      color: rgba(15, 23, 42, 0.7);
-      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-
-    .a11y-stiac-favorite-btn:hover,
-    .a11y-stiac-favorite-btn:focus-visible {
-      color: rgba(15, 23, 42, 0.85);
-      border-color: rgba(15, 23, 42, 0.25);
-      transform: translateY(-1px);
-      outline: none;
-    }
-
-    .a11y-stiac-favorite-btn svg {
-      width: 1rem;
-      height: 1rem;
-    }
-
-    #a11y-stiac-details-panel {
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      box-shadow: 0 28px 44px -30px rgba(15, 23, 42, 0.4);
-      transition: opacity 0.2s ease;
-    }
-
-    .a11y-stiac-details-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 3rem;
-      height: 3rem;
-      border-radius: 18px;
-      background: rgba(148, 163, 184, 0.18);
-    }
-
-    .a11y-stiac-details-close {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.75rem;
-      height: 1.75rem;
-      border-radius: 9999px;
-      color: rgba(71, 85, 105, 0.85);
-      transition: background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .a11y-stiac-details-close:hover,
-    .a11y-stiac-details-close:focus-visible {
-      background: rgba(148, 163, 184, 0.2);
-      color: rgba(15, 23, 42, 0.85);
-      outline: none;
-    }
-
-    .a11y-stiac-preview {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .a11y-stiac-preview-heading {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(71, 85, 105, 0.85);
-    }
-
-    .a11y-stiac-preview-sample {
-      border-radius: 18px;
-      background: rgba(148, 163, 184, 0.12);
-      padding: 1rem;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: rgba(30, 41, 59, 0.92);
-      transition: all 0.2s ease;
-    }
-
-    .a11y-stiac-preview-sample a {
-      text-decoration: underline;
-      font-weight: 600;
-      color: inherit;
-    }
-
-    .a11y-stiac-preview-media {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .a11y-stiac-preview-image,
-    .a11y-stiac-preview-video {
-      flex: 1 1 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(14, 165, 233, 0.12));
-      min-height: 3.2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .a11y-stiac-preview-video::after {
-      content: '▶';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.5rem;
-      color: rgba(15, 23, 42, 0.45);
-    }
-
-    .a11y-stiac-preview--invert .a11y-stiac-preview-sample {
-      background: #0f172a;
-      color: #f8fafc;
-    }
-
-    .a11y-stiac-preview--invert .a11y-stiac-preview-media {
-      filter: invert(1);
-    }
-
-    .a11y-stiac-preview--grayscale .a11y-stiac-preview-media,
-    .a11y-stiac-preview--grayscale .a11y-stiac-preview-sample {
-      filter: grayscale(1);
-    }
-
-    .a11y-stiac-preview--saturation .a11y-stiac-preview-media {
-      filter: saturate(1.8);
-    }
-
-    .a11y-stiac-preview--contrast .a11y-stiac-preview-sample {
-      filter: contrast(1.6);
-    }
-
-    .a11y-stiac-preview--hide-images .a11y-stiac-preview-image {
-      opacity: 0.15;
-      background: repeating-linear-gradient(45deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.2) 8px, transparent 8px, transparent 16px);
-    }
-
-    .a11y-stiac-preview--hide-video .a11y-stiac-preview-video {
-      opacity: 0.2;
-    }
-
-    .a11y-stiac-preview--reduce-motion .a11y-stiac-preview-sample::after {
-      content: 'Animations paused';
-      display: block;
-      margin-top: 0.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(148, 163, 184, 0.9);
-    }
-
-    .a11y-stiac-preview--underline .a11y-stiac-preview-sample a {
-      text-decoration-thickness: 4px;
-      text-decoration-color: currentColor;
-    }
-
-    .a11y-stiac-preview--font-size .a11y-stiac-preview-sample {
-      font-size: 1.15rem;
-    }
-
-    .a11y-stiac-preview--line-height .a11y-stiac-preview-sample {
-      line-height: 2;
-    }
-
-    .a11y-stiac-preview--letter-spacing .a11y-stiac-preview-sample {
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .a11y-stiac-preview--font-dyslexia .a11y-stiac-preview-sample {
-      font-family: "OpenDyslexic", "OpenDyslexic3", "Lexend Deca", "Lexend", "Arial", "Verdana", sans-serif;
-      letter-spacing: 0.05em;
-    }
-
-    .a11y-stiac-preview--text-align .a11y-stiac-preview-sample {
-      text-align: justify;
-    }
-
-    .a11y-stiac-preview--change-cursor .a11y-stiac-preview-video::before {
-      content: '';
-      position: absolute;
-      width: 2.5rem;
-      height: 2.5rem;
-      border: 2px solid rgba(15, 23, 42, 0.6);
-      border-radius: 9999px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 0 100vmax rgba(15, 23, 42, 0.12);
     }
 
     /*
@@ -3381,33 +3016,6 @@ function formatWidgetTemplate(template, params = {}) {
     });
 }
 
-function resolveTranslation(path, fallback = '') {
-    if (!path) {
-        return fallback;
-    }
-    const segments = Array.isArray(path) ? path : String(path).split('.');
-    if (!segments.length) {
-        return fallback;
-    }
-    let current = activeTranslations;
-    for (let index = 0; index < segments.length; index += 1) {
-        const key = segments[index];
-        if (!current || typeof current !== 'object' || !(key in current)) {
-            return fallback;
-        }
-        current = current[key];
-    }
-    return typeof current === 'string' ? current : fallback;
-}
-
-function formatTranslation(path, fallback, params) {
-    const template = resolveTranslation(path, fallback);
-    if (typeof template !== 'string') {
-        return fallback || '';
-    }
-    return formatWidgetTemplate(template, params);
-}
-
 function getLanguageNames() {
     if (!widgetScriptConfig.translateLanguageNames) {
         return NATIVE_LANGUAGE_NAMES;
@@ -3753,959 +3361,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const languageActiveLabelElement = document.querySelector('[data-language-active-label]');
     const languageActiveIconElement = document.querySelector('[data-language-active-icon]');
 
-    const headerContentElement = document.getElementById('headerContent');
-    const toolsContainer = document.getElementById('accessibility-tools');
-    const footerElement = document.getElementById('a11y-stiac-footer');
-    const changePositionsElement = document.getElementById('change-positions');
-
-    const CONTROL_METADATA = {
-        'invert-colors': {
-            translationKey: 'invertColours',
-            category: 'vision',
-            previewClass: 'invert',
-            keywords: ['invert', 'colour', 'color', 'vision', 'contrast'],
-            descriptionFallback: 'Invert page colours to reduce glare and boost contrast for light sensitivity.'
-        },
-        'grayscale': {
-            translationKey: 'grayscale',
-            category: 'vision',
-            previewClass: 'grayscale',
-            keywords: ['grayscale', 'monochrome', 'vision'],
-            descriptionFallback: 'Convert colours to grayscale for readers who prefer neutral tones without distractions.'
-        },
-        'saturation': {
-            translationKey: 'lowSaturation',
-            category: 'vision',
-            previewClass: 'saturation',
-            keywords: ['saturation', 'colour', 'color', 'tone'],
-            descriptionFallback: 'Cycle between muted and amplified colour saturation to improve focus or visibility.'
-        },
-        'contrast': {
-            translationKey: 'contrast',
-            category: 'vision',
-            previewClass: 'contrast',
-            keywords: ['contrast', 'vision', 'visibility'],
-            descriptionFallback: 'Increase or decrease contrast levels to match ambient light or personal comfort.'
-        },
-        'hide-images': {
-            translationKey: 'hideImages',
-            category: 'vision',
-            previewClass: 'hide-images',
-            keywords: ['hide images', 'remove pictures', 'reduce clutter'],
-            descriptionFallback: 'Temporarily remove decorative imagery so readers can concentrate on text content.'
-        },
-        'hide-video': {
-            translationKey: 'hideVideo',
-            category: 'vision',
-            previewClass: 'hide-video',
-            keywords: ['hide video', 'pause embeds', 'remove media'],
-            descriptionFallback: 'Hide auto-playing or distracting video embeds until you are ready to interact with them.'
-        },
-        'reduce-motion': {
-            translationKey: 'reduceMotion',
-            category: 'vision',
-            previewClass: 'reduce-motion',
-            keywords: ['reduce motion', 'animations', 'autoplay'],
-            descriptionFallback: 'Pause animated effects and autoplaying media to prevent motion sensitivity.'
-        },
-        'font-size': {
-            translationKey: 'fontSize',
-            category: 'content',
-            previewClass: 'font-size',
-            keywords: ['font size', 'text', 'readability'],
-            descriptionFallback: 'Increase body copy size in gentle steps so paragraphs stay readable on every screen.'
-        },
-        'line-height': {
-            translationKey: 'lineHeight',
-            category: 'content',
-            previewClass: 'line-height',
-            keywords: ['line height', 'spacing', 'readability'],
-            descriptionFallback: 'Add breathing room between lines of text to support dyslexia and low-vision readers.'
-        },
-        'letter-spacing': {
-            translationKey: 'letterSpacing',
-            category: 'content',
-            previewClass: 'letter-spacing',
-            keywords: ['letter spacing', 'tracking', 'typography'],
-            descriptionFallback: 'Loosen the spacing between letters for improved legibility at a glance.'
-        },
-        'font-dyslexia': {
-            translationKey: 'fontDyslexia',
-            category: 'content',
-            previewClass: 'font-dyslexia',
-            keywords: ['dyslexia', 'font', 'readability'],
-            descriptionFallback: 'Switch to the OpenDyslexic font stack for recognisable letter shapes and calmer reading.'
-        },
-        'text-align': {
-            translationKey: 'textAlign',
-            category: 'content',
-            previewClass: 'text-align',
-            keywords: ['text align', 'alignment', 'layout'],
-            descriptionFallback: 'Cycle through start, centre, end and justified text alignment without editing CSS manually.'
-        },
-        'underline': {
-            translationKey: 'linksHighlight',
-            category: 'navigation',
-            previewClass: 'underline',
-            keywords: ['links', 'underline', 'navigation'],
-            descriptionFallback: 'Highlight links with strong underlines and colour so keyboard and screen reader users can skim quickly.'
-        },
-        'change-cursor': {
-            translationKey: 'changeCursors',
-            category: 'navigation',
-            previewClass: 'change-cursor',
-            keywords: ['cursor', 'pointer', 'focus'],
-            descriptionFallback: 'Swap between focus, spotlight and reading guides to track content while navigating.'
-        }
-    };
-
-    const CATEGORY_ORDER = ['vision', 'content', 'navigation'];
-    const FAVORITES_STORAGE_KEY = 'a11y-stiac-favorites';
-    const MAX_FAVORITES = 6;
-
-    const controlRegistry = new Map();
-    const activeControlRegistry = new Map();
-    const sectionGridMap = new Map();
-    const sectionDetailsMap = new Map();
-    let favoritesState = loadFavorites();
-    let activeCategoryFilter = 'all';
-    const detailsPanelState = { controlId: null, restoreFocus: null };
-    let currentSearchTerm = '';
-    let detailsKeydownBound = false;
-
-    let statusContainer = null;
-    let statusSummaryElement = null;
-    let statusChipsElement = null;
-    let searchInputElement = null;
-    let filterButtonElements = [];
-    let favoritesContainerElement = null;
-    let favoritesListElement = null;
-    let favoritesClearButton = null;
-    let layoutToggleButton = null;
-    let layoutPanelElement = null;
-    let emptyStateElement = null;
-    let detailsPanelElement = null;
-    let detailsIconElement = null;
-    let detailsTitleElement = null;
-    let detailsStatusElement = null;
-    let detailsDescriptionElement = null;
-    let detailsPersistenceElement = null;
-    let detailsPreviewElement = null;
-    let detailsCloseButton = null;
-
-    initialiseEnhancedLayout();
-
-    function loadFavorites() {
-        if (typeof window === 'undefined' || !window.localStorage) {
-            return [];
-        }
-        try {
-            const stored = window.localStorage.getItem(FAVORITES_STORAGE_KEY);
-            if (!stored) {
-                return [];
-            }
-            const parsed = JSON.parse(stored);
-            return Array.isArray(parsed) ? parsed.filter((value) => typeof value === 'string') : [];
-        } catch (error) {
-            return [];
-        }
-    }
-
-    function persistFavorites() {
-        if (typeof window === 'undefined' || !window.localStorage) {
-            return;
-        }
-        try {
-            window.localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favoritesState));
-        } catch (error) {
-            // Ignore persistence failures.
-        }
-    }
-
-    function ensureInfoButton(controlId, trigger) {
-        if (!trigger || trigger.querySelector('.a11y-stiac-info-button')) {
-            return trigger ? trigger.querySelector('.a11y-stiac-info-button') : null;
-        }
-        const infoButton = document.createElement('button');
-        infoButton.type = 'button';
-        infoButton.className = 'a11y-stiac-info-button';
-        infoButton.setAttribute('aria-label', 'Learn more about this tool');
-        infoButton.setAttribute('data-i18n-attr', 'aria-label:controls.details.open');
-        infoButton.dataset.controlInfo = controlId;
-        infoButton.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-            '<circle cx="10" cy="10" r="8"></circle>' +
-            '<path d="M10 8v4"></path>' +
-            '<path d="M10 5h.01"></path>' +
-            '</svg>';
-        trigger.insertBefore(infoButton, trigger.firstChild);
-        return infoButton;
-    }
-
-    function buildStatusBar() {
-        const wrapper = document.createElement('div');
-        wrapper.id = 'a11y-stiac-status';
-        wrapper.className = 'flex flex-col gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-slate-100 sm:flex-row sm:items-center sm:justify-between';
-        wrapper.innerHTML = `
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-200" data-i18n="controls.status.title">Active tools</p>
-            <p id="a11y-stiac-status-summary" class="text-sm text-slate-100" data-i18n="controls.status.empty">No adjustments active.</p>
-          </div>
-          <div id="a11y-stiac-status-chips" class="flex flex-wrap items-center gap-2" aria-live="polite" aria-label="Active adjustments"></div>
-        `;
-        return wrapper;
-    }
-
-    function buildSearchFilter() {
-        const container = document.createElement('div');
-        container.id = 'a11y-stiac-search-filter';
-        container.className = 'flex flex-col gap-3 rounded-2xl bg-white/80 px-4 py-4 text-slate-700 ring-1 ring-inset ring-slate-900/10';
-        container.innerHTML = `
-          <label for="a11y-stiac-search" class="text-xs font-semibold uppercase tracking-wide text-slate-500" data-i18n="controls.filters.searchLabel">Find a tool</label>
-          <div class="relative">
-            <span class="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-400">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="7"></circle>
-                <path d="m20 20-3.5-3.5"></path>
-              </svg>
-            </span>
-            <input id="a11y-stiac-search" type="search" class="w-full rounded-xl border border-slate-900/10 bg-white/95 px-9 py-2.5 text-sm text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-slate-900/40" placeholder="Search tools" data-i18n-attr="placeholder:controls.filters.searchPlaceholder" />
-          </div>
-          <div class="flex flex-wrap gap-2" role="group" aria-label="Filter tool categories" data-i18n-attr="aria-label:controls.filters.groupLabel">
-            <button type="button" class="a11y-stiac-filter-pill active" data-filter-category="all" aria-pressed="true" data-i18n="controls.filters.categories.all">All</button>
-            <button type="button" class="a11y-stiac-filter-pill" data-filter-category="vision" aria-pressed="false" data-i18n="controls.filters.categories.vision">Vision</button>
-            <button type="button" class="a11y-stiac-filter-pill" data-filter-category="content" aria-pressed="false" data-i18n="controls.filters.categories.content">Content</button>
-            <button type="button" class="a11y-stiac-filter-pill" data-filter-category="navigation" aria-pressed="false" data-i18n="controls.filters.categories.navigation">Navigation</button>
-          </div>
-        `;
-        return container;
-    }
-
-    function buildLayoutContainer() {
-        const container = document.createElement('div');
-        container.id = 'a11y-stiac-layout-container';
-        container.className = 'rounded-2xl bg-white/80 px-4 py-4 ring-1 ring-inset ring-slate-900/10';
-        container.innerHTML = `
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500" data-i18n="controls.layout.title">Layout options</p>
-            <button id="a11y-stiac-layout-toggle" type="button" class="inline-flex items-center gap-2 rounded-xl border border-slate-900/10 bg-white/95 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-slate-600 shadow-sm transition hover:text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-expanded="false">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="3" y="3" width="7" height="7" rx="1"></rect>
-                <rect x="14" y="3" width="7" height="7" rx="1"></rect>
-                <rect x="14" y="14" width="7" height="7" rx="1"></rect>
-                <rect x="3" y="14" width="7" height="7" rx="1"></rect>
-              </svg>
-              <span data-i18n="controls.layout.toggleOpen">Show docking controls</span>
-            </button>
-          </div>
-          <div id="a11y-stiac-layout-panel" class="mt-3 hidden flex flex-col items-center gap-3"></div>
-        `;
-        return container;
-    }
-
-    function buildFavoritesContainer() {
-        const container = document.createElement('div');
-        container.id = 'a11y-stiac-favorites';
-        container.className = 'hidden flex flex-col gap-2 rounded-2xl bg-white/80 px-4 py-4 ring-1 ring-inset ring-slate-900/10';
-        container.innerHTML = `
-          <div class="flex items-center justify-between gap-3">
-            <p class="text-xs font-semibold uppercase tracking-wide text-slate-500" data-i18n="controls.favorites.title">Quick access</p>
-            <button id="a11y-stiac-favorites-clear" type="button" class="text-xs font-semibold uppercase tracking-wide text-slate-500 transition hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.favorites.clear">Clear</button>
-          </div>
-          <div id="a11y-stiac-favorites-list" class="flex gap-2 overflow-x-auto pb-1"></div>
-        `;
-        return container;
-    }
-
-    function buildEmptyState() {
-        const element = document.createElement('p');
-        element.id = 'a11y-stiac-empty-state';
-        element.className = 'hidden rounded-2xl border border-dashed border-slate-300 bg-white/70 px-4 py-6 text-center text-sm text-slate-500';
-        element.setAttribute('data-i18n', 'controls.filters.empty');
-        element.textContent = 'No tools match your search. Try a different keyword or category.';
-        return element;
-    }
-
-    function buildDetailsPanel() {
-        const panel = document.createElement('div');
-        panel.id = 'a11y-stiac-details-panel';
-        panel.className = 'hidden rounded-2xl bg-white/90 px-4 py-5 ring-1 ring-inset ring-slate-900/10';
-        panel.innerHTML = `
-          <div class="flex flex-col gap-3">
-            <div class="flex items-start justify-between gap-4">
-              <div class="flex items-center gap-3">
-                <span id="a11y-stiac-details-icon" class="a11y-stiac-details-icon"></span>
-                <div>
-                  <p id="a11y-stiac-details-title" class="text-base font-semibold text-slate-800">Tool</p>
-                  <p id="a11y-stiac-details-status" class="text-xs font-semibold uppercase tracking-wide text-slate-500">Status</p>
-                </div>
-              </div>
-              <button type="button" id="a11y-stiac-details-close" class="a11y-stiac-details-close" aria-label="Close details">
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="m6 6 8 8m0-8-8 8"></path>
-                </svg>
-              </button>
-            </div>
-            <p id="a11y-stiac-details-description" class="text-sm text-slate-600"></p>
-            <p id="a11y-stiac-details-persistence" class="text-xs font-semibold uppercase tracking-wide text-slate-400" data-i18n="controls.details.persistence">Your selection is saved for future visits when storage is available.</p>
-            <div id="a11y-stiac-details-preview" class="a11y-stiac-preview rounded-2xl border border-dashed border-slate-300 bg-slate-50/80 p-4">
-              <p class="a11y-stiac-preview-heading" data-i18n="controls.details.previewHeading">Preview</p>
-              <div class="a11y-stiac-preview-sample">
-                <p><strong>Accessibility preview</strong></p>
-                <p>Sample paragraph with a <a href="#">focus link</a> to demonstrate adjustments.</p>
-              </div>
-              <div class="a11y-stiac-preview-media">
-                <div class="a11y-stiac-preview-image"></div>
-                <div class="a11y-stiac-preview-video"></div>
-              </div>
-            </div>
-          </div>
-        `;
-        return panel;
-    }
-
-    function buildSections(existingItems) {
-        const wrapper = document.createElement('div');
-        wrapper.id = 'a11y-stiac-sections';
-        wrapper.className = 'flex flex-col gap-3';
-
-        const gridMap = new Map();
-        const detailsMap = new Map();
-
-        CATEGORY_ORDER.forEach((category) => {
-            const details = document.createElement('details');
-            details.className = 'a11y-stiac-section';
-            details.setAttribute('data-category-section', category);
-            if (category === 'vision') {
-                details.setAttribute('open', '');
-            }
-            details.addEventListener('toggle', () => {
-                if (details.dataset.a11yAutoToggle === 'true') {
-                    delete details.dataset.a11yAutoToggle;
-                    return;
-                }
-                if (details.open) {
-                    delete details.dataset.userCollapsed;
-                } else {
-                    details.dataset.userCollapsed = 'true';
-                }
-            });
-            const summary = document.createElement('summary');
-            summary.className = 'flex items-center justify-between gap-3 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700';
-            const summaryLabel = document.createElement('span');
-            summaryLabel.setAttribute('data-i18n', `controls.sections.${category}`);
-            summaryLabel.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-            const chevron = document.createElement('svg');
-            chevron.className = 'a11y-stiac-section-chevron';
-            chevron.setAttribute('viewBox', '0 0 20 20');
-            chevron.setAttribute('fill', 'currentColor');
-            chevron.setAttribute('aria-hidden', 'true');
-            chevron.innerHTML = '<path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" clip-rule="evenodd" />';
-            summary.appendChild(summaryLabel);
-            summary.appendChild(chevron);
-            details.appendChild(summary);
-            const grid = document.createElement('div');
-            grid.className = 'a11y-stiac-section-grid';
-            grid.setAttribute('data-category-grid', category);
-            details.appendChild(grid);
-            wrapper.appendChild(details);
-            gridMap.set(category, grid);
-            detailsMap.set(category, details);
-        });
-
-        existingItems.forEach((item) => {
-            const trigger = item.querySelector('.a11y-stiac-child');
-            if (!trigger || !trigger.id) {
-                return;
-            }
-            const metadata = CONTROL_METADATA[trigger.id];
-            if (!metadata) {
-                return;
-            }
-            const grid = gridMap.get(metadata.category);
-            if (!grid) {
-                return;
-            }
-            const labelElement = trigger.querySelector('p');
-            if (labelElement && !labelElement.hasAttribute('data-control-label')) {
-                labelElement.setAttribute('data-control-label', 'true');
-            }
-            ensureInfoButton(trigger.id, trigger);
-            item.dataset.category = metadata.category;
-            grid.appendChild(item);
-        });
-
-        sectionGridMap.clear();
-        sectionDetailsMap.clear();
-        gridMap.forEach((grid, category) => {
-            sectionGridMap.set(category, grid);
-        });
-        detailsMap.forEach((details, category) => {
-            sectionDetailsMap.set(category, details);
-        });
-
-        return wrapper;
-    }
-
-    function initialiseEnhancedLayout() {
-        if (!toolsContainer || !headerContentElement) {
-            return;
-        }
-
-        const existingItems = Array.from(toolsContainer.querySelectorAll('.a11y-stiac-item'));
-        toolsContainer.innerHTML = '';
-
-        statusContainer = buildStatusBar();
-        statusSummaryElement = statusContainer.querySelector('#a11y-stiac-status-summary');
-        statusChipsElement = statusContainer.querySelector('#a11y-stiac-status-chips');
-        headerContentElement.appendChild(statusContainer);
-
-        const searchFilter = buildSearchFilter();
-        searchInputElement = searchFilter.querySelector('#a11y-stiac-search');
-        filterButtonElements = Array.from(searchFilter.querySelectorAll('[data-filter-category]'));
-
-        const layoutContainer = buildLayoutContainer();
-        layoutToggleButton = layoutContainer.querySelector('#a11y-stiac-layout-toggle');
-        layoutPanelElement = layoutContainer.querySelector('#a11y-stiac-layout-panel');
-
-        favoritesContainerElement = buildFavoritesContainer();
-        favoritesListElement = favoritesContainerElement.querySelector('#a11y-stiac-favorites-list');
-        favoritesClearButton = favoritesContainerElement.querySelector('#a11y-stiac-favorites-clear');
-
-        const sections = buildSections(existingItems);
-        emptyStateElement = buildEmptyState();
-        detailsPanelElement = buildDetailsPanel();
-        detailsIconElement = detailsPanelElement.querySelector('#a11y-stiac-details-icon');
-        detailsTitleElement = detailsPanelElement.querySelector('#a11y-stiac-details-title');
-        detailsStatusElement = detailsPanelElement.querySelector('#a11y-stiac-details-status');
-        detailsDescriptionElement = detailsPanelElement.querySelector('#a11y-stiac-details-description');
-        detailsPersistenceElement = detailsPanelElement.querySelector('#a11y-stiac-details-persistence');
-        detailsPreviewElement = detailsPanelElement.querySelector('#a11y-stiac-details-preview');
-        detailsCloseButton = detailsPanelElement.querySelector('#a11y-stiac-details-close');
-
-        toolsContainer.appendChild(searchFilter);
-        toolsContainer.appendChild(layoutContainer);
-        toolsContainer.appendChild(favoritesContainerElement);
-        toolsContainer.appendChild(sections);
-        toolsContainer.appendChild(emptyStateElement);
-        toolsContainer.appendChild(detailsPanelElement);
-
-        if (changePositionsElement && layoutPanelElement) {
-            layoutPanelElement.appendChild(changePositionsElement);
-        } else {
-            layoutContainer.classList.add('hidden');
-        }
-
-        applyFavoritesVisibility();
-        registerControlsFromDOM();
-        bindEnhancedLayoutEvents();
-    }
-
-    function applyFavoritesVisibility() {
-        if (!favoritesContainerElement) {
-            return;
-        }
-        const hasFavorites = Array.isArray(favoritesState) && favoritesState.length > 0;
-        favoritesContainerElement.classList.toggle('hidden', !hasFavorites);
-        if (favoritesClearButton) {
-            favoritesClearButton.disabled = !hasFavorites;
-            favoritesClearButton.setAttribute('aria-disabled', hasFavorites ? 'false' : 'true');
-        }
-    }
-
-
-    function getControlEntry(controlId) {
-        if (!controlId) {
-            return null;
-        }
-        return controlRegistry.has(controlId) ? controlRegistry.get(controlId) : null;
-    }
-
-    function normaliseString(value) {
-        if (!value && value !== 0) {
-            return '';
-        }
-        return String(value)
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .trim();
-    }
-
-    function getControlLabel(controlId) {
-        const entry = getControlEntry(controlId);
-        const metadata = entry ? entry.metadata : CONTROL_METADATA[controlId];
-        const fallbackLabel = entry && entry.labelElement && entry.labelElement.textContent
-            ? entry.labelElement.textContent.trim()
-            : (metadata && metadata.translationKey ? metadata.translationKey : controlId);
-        if (metadata && metadata.translationKey) {
-            return resolveTranslation(`controls.${metadata.translationKey}.label`, fallbackLabel);
-        }
-        return fallbackLabel || controlId;
-    }
-
-    function getControlDescription(controlId) {
-        const metadata = CONTROL_METADATA[controlId];
-        if (!metadata) {
-            return '';
-        }
-        if (metadata.translationKey) {
-            return resolveTranslation(`controls.descriptions.${metadata.translationKey}`, metadata.descriptionFallback || '');
-        }
-        return metadata.descriptionFallback || '';
-    }
-
-    function updateControlSearchTokens(entry) {
-        if (!entry) {
-            return;
-        }
-        const tokens = [];
-        if (entry.labelElement && entry.labelElement.textContent) {
-            tokens.push(entry.labelElement.textContent);
-        }
-        if (entry.metadata && Array.isArray(entry.metadata.keywords)) {
-            entry.metadata.keywords.forEach((keyword) => tokens.push(keyword));
-        }
-        if (entry.metadata && entry.metadata.translationKey) {
-            const translatedLabel = resolveTranslation(`controls.${entry.metadata.translationKey}.label`, '');
-            if (translatedLabel) {
-                tokens.push(translatedLabel);
-            }
-            const translatedDescription = resolveTranslation(`controls.descriptions.${entry.metadata.translationKey}`, '');
-            if (translatedDescription) {
-                tokens.push(translatedDescription);
-            }
-        }
-        entry.searchTokens = tokens
-            .map(normaliseString)
-            .filter((token, index, list) => Boolean(token) && list.indexOf(token) === index);
-    }
-
-    function isControlActive(controlId) {
-        const entry = getControlEntry(controlId);
-        if (!entry || !entry.trigger) {
-            return false;
-        }
-        return entry.trigger.classList.contains('active');
-    }
-
-    function updateActiveRegistry(controlId, isActive) {
-        const entry = getControlEntry(controlId);
-        if (!entry) {
-            if (!isActive) {
-                activeControlRegistry.delete(controlId);
-            }
-            refreshStatusUI();
-            return;
-        }
-        if (isActive) {
-            activeControlRegistry.set(controlId, { trigger: entry.trigger });
-        } else {
-            activeControlRegistry.delete(controlId);
-        }
-        refreshStatusUI();
-    }
-
-    function refreshStatusUI() {
-        if (!statusContainer || !statusSummaryElement || !statusChipsElement) {
-            return;
-        }
-        const activeCount = activeControlRegistry.size;
-        const hasActive = activeCount > 0;
-        statusContainer.classList.toggle('has-active', hasActive);
-        const summaryKey = hasActive
-            ? (activeCount === 1 ? 'controls.status.single' : 'controls.status.multiple')
-            : 'controls.status.empty';
-        const summaryFallback = hasActive
-            ? (activeCount === 1 ? '1 adjustment active.' : `${activeCount} adjustments active.`)
-            : 'No adjustments active.';
-        statusSummaryElement.textContent = formatTranslation(summaryKey, summaryFallback, { count: activeCount });
-        statusChipsElement.innerHTML = '';
-        const ariaLabel = formatTranslation('controls.status.ariaLabel', 'Active adjustments');
-        statusChipsElement.setAttribute('aria-label', ariaLabel);
-        statusChipsElement.classList.toggle('hidden', !hasActive);
-        if (!hasActive) {
-            return;
-        }
-        activeControlRegistry.forEach((entry, controlId) => {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.className = 'a11y-stiac-status-chip';
-            const label = getControlLabel(controlId);
-            button.textContent = label;
-            button.setAttribute('data-control-target', controlId);
-            button.setAttribute('aria-label', formatTranslation('controls.status.chipAriaLabel', `Deactivate ${label}`, { label }));
-            button.addEventListener('click', () => {
-                const control = getControlEntry(controlId);
-                if (control && control.trigger) {
-                    control.trigger.focus();
-                    control.trigger.click();
-                }
-            });
-            statusChipsElement.appendChild(button);
-        });
-    }
-
-    function registerControlUsage(controlId) {
-        if (!controlId) {
-            return;
-        }
-        if (!Array.isArray(favoritesState)) {
-            favoritesState = [];
-        }
-        favoritesState = favoritesState.filter((value) => value !== controlId && Boolean(getControlEntry(value)));
-        favoritesState.unshift(controlId);
-        if (favoritesState.length > MAX_FAVORITES) {
-            favoritesState = favoritesState.slice(0, MAX_FAVORITES);
-        }
-        persistFavorites();
-        renderFavoritesList();
-    }
-
-    function renderFavoritesList() {
-        if (!favoritesListElement) {
-            return;
-        }
-        const validFavorites = favoritesState.filter((controlId, index) => {
-            return Boolean(getControlEntry(controlId)) && favoritesState.indexOf(controlId) === index;
-        }).slice(0, MAX_FAVORITES);
-        if (favoritesState.length !== validFavorites.length
-            || favoritesState.some((value, index) => value !== validFavorites[index])) {
-            favoritesState = validFavorites;
-            persistFavorites();
-        }
-        favoritesListElement.innerHTML = '';
-        favoritesState.forEach((controlId) => {
-            const entry = getControlEntry(controlId);
-            if (!entry) {
-                return;
-            }
-            const label = getControlLabel(controlId);
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.className = 'a11y-stiac-favorite-btn';
-            button.setAttribute('data-favorite-control', controlId);
-            button.setAttribute('aria-label', formatTranslation('controls.favorites.activate', `Toggle ${label}`, { label }));
-            button.innerHTML = '<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">'
-                + '<path d="M10 2.5l2.472 5.007 5.528.804-4 3.902.944 5.505L10 14.77l-4.944 2.948.944-5.505-4-3.902 5.528-.804L10 2.5z"></path>'
-                + '</svg>'
-                + `<span>${label}</span>`;
-            button.addEventListener('click', (event) => {
-                event.preventDefault();
-                const control = getControlEntry(controlId);
-                if (control && control.trigger) {
-                    control.trigger.focus();
-                    control.trigger.click();
-                }
-            });
-            favoritesListElement.appendChild(button);
-        });
-        applyFavoritesVisibility();
-    }
-
-    function clearFavorites() {
-        if (!favoritesState.length) {
-            return;
-        }
-        favoritesState = [];
-        persistFavorites();
-        if (favoritesListElement) {
-            favoritesListElement.innerHTML = '';
-        }
-        applyFavoritesVisibility();
-    }
-
-    function updateLayoutToggleText() {
-        if (!layoutToggleButton) {
-            return;
-        }
-        const labelSpan = layoutToggleButton.querySelector('[data-i18n]');
-        if (!labelSpan) {
-            return;
-        }
-        const isExpanded = layoutToggleButton.getAttribute('aria-expanded') === 'true';
-        const key = isExpanded ? 'controls.layout.toggleClose' : 'controls.layout.toggleOpen';
-        labelSpan.setAttribute('data-i18n', key);
-        labelSpan.textContent = resolveTranslation(key, isExpanded ? 'Hide docking controls' : 'Show docking controls');
-    }
-
-    function toggleLayoutPanel() {
-        if (!layoutToggleButton || !layoutPanelElement) {
-            return;
-        }
-        const isHidden = layoutPanelElement.classList.contains('hidden');
-        if (isHidden) {
-            layoutPanelElement.classList.remove('hidden');
-            layoutToggleButton.setAttribute('aria-expanded', 'true');
-        } else {
-            layoutPanelElement.classList.add('hidden');
-            layoutToggleButton.setAttribute('aria-expanded', 'false');
-        }
-        updateLayoutToggleText();
-    }
-
-    function updateSectionVisibility(visibleByCategory) {
-        sectionGridMap.forEach((grid, category) => {
-            const details = sectionDetailsMap.get(category);
-            if (!grid || !details) {
-                return;
-            }
-            const visibleCount = visibleByCategory && visibleByCategory.has(category)
-                ? visibleByCategory.get(category)
-                : 0;
-            const hasVisibleChildren = visibleCount > 0;
-            details.classList.toggle('hidden', !hasVisibleChildren);
-            if (!hasVisibleChildren) {
-                if (details.open) {
-                    details.dataset.a11yAutoToggle = 'true';
-                    details.removeAttribute('open');
-                }
-                delete details.dataset.userCollapsed;
-                return;
-            }
-            if (!details.open && details.dataset.userCollapsed === 'true') {
-                return;
-            }
-            if (!details.open) {
-                details.dataset.a11yAutoToggle = 'true';
-                details.setAttribute('open', '');
-            }
-        });
-    }
-
-    function updateEmptyStateVisibility(visibleCount) {
-        if (!emptyStateElement) {
-            return;
-        }
-        emptyStateElement.classList.toggle('hidden', visibleCount > 0);
-    }
-
-    function applyFilters() {
-        const searchTerm = normaliseString(currentSearchTerm);
-        const visibleByCategory = new Map();
-        let visibleCount = 0;
-        controlRegistry.forEach((entry) => {
-            const matchesCategory = activeCategoryFilter === 'all'
-                || (entry.metadata && entry.metadata.category === activeCategoryFilter);
-            const matchesSearch = !searchTerm
-                || (entry.searchTokens && entry.searchTokens.some((token) => token.includes(searchTerm)));
-            const shouldShow = matchesCategory && matchesSearch;
-            if (entry.item) {
-                entry.item.classList.toggle('hidden', !shouldShow);
-            }
-            if (shouldShow) {
-                visibleCount += 1;
-                const category = entry.metadata ? entry.metadata.category : 'uncategorised';
-                visibleByCategory.set(category, (visibleByCategory.get(category) || 0) + 1);
-            }
-        });
-        updateSectionVisibility(visibleByCategory);
-        updateEmptyStateVisibility(visibleCount);
-        return visibleCount;
-    }
-
-    function setActiveFilterCategory(category) {
-        const allowed = ['all', ...CATEGORY_ORDER];
-        activeCategoryFilter = allowed.includes(category) ? category : 'all';
-        if (Array.isArray(filterButtonElements)) {
-            filterButtonElements.forEach((button) => {
-                const isActive = button.dataset.filterCategory === activeCategoryFilter;
-                button.classList.toggle('active', isActive);
-                button.setAttribute('aria-pressed', String(isActive));
-            });
-        }
-        applyFilters();
-    }
-
-    function handleFilterClick(event) {
-        const target = event.currentTarget;
-        if (!target || !target.dataset) {
-            return;
-        }
-        setActiveFilterCategory(target.dataset.filterCategory || 'all');
-    }
-
-    function handleSearchInput(event) {
-        currentSearchTerm = event.target ? event.target.value : '';
-        applyFilters();
-    }
-
-    function updateDetailsStatus(controlId) {
-        if (!detailsPanelElement || detailsPanelState.controlId !== controlId) {
-            return;
-        }
-        const active = isControlActive(controlId);
-        if (detailsStatusElement) {
-            detailsStatusElement.textContent = formatTranslation(
-                active ? 'controls.details.statusActive' : 'controls.details.statusInactive',
-                active ? 'Active' : 'Inactive'
-            );
-        }
-        detailsPanelElement.setAttribute('data-control-active', active ? 'true' : 'false');
-    }
-
-    function updateDetailsContent(controlId) {
-        const entry = getControlEntry(controlId);
-        if (!entry || !detailsPanelElement) {
-            return;
-        }
-        const label = getControlLabel(controlId);
-        if (detailsTitleElement) {
-            detailsTitleElement.textContent = label;
-        }
-        if (detailsDescriptionElement) {
-            detailsDescriptionElement.textContent = getControlDescription(controlId);
-        }
-        if (detailsIconElement) {
-            const icon = entry.trigger ? entry.trigger.querySelector('svg') : null;
-            detailsIconElement.innerHTML = icon ? icon.outerHTML : '';
-        }
-        if (detailsPreviewElement) {
-            const previousClass = detailsPreviewElement.dataset.previewClass;
-            if (previousClass) {
-                detailsPreviewElement.classList.remove(previousClass);
-                delete detailsPreviewElement.dataset.previewClass;
-            }
-            if (entry.metadata && entry.metadata.previewClass) {
-                const previewClass = `a11y-stiac-preview--${entry.metadata.previewClass}`;
-                detailsPreviewElement.classList.add(previewClass);
-                detailsPreviewElement.dataset.previewClass = previewClass;
-            }
-        }
-        updateDetailsStatus(controlId);
-    }
-
-    function openDetailsPanel(controlId) {
-        const entry = getControlEntry(controlId);
-        if (!entry || !detailsPanelElement) {
-            return;
-        }
-        detailsPanelState.controlId = controlId;
-        detailsPanelState.restoreFocus = document && document.activeElement && document.activeElement.focus
-            ? document.activeElement
-            : null;
-        updateDetailsContent(controlId);
-        detailsPanelElement.classList.remove('hidden');
-        if (detailsCloseButton) {
-            detailsCloseButton.focus();
-        }
-    }
-
-    function closeDetailsPanel() {
-        if (!detailsPanelElement) {
-            return;
-        }
-        detailsPanelElement.classList.add('hidden');
-        const { restoreFocus } = detailsPanelState;
-        detailsPanelState.controlId = null;
-        detailsPanelState.restoreFocus = null;
-        if (restoreFocus && restoreFocus.focus && restoreFocus.isConnected) {
-            restoreFocus.focus();
-        }
-    }
-
-    function handleDetailsKeydown(event) {
-        if (event.key === 'Escape' && detailsPanelState.controlId) {
-            closeDetailsPanel();
-        }
-    }
-
-    function refreshEnhancedLayoutText() {
-        controlRegistry.forEach((entry) => {
-            updateControlSearchTokens(entry);
-        });
-        refreshStatusUI();
-        renderFavoritesList();
-        updateLayoutToggleText();
-        if (detailsPanelState.controlId) {
-            updateDetailsContent(detailsPanelState.controlId);
-        }
-        applyFilters();
-    }
-
-    function registerControlsFromDOM() {
-        controlRegistry.clear();
-        activeControlRegistry.clear();
-        if (!toolsContainer) {
-            return;
-        }
-        const triggers = toolsContainer.querySelectorAll('.a11y-stiac-child[id]');
-        triggers.forEach((trigger) => {
-            const controlId = trigger.id;
-            const metadata = CONTROL_METADATA[controlId];
-            if (!metadata) {
-                return;
-            }
-            const item = trigger.closest('.a11y-stiac-item');
-            const labelElement = trigger.querySelector('[data-control-label]') || trigger.querySelector('p');
-            const entry = {
-                id: controlId,
-                trigger,
-                item,
-                labelElement,
-                metadata,
-                searchTokens: []
-            };
-            controlRegistry.set(controlId, entry);
-            updateControlSearchTokens(entry);
-            if (trigger.classList.contains('active')) {
-                activeControlRegistry.set(controlId, { trigger });
-            }
-            const infoButton = trigger.querySelector('.a11y-stiac-info-button');
-            if (infoButton && !infoButton.dataset.a11yInfoBound) {
-                infoButton.dataset.a11yInfoBound = 'true';
-                infoButton.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    openDetailsPanel(controlId);
-                });
-            }
-        });
-        renderFavoritesList();
-        refreshStatusUI();
-        applyFilters();
-    }
-
-    function bindEnhancedLayoutEvents() {
-        if (searchInputElement && !searchInputElement.dataset.a11yBound) {
-            searchInputElement.dataset.a11yBound = 'true';
-            searchInputElement.addEventListener('input', handleSearchInput);
-        }
-        filterButtonElements.forEach((button) => {
-            if (button.dataset.a11yBound) {
-                return;
-            }
-            button.dataset.a11yBound = 'true';
-            button.addEventListener('click', handleFilterClick);
-        });
-        if (favoritesClearButton && !favoritesClearButton.dataset.a11yBound) {
-            favoritesClearButton.dataset.a11yBound = 'true';
-            favoritesClearButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                clearFavorites();
-            });
-        }
-        if (layoutToggleButton && !layoutToggleButton.dataset.a11yBound) {
-            layoutToggleButton.dataset.a11yBound = 'true';
-            layoutToggleButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                toggleLayoutPanel();
-            });
-            updateLayoutToggleText();
-        }
-        if (detailsCloseButton && !detailsCloseButton.dataset.a11yBound) {
-            detailsCloseButton.dataset.a11yBound = 'true';
-            detailsCloseButton.addEventListener('click', (event) => {
-                event.preventDefault();
-                closeDetailsPanel();
-            });
-        }
-        if (!detailsKeydownBound && typeof document !== 'undefined' && document && document.addEventListener) {
-            document.addEventListener('keydown', handleDetailsKeydown);
-            detailsKeydownBound = true;
-        }
-    }
-
-
     // Hide language icons when the Hide Images tool is active unless the embedding script
     // explicitly opts to preserve them via `data-preserve-language-icons`.
     const shouldHideLanguageIcons = () => {
@@ -4992,7 +3647,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     languageSelectElement.value = payload.language;
                 }
                 syncTextAlignUI({ announce: false });
-                refreshEnhancedLayoutText();
             }
         }).then((state) => {
             if (languageSelectElement) {
@@ -5009,7 +3663,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 } else {
                     renderLanguageOptions(widgetScriptConfig.defaultLanguage);
                 }
-                refreshEnhancedLayoutText();
             }
         }).catch((error) => {
             if (typeof console !== 'undefined' && console && typeof console.error === 'function') {
@@ -5017,7 +3670,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             renderLanguageOptions(widgetScriptConfig.defaultLanguage);
             applyWidgetOverrides();
-            refreshEnhancedLayoutText();
             if (languageSelectElement) {
                 languageSelectElement.setAttribute('disabled', 'disabled');
             }
@@ -5028,7 +3680,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         renderLanguageOptions(widgetScriptConfig.defaultLanguage);
         applyWidgetOverrides();
-        refreshEnhancedLayoutText();
         if (languageSelectElement) {
             languageSelectElement.setAttribute('disabled', 'disabled');
         }
@@ -5817,7 +4468,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     function syncTextAlignUI(options = {}) {
-        const { announce = false, userInitiated = false } = options;
+        const { announce = false } = options;
         if (!textAlignControl) {
             return;
         }
@@ -5831,11 +4482,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        if (userInitiated) {
-            setControlActiveState(textAlignControl, Boolean(currentValue), { userInitiated: true });
-        } else {
-            setControlActiveState(textAlignControl, Boolean(currentValue));
-        }
+        textAlignControl.classList.toggle('active', Boolean(currentValue));
         updateProgress(textAlignControl, typeof progressIndex === 'number' ? progressIndex : -1);
 
         if (textAlignStatusElement) {
@@ -5879,7 +4526,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function setControlActiveState(element, isActive) {
-        const options = arguments.length > 2 && arguments[2] ? arguments[2] : {};
         if (!element) {
             return;
         }
@@ -5891,16 +4537,6 @@ document.addEventListener("DOMContentLoaded", function() {
             icon.style.color = targetColor;
             icon.style.fill = 'currentColor';
         });
-        const controlId = element.id || (element.dataset ? element.dataset.controlId : null);
-        if (controlId) {
-            updateActiveRegistry(controlId, Boolean(isActive));
-            if (detailsPanelState.controlId === controlId) {
-                updateDetailsStatus(controlId);
-            }
-            if (options && options.userInitiated) {
-                registerControlUsage(controlId);
-            }
-        }
     }
 
     function updateProgress(element, activeIndex) {
@@ -5992,7 +4628,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const item = document.querySelector('#invert-colors');
         filterState.invert = !filterState.invert;
         applyFilterState();
-        setControlActiveState(item, filterState.invert, { userInitiated: true });
+        setControlActiveState(item, filterState.invert);
         saveSettings();
     });
 
@@ -6000,7 +4636,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const item = document.querySelector('#grayscale');
         filterState.grayscale = !filterState.grayscale;
         applyFilterState();
-        setControlActiveState(item, filterState.grayscale, { userInitiated: true });
+        setControlActiveState(item, filterState.grayscale);
         saveSettings();
     });
 
@@ -6034,7 +4670,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, filterState.saturation !== 'default', { userInitiated: true });
+        setControlActiveState(item, filterState.saturation !== 'default');
         applyFilterState();
         saveSettings();
     });
@@ -6067,7 +4703,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, underlineClickCount !== 0, { userInitiated: true });
+        setControlActiveState(item, underlineClickCount !== 0);
         saveSettings();
     });
 
@@ -6142,7 +4778,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, fontSizeClickCount !== 0, { userInitiated: true });
+        setControlActiveState(item, fontSizeClickCount !== 0);
         saveSettings();
     });
 
@@ -6174,7 +4810,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, lineHeightClickCount !== 0, { userInitiated: true });
+        setControlActiveState(item, lineHeightClickCount !== 0);
         saveSettings();
     });
 
@@ -6202,7 +4838,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, letterSpacingClickCount !== 0, { userInitiated: true });
+        setControlActiveState(item, letterSpacingClickCount !== 0);
         saveSettings();
     });
 
@@ -6215,7 +4851,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else {
                 delete docElement.dataset.a11yStiacDyslexiaFont;
             }
-            setControlActiveState(dyslexiaFontControl, nextState, { userInitiated: true });
+            setControlActiveState(dyslexiaFontControl, nextState);
             saveSettings();
         });
     }
@@ -6236,7 +4872,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
 
-            syncTextAlignUI({ announce: true, userInitiated: true });
+            syncTextAlignUI({ announce: true });
             saveSettings();
         });
     }
@@ -6265,7 +4901,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, contrastClickCount !== 0, { userInitiated: true });
+        setControlActiveState(item, contrastClickCount !== 0);
         applyFilterState();
         saveSettings();
     });
@@ -6274,7 +4910,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const item = document.querySelector('#hide-images');
         const nextState = !docElement.classList.contains('hide-images');
         setHideImagesActive(nextState);
-        setControlActiveState(item, nextState, { userInitiated: true });
+        setControlActiveState(item, nextState);
         saveSettings();
     });
 
@@ -6282,7 +4918,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const item = document.querySelector('#hide-video');
         const nextState = !docElement.classList.contains('hide-video');
         docElement.classList.toggle('hide-video');
-        setControlActiveState(item, nextState, { userInitiated: true });
+        setControlActiveState(item, nextState);
         saveSettings();
     });
 
@@ -6291,7 +4927,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const nextState = !docElement.classList.contains('reduce-motion');
         reduceMotionPreferenceLocked = true;
         setReduceMotionActive(nextState);
-        setControlActiveState(item, nextState, { userInitiated: true });
+        setControlActiveState(item, nextState);
         saveSettings();
     });
 
@@ -6345,7 +4981,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         updateProgress(item, progressIndex);
-        setControlActiveState(item, cursorClickCount !== 0, { userInitiated: true });
+        setControlActiveState(item, cursorClickCount !== 0);
         saveSettings();
     });
 

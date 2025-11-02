@@ -78,64 +78,6 @@
       "bottomLeft": "Anclar el widget a la esquina inferior izquierda",
       "bottomRight": "Anclar el widget a la esquina inferior derecha",
       "right": "Anclar el widget al borde derecho"
-    },
-    "status": {
-      "title": "Herramientas activas",
-      "empty": "No hay ajustes activos.",
-      "single": "{{count}} ajuste activo.",
-      "multiple": "{{count}} ajustes activos.",
-      "ariaLabel": "Ajustes activos",
-      "chipAriaLabel": "Desactivar {{label}}"
-    },
-    "filters": {
-      "searchLabel": "Buscar una herramienta",
-      "searchPlaceholder": "Buscar herramientas",
-      "groupLabel": "Filtrar categorías de herramientas",
-      "categories": {
-        "all": "Todos",
-        "vision": "Visión",
-        "content": "Contenido",
-        "navigation": "Navegación"
-      },
-      "empty": "Ninguna herramienta coincide con la búsqueda. Prueba con otra palabra clave o categoría."
-    },
-    "layout": {
-      "title": "Opciones de diseño",
-      "toggleOpen": "Mostrar controles de anclaje",
-      "toggleClose": "Ocultar controles de anclaje"
-    },
-    "favorites": {
-      "title": "Acceso rápido",
-      "clear": "Limpiar",
-      "activate": "Activar/desactivar {{label}}"
-    },
-    "details": {
-      "persistence": "Tu selección se guarda para visitas futuras cuando haya almacenamiento disponible.",
-      "previewHeading": "Vista previa",
-      "open": "Saber más sobre esta herramienta",
-      "statusActive": "Activo",
-      "statusInactive": "Inactivo"
-    },
-    "sections": {
-      "vision": "Visión",
-      "content": "Contenido",
-      "navigation": "Navegación"
-    },
-    "descriptions": {
-      "invertColours": "Invierte los colores de la página para reducir el deslumbramiento y aumentar el contraste si eres sensible a la luz.",
-      "grayscale": "Convierte los colores a escala de grises para quienes prefieren tonos neutros sin distracciones.",
-      "lowSaturation": "Alterna entre saturación reducida e intensificada para mejorar el enfoque o la visibilidad.",
-      "contrast": "Aumenta o disminuye el contraste para adaptarlo a la luz ambiente o a tu comodidad.",
-      "hideImages": "Elimina temporalmente las imágenes decorativas para concentrarte en el texto.",
-      "hideVideo": "Oculta los vídeos automáticos o distractores hasta que quieras interactuar con ellos.",
-      "reduceMotion": "Detén los efectos animados y los medios automáticos para evitar molestias por movimiento.",
-      "fontSize": "Aumenta gradualmente el tamaño del texto para mantener los párrafos legibles en cualquier pantalla.",
-      "lineHeight": "Añade espacio entre líneas para ayudar a lectores con dislexia o baja visión.",
-      "letterSpacing": "Amplía el espaciado entre letras para mejorar la legibilidad a primera vista.",
-      "fontDyslexia": "Cambia a la fuente OpenDyslexic para formas de letras más reconocibles y una lectura más relajada.",
-      "textAlign": "Recorre la alineación izquierda, centrada, derecha y justificada sin editar el CSS.",
-      "linksHighlight": "Resalta los enlaces con subrayados y colores marcados para que los usuarios con teclado o lectores de pantalla puedan explorar rápidamente.",
-      "changeCursors": "Cambia entre cursores de enfoque, foco y guía de lectura para seguir el contenido mientras navegas."
     }
   },
   "announcements": {
