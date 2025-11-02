@@ -78,6 +78,64 @@
       "bottomLeft": "Fixar o widget no canto inferior esquerdo",
       "bottomRight": "Fixar o widget no canto inferior direito",
       "right": "Fixar o widget na borda direita"
+    },
+    "status": {
+      "title": "Ferramentas ativas",
+      "empty": "Nenhum ajuste ativo.",
+      "single": "{{count}} ajuste ativo.",
+      "multiple": "{{count}} ajustes ativos.",
+      "ariaLabel": "Ajustes ativos",
+      "chipAriaLabel": "Desativar {{label}}"
+    },
+    "filters": {
+      "searchLabel": "Encontrar uma ferramenta",
+      "searchPlaceholder": "Pesquisar ferramentas",
+      "groupLabel": "Filtrar categorias de ferramentas",
+      "categories": {
+        "all": "Todos",
+        "vision": "Visão",
+        "content": "Conteúdo",
+        "navigation": "Navegação"
+      },
+      "empty": "Nenhuma ferramenta corresponde à pesquisa. Tente outra palavra-chave ou categoria."
+    },
+    "layout": {
+      "title": "Opções de layout",
+      "toggleOpen": "Mostrar controles de ancoragem",
+      "toggleClose": "Ocultar controles de ancoragem"
+    },
+    "favorites": {
+      "title": "Acesso rápido",
+      "clear": "Limpar",
+      "activate": "Ativar/desativar {{label}}"
+    },
+    "details": {
+      "persistence": "Sua seleção é salva para visitas futuras quando o armazenamento estiver disponível.",
+      "previewHeading": "Pré-visualização",
+      "open": "Saiba mais sobre esta ferramenta",
+      "statusActive": "Ativo",
+      "statusInactive": "Inativo"
+    },
+    "sections": {
+      "vision": "Visão",
+      "content": "Conteúdo",
+      "navigation": "Navegação"
+    },
+    "descriptions": {
+      "invertColours": "Inverta as cores da página para reduzir o brilho e aumentar o contraste em caso de sensibilidade à luz.",
+      "grayscale": "Converta as cores para tons de cinza para quem prefere cores neutras sem distrações.",
+      "lowSaturation": "Alterne entre saturação reduzida e intensificada para melhorar o foco ou a visibilidade.",
+      "contrast": "Aumente ou diminua o contraste para adequá-lo à luz ambiente ou à sua preferência.",
+      "hideImages": "Remova temporariamente imagens decorativas para focar no texto.",
+      "hideVideo": "Oculte vídeos automáticos ou distrativos até querer interagir com eles.",
+      "reduceMotion": "Pause efeitos animados e mídias automáticas para evitar desconforto com movimento.",
+      "fontSize": "Aumente gradualmente o tamanho do texto para manter os parágrafos legíveis em qualquer tela.",
+      "lineHeight": "Adicione espaço entre linhas para ajudar leitores com dislexia ou baixa visão.",
+      "letterSpacing": "Amplie o espaçamento entre letras para melhorar a legibilidade imediata.",
+      "fontDyslexia": "Mude para a fonte OpenDyslexic para formas de letras mais reconhecíveis e uma leitura mais tranquila.",
+      "textAlign": "Percorra os alinhamentos esquerda, centro, direita e justificado sem editar o CSS.",
+      "linksHighlight": "Destaque os links com sublinhados e cores fortes para facilitar a varredura com teclado ou leitor de tela.",
+      "changeCursors": "Alterne entre cursores de foco, holofote e guia de leitura para acompanhar o conteúdo durante a navegação."
     }
   },
   "announcements": {

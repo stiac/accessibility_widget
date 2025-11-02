@@ -78,6 +78,64 @@
       "bottomLeft": "Ancorare il widget all'angolo in basso a sinistra",
       "bottomRight": "Ancorare il widget all'angolo in basso a destra",
       "right": "Ancorare il widget al bordo destro"
+    },
+    "status": {
+      "title": "Strumenti attivi",
+      "empty": "Nessuna regolazione attiva.",
+      "single": "{{count}} regolazione attiva.",
+      "multiple": "{{count}} regolazioni attive.",
+      "ariaLabel": "Regolazioni attive",
+      "chipAriaLabel": "Disattiva {{label}}"
+    },
+    "filters": {
+      "searchLabel": "Trova uno strumento",
+      "searchPlaceholder": "Cerca strumenti",
+      "groupLabel": "Filtra le categorie di strumenti",
+      "categories": {
+        "all": "Tutti",
+        "vision": "Visione",
+        "content": "Contenuti",
+        "navigation": "Navigazione"
+      },
+      "empty": "Nessuno strumento corrisponde alla ricerca. Prova con un'altra parola chiave o categoria."
+    },
+    "layout": {
+      "title": "Opzioni layout",
+      "toggleOpen": "Mostra i controlli di ancoraggio",
+      "toggleClose": "Nascondi i controlli di ancoraggio"
+    },
+    "favorites": {
+      "title": "Accesso rapido",
+      "clear": "Svuota",
+      "activate": "Attiva/disattiva {{label}}"
+    },
+    "details": {
+      "persistence": "La selezione viene salvata per le visite future quando l'archiviazione è disponibile.",
+      "previewHeading": "Anteprima",
+      "open": "Scopri di più su questo strumento",
+      "statusActive": "Attivo",
+      "statusInactive": "Disattivo"
+    },
+    "sections": {
+      "vision": "Visione",
+      "content": "Contenuti",
+      "navigation": "Navigazione"
+    },
+    "descriptions": {
+      "invertColours": "Inverti i colori della pagina per ridurre l'abbagliamento e aumentare il contrasto in caso di sensibilità alla luce.",
+      "grayscale": "Converti i colori in scala di grigi per chi preferisce tonalità neutre senza distrazioni.",
+      "lowSaturation": "Alterna tra saturazione attenuata e amplificata per migliorare la concentrazione o la visibilità.",
+      "contrast": "Aumenta o diminuisci il contrasto per adattarlo alla luce ambientale o alle tue preferenze.",
+      "hideImages": "Rimuovi temporaneamente le immagini decorative per concentrarti sul testo.",
+      "hideVideo": "Nascondi i video in autoplay o distraenti finché non desideri interagire con loro.",
+      "reduceMotion": "Metti in pausa effetti animati e contenuti automatici per evitare fastidi dovuti al movimento.",
+      "fontSize": "Aumenta gradualmente la dimensione del testo così i paragrafi restano leggibili su ogni schermo.",
+      "lineHeight": "Aggiungi spazio tra le righe per agevolare i lettori con dislessia o vista ridotta.",
+      "letterSpacing": "Allarga la spaziatura tra le lettere per una migliore leggibilità a colpo d'occhio.",
+      "fontDyslexia": "Passa al font OpenDyslexic per forme di lettere riconoscibili e una lettura più rilassata.",
+      "textAlign": "Scorri tra allineamento sinistro, centrato, destro e giustificato senza modificare il CSS.",
+      "linksHighlight": "Evidenzia i link con sottolineature e colori marcati per una scansione rapida con tastiera o screen reader.",
+      "changeCursors": "Alterna tra cursori di messa a fuoco, evidenziazione e guida di lettura per seguire i contenuti durante la navigazione."
     }
   },
   "announcements": {
