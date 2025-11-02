@@ -1,4 +1,17 @@
 # Changelog
+# [1.5.32] - 2025-12-22
+
+### Added
+- Introduced `data-enable-position-controls` / `data-position-controls` so integrators can opt into rendering the Change Positions footer when required.
+
+### Changed
+- Removed the Change Positions buttons from the default layout to keep the widget lean unless the host explicitly enables them.
+
+### Fixed
+- None.
+
+### Removed
+- None.
 # [1.5.31] - 2025-12-21
 
 ### Added

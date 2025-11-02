@@ -1775,6 +1775,142 @@ const accessibilityMenuStyles = `
       display: none;
     }
 `;
+// Template block for the optional position controls. Having a dedicated
+// constant keeps the main widget layout readable and allows runtime toggling.
+const changePositionsControlsHTML = `
+        <!--change positions-->
+        <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
+          <button
+            id="align-a11y-stiac-top"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top edge"
+            title="Dock widget to the top edge"
+            data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4.47 10.53a.75.75 0 0 0 1.06 0L9.25 6.81V19a.75.75 0 0 0 1.5 0V6.81l3.72 3.72a.75.75 0 1 0 1.06-1.06l-5-5a.75.75 0 0 0-1.06 0l-5 5a.75.75 0 0 0 0 1.06Z"
+                fill="currentColor"
+              />
+            </svg></button>
+          <button
+            id="align-a11y-stiac-top-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top-left corner"
+            title="Dock widget to the top-left corner"
+            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
+                fill="currentColor"
+                transform="rotate(45 12 12)"
+              />
+            </svg></button>
+          <button
+            id="align-a11y-stiac-bottom"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom edge"
+            title="Dock widget to the bottom edge"
+            data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
+                fill="currentColor"
+              />
+            </svg></button>
+          <button
+            id="align-a11y-stiac-bottom-left"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom-left corner"
+            title="Dock widget to the bottom-left corner"
+            data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M13.47 19.53a.75.75 0 0 1 0-1.06l3.72-3.72H5a.75.75 0 0 1 0-1.5h12.19l-3.72-3.72a.75.75 0 1 1 1.06-1.06l5 5a.75.75 0 0 1 0 1.06l-5 5a.75.75 0 0 1-1.06 0Z"
+                fill="currentColor"
+                transform="rotate(45 12 12)"
+              />
+            </svg></button>
+          <button
+            id="align-a11y-stiac-bottom-right"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the bottom-right corner"
+            title="Dock widget to the bottom-right corner"
+            data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.53 10.53a.75.75 0 0 0-1.06 0L14.75 6.81V19a.75.75 0 0 1-1.5 0V6.81l-3.72 3.72a.75.75 0 0 1-1.06-1.06l5-5a.75.75 0 0 1 1.06 0l5 5a.75.75 0 0 1 0 1.06Z"
+                fill="currentColor"
+              />
+            </svg></button>
+          <button
+            id="align-a11y-stiac-top-right"
+            type="button"
+            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            aria-pressed="false"
+            aria-label="Dock widget to the top-right corner"
+            title="Dock widget to the top-right corner"
+            data-i18n-attr="aria-label:controls.position.topRight, title:controls.position.topRight"
+          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="block h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
+                fill="currentColor"
+                transform="rotate(-45 12 12)"
+              />
+            </svg></button>
+        </div>`;
+
 const accessibilityMenuHTML = `
     <div id="accessibility-modal" class="bottom close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-a11y-stiac-preserve-images>
       <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-lg shadow-slate-900/40 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
@@ -2028,139 +2164,7 @@ const accessibilityMenuHTML = `
           Reset All
         </button>
 
-        <!--change positions-->
-        <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
-          <button
-            id="align-a11y-stiac-top"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the top edge"
-            title="Dock widget to the top edge"
-            data-i18n-attr="aria-label:controls.position.top, title:controls.position.top"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M4.47 10.53a.75.75 0 0 0 1.06 0L9.25 6.81V19a.75.75 0 0 0 1.5 0V6.81l3.72 3.72a.75.75 0 1 0 1.06-1.06l-5-5a.75.75 0 0 0-1.06 0l-5 5a.75.75 0 0 0 0 1.06Z"
-                fill="currentColor"
-              />
-            </svg></button>
-          <button
-            id="align-a11y-stiac-top-left"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the top-left corner"
-            title="Dock widget to the top-left corner"
-            data-i18n-attr="aria-label:controls.position.topLeft, title:controls.position.topLeft"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M10.53 4.47a.75.75 0 0 1 0 1.06L6.81 9.25H19a.75.75 0 0 1 0 1.5H6.81l3.72 3.72a.75.75 0 1 1-1.06 1.06l-5-5a.75.75 0 0 1 0-1.06l5-5a.75.75 0 0 1 1.06 0Z"
-                fill="currentColor"
-                transform="rotate(45 12 12)"
-              />
-            </svg></button>
-          <button
-            id="align-a11y-stiac-bottom"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the bottom edge"
-            title="Dock widget to the bottom edge"
-            data-i18n-attr="aria-label:controls.position.bottom, title:controls.position.bottom"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
-                fill="currentColor"
-              />
-            </svg></button>
-          <button
-            id="align-a11y-stiac-bottom-left"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the bottom-left corner"
-            title="Dock widget to the bottom-left corner"
-            data-i18n-attr="aria-label:controls.position.bottomLeft, title:controls.position.bottomLeft"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
-                fill="currentColor"
-                transform="rotate(45 12 12)"
-              />
-            </svg></button>
-          <button
-            id="align-a11y-stiac-bottom-right"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the bottom-right corner"
-            title="Dock widget to the bottom-right corner"
-            data-i18n-attr="aria-label:controls.position.bottomRight, title:controls.position.bottomRight"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M19.53 13.47a.75.75 0 0 0-1.06 0L14.75 17.19V5a.75.75 0 0 0-1.5 0v12.19l-3.72-3.72a.75.75 0 1 0-1.06 1.06l5 5a.75.75 0 0 0 1.06 0l5-5a.75.75 0 0 0 0-1.06Z"
-                fill="currentColor"
-                transform="rotate(-45 12 12)"
-              />
-            </svg></button>
-          <button
-            id="align-a11y-stiac-top-right"
-            type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
-            aria-pressed="false"
-            aria-label="Dock widget to the top-right corner"
-            title="Dock widget to the top-right corner"
-            data-i18n-attr="aria-label:controls.position.topRight, title:controls.position.topRight"
-          ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M13.47 4.47a.75.75 0 0 0 0 1.06l3.72 3.72H5a.75.75 0 0 0 0 1.5h12.19l-3.72 3.72a.75.75 0 1 0 1.06 1.06l5-5a.75.75 0 0 0 0-1.06l-5-5a.75.75 0 0 0-1.06 0Z"
-                fill="currentColor"
-                transform="rotate(-45 12 12)"
-              />
-            </svg></button>
-        </div>
+        {{ changePositionsControls }}
         <p id="a11y-stiac-language-announcement" class="a11y-stiac-sr-only" aria-live="polite" role="status"></p>
         <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500" role="note" aria-label="Software protetto da Stiac Web Services">
           <strong class="block text-xs tracking-[0.35em] text-slate-600">Stiac Web Services</strong>
@@ -2211,7 +2215,8 @@ function resolveWidgetScriptConfig() {
         voce2: '',
         localesPath: '',
         translateLanguageNames: false,
-        preserveLanguageIcons: false
+        preserveLanguageIcons: false,
+        positionControlsEnabled: false
     };
 
     if (typeof document === 'undefined') {
@@ -2324,6 +2329,20 @@ function resolveWidgetScriptConfig() {
             config.preserveLanguageIcons = true;
         } else if (falsyValues.includes(rawPreference)) {
             config.preserveLanguageIcons = false;
+        }
+    }
+
+    const positionControlsPreference = typeof script.dataset.positionControls === 'string'
+        ? script.dataset.positionControls
+        : script.dataset.enablePositionControls;
+    if (typeof positionControlsPreference === 'string' && positionControlsPreference.trim()) {
+        const rawPreference = positionControlsPreference.trim().toLowerCase();
+        const truthyValues = ['1', 'true', 'yes', 'on'];
+        const falsyValues = ['0', 'false', 'no', 'off'];
+        if (truthyValues.includes(rawPreference)) {
+            config.positionControlsEnabled = true;
+        } else if (falsyValues.includes(rawPreference)) {
+            config.positionControlsEnabled = false;
         }
     }
 
@@ -3304,7 +3323,12 @@ document.addEventListener("DOMContentLoaded", function() {
     accessibilityMenuStyleElement.innerHTML = accessibilityMenuStyles;
     document.head.appendChild(accessibilityMenuStyleElement);
 
-    document.body.insertAdjacentHTML("beforeend", accessibilityMenuHTML);
+    const shouldRenderPositionControls = widgetScriptConfig.positionControlsEnabled === true;
+    const widgetMarkup = formatWidgetTemplate(accessibilityMenuHTML, {
+        changePositionsControls: shouldRenderPositionControls ? changePositionsControlsHTML : ''
+    });
+
+    document.body.insertAdjacentHTML("beforeend", widgetMarkup);
 
     // Promote cursor overlays to the body so they are not clipped by the modal container.
     const injectedCursor = document.getElementById('cursor');
