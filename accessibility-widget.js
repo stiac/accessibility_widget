@@ -2797,7 +2797,7 @@ document.addEventListener("DOMContentLoaded", function() {
         accessibilityModal.classList.add('is-ready');
     });
 
-    console.info('Powered by Stiac Web Services');
+    //console.info('Accessibility Widget v1.7.0 - Powered by Stiac Web Services');
 
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
