@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.28
+- **Version**: 1.5.29
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-18
+- **Last Update**: 2025-12-19
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-12-19 — Rebranded the accessibility widget by renaming every `acc-` class, ID, data attribute, and storage key to the new `a11y-stiac-` namespace for consistent STiac theming (AI assistant)
 - 2025-12-18 — Wrapped the close button click handler so the scrollbar padding helper always initialises even when the launcher markup is missing on load (AI assistant)
 - 2025-12-12 — Reordered i18n initialisation so stored, browser, and document languages override configured defaults, restoring automatic locale detection for supported visitors (AI assistant)
 - 2025-12-10 — Hard-set the accessibility tools container to a 0.9rem right padding so it lines up with the navigation even when a scrollbar is visible (AI assistant)

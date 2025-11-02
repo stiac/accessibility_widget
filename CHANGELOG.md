@@ -1,4 +1,20 @@
 # Changelog
+# [1.5.29] - 2025-12-19
+
+### Added
+- None.
+
+### Changed
+- Rebranded all widget classes, IDs, data attributes, and helper animations from the `acc-` prefix to the `a11y-stiac-` namespa
+  ce so the UI reflects the latest STiac branding.
+- Updated the persisted settings storage key to `a11y-stiac-settings` so cache, local storage, and cookie integrations follow th
+  e new naming convention.
+
+### Fixed
+- None.
+
+### Removed
+- None.
 # [1.5.28] - 2025-12-18
 
 ### Added
@@ -30,7 +46,7 @@
 # [1.5.26] - 2025-12-16
 
 ### Added
-- Introduced `data-default-position` / `data-position` script attributes so integrators can preselect the widget's docking location using either keyword positions or the matching `align-acc-*` IDs.
+- Introduced `data-default-position` / `data-position` script attributes so integrators can preselect the widget's docking location using either keyword positions or the matching `align-a11y-stiac-*` IDs.
 
 ### Changed
 - Updated the default docking position to the bottom edge so the widget opens near common assistive launchers on initial load.
@@ -177,7 +193,7 @@
 
 ### Fixed
 - Ensured the close toggle and Reset All button apply the configured header colours instead of the generic accent fallback.
-- Applied hover background, text, and icon fill overrides when hovering the `.acc-item.group` wrapper so cards reflect the chosen palette consistently.
+- Applied hover background, text, and icon fill overrides when hovering the `.a11y-stiac-item.group` wrapper so cards reflect the chosen palette consistently.
 
 ### Removed
 - None.
@@ -479,7 +495,7 @@
 ## [1.4.22] - 2025-11-14
 
 ### Added
-- Introduced a Reduce Motion control that freezes CSS-driven motion, pauses autoplaying media, and stops marquee content to meet WCAG 2.1 Level A and European Accessibility Act expectations, with an opt-out via `data-acc-preserve-motion` for essential animations.
+- Introduced a Reduce Motion control that freezes CSS-driven motion, pauses autoplaying media, and stops marquee content to meet WCAG 2.1 Level A and European Accessibility Act expectations, with an opt-out via `data-a11y-stiac-preserve-motion` for essential animations.
 
 ### Changed
 - None.
@@ -538,7 +554,7 @@
 - Introduced a keyboard-navigable Text Align button group with Start, Center, End, and Justify options that surface polite screen reader announcements.
 
 ### Changed
-- Applied `data-acc-text-align` helpers and WCAG/EAA-driven styling so user-selected alignment overrides conflicting author styles while respecting document direction.
+- Applied `data-a11y-stiac-text-align` helpers and WCAG/EAA-driven styling so user-selected alignment overrides conflicting author styles while respecting document direction.
 
 ### Fixed
 - Migrated legacy left/center/right settings to the new alignment model and ensured resets restore the original site alignment safely.
@@ -820,7 +836,7 @@ ize control affects the entire site instead of only resizing the accessibility m
 ## [1.3.3] - 2024-06-20
 
 ### Added
-- Support for `data-acc-video-embed` and `data-acc-preserve-video` attributes to fine tune hide-video behaviour for custom players.
+- Support for `data-a11y-stiac-video-embed` and `data-a11y-stiac-preserve-video` attributes to fine tune hide-video behaviour for custom players.
 
 ### Changed
 - None.
