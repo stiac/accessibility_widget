@@ -1105,17 +1105,17 @@ const openDyslexicBoldDataUri =
 
 const accessibilityMenuStyles = `
     :root {
-      --acc_color_1: #036cff;
-      --acc_color_2: #f8fafc;
-      --acc_hover_color: #1f5dff;
-      --acc_hover_text_color: #f8fafc;
-      --acc_text_color: rgba(15, 23, 42, 0.85);
-      --acc_header_bg_color: #036cff;
-      --acc_header_text_color: #ffffff;
-      --acc_control_active_bg_color: #036cff;
-      --acc_control_active_text_color: #ffffff;
+      --a11y-stiac-color-1: #036cff;
+      --a11y-stiac-color-2: #f8fafc;
+      --a11y-stiac-hover-color: #1f5dff;
+      --a11y-stiac-hover-text-color: #f8fafc;
+      --a11y-stiac-text-color: rgba(15, 23, 42, 0.85);
+      --a11y-stiac-header-bg-color: #036cff;
+      --a11y-stiac-header-text-color: #ffffff;
+      --a11y-stiac-control-active-bg-color: #036cff;
+      --a11y-stiac-control-active-text-color: #ffffff;
       --border_radius: 24px;
-      --acc-font-scale: 1;
+      --a11y-stiac-font-scale: 1;
     }
 
     /*
@@ -1143,12 +1143,12 @@ const accessibilityMenuStyles = `
         url("${openDyslexicBoldDataUri}") format("opentype");
     }
 
-    html[data-acc-font-scale-active] {
-      font-size: var(--acc-root-font-size, 100%) !important;
+    html[data-a11y-stiac-font-scale-active] {
+      font-size: var(--a11y-stiac-root-font-size, 100%) !important;
     }
 
-    html[data-acc-font-scale-active] body {
-      font-size: var(--acc-body-font-size, inherit) !important;
+    html[data-a11y-stiac-font-scale-active] body {
+      font-size: var(--a11y-stiac-body-font-size, inherit) !important;
     }
 
     /*
@@ -1156,7 +1156,7 @@ const accessibilityMenuStyles = `
      * dedicated control is active while leaving the widget typography
      * untouched for consistent UI rendering.
      */
-    html[data-acc-dyslexia-font] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+    html[data-a11y-stiac-dyslexia-font] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       font-family: "OpenDyslexic", "OpenDyslexic3", "Atkinson Hyperlegible", "Lexend Deca", "Lexend", "Arial", "Verdana", sans-serif !important;
       letter-spacing: 0.02em;
     }
@@ -1170,19 +1170,19 @@ const accessibilityMenuStyles = `
      * restore the browser defaults for inline media while keeping the widget's
      * icons block-level for sizing consistency.
      */
-    html[data-acc-tailwind-fallback] audio,
-    html[data-acc-tailwind-fallback] canvas,
-    html[data-acc-tailwind-fallback] embed,
-    html[data-acc-tailwind-fallback] iframe,
-    html[data-acc-tailwind-fallback] img,
-    html[data-acc-tailwind-fallback] object,
-    html[data-acc-tailwind-fallback] svg,
-    html[data-acc-tailwind-fallback] video {
+    html[data-a11y-stiac-tailwind-fallback] audio,
+    html[data-a11y-stiac-tailwind-fallback] canvas,
+    html[data-a11y-stiac-tailwind-fallback] embed,
+    html[data-a11y-stiac-tailwind-fallback] iframe,
+    html[data-a11y-stiac-tailwind-fallback] img,
+    html[data-a11y-stiac-tailwind-fallback] object,
+    html[data-a11y-stiac-tailwind-fallback] svg,
+    html[data-a11y-stiac-tailwind-fallback] video {
       display: inline;
       vertical-align: baseline;
     }
 
-    html[data-acc-tailwind-fallback] #accessibility-modal svg {
+    html[data-a11y-stiac-tailwind-fallback] #accessibility-modal svg {
       display: block;
       vertical-align: middle;
     }
@@ -1193,23 +1193,23 @@ const accessibilityMenuStyles = `
      * to their reading preference without author styles fighting the choice.
      * The modal is excluded so that the control affects the host page only.
      */
-    html[data-acc-text-align="start"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+    html[data-a11y-stiac-text-align="start"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       text-align: start !important;
     }
 
-    html[data-acc-text-align="center"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+    html[data-a11y-stiac-text-align="center"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       text-align: center !important;
     }
 
-    html[data-acc-text-align="end"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+    html[data-a11y-stiac-text-align="end"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       text-align: end !important;
     }
 
-    html[data-acc-text-align="justify"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+    html[data-a11y-stiac-text-align="justify"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       text-align: justify !important;
     }
 
-    .acc-sr-only {
+    .a11y-stiac-sr-only {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -1232,7 +1232,7 @@ const accessibilityMenuStyles = `
     }
 
     #accessibility-modal {
-      font-size: var(--acc-modal-font-size, calc(1rem / var(--acc-font-scale, 1)));
+      font-size: var(--a11y-stiac-modal-font-size, calc(1rem / var(--a11y-stiac-font-scale, 1)));
     }
 
     #accessibility-modal * {
@@ -1247,23 +1247,23 @@ const accessibilityMenuStyles = `
      * to keep the UI stable regardless of the applied zoom level.
      */
     #accessibility-modal .text-xs {
-      font-size: var(--acc-modal-text-xs, calc(0.75rem / var(--acc-font-scale, 1)));
+      font-size: var(--a11y-stiac-modal-text-xs, calc(0.75rem / var(--a11y-stiac-font-scale, 1)));
     }
 
     #accessibility-modal .text-sm {
-      font-size: var(--acc-modal-text-sm, calc(0.875rem / var(--acc-font-scale, 1)));
+      font-size: var(--a11y-stiac-modal-text-sm, calc(0.875rem / var(--a11y-stiac-font-scale, 1)));
     }
 
     #accessibility-modal .text-lg {
-      font-size: var(--acc-modal-text-lg, calc(1.125rem / var(--acc-font-scale, 1)));
+      font-size: var(--a11y-stiac-modal-text-lg, calc(1.125rem / var(--a11y-stiac-font-scale, 1)));
     }
 
     #accessibility-modal .text-[10px] {
-      font-size: var(--acc-modal-text-10, calc(10px / var(--acc-font-scale, 1)));
+      font-size: var(--a11y-stiac-modal-text-10, calc(10px / var(--a11y-stiac-font-scale, 1)));
     }
 
     #accessibility-modal .text-[11px] {
-      font-size: var(--acc-modal-text-11, calc(11px / var(--acc-font-scale, 1)));
+      font-size: var(--a11y-stiac-modal-text-11, calc(11px / var(--a11y-stiac-font-scale, 1)));
     }
 
     #accessibility-modal {
@@ -1275,22 +1275,22 @@ const accessibilityMenuStyles = `
       max-height: 90vh;
       z-index: 99999999;
       text-align: left;
-      --acc-translate-x: 0;
-      --acc-transform-origin: top right;
-      --acc-open-radius: 24px;
-      --acc-closed-radius: 9999px;
-      --acc-launcher-shadow: 0 22px 36px -18px rgba(15, 23, 42, 0.55);
-      transform-origin: var(--acc-transform-origin);
-      border-radius: var(--acc-open-radius);
+      --a11y-stiac-translate-x: 0;
+      --a11y-stiac-transform-origin: top right;
+      --a11y-stiac-open-radius: 24px;
+      --a11y-stiac-closed-radius: 9999px;
+      --a11y-stiac-launcher-shadow: 0 22px 36px -18px rgba(15, 23, 42, 0.55);
+      transform-origin: var(--a11y-stiac-transform-origin);
+      border-radius: var(--a11y-stiac-open-radius);
       transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1), width 0.35s ease, height 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
       opacity: 0;
-      transform: translate3d(var(--acc-translate-x), 16px, 0) scale(0.96);
+      transform: translate3d(var(--a11y-stiac-translate-x), 16px, 0) scale(0.96);
       filter: saturate(100%) blur(0);
     }
 
     #accessibility-modal.is-ready {
       opacity: 1;
-      transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+      transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
     }
 
     /*
@@ -1298,50 +1298,50 @@ const accessibilityMenuStyles = `
      * launcher bubble feels responsive without being jarring.
      */
     #accessibility-modal.is-ready:not(.close) {
-      animation: acc-modal-open 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      animation: a11y-stiac-modal-open 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
       animation-fill-mode: both;
     }
 
-    @keyframes acc-modal-open {
+    @keyframes a11y-stiac-modal-open {
       0% {
         opacity: 0;
-        transform: translate3d(var(--acc-translate-x), 22px, 0) scale(0.9);
+        transform: translate3d(var(--a11y-stiac-translate-x), 22px, 0) scale(0.9);
         filter: saturate(92%) blur(8px);
-        border-radius: var(--acc-closed-radius);
-        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        border-radius: var(--a11y-stiac-closed-radius);
+        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
       }
       55% {
         opacity: 1;
-        transform: translate3d(var(--acc-translate-x), -6px, 0) scale(1.02);
+        transform: translate3d(var(--a11y-stiac-translate-x), -6px, 0) scale(1.02);
         filter: saturate(110%) blur(0);
-        border-radius: calc(var(--acc-open-radius) + 12px);
+        border-radius: calc(var(--a11y-stiac-open-radius) + 12px);
       }
       100% {
         opacity: 1;
-        transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
+        transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
         filter: saturate(100%) blur(0);
-        border-radius: var(--acc-open-radius);
-        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        border-radius: var(--a11y-stiac-open-radius);
+        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
       }
     }
 
     #accessibility-modal.is-ready.close {
-      animation: acc-modal-collapse 0.45s cubic-bezier(0.55, 0, 0.45, 1);
+      animation: a11y-stiac-modal-collapse 0.45s cubic-bezier(0.55, 0, 0.45, 1);
       animation-fill-mode: both;
     }
 
-    @keyframes acc-modal-collapse {
+    @keyframes a11y-stiac-modal-collapse {
       0% {
         opacity: 1;
-        transform: translate3d(var(--acc-translate-x), 0, 0) scale(1);
-        border-radius: var(--acc-open-radius);
-        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
+        border-radius: var(--a11y-stiac-open-radius);
+        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
       }
       100% {
         opacity: 1;
-        transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
-        border-radius: var(--acc-closed-radius);
-        box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
+        border-radius: var(--a11y-stiac-closed-radius);
+        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
       }
     }
 
@@ -1355,22 +1355,22 @@ const accessibilityMenuStyles = `
       height: 3.75rem;
       min-width: 3.75rem;
       min-height: 3.75rem;
-      border-radius: var(--acc-closed-radius);
+      border-radius: var(--a11y-stiac-closed-radius);
       overflow: hidden;
       opacity: 1;
-      transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+      transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
       filter: saturate(100%) blur(0);
-      box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+      box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
     }
 
     #accessibility-modal.is-ready.close {
-      transform: translate3d(var(--acc-translate-x), 8px, 0) scale(0.94);
+      transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
     }
 
     #accessibility-modal.close #headerContent,
     #accessibility-modal.close #accessibility-tools,
     #accessibility-modal.close #language-selector,
-    #accessibility-modal.close #acc-footer {
+    #accessibility-modal.close #a11y-stiac-footer {
       display: none;
     }
 
@@ -1381,7 +1381,7 @@ const accessibilityMenuStyles = `
       height: 2.75rem;
       border-radius: 9999px;
       margin: 0;
-      box-shadow: var(--acc-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+      box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
     }
 
     #accessibility-modal.close #closeBtn svg {
@@ -1402,15 +1402,15 @@ const accessibilityMenuStyles = `
     #accessibility-modal.left {
       left: 1rem;
       right: auto;
-      --acc-translate-x: 0;
-      --acc-transform-origin: top left;
+      --a11y-stiac-translate-x: 0;
+      --a11y-stiac-transform-origin: top left;
     }
 
     #accessibility-modal.right {
       right: 1rem;
       left: auto;
-      --acc-translate-x: 0;
-      --acc-transform-origin: top right;
+      --a11y-stiac-translate-x: 0;
+      --a11y-stiac-transform-origin: top right;
     }
 
     #accessibility-modal.top {
@@ -1418,8 +1418,8 @@ const accessibilityMenuStyles = `
       bottom: auto;
       left: 50%;
       right: auto;
-      --acc-translate-x: -50%;
-      --acc-transform-origin: top center;
+      --a11y-stiac-translate-x: -50%;
+      --a11y-stiac-transform-origin: top center;
     }
 
     #accessibility-modal.bottom {
@@ -1427,8 +1427,8 @@ const accessibilityMenuStyles = `
       bottom: 1rem;
       left: 50%;
       right: auto;
-      --acc-translate-x: -50%;
-      --acc-transform-origin: bottom center;
+      --a11y-stiac-translate-x: -50%;
+      --a11y-stiac-transform-origin: bottom center;
     }
 
     #accessibility-modal.bottom-left {
@@ -1436,8 +1436,8 @@ const accessibilityMenuStyles = `
       bottom: 1rem;
       left: 1rem;
       right: auto;
-      --acc-translate-x: 0;
-      --acc-transform-origin: bottom left;
+      --a11y-stiac-translate-x: 0;
+      --a11y-stiac-transform-origin: bottom left;
     }
 
     #accessibility-modal.bottom-right {
@@ -1445,8 +1445,8 @@ const accessibilityMenuStyles = `
       bottom: 1rem;
       right: 1rem;
       left: auto;
-      --acc-translate-x: 0;
-      --acc-transform-origin: bottom right;
+      --a11y-stiac-translate-x: 0;
+      --a11y-stiac-transform-origin: bottom right;
     }
 
     #accessibility-modal #accessibility-tools {
@@ -1464,48 +1464,48 @@ const accessibilityMenuStyles = `
       border-radius: 9999px;
     }
 
-    .acc-item:hover .acc-child {
+    .a11y-stiac-item:hover .a11y-stiac-child {
       transform: translateY(-2px);
     }
 
-    .acc-child {
+    .a11y-stiac-child {
       border: 1px solid rgba(15, 23, 42, 0.1);
-      background: var(--acc_color_2);
+      background: var(--a11y-stiac-color-2);
       border-radius: 20px;
       box-shadow: none;
-      color: var(--acc_text_color);
+      color: var(--a11y-stiac-text-color);
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
-    .acc-child svg {
+    .a11y-stiac-child svg {
       color: inherit;
       fill: currentColor;
       transition: color 0.2s ease, fill 0.2s ease;
     }
 
-    .acc-child.active {
-      background: var(--acc_control_active_bg_color);
-      color: var(--acc_control_active_text_color);
+    .a11y-stiac-child.active {
+      background: var(--a11y-stiac-control-active-bg-color);
+      color: var(--a11y-stiac-control-active-text-color);
       border-color: transparent;
     }
 
-    .acc-child:not(.active):hover,
-    .acc-child.active:hover,
-    .acc-item.group:hover .acc-child {
-      background: var(--acc_hover_color);
-      color: var(--acc_hover_text_color);
+    .a11y-stiac-child:not(.active):hover,
+    .a11y-stiac-child.active:hover,
+    .a11y-stiac-item.group:hover .a11y-stiac-child {
+      background: var(--a11y-stiac-hover-color);
+      color: var(--a11y-stiac-hover-text-color);
     }
 
-    .acc-item.group:hover .acc-child svg {
+    .a11y-stiac-item.group:hover .a11y-stiac-child svg {
       color: inherit;
       fill: currentColor;
     }
 
-    .acc-progress-parent {
+    .a11y-stiac-progress-parent {
       width: 100%;
     }
 
-    .acc-progress-child {
+    .a11y-stiac-progress-child {
       opacity: 1;
       background: rgba(15, 23, 42, 0.25);
       border-radius: 9999px;
@@ -1513,31 +1513,31 @@ const accessibilityMenuStyles = `
       transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .acc-progress-child.active {
+    .a11y-stiac-progress-child.active {
       opacity: 1;
-      background: var(--acc_color_1);
-      border-color: var(--acc_color_1);
+      background: var(--a11y-stiac-color-1);
+      border-color: var(--a11y-stiac-color-1);
       box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.65);
     }
 
     #headerContent {
-      background: var(--acc_header_bg_color) !important;
-      color: var(--acc_header_text_color) !important;
+      background: var(--a11y-stiac-header-bg-color) !important;
+      color: var(--a11y-stiac-header-text-color) !important;
     }
 
     #headerContent * {
-      color: var(--acc_header_text_color) !important;
+      color: var(--a11y-stiac-header-text-color) !important;
     }
 
     #closeBtn {
-      background: var(--acc_header_bg_color);
-      color: var(--acc_header_text_color);
+      background: var(--a11y-stiac-header-bg-color);
+      color: var(--a11y-stiac-header-text-color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
 
     #closeBtn:hover {
-      background: var(--acc_hover_color);
-      color: var(--acc_hover_text_color);
+      background: var(--a11y-stiac-hover-color);
+      color: var(--a11y-stiac-hover-text-color);
     }
 
     #closeBtn svg {
@@ -1547,19 +1547,19 @@ const accessibilityMenuStyles = `
     }
 
     #reset-all {
-      background: var(--acc_header_bg_color);
-      color: var(--acc_header_text_color);
+      background: var(--a11y-stiac-header-bg-color);
+      color: var(--a11y-stiac-header-text-color);
       transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
     }
 
     #reset-all:hover {
-      background: var(--acc_hover_color);
-      color: var(--acc_hover_text_color);
+      background: var(--a11y-stiac-hover-color);
+      color: var(--a11y-stiac-hover-text-color);
     }
 
     #change-positions button {
-      background: var(--acc_color_2);
-      color: var(--acc_text_color);
+      background: var(--a11y-stiac-color-2);
+      color: var(--a11y-stiac-text-color);
       border-color: transparent;
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
@@ -1571,24 +1571,24 @@ const accessibilityMenuStyles = `
     }
 
     #change-positions button:hover {
-      background: var(--acc_hover_color);
-      color: var(--acc_hover_text_color);
+      background: var(--a11y-stiac-hover-color);
+      color: var(--a11y-stiac-hover-text-color);
     }
 
     #change-positions button.active {
-      background: var(--acc_header_bg_color);
-      color: var(--acc_header_text_color);
+      background: var(--a11y-stiac-header-bg-color);
+      color: var(--a11y-stiac-header-text-color);
       box-shadow: none;
     }
 
     #change-positions button.active:hover {
-      background: var(--acc_hover_color);
-      color: var(--acc_hover_text_color);
+      background: var(--a11y-stiac-hover-color);
+      color: var(--a11y-stiac-hover-text-color);
     }
 
-    .acc-item:hover .acc-child.active {
-      background: var(--acc_hover_color);
-      color: var(--acc_hover_text_color);
+    .a11y-stiac-item:hover .a11y-stiac-child.active {
+      background: var(--a11y-stiac-hover-color);
+      color: var(--a11y-stiac-hover-text-color);
     }
 
     .hidden {
@@ -1626,7 +1626,7 @@ const accessibilityMenuStyles = `
       display: none !important;
     }
 
-    .hide-images [data-acc-preserve-images] :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
+    .hide-images [data-a11y-stiac-preserve-images] :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
       display: initial !important;
     }
 
@@ -1655,12 +1655,12 @@ const accessibilityMenuStyles = `
         object[data$=".mp4"],
         object[data$=".webm"],
         object[data$=".ogv"],
-        [data-acc-video-embed]
+        [data-a11y-stiac-video-embed]
       ) {
       display: none !important;
     }
 
-    .hide-video [data-acc-preserve-video] {
+    .hide-video [data-a11y-stiac-preserve-video] {
       display: initial !important;
     }
 
@@ -1728,8 +1728,8 @@ const accessibilityMenuStyles = `
       height: auto;
       aspect-ratio: 1/1;
       background: rgba(255, 0, 0, 0.5);
-      border: 2px solid var(--acc_color_2);
-      box-shadow: 0 0 20px 0 var(--acc_color_2);
+      border: 2px solid var(--a11y-stiac-color-2);
+      box-shadow: 0 0 20px 0 var(--a11y-stiac-color-2);
       border-radius: 50%;
       mix-blend-mode: difference;
       transition: all 0.1s ease;
@@ -1741,7 +1741,7 @@ const accessibilityMenuStyles = `
       width: 100%;
       height: 15vh;
       background: transparent;
-      border: 10px solid var(--acc_color_2);
+      border: 10px solid var(--a11y-stiac-color-2);
       border-left: 0;
       border-right: 0;
       box-shadow: 0 0 0 100vh rgb(0 0 0 / 50%);
@@ -1752,7 +1752,7 @@ const accessibilityMenuStyles = `
     #cursor.cursor-2 {
       width: 25vw;
       height: 8px;
-      background: var(--acc_color_1);
+      background: var(--a11y-stiac-color-1);
       border: yellow 2px solid;
       transition: all 0.1s ease;
       transform-origin: center;
@@ -1776,7 +1776,7 @@ const accessibilityMenuStyles = `
     }
 `;
 const accessibilityMenuHTML = `
-    <div id="accessibility-modal" class="bottom close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-acc-preserve-images>
+    <div id="accessibility-modal" class="bottom close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-a11y-stiac-preserve-images>
       <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-lg shadow-slate-900/40 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">
           <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"></path>
@@ -1788,9 +1788,9 @@ const accessibilityMenuHTML = `
         <span class="text-sm font-normal text-slate-300" data-i18n="controls.heading.subtitle">Fine-tune colours, typography and focus helpers with a refreshed look.</span>
       </div>
       <div id="language-selector" class="mx-6 -mt-2 flex flex-col gap-2 rounded-2xl bg-white/80 px-6 py-4 text-slate-700 ring-1 ring-inset ring-slate-900/10">
-        <label id="acc-language-label" for="acc-language-select" class="text-xs font-semibold uppercase tracking-wide text-slate-600" data-i18n="language.selectorLabel">Language</label>
+        <label id="a11y-stiac-language-label" for="a11y-stiac-language-select" class="text-xs font-semibold uppercase tracking-wide text-slate-600" data-i18n="language.selectorLabel">Language</label>
         <div class="relative mt-1">
-          <button id="acc-language-trigger" type="button" class="acc-language-trigger inline-flex w-full items-center justify-between gap-3 rounded-xl border border-slate-900/10 bg-white/95 px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-haspopup="listbox" aria-expanded="false" aria-describedby="acc-language-help" aria-labelledby="acc-language-label acc-language-active-label" aria-controls="acc-language-dropdown">
+          <button id="a11y-stiac-language-trigger" type="button" class="a11y-stiac-language-trigger inline-flex w-full items-center justify-between gap-3 rounded-xl border border-slate-900/10 bg-white/95 px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-haspopup="listbox" aria-expanded="false" aria-describedby="a11y-stiac-language-help" aria-labelledby="a11y-stiac-language-label a11y-stiac-language-active-label" aria-controls="a11y-stiac-language-dropdown">
             <span class="flex items-center gap-3">
               <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 ring-1 ring-inset ring-slate-900/10" data-language-active-icon>
                 <svg class="h-6 w-6 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -1800,175 +1800,175 @@ const accessibilityMenuHTML = `
                   <path d="M12 3a15 15 0 0 0 0 18"></path>
                 </svg>
               </span>
-              <span id="acc-language-active-label" class="text-sm font-medium text-slate-700" data-language-active-label>English</span>
+              <span id="a11y-stiac-language-active-label" class="text-sm font-medium text-slate-700" data-language-active-label>English</span>
             </span>
             <svg class="h-4 w-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div id="acc-language-dropdown" class="acc-language-dropdown absolute left-0 right-0 z-20 mt-3 hidden rounded-2xl border border-slate-900/10 bg-white/95 shadow-xl shadow-slate-900/20 backdrop-blur" data-language-dropdown>
-            <ul class="max-h-60 overflow-y-auto py-2" role="listbox" aria-labelledby="acc-language-label" data-language-options></ul>
+          <div id="a11y-stiac-language-dropdown" class="a11y-stiac-language-dropdown absolute left-0 right-0 z-20 mt-3 hidden rounded-2xl border border-slate-900/10 bg-white/95 shadow-xl shadow-slate-900/20 backdrop-blur" data-language-dropdown>
+            <ul class="max-h-60 overflow-y-auto py-2" role="listbox" aria-labelledby="a11y-stiac-language-label" data-language-options></ul>
           </div>
         </div>
-        <select id="acc-language-select" class="acc-sr-only" aria-describedby="acc-language-help"></select>
-        <p id="acc-language-help" class="text-xs text-slate-500" data-i18n="language.selectorDescription">Choose the language used for the accessibility tools interface.</p>
+        <select id="a11y-stiac-language-select" class="a11y-stiac-sr-only" aria-describedby="a11y-stiac-language-help"></select>
+        <p id="a11y-stiac-language-help" class="text-xs text-slate-500" data-i18n="language.selectorDescription">Choose the language used for the accessibility tools interface.</p>
       </div>
       <div id="accessibility-tools" class="grid max-h-[45vh] grid-cols-1 gap-4 overflow-y-auto px-6 pb-6 sm:grid-cols-2">
 
         <!--invert colors-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="invert-colors">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="invert-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-half" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z" />
               <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.invertColours.label">Invert Colours</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--grayscale-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="grayscale">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="grayscale">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.grayscale.label">Grayscale</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--saturation-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="saturation">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="saturation">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-palette" viewBox="0 0 16 16">
               <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
               <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.lowSaturation.label">Low Saturation</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 active h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 active h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--links highlight-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="underline">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
               <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
               <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.linksHighlight.label">Links Highlight</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--font size-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-size">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-size">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 12V17H17.5C17.7761 17 18 17.2239 18 17.5C18 17.7761 17.7761 18 17.5 18H15.5C15.2239 18 15 17.7761 15 17.5C15 17.2239 15.2239 17 15.5 17H16V12H14V12.5C14 12.7761 13.7761 13 13.5 13C13.2239 13 13 12.7761 13 12.5V11.5C13 11.2239 13.2239 11 13.5 11H19.5C19.7761 11 20 11.2239 20 11.5V12.5C20 12.7761 19.7761 13 19.5 13C19.2239 13 19 12.7761 19 12.5V12H17ZM10 6V17H11.5C11.7761 17 12 17.2239 12 17.5C12 17.7761 11.7761 18 11.5 18H7.5C7.22386 18 7 17.7761 7 17.5C7 17.2239 7.22386 17 7.5 17H9V6H5V7.5C5 7.77614 4.77614 8 4.5 8C4.22386 8 4 7.77614 4 7.5V5.5C4 5.22386 4.22386 5 4.5 5H14.5C14.7761 5 15 5.22386 15 5.5V7.5C15 7.77614 14.7761 8 14.5 8C14.2239 8 14 7.77614 14 7.5V6H10Z" fill="currentColor" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.fontSize.label">Font Size</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--line height-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="line-height">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="line-height">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.lineHeight.label">Line Height</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--letter spacing-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="letter-spacing">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="letter-spacing">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.letterSpacing.label">Letter Spacing</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--dyslexia friendly font toggle-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-dyslexia" aria-describedby="font-dyslexia-description">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-dyslexia" aria-describedby="font-dyslexia-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.5 5C3.11929 5 2 6.11929 2 7.5V16.5C2 17.8807 3.11929 19 4.5 19H11.75C13.1307 19 14.25 17.8807 14.25 16.5V13.75H19.5C20.8807 13.75 22 12.6307 22 11.25V7.5C22 6.11929 20.8807 5 19.5 5H4.5ZM4 7.5C4 7.22386 4.22386 7 4.5 7H11.5C11.7761 7 12 7.22386 12 7.5V9C12 9.27614 11.7761 9.5 11.5 9.5H6.75V16.5C6.75 16.7761 6.52614 17 6.25 17H4.5C4.22386 17 4 16.7761 4 16.5V7.5ZM14 7.5C14 7.22386 14.2239 7 14.5 7H19.5C19.7761 7 20 7.22386 20 7.5V11.25C20 11.5261 19.7761 11.75 19.5 11.75H14.5C14.2239 11.75 14 11.5261 14 11.25V7.5Z" fill="currentColor" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.fontDyslexia.label">Font Dyslexia</p>
-            <p id="font-dyslexia-description" class="acc-sr-only" data-i18n="controls.fontDyslexia.description">Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu.</p>
+            <p id="font-dyslexia-description" class="a11y-stiac-sr-only" data-i18n="controls.fontDyslexia.description">Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu.</p>
           </div>
         </div>
 
         <!--text align-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-text-align-icon>
               <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" id="text-align-label" data-i18n="controls.textAlign.label">Text Align</p>
-            <p id="text-align-description" class="acc-sr-only" data-i18n="controls.textAlign.description">Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.</p>
-            <p class="acc-sr-only" data-text-align-status role="status" aria-live="polite"></p>
-            <div class="acc-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-4 h-1 flex-1"></div>
+            <p id="text-align-description" class="a11y-stiac-sr-only" data-i18n="controls.textAlign.description">Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.</p>
+            <p class="a11y-stiac-sr-only" data-text-align-status role="status" aria-live="polite"></p>
+            <div class="a11y-stiac-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-4 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--contrast-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="contrast">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="contrast">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-transparency" viewBox="0 0 16 16">
               <path d="M0 6.5a6.5 6.5 0 0 1 12.346-2.846 6.5 6.5 0 1 1-8.691 8.691A6.5 6.5 0 0 1 0 6.5m5.144 6.358a5.5 5.5 0 1 0 7.714-7.714 6.5 6.5 0 0 1-7.714 7.714m-.733-1.269q.546.226 1.144.33l-1.474-1.474q.104.597.33 1.144m2.614.386a5.5 5.5 0 0 0 1.173-.242L4.374 7.91a6 6 0 0 0-.296 1.118zm2.157-.672q.446-.25.838-.576L5.418 6.126a6 6 0 0 0-.587.826zm1.545-1.284q.325-.39.576-.837L6.953 4.83a6 6 0 0 0-.827.587l4.6 4.602Zm1.006-1.822q.183-.562.242-1.172L9.028 4.078q-.58.096-1.118.296l3.823 3.824Zm.186-2.642a5.5 5.5 0 0 0-.33-1.144 5.5 5.5 0 0 0-1.144-.33z" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.contrast.label">Contrast</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--hide images-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-images">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-images">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.8,4L4.8,4l1,1L4.8,4z M19.7,19L19.7,19l0.8,0.8L19.7,19z" />
               <path d="M18,7h-2c-0.5,0-1,0.5-1,1v2c0,0.5,0.5,1,1,1h2c0.5,0,1-0.5,1-1V8C19,7.5,18.5,7,18,7z M18,10h-2V8h2V10z" />
@@ -1980,8 +1980,8 @@ const accessibilityMenuHTML = `
         </div>
 
         <!--hide video-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-video">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-video">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-off" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M10.961 12.365a2 2 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518zM1.428 4.18A1 1 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634zM15 11.73l-3.5-1.555v-4.35L15 4.269zm-4.407 3.56-10-14 .814-.58 10 14z" />
             </svg>
@@ -1990,27 +1990,27 @@ const accessibilityMenuHTML = `
         </div>
 
         <!--reduce motion-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="reduce-motion" aria-describedby="reduce-motion-description">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="reduce-motion" aria-describedby="reduce-motion-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-2.5-11.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Zm5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Z" fill="currentColor" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.reduceMotion.label">Reduce Motion</p>
-            <p id="reduce-motion-description" class="acc-sr-only" data-i18n="controls.reduceMotion.description">Stop animated, blinking, and flashing visuals from playing automatically across the page.</p>
+            <p id="reduce-motion-description" class="a11y-stiac-sr-only" data-i18n="controls.reduceMotion.description">Stop animated, blinking, and flashing visuals from playing automatically across the page.</p>
           </div>
         </div>
 
         <!--change cursor-->
-        <div class="acc-item group">
-          <div class="acc-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="change-cursor">
+        <div class="a11y-stiac-item group">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="change-cursor">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.85333 19.8536C8.58758 20.1193 8.13463 20.0079 8.02253 19.6492L3.02253 3.64915C2.90221 3.26413 3.26389 2.90246 3.64891 3.02278L19.6489 8.02278C20.0076 8.13487 20.1191 8.58782 19.8533 8.85357L16.2069 12.5L20.8533 17.1465C21.0486 17.3417 21.0486 17.6583 20.8533 17.8536L17.8533 20.8536C17.6581 21.0488 17.3415 21.0488 17.1462 20.8536L12.4998 16.2071L8.85333 19.8536ZM4.26173 4.26197L8.73053 18.5621L12.1462 15.1465C12.3415 14.9512 12.6581 14.9512 12.8533 15.1465L17.4998 19.7929L19.7927 17.5L15.1462 12.8536C14.951 12.6583 14.951 12.3417 15.1462 12.1465L18.5619 8.73078L4.26173 4.26197Z" fill="currentColor" />
             </svg>
             <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.changeCursors.label">Change Cursors</p>
-            <div class="acc-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="acc-progress-child acc-progress-child-1 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-2 h-1 flex-1"></div>
-              <div class="acc-progress-child acc-progress-child-3 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
             </div>
           </div>
         </div>
@@ -2021,7 +2021,7 @@ const accessibilityMenuHTML = `
       <div id="triangle-cursor"></div>
 
       <!--accessibility modal footer-->
-      <div id="acc-footer" class="flex flex-col gap-4 border-t border-slate-900/10 bg-white/90 px-6 py-5 shadow-inner shadow-slate-900/5">
+      <div id="a11y-stiac-footer" class="flex flex-col gap-4 border-t border-slate-900/10 bg-white/90 px-6 py-5 shadow-inner shadow-slate-900/5">
 
         <!--reset all-->
         <button id="reset-all" class="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold shadow-lg shadow-slate-900/30 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.resetAll.label">
@@ -2031,7 +2031,7 @@ const accessibilityMenuHTML = `
         <!--change positions-->
         <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
           <button
-            id="align-acc-top"
+            id="align-a11y-stiac-top"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
@@ -2052,7 +2052,7 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-top-left"
+            id="align-a11y-stiac-top-left"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
@@ -2074,7 +2074,7 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-bottom"
+            id="align-a11y-stiac-bottom"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
@@ -2095,7 +2095,7 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-bottom-left"
+            id="align-a11y-stiac-bottom-left"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
@@ -2117,7 +2117,7 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-bottom-right"
+            id="align-a11y-stiac-bottom-right"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
@@ -2139,7 +2139,7 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
           <button
-            id="align-acc-top-right"
+            id="align-a11y-stiac-top-right"
             type="button"
             class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
             aria-pressed="false"
@@ -2161,7 +2161,7 @@ const accessibilityMenuHTML = `
               />
             </svg></button>
         </div>
-        <p id="acc-language-announcement" class="acc-sr-only" aria-live="polite" role="status"></p>
+        <p id="a11y-stiac-language-announcement" class="a11y-stiac-sr-only" aria-live="polite" role="status"></p>
         <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-500" role="note" aria-label="Software protetto da Stiac Web Services">
           <strong class="block text-xs tracking-[0.35em] text-slate-600">Stiac Web Services</strong>
           <span class="text-[10px] font-normal tracking-[0.3em] text-slate-400">Proprietary Accessibility Suite</span>
@@ -2175,7 +2175,7 @@ const VALID_MODAL_POSITIONS = ['left', 'top', 'bottom', 'right', 'bottom-left', 
 /**
  * Normalise widget placement requests so we always apply a known alignment class.
  * Accepts both the modal position keywords (e.g. "bottom-left") and alignment
- * control identifiers (e.g. "align-acc-bottom-left").
+ * control identifiers (e.g. "align-a11y-stiac-bottom-left").
  * @param {string} value - Raw configuration string provided by the host page.
  * @param {string} fallback - Safe position to use when the provided value is invalid.
  * @returns {string} Sanitised position class.
@@ -2188,8 +2188,8 @@ function normalisePositionClass(value, fallback = 'bottom') {
     if (!trimmedValue) {
         return fallback;
     }
-    const withoutPrefix = trimmedValue.startsWith('align-acc-')
-        ? trimmedValue.substring('align-acc-'.length)
+    const withoutPrefix = trimmedValue.startsWith('align-a11y-stiac-')
+        ? trimmedValue.substring('align-a11y-stiac-'.length)
         : trimmedValue;
     return VALID_MODAL_POSITIONS.includes(withoutPrefix) ? withoutPrefix : fallback;
 }
@@ -3229,8 +3229,8 @@ function ensureTailwindCSSLoaded() {
         return;
     }
 
-    if (document.documentElement && !document.documentElement.hasAttribute('data-acc-tailwind-fallback')) {
-        document.documentElement.setAttribute('data-acc-tailwind-fallback', 'true');
+    if (document.documentElement && !document.documentElement.hasAttribute('data-a11y-stiac-tailwind-fallback')) {
+        document.documentElement.setAttribute('data-a11y-stiac-tailwind-fallback', 'true');
     }
 
     const tailwindScript = document.createElement('script');
@@ -3287,15 +3287,15 @@ document.addEventListener("DOMContentLoaded", function() {
     ]);
 
     if (document.documentElement && document.documentElement.style) {
-        document.documentElement.style.setProperty('--acc_color_1', resolvedColors.active);
-        document.documentElement.style.setProperty('--acc_color_2', resolvedColors.inactive);
-        document.documentElement.style.setProperty('--acc_hover_color', hoverColor);
-        document.documentElement.style.setProperty('--acc_hover_text_color', hoverTextColor);
-        document.documentElement.style.setProperty('--acc_text_color', textColor);
-        document.documentElement.style.setProperty('--acc_header_bg_color', headerBackgroundColor);
-        document.documentElement.style.setProperty('--acc_header_text_color', headerTextColor);
-        document.documentElement.style.setProperty('--acc_control_active_bg_color', controlActiveBackgroundColor);
-        document.documentElement.style.setProperty('--acc_control_active_text_color', controlActiveTextColor);
+        document.documentElement.style.setProperty('--a11y-stiac-color-1', resolvedColors.active);
+        document.documentElement.style.setProperty('--a11y-stiac-color-2', resolvedColors.inactive);
+        document.documentElement.style.setProperty('--a11y-stiac-hover-color', hoverColor);
+        document.documentElement.style.setProperty('--a11y-stiac-hover-text-color', hoverTextColor);
+        document.documentElement.style.setProperty('--a11y-stiac-text-color', textColor);
+        document.documentElement.style.setProperty('--a11y-stiac-header-bg-color', headerBackgroundColor);
+        document.documentElement.style.setProperty('--a11y-stiac-header-text-color', headerTextColor);
+        document.documentElement.style.setProperty('--a11y-stiac-control-active-bg-color', controlActiveBackgroundColor);
+        document.documentElement.style.setProperty('--a11y-stiac-control-active-text-color', controlActiveTextColor);
     }
 
     ensureTailwindCSSLoaded();
@@ -3321,11 +3321,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeBtn = document.getElementById('closeBtn');
     const headingTitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.title"]') : null;
     const headingSubtitleElement = accessibilityModal ? accessibilityModal.querySelector('[data-i18n="controls.heading.subtitle"]') : null;
-    const languageSelectElement = document.getElementById('acc-language-select');
-    const languageAnnouncementElement = document.getElementById('acc-language-announcement');
+    const languageSelectElement = document.getElementById('a11y-stiac-language-select');
+    const languageAnnouncementElement = document.getElementById('a11y-stiac-language-announcement');
     const languageSelectorContainer = document.getElementById('language-selector');
-    const languageTriggerButton = document.getElementById('acc-language-trigger');
-    const languageDropdownElement = document.getElementById('acc-language-dropdown');
+    const languageTriggerButton = document.getElementById('a11y-stiac-language-trigger');
+    const languageDropdownElement = document.getElementById('a11y-stiac-language-dropdown');
     const languageOptionsListElement = languageDropdownElement ? languageDropdownElement.querySelector('[data-language-options]') : null;
     const languageActiveLabelElement = document.querySelector('[data-language-active-label]');
     const languageActiveIconElement = document.querySelector('[data-language-active-icon]');
@@ -3554,9 +3554,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 const optionButton = document.createElement('button');
                 optionButton.type = 'button';
-                optionButton.className = 'acc-language-option flex w-full items-center justify-between gap-3 px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/40';
+                optionButton.className = 'a11y-stiac-language-option flex w-full items-center justify-between gap-3 px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/40';
                 optionButton.setAttribute('role', 'option');
-                optionButton.setAttribute('id', `acc-language-option-${code}`);
+                optionButton.setAttribute('id', `a11y-stiac-language-option-${code}`);
                 optionButton.setAttribute('data-language-option', code);
                 optionButton.setAttribute('aria-selected', code === resolvedLanguage ? 'true' : 'false');
                 optionButton.innerHTML = `
@@ -3589,7 +3589,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (languageOptionsListElement) {
             languageOptionsListElement.innerHTML = '';
             languageOptionsListElement.appendChild(dropdownFragment);
-            languageOptionsListElement.setAttribute('aria-activedescendant', `acc-language-option-${resolvedLanguage}`);
+            languageOptionsListElement.setAttribute('aria-activedescendant', `a11y-stiac-language-option-${resolvedLanguage}`);
         }
 
         updateActiveLanguageDisplay(resolvedLanguage, names);
@@ -3694,22 +3694,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const computedStyle = window.getComputedStyle(toolsContainer);
 
-        if (!toolsContainer.dataset.accBasePaddingRight) {
+        if (!toolsContainer.dataset.a11yStiacBasePaddingRight) {
             const initialPadding = parseFloat(computedStyle.paddingRight);
-            toolsContainer.dataset.accBasePaddingRight = Number.isFinite(initialPadding) ? String(initialPadding) : '0';
+            toolsContainer.dataset.a11yStiacBasePaddingRight = Number.isFinite(initialPadding) ? String(initialPadding) : '0';
         }
 
-        const basePaddingRight = parseFloat(toolsContainer.dataset.accBasePaddingRight) || 0;
+        const basePaddingRight = parseFloat(toolsContainer.dataset.a11yStiacBasePaddingRight) || 0;
         const scrollbarWidth = Math.max(toolsContainer.offsetWidth - toolsContainer.clientWidth, 0);
 
         if (scrollbarWidth > 0) {
             // Offset the right padding by the scrollbar width so the card grid remains centred.
             toolsContainer.style.paddingRight = `${basePaddingRight + scrollbarWidth}px`;
-            toolsContainer.dataset.accScrollbarPaddingApplied = 'true';
-        } else if (toolsContainer.dataset.accScrollbarPaddingApplied) {
+            toolsContainer.dataset.a11yStiacScrollbarPaddingApplied = 'true';
+        } else if (toolsContainer.dataset.a11yStiacScrollbarPaddingApplied) {
             // Reset any inline padding so Tailwind's base spacing is restored when no scrollbar is present.
             toolsContainer.style.paddingRight = '';
-            delete toolsContainer.dataset.accScrollbarPaddingApplied;
+            delete toolsContainer.dataset.a11yStiacScrollbarPaddingApplied;
         }
     }
 
@@ -3751,10 +3751,10 @@ document.addEventListener("DOMContentLoaded", function() {
         closeBtn.innerHTML = getCloseButtonIconMarkup(isClosed);
     }
 
-    const accItems = document.querySelectorAll('.acc-item');
+    const accItems = document.querySelectorAll('.a11y-stiac-item');
 
     accItems.forEach(item => {
-        const trigger = item.querySelector('.acc-child');
+        const trigger = item.querySelector('.a11y-stiac-child');
         if (!trigger) {
             return;
         }
@@ -3834,12 +3834,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (modalFontMetrics) {
         const formatPixels = (value) => `${Math.round(value * 1000) / 1000}px`;
-        accessibilityModal.style.setProperty('--acc-modal-font-size', formatPixels(modalFontMetrics.base));
-        accessibilityModal.style.setProperty('--acc-modal-text-xs', formatPixels(modalFontMetrics.textXs));
-        accessibilityModal.style.setProperty('--acc-modal-text-sm', formatPixels(modalFontMetrics.textSm));
-        accessibilityModal.style.setProperty('--acc-modal-text-lg', formatPixels(modalFontMetrics.textLg));
-        accessibilityModal.style.setProperty('--acc-modal-text-10', formatPixels(modalFontMetrics.text10));
-        accessibilityModal.style.setProperty('--acc-modal-text-11', formatPixels(modalFontMetrics.text11));
+        accessibilityModal.style.setProperty('--a11y-stiac-modal-font-size', formatPixels(modalFontMetrics.base));
+        accessibilityModal.style.setProperty('--a11y-stiac-modal-text-xs', formatPixels(modalFontMetrics.textXs));
+        accessibilityModal.style.setProperty('--a11y-stiac-modal-text-sm', formatPixels(modalFontMetrics.textSm));
+        accessibilityModal.style.setProperty('--a11y-stiac-modal-text-lg', formatPixels(modalFontMetrics.textLg));
+        accessibilityModal.style.setProperty('--a11y-stiac-modal-text-10', formatPixels(modalFontMetrics.text10));
+        accessibilityModal.style.setProperty('--a11y-stiac-modal-text-11', formatPixels(modalFontMetrics.text11));
     }
 
     // Track host elements whose CSS background images are temporarily disabled by the Hide Images control.
@@ -3863,7 +3863,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (elementIsInsideAccessibilityWidget(element)) {
             return false;
         }
-        if (element.closest('[data-acc-preserve-images]')) {
+        if (element.closest('[data-a11y-stiac-preserve-images]')) {
             return false;
         }
         return true;
@@ -3902,17 +3902,17 @@ document.addEventListener("DOMContentLoaded", function() {
             const inlinePriority = element.style.getPropertyPriority('background-image');
 
             if (inlineValue) {
-                element.dataset.accBgImageInlineValue = inlineValue;
-                element.dataset.accBgImageHadInline = 'true';
+                element.dataset.a11yStiacBgImageInlineValue = inlineValue;
+                element.dataset.a11yStiacBgImageHadInline = 'true';
                 if (inlinePriority) {
-                    element.dataset.accBgImageInlinePriority = inlinePriority;
+                    element.dataset.a11yStiacBgImageInlinePriority = inlinePriority;
                 } else {
-                    delete element.dataset.accBgImageInlinePriority;
+                    delete element.dataset.a11yStiacBgImageInlinePriority;
                 }
             } else {
-                element.dataset.accBgImageHadInline = 'false';
-                delete element.dataset.accBgImageInlineValue;
-                delete element.dataset.accBgImageInlinePriority;
+                element.dataset.a11yStiacBgImageHadInline = 'false';
+                delete element.dataset.a11yStiacBgImageInlineValue;
+                delete element.dataset.a11yStiacBgImageInlinePriority;
             }
 
             element.style.setProperty('background-image', 'none', 'important');
@@ -3922,17 +3922,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function resetHideImagesBackgrounds() {
         hideImageBackgroundElements.forEach((element) => {
-            if (element.dataset.accBgImageHadInline === 'true') {
-                const inlineValue = element.dataset.accBgImageInlineValue || '';
-                const inlinePriority = element.dataset.accBgImageInlinePriority || '';
+            if (element.dataset.a11yStiacBgImageHadInline === 'true') {
+                const inlineValue = element.dataset.a11yStiacBgImageInlineValue || '';
+                const inlinePriority = element.dataset.a11yStiacBgImageInlinePriority || '';
                 element.style.setProperty('background-image', inlineValue, inlinePriority);
             } else {
                 element.style.removeProperty('background-image');
             }
 
-            delete element.dataset.accBgImageInlineValue;
-            delete element.dataset.accBgImageInlinePriority;
-            delete element.dataset.accBgImageHadInline;
+            delete element.dataset.a11yStiacBgImageInlineValue;
+            delete element.dataset.a11yStiacBgImageInlinePriority;
+            delete element.dataset.a11yStiacBgImageHadInline;
         });
 
         hideImageBackgroundElements.clear();
@@ -3996,7 +3996,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (elementIsInsideAccessibilityWidget(element)) {
             return false;
         }
-        if (element.closest && element.closest('[data-acc-preserve-motion]')) {
+        if (element.closest && element.closest('[data-a11y-stiac-preserve-motion]')) {
             return false;
         }
         return true;
@@ -4034,28 +4034,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
 
                 if (element.loop) {
-                    element.dataset.accReduceMotionWasLooping = 'true';
+                    element.dataset.a11yStiacReduceMotionWasLooping = 'true';
                     element.loop = false;
                 }
 
                 if (element.autoplay) {
-                    element.dataset.accReduceMotionWasAutoplay = 'true';
+                    element.dataset.a11yStiacReduceMotionWasAutoplay = 'true';
                     if (element.hasAttribute('autoplay')) {
-                        element.dataset.accReduceMotionHadAutoplayAttr = 'true';
+                        element.dataset.a11yStiacReduceMotionHadAutoplayAttr = 'true';
                     }
                     element.autoplay = false;
                     element.removeAttribute('autoplay');
                 }
 
                 if (wasPlaying) {
-                    element.dataset.accReduceMotionPaused = 'true';
+                    element.dataset.a11yStiacReduceMotionPaused = 'true';
                 }
 
                 reduceMotionPausedMedia.add(element);
             } else if (element.tagName && element.tagName.toLowerCase() === 'marquee') {
                 if (!reduceMotionMarquees.has(element)) {
-                    element.dataset.accReduceMotionScrollAmount = element.getAttribute('scrollamount') || '';
-                    element.dataset.accReduceMotionBehavior = element.getAttribute('behavior') || '';
+                    element.dataset.a11yStiacReduceMotionScrollAmount = element.getAttribute('scrollamount') || '';
+                    element.dataset.a11yStiacReduceMotionBehavior = element.getAttribute('behavior') || '';
                     element.setAttribute('scrollamount', '0');
                     if (typeof element.stop === 'function') {
                         element.stop();
@@ -4072,10 +4072,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
 
-            const wasLooping = element.dataset.accReduceMotionWasLooping === 'true';
-            const wasAutoplay = element.dataset.accReduceMotionWasAutoplay === 'true';
-            const hadAutoplayAttr = element.dataset.accReduceMotionHadAutoplayAttr === 'true';
-            const shouldResume = element.dataset.accReduceMotionPaused === 'true';
+            const wasLooping = element.dataset.a11yStiacReduceMotionWasLooping === 'true';
+            const wasAutoplay = element.dataset.a11yStiacReduceMotionWasAutoplay === 'true';
+            const hadAutoplayAttr = element.dataset.a11yStiacReduceMotionHadAutoplayAttr === 'true';
+            const shouldResume = element.dataset.a11yStiacReduceMotionPaused === 'true';
 
             if (wasLooping) {
                 element.loop = true;
@@ -4089,10 +4089,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 element.setAttribute('autoplay', '');
             }
 
-            delete element.dataset.accReduceMotionWasLooping;
-            delete element.dataset.accReduceMotionWasAutoplay;
-            delete element.dataset.accReduceMotionHadAutoplayAttr;
-            delete element.dataset.accReduceMotionPaused;
+            delete element.dataset.a11yStiacReduceMotionWasLooping;
+            delete element.dataset.a11yStiacReduceMotionWasAutoplay;
+            delete element.dataset.a11yStiacReduceMotionHadAutoplayAttr;
+            delete element.dataset.a11yStiacReduceMotionPaused;
 
             if (shouldResume && typeof element.play === 'function') {
                 const playPromise = element.play();
@@ -4105,8 +4105,8 @@ document.addEventListener("DOMContentLoaded", function() {
         reduceMotionPausedMedia.clear();
 
         reduceMotionMarquees.forEach((element) => {
-            const storedAmount = element.dataset.accReduceMotionScrollAmount || '';
-            const storedBehavior = element.dataset.accReduceMotionBehavior || '';
+            const storedAmount = element.dataset.a11yStiacReduceMotionScrollAmount || '';
+            const storedBehavior = element.dataset.a11yStiacReduceMotionBehavior || '';
 
             if (storedAmount) {
                 element.setAttribute('scrollamount', storedAmount);
@@ -4124,8 +4124,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 element.start();
             }
 
-            delete element.dataset.accReduceMotionScrollAmount;
-            delete element.dataset.accReduceMotionBehavior;
+            delete element.dataset.a11yStiacReduceMotionScrollAmount;
+            delete element.dataset.a11yStiacReduceMotionBehavior;
         });
         reduceMotionMarquees.clear();
     }
@@ -4166,11 +4166,11 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.classList.toggle('reduce-motion', shouldActivate);
 
         if (shouldActivate) {
-            docElement.setAttribute('data-acc-reduce-motion', 'true');
+            docElement.setAttribute('data-a11y-stiac-reduce-motion', 'true');
             pauseMotionTargets(docElement);
             ensureReduceMotionObserver();
         } else {
-            docElement.removeAttribute('data-acc-reduce-motion');
+            docElement.removeAttribute('data-a11y-stiac-reduce-motion');
             resumeMotionTargets();
             disconnectReduceMotionObserver();
         }
@@ -4401,13 +4401,13 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     const getDocumentTextAlign = () => {
-        if (docElement.dataset && docElement.dataset.accTextAlignValue) {
-            const datasetValue = normaliseTextAlignValue(docElement.dataset.accTextAlignValue);
+        if (docElement.dataset && docElement.dataset.a11yStiacTextAlignValue) {
+            const datasetValue = normaliseTextAlignValue(docElement.dataset.a11yStiacTextAlignValue);
             if (datasetValue) {
                 return datasetValue;
             }
         }
-        const attributeValue = normaliseTextAlignValue(docElement.getAttribute('data-acc-text-align'));
+        const attributeValue = normaliseTextAlignValue(docElement.getAttribute('data-a11y-stiac-text-align'));
         if (attributeValue) {
             return attributeValue;
         }
@@ -4421,12 +4421,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const setDocumentTextAlign = (value) => {
         const safeValue = normaliseTextAlignValue(value);
         if (safeValue) {
-            docElement.setAttribute('data-acc-text-align', safeValue);
-            docElement.dataset.accTextAlignValue = safeValue;
+            docElement.setAttribute('data-a11y-stiac-text-align', safeValue);
+            docElement.dataset.a11yStiacTextAlignValue = safeValue;
         } else {
-            docElement.removeAttribute('data-acc-text-align');
+            docElement.removeAttribute('data-a11y-stiac-text-align');
             if (docElement.dataset) {
-                delete docElement.dataset.accTextAlignValue;
+                delete docElement.dataset.a11yStiacTextAlignValue;
             }
         }
         if (bodyElement) {
@@ -4469,7 +4469,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    const STORAGE_KEY = 'accessibility-settings';
+    const STORAGE_KEY = 'a11y-stiac-settings';
 
     function applyFilterState() {
         const filters = [];
@@ -4500,7 +4500,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         element.classList.toggle('active', isActive);
         element.setAttribute('aria-pressed', String(Boolean(isActive)));
-        const targetColor = isActive ? 'var(--acc_header_text_color)' : 'var(--acc_text_color)';
+        const targetColor = isActive ? 'var(--a11y-stiac-header-text-color)' : 'var(--a11y-stiac-text-color)';
         element.style.color = targetColor;
         element.querySelectorAll('svg').forEach(icon => {
             icon.style.color = targetColor;
@@ -4512,7 +4512,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!element) {
             return;
         }
-        const progressParent = element.querySelector('.acc-progress-parent');
+        const progressParent = element.querySelector('.a11y-stiac-progress-parent');
         if (!progressParent) {
             return;
         }
@@ -4521,18 +4521,18 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             progressParent.classList.remove('hidden');
         }
-        progressParent.querySelectorAll('.acc-progress-child').forEach((child, index) => {
+        progressParent.querySelectorAll('.a11y-stiac-progress-child').forEach((child, index) => {
             child.classList.toggle('active', index === activeIndex);
         });
     }
 
 
-    const alignAccTopLeft = document.getElementById('align-acc-top-left');
-    const alignAccTop = document.getElementById('align-acc-top');
-    const alignAccBottom = document.getElementById('align-acc-bottom');
-    const alignAccBottomLeft = document.getElementById('align-acc-bottom-left');
-    const alignAccBottomRight = document.getElementById('align-acc-bottom-right');
-    const alignAccTopRight = document.getElementById('align-acc-top-right');
+    const alignAccTopLeft = document.getElementById('align-a11y-stiac-top-left');
+    const alignAccTop = document.getElementById('align-a11y-stiac-top');
+    const alignAccBottom = document.getElementById('align-a11y-stiac-bottom');
+    const alignAccBottomLeft = document.getElementById('align-a11y-stiac-bottom-left');
+    const alignAccBottomRight = document.getElementById('align-a11y-stiac-bottom-right');
+    const alignAccTopRight = document.getElementById('align-a11y-stiac-top-right');
 
     const positionClasses = [...VALID_MODAL_POSITIONS];
     const positionControls = [
@@ -4712,14 +4712,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 scanForTextElements(observerRoot);
             }
             activeFontScale = fontScale;
-            docElement.dataset.accFontSizeValue = fontSizeValue;
-            docElement.dataset.accFontScale = String(fontScale);
+            docElement.dataset.a11yStiacFontSizeValue = fontSizeValue;
+            docElement.dataset.a11yStiacFontScale = String(fontScale);
             applyFontScaleToRegisteredElements(fontScale);
         } else {
             applyFontScaleToRegisteredElements(null);
             activeFontScale = 1;
-            delete docElement.dataset.accFontSizeValue;
-            delete docElement.dataset.accFontScale;
+            delete docElement.dataset.a11yStiacFontSizeValue;
+            delete docElement.dataset.a11yStiacFontScale;
         }
     }
 
@@ -4814,11 +4814,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const dyslexiaFontControl = document.querySelector('#font-dyslexia');
     if (dyslexiaFontControl) {
         dyslexiaFontControl.addEventListener('click', () => {
-            const nextState = !docElement.dataset.accDyslexiaFont;
+            const nextState = !docElement.dataset.a11yStiacDyslexiaFont;
             if (nextState) {
-                docElement.dataset.accDyslexiaFont = 'true';
+                docElement.dataset.a11yStiacDyslexiaFont = 'true';
             } else {
-                delete docElement.dataset.accDyslexiaFont;
+                delete docElement.dataset.a11yStiacDyslexiaFont;
             }
             setControlActiveState(dyslexiaFontControl, nextState);
             saveSettings();
@@ -5009,7 +5009,7 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.style.letterSpacing = '';
         setDocumentTextAlign('');
         syncTextAlignUI();
-        delete docElement.dataset.accDyslexiaFont;
+        delete docElement.dataset.a11yStiacDyslexiaFont;
         setHideImagesActive(false);
         docElement.classList.remove('hide-video');
         setReduceMotionActive(false);
@@ -5051,11 +5051,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 contrast: filterState.contrast
             },
             underline: docElement.classList.contains('underline-style-2') ? 'style-2' : docElement.classList.contains('underline-style-1') ? 'style-1' : docElement.classList.contains('underline-style-0') ? 'style-0' : 'default',
-            fontSize: docElement.dataset.accFontSizeValue || '',
+            fontSize: docElement.dataset.a11yStiacFontSizeValue || '',
             lineHeight: docElement.classList.contains('line-height-2') ? 'line-height-2' : docElement.classList.contains('line-height-1') ? 'line-height-1' : docElement.classList.contains('line-height-0') ? 'line-height-0' : 'default',
             letterSpacing: docElement.style.letterSpacing || '',
             textAlign: getDocumentTextAlign(),
-            dyslexiaFont: Boolean(docElement.dataset.accDyslexiaFont),
+            dyslexiaFont: Boolean(docElement.dataset.a11yStiacDyslexiaFont),
             hideImages: docElement.classList.contains('hide-images'),
             hideVideo: docElement.classList.contains('hide-video'),
             reduceMotion: docElement.classList.contains('reduce-motion'),
@@ -5120,9 +5120,9 @@ document.addEventListener("DOMContentLoaded", function() {
         docElement.style.letterSpacing = settings.letterSpacing || '';
         setDocumentTextAlign(settings.textAlign || '');
         if (settings.dyslexiaFont) {
-            docElement.dataset.accDyslexiaFont = 'true';
+            docElement.dataset.a11yStiacDyslexiaFont = 'true';
         } else {
-            delete docElement.dataset.accDyslexiaFont;
+            delete docElement.dataset.a11yStiacDyslexiaFont;
         }
         setHideImagesActive(Boolean(settings.hideImages));
         docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
@@ -5214,8 +5214,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const fontSizeItem = document.querySelector('#font-size');
-        const storedFontSizeValue = docElement.dataset.accFontSizeValue || '';
-        const storedFontScale = parseFloat(docElement.dataset.accFontScale || '');
+        const storedFontSizeValue = docElement.dataset.a11yStiacFontSizeValue || '';
+        const storedFontScale = parseFloat(docElement.dataset.a11yStiacFontScale || '');
         const resolvedStoredScale = resolveFontScale(storedFontSizeValue);
         const currentFontScale = Number.isFinite(storedFontScale) && storedFontScale > 0
             ? storedFontScale
@@ -5280,7 +5280,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const dyslexiaFontItem = document.querySelector('#font-dyslexia');
-        const dyslexiaActive = Boolean(docElement.dataset.accDyslexiaFont);
+        const dyslexiaActive = Boolean(docElement.dataset.a11yStiacDyslexiaFont);
         setControlActiveState(dyslexiaFontItem, dyslexiaActive);
         updateProgress(dyslexiaFontItem, -1);
 
@@ -5387,11 +5387,11 @@ document.addEventListener("DOMContentLoaded", function() {
     syncControls();
 
     accItems.forEach(item => {
-        const trigger = item.querySelector('.acc-child');
+        const trigger = item.querySelector('.a11y-stiac-child');
         if (!trigger) {
             return;
         }
-        const targetColor = trigger.classList.contains('active') ? 'var(--acc_header_text_color)' : 'var(--acc_text_color)';
+        const targetColor = trigger.classList.contains('active') ? 'var(--a11y-stiac-header-text-color)' : 'var(--a11y-stiac-text-color)';
         trigger.style.color = targetColor;
         trigger.querySelectorAll('svg').forEach(icon => {
             icon.style.color = targetColor;

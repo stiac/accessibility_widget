@@ -8,8 +8,15 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.28`
+- **Current Version:** `1.5.29`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.29
+
+- Rebranded every widget class, ID, data attribute, and helper animation from the legacy `acc-` prefix to the new `a11y-stiac-`
+  namespace so integrators can ship a fully branded experience out of the box.
+- Renamed the persisted settings cache key to `a11y-stiac-settings` to keep local storage and cookie integrations aligned with
+  the updated naming scheme.
 
 ## What's New in 1.5.28
 
@@ -21,7 +28,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 
 ## What's New in 1.5.26
 
-- Dock the accessibility modal to the bottom edge by default and add a `data-default-position` / `data-position` script attribute so integrators can preselect any alignment (accepts both `bottom-left` style keywords and `align-acc-bottom` button IDs).
+- Dock the accessibility modal to the bottom edge by default and add a `data-default-position` / `data-position` script attribute so integrators can preselect any alignment (accepts both `bottom-left` style keywords and `align-a11y-stiac-bottom` button IDs).
 
 ## What's New in 1.5.25
 
@@ -58,7 +65,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 ## What's New in 1.5.16
 
 - Default the Close toggle and Reset All button to the header palette so they immediately adopt the blue `#036cff` background and white text without requiring overrides.
-- Apply the configured hover colours to entire accessibility cards (including SVG icons) even when the pointer rests on the `.acc-item.group` wrapper.
+- Apply the configured hover colours to entire accessibility cards (including SVG icons) even when the pointer rests on the `.a11y-stiac-item.group` wrapper.
 
 ## What's New in 1.5.15
 
@@ -152,8 +159,8 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **High Contrast**: Increases the contrast of the page to improve readability for users with visual impairments.
 - **Extra Contrast**: Increases the contrast of the page even further to improve readability for users with visual impairments.
 - **Hide Images**: Hides all images on the page to improve readability for users with visual impairments.
-- **Hide Videos**: Hides native video tags, common iframe players, and plugin embeds (with an opt-out via `data-acc-preserve-video`) to reduce motion for users who prefer a still experience.
-- **Reduce Motion**: Disables CSS animations and smooth scrolling while pausing autoplaying media and marquees to eliminate blinking or flashing movement on demand (use `data-acc-preserve-motion` to opt specific widgets out).
+- **Hide Videos**: Hides native video tags, common iframe players, and plugin embeds (with an opt-out via `data-a11y-stiac-preserve-video`) to reduce motion for users who prefer a still experience.
+- **Reduce Motion**: Disables CSS animations and smooth scrolling while pausing autoplaying media and marquees to eliminate blinking or flashing movement on demand (use `data-a11y-stiac-preserve-motion` to opt specific widgets out).
 - **Big Circle Cursor**: Changes the cursor to a big circle to improve visibility for users with visual impairments.
 - **Reading Mask**: Highlights the current line of text being read to improve focus for users with visual impairments.
 - **Reading Guide**: Makes it easier to read long lines of text by Long Highlight Cursor.
@@ -204,7 +211,7 @@ You can use `min.js` file _as your requirement_
 ### Styling
 
 - The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads.
-- Adjust the colour scheme quickly by editing the CSS variables (`--acc_color_1`, `--acc_color_2`, `--acc_hover_color`, `--acc_hover_text_color`, `--acc_text_color`, `--acc_header_bg_color`, `--acc_header_text_color`, `--acc_control_active_bg_color`, `--acc_control_active_text_color`) at the top of `accessibility-menu.js`.
+- Adjust the colour scheme quickly by editing the CSS variables (`--a11y-stiac-color-1`, `--a11y-stiac-color-2`, `--a11y-stiac-hover-color`, `--a11y-stiac-hover-text-color`, `--a11y-stiac-text-color`, `--a11y-stiac-header-bg-color`, `--a11y-stiac-header-text-color`, `--a11y-stiac-control-active-bg-color`, `--a11y-stiac-control-active-text-color`) at the top of `accessibility-menu.js`.
 
 ### Script data attributes
 
@@ -235,7 +242,7 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 | `data-color-header-text` | Overrides the text/icon colour used by the header banner and active Change Positions toggles. Falls back to the most legible option if omitted. | Any valid CSS colour | Derived from palette |
 | `data-color-control-active` | Background colour for active accessibility cards inside the grid. | Any valid CSS colour | Matches header background by default |
 | `data-color-control-active-text` | Overrides the text/icon colour used by active accessibility cards. Falls back to a contrast-safe value if omitted. | Any valid CSS colour | Derived from palette |
-| `data-default-position`, `data-position` | Sets the initial docking point for the accessibility modal. Accepts keyword positions (`left`, `top`, `bottom`, `right`, `bottom-left`, `bottom-right`) or the equivalent `align-acc-*` control IDs. | Listed keywords / IDs | `bottom` |
+| `data-default-position`, `data-position` | Sets the initial docking point for the accessibility modal. Accepts keyword positions (`left`, `top`, `bottom`, `right`, `bottom-left`, `bottom-right`) or the equivalent `align-a11y-stiac-*` control IDs. | Listed keywords / IDs | `bottom` |
 | `data-voce1` | Overrides the main heading inside the widget (useful for localisation/branding). | Free text | `Accessibility Tools` / translated value |
 | `data-voce2` | Overrides the sub-heading tagline beneath the title. | Free text | `Fine-tune colours…` / translated value |
 | `data-locales-path` | Overrides the folder that contains JSON locale files. Use when hosting the bundles outside the script directory. | Relative or absolute path ending in the folder containing locale JSON files. | `<script dir>/locales` when same origin, otherwise the host site's `/locales` folder |
@@ -254,8 +261,8 @@ All attributes are optional; omit any value to keep the default behaviour. Colou
 
 ### Fine-tune Video Visibility
 
-- Add `data-acc-video-embed` to any custom wrapper that should respond to the **Hide Videos** toggle (useful for bespoke players or CMS shortcodes).
-- Add `data-acc-preserve-video` directly on a video/iframe/embed element to keep it visible even while the global hide toggle is active.
+- Add `data-a11y-stiac-video-embed` to any custom wrapper that should respond to the **Hide Videos** toggle (useful for bespoke players or CMS shortcodes).
+- Add `data-a11y-stiac-preserve-video` directly on a video/iframe/embed element to keep it visible even while the global hide toggle is active.
 
 
 ## Preview
