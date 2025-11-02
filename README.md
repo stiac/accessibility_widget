@@ -8,8 +8,16 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.30`
+- **Current Version:** `1.5.31`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.31
+
+- Keep the tools grid in a two-column layout on mobile screens so the most popular actions remain above the fold without extra
+  scrolling.
+- Tightened card padding and bumped label typography to improve tap targets and readability on small displays while preserving
+  the existing desktop spacing.
+- Raised the mobile grid viewport height ceiling to 60vh so more controls are visible when the widget opens on handheld devices.
 
 ## What's New in 1.5.30
 

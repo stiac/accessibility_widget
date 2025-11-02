@@ -1,4 +1,19 @@
 # Changelog
+# [1.5.31] - 2025-12-21
+
+### Added
+- None.
+
+### Changed
+- Kept the accessibility tools grid in two columns on mobile so actions remain easy to scan without excessive scrolling.
+- Reduced mobile card padding and enlarged labels to improve tap affordances while keeping desktop spacing intact.
+- Increased the mobile grid height allowance to 60vh so more controls are visible when the widget opens on handheld devices.
+
+### Fixed
+- None.
+
+### Removed
+- None.
 # [1.5.30] - 2025-12-20
 
 ### Added
