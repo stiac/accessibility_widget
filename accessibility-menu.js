@@ -1813,16 +1813,16 @@ const accessibilityMenuHTML = `
         <select id="a11y-stiac-language-select" class="a11y-stiac-sr-only" aria-describedby="a11y-stiac-language-help"></select>
         <p id="a11y-stiac-language-help" class="text-xs text-slate-500" data-i18n="language.selectorDescription">Choose the language used for the accessibility tools interface.</p>
       </div>
-      <div id="accessibility-tools" class="grid max-h-[45vh] grid-cols-1 gap-4 overflow-y-auto px-6 pb-6 sm:grid-cols-2">
+      <div id="accessibility-tools" class="grid max-h-[60vh] grid-cols-2 gap-3 overflow-y-auto px-4 pb-6 sm:max-h-[45vh] sm:gap-4 sm:px-6">
 
         <!--invert colors-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="invert-colors">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="invert-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-half" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z" />
               <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.invertColours.label">Invert Colours</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.invertColours.label">Invert Colours</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1833,11 +1833,11 @@ const accessibilityMenuHTML = `
 
         <!--grayscale-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="grayscale">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="grayscale">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.grayscale.label">Grayscale</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.grayscale.label">Grayscale</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1848,12 +1848,12 @@ const accessibilityMenuHTML = `
 
         <!--saturation-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="saturation">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="saturation">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-palette" viewBox="0 0 16 16">
               <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
               <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.lowSaturation.label">Low Saturation</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.lowSaturation.label">Low Saturation</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 active h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1863,12 +1863,12 @@ const accessibilityMenuHTML = `
 
         <!--links highlight-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="underline">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
               <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
               <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.linksHighlight.label">Links Highlight</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.linksHighlight.label">Links Highlight</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1879,11 +1879,11 @@ const accessibilityMenuHTML = `
 
         <!--font size-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-size">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="font-size">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 12V17H17.5C17.7761 17 18 17.2239 18 17.5C18 17.7761 17.7761 18 17.5 18H15.5C15.2239 18 15 17.7761 15 17.5C15 17.2239 15.2239 17 15.5 17H16V12H14V12.5C14 12.7761 13.7761 13 13.5 13C13.2239 13 13 12.7761 13 12.5V11.5C13 11.2239 13.2239 11 13.5 11H19.5C19.7761 11 20 11.2239 20 11.5V12.5C20 12.7761 19.7761 13 19.5 13C19.2239 13 19 12.7761 19 12.5V12H17ZM10 6V17H11.5C11.7761 17 12 17.2239 12 17.5C12 17.7761 11.7761 18 11.5 18H7.5C7.22386 18 7 17.7761 7 17.5C7 17.2239 7.22386 17 7.5 17H9V6H5V7.5C5 7.77614 4.77614 8 4.5 8C4.22386 8 4 7.77614 4 7.5V5.5C4 5.22386 4.22386 5 4.5 5H14.5C14.7761 5 15 5.22386 15 5.5V7.5C15 7.77614 14.7761 8 14.5 8C14.2239 8 14 7.77614 14 7.5V6H10Z" fill="currentColor" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.fontSize.label">Font Size</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.fontSize.label">Font Size</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1894,11 +1894,11 @@ const accessibilityMenuHTML = `
 
         <!--line height-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="line-height">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="line-height">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.lineHeight.label">Line Height</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.lineHeight.label">Line Height</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1909,11 +1909,11 @@ const accessibilityMenuHTML = `
 
         <!--letter spacing-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="letter-spacing">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="letter-spacing">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.letterSpacing.label">Letter Spacing</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.letterSpacing.label">Letter Spacing</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1924,22 +1924,22 @@ const accessibilityMenuHTML = `
 
         <!--dyslexia friendly font toggle-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="font-dyslexia" aria-describedby="font-dyslexia-description">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="font-dyslexia" aria-describedby="font-dyslexia-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.5 5C3.11929 5 2 6.11929 2 7.5V16.5C2 17.8807 3.11929 19 4.5 19H11.75C13.1307 19 14.25 17.8807 14.25 16.5V13.75H19.5C20.8807 13.75 22 12.6307 22 11.25V7.5C22 6.11929 20.8807 5 19.5 5H4.5ZM4 7.5C4 7.22386 4.22386 7 4.5 7H11.5C11.7761 7 12 7.22386 12 7.5V9C12 9.27614 11.7761 9.5 11.5 9.5H6.75V16.5C6.75 16.7761 6.52614 17 6.25 17H4.5C4.22386 17 4 16.7761 4 16.5V7.5ZM14 7.5C14 7.22386 14.2239 7 14.5 7H19.5C19.7761 7 20 7.22386 20 7.5V11.25C20 11.5261 19.7761 11.75 19.5 11.75H14.5C14.2239 11.75 14 11.5261 14 11.25V7.5Z" fill="currentColor" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.fontDyslexia.label">Font Dyslexia</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.fontDyslexia.label">Font Dyslexia</p>
             <p id="font-dyslexia-description" class="a11y-stiac-sr-only" data-i18n="controls.fontDyslexia.description">Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu.</p>
           </div>
         </div>
 
         <!--text align-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-text-align-icon>
               <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" id="text-align-label" data-i18n="controls.textAlign.label">Text Align</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" id="text-align-label" data-i18n="controls.textAlign.label">Text Align</p>
             <p id="text-align-description" class="a11y-stiac-sr-only" data-i18n="controls.textAlign.description">Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.</p>
             <p class="a11y-stiac-sr-only" data-text-align-status role="status" aria-live="polite"></p>
             <div class="a11y-stiac-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
@@ -1953,11 +1953,11 @@ const accessibilityMenuHTML = `
 
         <!--contrast-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="contrast">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="contrast">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-transparency" viewBox="0 0 16 16">
               <path d="M0 6.5a6.5 6.5 0 0 1 12.346-2.846 6.5 6.5 0 1 1-8.691 8.691A6.5 6.5 0 0 1 0 6.5m5.144 6.358a5.5 5.5 0 1 0 7.714-7.714 6.5 6.5 0 0 1-7.714 7.714m-.733-1.269q.546.226 1.144.33l-1.474-1.474q.104.597.33 1.144m2.614.386a5.5 5.5 0 0 0 1.173-.242L4.374 7.91a6 6 0 0 0-.296 1.118zm2.157-.672q.446-.25.838-.576L5.418 6.126a6 6 0 0 0-.587.826zm1.545-1.284q.325-.39.576-.837L6.953 4.83a6 6 0 0 0-.827.587l4.6 4.602Zm1.006-1.822q.183-.562.242-1.172L9.028 4.078q-.58.096-1.118.296l3.823 3.824Zm.186-2.642a5.5 5.5 0 0 0-.33-1.144 5.5 5.5 0 0 0-1.144-.33z" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.contrast.label">Contrast</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.contrast.label">Contrast</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
@@ -1968,45 +1968,45 @@ const accessibilityMenuHTML = `
 
         <!--hide images-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-images">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="hide-images">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.8,4L4.8,4l1,1L4.8,4z M19.7,19L19.7,19l0.8,0.8L19.7,19z" />
               <path d="M18,7h-2c-0.5,0-1,0.5-1,1v2c0,0.5,0.5,1,1,1h2c0.5,0,1-0.5,1-1V8C19,7.5,18.5,7,18,7z M18,10h-2V8h2V10z" />
               <path d="M22,6.5v11c0,0.6-0.2,1.1-0.6,1.6l-0.6-0.6l-0.1-0.1l-4.9-4.9l0.3-0.3c0.2-0.2,0.5-0.2,0.7,0l4.2,4.1V6.5	C21,5.7,20.3,5,19.5,5H7.4l-1-1h13.1C20.9,4,22,5.1,22,6.5z" />
               <path d="M1.9,1.1L1.1,1.9l2.4,2.4C2.6,4.6,2,5.5,2,6.5v11C2,18.9,3.1,20,4.5,20h14.8l2.9,2.9l0.7-0.7L1.9,1.1z M3,6.5	C3,5.8,3.5,5.1,4.3,5l10,10l-0.8,0.8l-5.7-5.6c-0.2-0.2-0.5-0.2-0.7,0L3,14.3V6.5z M4.5,19C3.7,19,3,18.3,3,17.5v-1.8l4.5-4.5	l5.7,5.6c0.2,0.2,0.5,0.2,0.7,0l1.1-1.1l3.3,3.3H4.5z" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.hideImages.label">Hide Image</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.hideImages.label">Hide Image</p>
           </div>
         </div>
 
         <!--hide video-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="hide-video">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="hide-video">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-off" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M10.961 12.365a2 2 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518zM1.428 4.18A1 1 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634zM15 11.73l-3.5-1.555v-4.35L15 4.269zm-4.407 3.56-10-14 .814-.58 10 14z" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.hideVideo.label">Hide Video</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.hideVideo.label">Hide Video</p>
           </div>
         </div>
 
         <!--reduce motion-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="reduce-motion" aria-describedby="reduce-motion-description">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="reduce-motion" aria-describedby="reduce-motion-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-2.5-11.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Zm5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Z" fill="currentColor" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.reduceMotion.label">Reduce Motion</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.reduceMotion.label">Reduce Motion</p>
             <p id="reduce-motion-description" class="a11y-stiac-sr-only" data-i18n="controls.reduceMotion.description">Stop animated, blinking, and flashing visuals from playing automatically across the page.</p>
           </div>
         </div>
 
         <!--change cursor-->
         <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-5 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200" id="change-cursor">
+          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="change-cursor">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.85333 19.8536C8.58758 20.1193 8.13463 20.0079 8.02253 19.6492L3.02253 3.64915C2.90221 3.26413 3.26389 2.90246 3.64891 3.02278L19.6489 8.02278C20.0076 8.13487 20.1191 8.58782 19.8533 8.85357L16.2069 12.5L20.8533 17.1465C21.0486 17.3417 21.0486 17.6583 20.8533 17.8536L17.8533 20.8536C17.6581 21.0488 17.3415 21.0488 17.1462 20.8536L12.4998 16.2071L8.85333 19.8536ZM4.26173 4.26197L8.73053 18.5621L12.1462 15.1465C12.3415 14.9512 12.6581 14.9512 12.8533 15.1465L17.4998 19.7929L19.7927 17.5L15.1462 12.8536C14.951 12.6583 14.951 12.3417 15.1462 12.1465L18.5619 8.73078L4.26173 4.26197Z" fill="currentColor" />
             </svg>
-            <p class="text-xs font-semibold uppercase tracking-wide" data-i18n="controls.changeCursors.label">Change Cursors</p>
+            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.changeCursors.label">Change Cursors</p>
             <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
