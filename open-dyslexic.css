@@ -10,8 +10,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff2/OpenDyslexic-Regular.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Regular.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/stiac/accessibility_widget@main/resources/fonts/open-dyslexic/OpenDyslexic-Regular.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/stiac/accessibility_widget@main/resources/fonts/open-dyslexic/OpenDyslexic-Regular.woff') format('woff');
 }
 
 @font-face {
@@ -19,6 +19,6 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url('https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff2/OpenDyslexic-Bold.woff2') format('woff2'),
-         url('https://cdn.jsdelivr.net/gh/antijingoist/open-dyslexic/woff/OpenDyslexic-Bold.woff') format('woff');
+    src: url('https://cdn.jsdelivr.net/gh/stiac/accessibility_widget@main/resources/fonts/open-dyslexic/OpenDyslexic-Bold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/stiac/accessibility_widget@main/resources/fonts/open-dyslexic/OpenDyslexic-Bold.woff') format('woff');
 }
