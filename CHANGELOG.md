@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.26] - 2025-12-16
+
+### Added
+- Introduced `data-default-position` / `data-position` script attributes so integrators can preselect the widget's docking location using either keyword positions or the matching `align-acc-*` IDs.
+
+### Changed
+- Updated the default docking position to the bottom edge so the widget opens near common assistive launchers on initial load.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.25] - 2025-12-15
 
 ### Added
