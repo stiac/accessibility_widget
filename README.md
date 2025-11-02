@@ -53,7 +53,8 @@ You can install the Accessibility Plugin using npm. Run the following command in
 >[!tip]
 > ### OR
 > You can use this `CDN` easily.
-> <pre><code><script src="https://cnd.stiac.it/accessibility/@1.3.2/dist/accessibility-menu.js"></script></code></pre>
+> <pre><code><script src="https://cdn.jsdelivr.net/gh/stiac/accessibility_widget@main/i18n.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/stiac/accessibility_widget@main/accessibility-widget.js"></script></code></pre>
 
 
 <br/>
@@ -66,7 +67,7 @@ After installation, you can link the `javascript` file _normally_ using
 ### OR
 
 You can use `min.js` file _as your requirement_
-<pre><code><script src="assets/app/accessibility/accessibility-menu.js"></script></code></pre>
+<pre><code><script src="assets/app/accessibility/accessibility-widget.js"></script></code></pre>
 
 >[!important]
 > **Link the `Javascript` file `after all javascript` for better output**
