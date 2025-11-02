@@ -1,4 +1,18 @@
 # Changelog
+# [1.7.2] - 2025-12-27
+
+### Added
+- Introduced a localized expand/collapse toggle beneath the tools grid so visitors can reveal every control without relying on hidden scrollbars.
+
+### Changed
+- Reworked the scrollbar padding helper to respect the expanded layout and keep the grid visually centered when the list opens or collapses.
+
+### Fixed
+- Reset inline padding when expanding or collapsing the grid to prevent misaligned cards after toggling the new control.
+
+### Removed
+- Retired the gradient overlays and scroll hint messaging that previously attempted to communicate overflow.
+
 # [1.7.1] - 2025-12-26
 
 ### Added

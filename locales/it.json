@@ -14,7 +14,10 @@
       "title": "Strumenti di Accessibilità",
       "subtitle": "Personalizza colori, tipografia e aiuti al focus con un'interfaccia aggiornata."
     },
-    "scrollHint": "Scorri per altre opzioni",
+    "toolsToggle": {
+      "expand": "Mostra tutti gli strumenti",
+      "collapse": "Mostra meno strumenti"
+    },
     "invertColours": {
       "label": "Inverti Colori"
     },

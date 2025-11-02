@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.7.1
+- **Version**: 1.7.2
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-26
+- **Last Update**: 2025-12-27
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-12-27 — Replaced the scroll hint treatment with a localized expand/collapse toggle so overflowed tools remain discoverable without relying on hidden scrollbars (AI assistant)
 - 2025-12-26 — Added localized scroll hints and gradient overlays so the tools list clearly communicates when more controls are available (AI assistant)
 - 2025-12-25 — Embedded all maintained locale bundles directly in the widget and introduced a local Tailwind build pipeline with a packaged stylesheet fallback (AI assistant)
 - 2025-12-22 — Hid the Change Positions controls by default and added a dataset toggle so hosts can re-enable them when required (AI assistant)

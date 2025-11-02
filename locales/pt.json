@@ -14,7 +14,10 @@
       "title": "Ferramentas de acessibilidade",
       "subtitle": "Ajuste cores, tipografia e auxiliares de foco com uma interface renovada."
     },
-    "scrollHint": "Role para ver mais ferramentas",
+    "toolsToggle": {
+      "expand": "Mostrar todas as ferramentas",
+      "collapse": "Mostrar menos ferramentas"
+    },
     "invertColours": {
       "label": "Inverter cores"
     },

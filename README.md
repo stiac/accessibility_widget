@@ -8,13 +8,13 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.7.1`
+- **Current Version:** `1.7.2`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
-## What's New in 1.7.1
+## What's New in 1.7.2
 
-- Added a localized scroll hint and gradient overlays to the accessibility tools grid so visitors immediately understand when additional controls are available below the fold.
-- Synced the new affordances with resize and language events to keep the guidance accurate across translations and responsive breakpoints.
+- Added a localized “Show all tools” toggle that expands the tools grid when it would otherwise overflow, ensuring every option stays discoverable without relying on scrollbar cues.
+- Smoothed the responsive padding helper so the grid remains centered when the list expands or collapses back to its compact, scrollable layout.
 
 ## Features
 

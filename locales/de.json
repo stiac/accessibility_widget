@@ -14,7 +14,10 @@
       "title": "Barrierefreiheits-Werkzeuge",
       "subtitle": "Optimieren Sie Farben, Typografie und Fokus-Hilfen mit einer überarbeiteten Oberfläche."
     },
-    "scrollHint": "Scrollen Sie, um weitere Werkzeuge zu sehen",
+    "toolsToggle": {
+      "expand": "Alle Werkzeuge anzeigen",
+      "collapse": "Weniger Werkzeuge anzeigen"
+    },
     "invertColours": {
       "label": "Farben invertieren"
     },

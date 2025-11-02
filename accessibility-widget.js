@@ -341,46 +341,9 @@ const accessibilityMenuStyles = `
       position: relative;
     }
 
-    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::before,
-    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::after {
-      content: '';
-      position: sticky;
-      left: 0;
-      right: 0;
-      display: block;
-      height: 2.75rem;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-      opacity: 0;
-      z-index: 5;
-    }
-
-    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::before {
-      top: 0;
-      margin-bottom: -2.75rem;
-      background-image: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0.95),
-        rgba(255, 255, 255, 0)
-      );
-    }
-
-    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::after {
-      bottom: 0;
-      margin-top: -2.75rem;
-      background-image: linear-gradient(
-        to top,
-        rgba(255, 255, 255, 0.95),
-        rgba(255, 255, 255, 0)
-      );
-    }
-
-    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable:not(.a11y-stiac-scroll-top)::before {
-      opacity: 1;
-    }
-
-    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable:not(.a11y-stiac-scroll-bottom)::after {
-      opacity: 1;
+    #accessibility-modal #accessibility-tools.a11y-stiac-expanded {
+      max-height: none;
+      overflow: visible;
     }
 
     #accessibility-modal #accessibility-tools::-webkit-scrollbar {
@@ -392,47 +355,49 @@ const accessibilityMenuStyles = `
       border-radius: 9999px;
     }
 
-    .a11y-stiac-scroll-hint {
-      margin: 0 1.5rem;
-      padding: 0;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      color: rgba(15, 23, 42, 0.65);
-      font-size: 0.75rem;
+    .a11y-stiac-tools-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: calc(100% - 3rem);
+      margin: -0.5rem 1.5rem 1.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      background: rgba(255, 255, 255, 0.85);
+      color: rgba(15, 23, 42, 0.75);
+      font-size: 0.875rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      text-align: center;
-      pointer-events: none;
-      transition: opacity 0.2s ease, max-height 0.2s ease, padding 0.2s ease, margin 0.2s ease;
+      letter-spacing: 0.01em;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .a11y-stiac-scroll-hint::before {
+    .a11y-stiac-tools-toggle::after {
       content: '';
-      display: block;
-      width: 2.5rem;
-      height: 0.35rem;
-      margin: 0 auto 0.6rem;
-      border-radius: 9999px;
-      background: rgba(15, 23, 42, 0.18);
-      transition: opacity 0.2s ease;
-      opacity: 0;
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.2s ease;
     }
 
-    .a11y-stiac-scroll-hint.a11y-stiac-visible {
-      max-height: 4rem;
-      padding: 0.75rem 0 1rem;
-      margin-top: -0.5rem;
-      opacity: 1;
+    .a11y-stiac-tools-toggle[aria-expanded="true"]::after {
+      transform: rotate(-135deg);
     }
 
-    .a11y-stiac-scroll-hint.a11y-stiac-visible::before {
-      opacity: 1;
+    .a11y-stiac-tools-toggle:hover {
+      background: rgba(15, 23, 42, 0.08);
+      color: rgba(15, 23, 42, 0.85);
+      border-color: rgba(15, 23, 42, 0.18);
+      box-shadow: 0 10px 30px -15px rgba(15, 23, 42, 0.4);
     }
 
-    .a11y-stiac-scroll-hint.a11y-stiac-hide {
-      opacity: 0;
+    .a11y-stiac-tools-toggle:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.35);
     }
 
     .a11y-stiac-item:hover .a11y-stiac-child {
@@ -2818,7 +2783,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 activeTranslations = payload && payload.translations ? payload.translations : {};
                 applyWidgetOverrides();
                 renderLanguageOptions(payload && payload.language ? payload.language : widgetScriptConfig.defaultLanguage);
-                refreshScrollHintCopy();
+                updateAccessibilityToolsOverflowState();
                 if (languageSelectElement && payload && payload.language) {
                     languageSelectElement.value = payload.language;
                 }
@@ -2846,7 +2811,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             renderLanguageOptions(widgetScriptConfig.defaultLanguage);
             applyWidgetOverrides();
-            refreshScrollHintCopy();
+            updateAccessibilityToolsOverflowState();
             if (languageSelectElement) {
                 languageSelectElement.setAttribute('disabled', 'disabled');
             }
@@ -2857,7 +2822,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         renderLanguageOptions(widgetScriptConfig.defaultLanguage);
         applyWidgetOverrides();
-        refreshScrollHintCopy();
+        updateAccessibilityToolsOverflowState();
         if (languageSelectElement) {
             languageSelectElement.setAttribute('disabled', 'disabled');
         }
@@ -2882,82 +2847,91 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     const toolsContainer = document.getElementById('accessibility-tools');
-    let scrollHintElement = null;
+    let toolsToggleButton = null;
 
-    function ensureScrollHintElement() {
+    // Resolve the localized copy for the expand/collapse control with English fallbacks so the
+    // button always conveys the current state even if translations fail to load.
+    function resolveToolsToggleLabel(isExpanded) {
+        const fallbackLabels = {
+            expand: 'Show all tools',
+            collapse: 'Show fewer tools'
+        };
+
+        const key = isExpanded ? 'collapse' : 'expand';
+
+        if (
+            activeTranslations
+            && activeTranslations.controls
+            && activeTranslations.controls.toolsToggle
+            && typeof activeTranslations.controls.toolsToggle[key] === 'string'
+        ) {
+            return activeTranslations.controls.toolsToggle[key];
+        }
+
+        return fallbackLabels[key];
+    }
+
+    // Lazily create the toggle button that reveals the full tools grid when overflow is present.
+    function ensureToolsToggleButton() {
         if (!toolsContainer) {
             return null;
         }
 
-        if (!scrollHintElement) {
-            scrollHintElement = document.createElement('p');
-            scrollHintElement.id = 'accessibility-scroll-hint';
-            scrollHintElement.className = 'a11y-stiac-scroll-hint';
-            scrollHintElement.setAttribute('aria-hidden', 'true');
-            scrollHintElement.setAttribute('data-i18n', 'controls.scrollHint');
-            scrollHintElement.textContent = resolveScrollHintMessage();
-            toolsContainer.insertAdjacentElement('afterend', scrollHintElement);
+        if (!toolsToggleButton) {
+            toolsToggleButton = document.createElement('button');
+            toolsToggleButton.id = 'accessibility-tools-toggle';
+            toolsToggleButton.type = 'button';
+            toolsToggleButton.className = 'a11y-stiac-tools-toggle';
+            toolsToggleButton.setAttribute('aria-expanded', 'false');
+            toolsToggleButton.setAttribute('aria-controls', 'accessibility-tools');
+            toolsToggleButton.style.display = 'none';
+            toolsToggleButton.addEventListener('click', () => {
+                const isExpanded = toolsContainer.classList.toggle('a11y-stiac-expanded');
+                if (!isExpanded) {
+                    // Restore the scroll position so the first row is visible when collapsing back
+                    // to the compact, scrollable layout.
+                    toolsContainer.scrollTop = 0;
+                }
+                applyAccessibilityToolsScrollbarPadding();
+                updateAccessibilityToolsOverflowState();
+            });
         }
 
-        return scrollHintElement;
-    }
-
-    function resolveScrollHintMessage() {
-        return activeTranslations
-            && activeTranslations.controls
-            && typeof activeTranslations.controls.scrollHint === 'string'
-            ? activeTranslations.controls.scrollHint
-            : 'Scroll for more tools';
-    }
-
-    function refreshScrollHintCopy() {
-        const hint = ensureScrollHintElement();
-        if (!hint) {
-            return;
+        if (!toolsToggleButton.isConnected) {
+            toolsContainer.insertAdjacentElement('afterend', toolsToggleButton);
         }
 
-        hint.textContent = resolveScrollHintMessage();
+        return toolsToggleButton;
     }
 
-    function updateAccessibilityToolsScrollAffordances() {
+    // Show or hide the toggle button depending on overflow/expanded state and keep its label in sync.
+    function updateAccessibilityToolsOverflowState() {
         if (!toolsContainer) {
             return;
         }
 
-        const hint = ensureScrollHintElement();
+        const isExpanded = toolsContainer.classList.contains('a11y-stiac-expanded');
         const hasOverflow = toolsContainer.scrollHeight - toolsContainer.clientHeight > 1;
+        const shouldShowToggle = hasOverflow || isExpanded;
+        const toggleButton = shouldShowToggle ? ensureToolsToggleButton() : toolsToggleButton;
 
-        if (!hasOverflow) {
-            toolsContainer.classList.remove(
-                'a11y-stiac-scrollable',
-                'a11y-stiac-scroll-top',
-                'a11y-stiac-scroll-bottom'
-            );
-
-            if (hint) {
-                hint.classList.remove('a11y-stiac-visible', 'a11y-stiac-hide');
-            }
-
+        if (!toggleButton) {
             return;
         }
 
-        toolsContainer.classList.add('a11y-stiac-scrollable');
-
-        const atTop = toolsContainer.scrollTop <= 1;
-        const atBottom = toolsContainer.scrollTop + toolsContainer.clientHeight >= toolsContainer.scrollHeight - 1;
-
-        toolsContainer.classList.toggle('a11y-stiac-scroll-top', atTop);
-        toolsContainer.classList.toggle('a11y-stiac-scroll-bottom', atBottom);
-
-        if (hint) {
-            hint.classList.add('a11y-stiac-visible');
-
-            if (atBottom) {
-                hint.classList.add('a11y-stiac-hide');
-            } else {
-                hint.classList.remove('a11y-stiac-hide');
-            }
+        if (!shouldShowToggle) {
+            toggleButton.style.display = 'none';
+            toggleButton.removeAttribute('data-i18n');
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toolsContainer.classList.remove('a11y-stiac-expanded');
+            return;
         }
+
+        const label = resolveToolsToggleLabel(isExpanded);
+        toggleButton.textContent = label;
+        toggleButton.setAttribute('data-i18n', isExpanded ? 'controls.toolsToggle.collapse' : 'controls.toolsToggle.expand');
+        toggleButton.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        toggleButton.style.display = 'inline-flex';
     }
 
     // Trigger the refined reveal transition once the modal has been added to the DOM.
@@ -2965,7 +2939,7 @@ document.addEventListener("DOMContentLoaded", function() {
         accessibilityModal.classList.add('is-ready');
     });
 
-    //console.info('Accessibility Widget v1.7.1 - Powered by Stiac Web Services');
+    //console.info('Accessibility Widget v1.7.2 - Powered by Stiac Web Services');
 
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
@@ -2974,7 +2948,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function applyAccessibilityToolsScrollbarPadding() {
-        if (!toolsContainer || typeof window === 'undefined' || typeof window.getComputedStyle !== 'function') {
+        if (!toolsContainer) {
+            return;
+        }
+
+        if (typeof window === 'undefined' || typeof window.getComputedStyle !== 'function') {
+            updateAccessibilityToolsOverflowState();
+            return;
+        }
+
+        // When the tools list is expanded we intentionally remove the max-height and scrollbar, so
+        // reset any inline padding and skip width calculations to keep the layout balanced.
+        if (toolsContainer.classList.contains('a11y-stiac-expanded')) {
+            toolsContainer.style.paddingRight = '';
+            if (toolsContainer.dataset.a11yStiacScrollbarPaddingApplied) {
+                delete toolsContainer.dataset.a11yStiacScrollbarPaddingApplied;
+            }
+            updateAccessibilityToolsOverflowState();
             return;
         }
 
@@ -2998,7 +2988,7 @@ document.addEventListener("DOMContentLoaded", function() {
             delete toolsContainer.dataset.a11yStiacScrollbarPaddingApplied;
         }
 
-        updateAccessibilityToolsScrollAffordances();
+        updateAccessibilityToolsOverflowState();
     }
 
     function accessibilityModalOpenCloseToggle() {
@@ -3012,12 +3002,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     applyAccessibilityToolsScrollbarPadding();
-
-    if (toolsContainer && typeof toolsContainer.addEventListener === 'function') {
-        toolsContainer.addEventListener('scroll', () => {
-            updateAccessibilityToolsScrollAffordances();
-        }, { passive: true });
-    }
 
     if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
         window.addEventListener('resize', () => {
