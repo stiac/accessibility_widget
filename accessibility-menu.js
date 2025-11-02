@@ -1776,7 +1776,7 @@ const accessibilityMenuStyles = `
     }
 `;
 const accessibilityMenuHTML = `
-    <div id="accessibility-modal" class="right close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-acc-preserve-images>
+    <div id="accessibility-modal" class="bottom close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-acc-preserve-images>
       <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-lg shadow-slate-900/40 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">
           <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"></path>
@@ -2170,6 +2170,30 @@ const accessibilityMenuHTML = `
     </div>
 `;
 
+const VALID_MODAL_POSITIONS = ['left', 'top', 'bottom', 'right', 'bottom-left', 'bottom-right'];
+
+/**
+ * Normalise widget placement requests so we always apply a known alignment class.
+ * Accepts both the modal position keywords (e.g. "bottom-left") and alignment
+ * control identifiers (e.g. "align-acc-bottom-left").
+ * @param {string} value - Raw configuration string provided by the host page.
+ * @param {string} fallback - Safe position to use when the provided value is invalid.
+ * @returns {string} Sanitised position class.
+ */
+function normalisePositionClass(value, fallback = 'bottom') {
+    if (typeof value !== 'string') {
+        return fallback;
+    }
+    const trimmedValue = value.trim().toLowerCase();
+    if (!trimmedValue) {
+        return fallback;
+    }
+    const withoutPrefix = trimmedValue.startsWith('align-acc-')
+        ? trimmedValue.substring('align-acc-'.length)
+        : trimmedValue;
+    return VALID_MODAL_POSITIONS.includes(withoutPrefix) ? withoutPrefix : fallback;
+}
+
 function resolveWidgetScriptConfig() {
     const defaults = {
         defaultLanguage: 'en',
@@ -2182,6 +2206,7 @@ function resolveWidgetScriptConfig() {
         colorHeaderText: '#ffffff',
         colorControlActive: '',
         colorControlActiveText: '#ffffff',
+        defaultPosition: 'bottom',
         voce1: '',
         voce2: '',
         localesPath: '',
@@ -2262,6 +2287,12 @@ function resolveWidgetScriptConfig() {
         config.colorControlActiveText = script.dataset.colorControlActiveText.trim();
     }
 
+    if (typeof script.dataset.defaultPosition === 'string' && script.dataset.defaultPosition.trim()) {
+        config.defaultPosition = script.dataset.defaultPosition.trim();
+    } else if (typeof script.dataset.position === 'string' && script.dataset.position.trim()) {
+        config.defaultPosition = script.dataset.position.trim();
+    }
+
     if (typeof script.dataset.voce1 === 'string' && script.dataset.voce1.trim()) {
         config.voce1 = script.dataset.voce1.trim();
     }
@@ -2296,10 +2327,13 @@ function resolveWidgetScriptConfig() {
         }
     }
 
+    config.defaultPosition = normalisePositionClass(config.defaultPosition, defaults.defaultPosition);
+
     return config;
 }
 
 const widgetScriptConfig = resolveWidgetScriptConfig();
+const DEFAULT_MODAL_POSITION = normalisePositionClass(widgetScriptConfig.defaultPosition, 'bottom');
 
 // Locale bundles embedded directly within the widget so we can serve translations without
 // depending on external JSON requests (useful when CORS is blocked or files cannot be hosted
@@ -4464,7 +4498,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const alignAccBottomRight = document.getElementById('align-acc-bottom-right');
     const alignAccTopRight = document.getElementById('align-acc-top-right');
 
-    const positionClasses = ['left', 'top', 'bottom', 'right', 'bottom-left', 'bottom-right'];
+    const positionClasses = [...VALID_MODAL_POSITIONS];
     const positionControls = [
         { element: alignAccTopLeft, className: 'left' },
         { element: alignAccTop, className: 'top' },
@@ -4474,9 +4508,16 @@ document.addEventListener("DOMContentLoaded", function() {
         { element: alignAccTopRight, className: 'right' }
     ];
 
+    if (!accessibilityModal.classList.contains(DEFAULT_MODAL_POSITION)) {
+        positionClasses.forEach(existingClass => {
+            accessibilityModal.classList.remove(existingClass);
+        });
+        accessibilityModal.classList.add(DEFAULT_MODAL_POSITION);
+    }
+
     function getCurrentPosition() {
         const activeClass = positionClasses.find(positionClass => accessibilityModal.classList.contains(positionClass));
-        return activeClass || 'right';
+        return activeClass || DEFAULT_MODAL_POSITION;
     }
 
     function updatePositionControls() {
@@ -4493,11 +4534,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function setModalPosition(positionClass) {
+        const safePosition = normalisePositionClass(positionClass, getCurrentPosition());
         accessibilityModalOpenCloseToggle();
         positionClasses.forEach(existingClass => {
             accessibilityModal.classList.remove(existingClass);
         });
-        accessibilityModal.classList.add(positionClass);
+        accessibilityModal.classList.add(safePosition);
         updatePositionControls();
         updateCloseButtonIcon();
         saveSettings();
@@ -5014,7 +5056,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hideVideo: Boolean(legacy.hideVideo),
             reduceMotion: Boolean(legacy.reduceMotion),
             cursor: legacy.cursor2 ? 'guide' : legacy.cursor1 ? 'mask' : legacy.cursor0 ? 'focus' : 'default',
-            position: legacy.accPosition || 'right'
+            position: normalisePositionClass(legacy.accPosition, DEFAULT_MODAL_POSITION)
         };
     }
 
@@ -5075,9 +5117,7 @@ document.addEventListener("DOMContentLoaded", function() {
         positionClasses.forEach(positionClass => {
             accessibilityModal.classList.remove(positionClass);
         });
-        const restoredPosition = settings.position && positionClasses.includes(settings.position)
-            ? settings.position
-            : 'right';
+        const restoredPosition = normalisePositionClass(settings.position, DEFAULT_MODAL_POSITION);
         accessibilityModal.classList.add(restoredPosition);
         updatePositionControls();
         updateCloseButtonIcon();

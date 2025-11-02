@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.25`
+- **Current Version:** `1.5.26`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.26
+
+- Dock the accessibility modal to the bottom edge by default and add a `data-default-position` / `data-position` script attribute so integrators can preselect any alignment (accepts both `bottom-left` style keywords and `align-acc-bottom` button IDs).
 
 ## What's New in 1.5.25
 
@@ -223,6 +227,7 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 | `data-color-header-text` | Overrides the text/icon colour used by the header banner and active Change Positions toggles. Falls back to the most legible option if omitted. | Any valid CSS colour | Derived from palette |
 | `data-color-control-active` | Background colour for active accessibility cards inside the grid. | Any valid CSS colour | Matches header background by default |
 | `data-color-control-active-text` | Overrides the text/icon colour used by active accessibility cards. Falls back to a contrast-safe value if omitted. | Any valid CSS colour | Derived from palette |
+| `data-default-position`, `data-position` | Sets the initial docking point for the accessibility modal. Accepts keyword positions (`left`, `top`, `bottom`, `right`, `bottom-left`, `bottom-right`) or the equivalent `align-acc-*` control IDs. | Listed keywords / IDs | `bottom` |
 | `data-voce1` | Overrides the main heading inside the widget (useful for localisation/branding). | Free text | `Accessibility Tools` / translated value |
 | `data-voce2` | Overrides the sub-heading tagline beneath the title. | Free text | `Fine-tune colours…` / translated value |
 | `data-locales-path` | Overrides the folder that contains JSON locale files. Use when hosting the bundles outside the script directory. | Relative or absolute path ending in the folder containing locale JSON files. | `<script dir>/locales` when same origin, otherwise the host site's `/locales` folder |
