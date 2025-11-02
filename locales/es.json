@@ -14,6 +14,7 @@
       "title": "Herramientas de accesibilidad",
       "subtitle": "Ajuste colores, tipografía y ayudas de enfoque con una interfaz renovada."
     },
+    "scrollHint": "Desplázate para ver más herramientas",
     "invertColours": {
       "label": "Invertir colores"
     },

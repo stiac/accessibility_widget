@@ -1,4 +1,19 @@
 # Changelog
+# [1.7.1] - 2025-12-26
+
+### Added
+- Display a localized scroll hint beneath the tools grid whenever additional controls are available, helping visitors discover content below the fold.
+- Fade-in gradient overlays at the top and bottom of the scrollable grid to visually indicate that more controls can be explored.
+
+### Changed
+- Keep the new scroll affordances in sync with resize events and language switches so guidance remains accurate across responsive layouts and translations.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.7.0] - 2025-12-25
 
 ### Added

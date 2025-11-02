@@ -338,6 +338,49 @@ const accessibilityMenuStyles = `
       scrollbar-width: thin;
       /* Keep the tools grid visually centred beside the navigation column. */
       padding-right: 0.9rem;
+      position: relative;
+    }
+
+    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::before,
+    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::after {
+      content: '';
+      position: sticky;
+      left: 0;
+      right: 0;
+      display: block;
+      height: 2.75rem;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      opacity: 0;
+      z-index: 5;
+    }
+
+    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::before {
+      top: 0;
+      margin-bottom: -2.75rem;
+      background-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0)
+      );
+    }
+
+    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable::after {
+      bottom: 0;
+      margin-top: -2.75rem;
+      background-image: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0.95),
+        rgba(255, 255, 255, 0)
+      );
+    }
+
+    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable:not(.a11y-stiac-scroll-top)::before {
+      opacity: 1;
+    }
+
+    #accessibility-modal #accessibility-tools.a11y-stiac-scrollable:not(.a11y-stiac-scroll-bottom)::after {
+      opacity: 1;
     }
 
     #accessibility-modal #accessibility-tools::-webkit-scrollbar {
@@ -347,6 +390,49 @@ const accessibilityMenuStyles = `
     #accessibility-modal #accessibility-tools::-webkit-scrollbar-thumb {
       background: rgba(15, 23, 42, 0.35);
       border-radius: 9999px;
+    }
+
+    .a11y-stiac-scroll-hint {
+      margin: 0 1.5rem;
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      color: rgba(15, 23, 42, 0.65);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-align: center;
+      pointer-events: none;
+      transition: opacity 0.2s ease, max-height 0.2s ease, padding 0.2s ease, margin 0.2s ease;
+    }
+
+    .a11y-stiac-scroll-hint::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 0.35rem;
+      margin: 0 auto 0.6rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.18);
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+
+    .a11y-stiac-scroll-hint.a11y-stiac-visible {
+      max-height: 4rem;
+      padding: 0.75rem 0 1rem;
+      margin-top: -0.5rem;
+      opacity: 1;
+    }
+
+    .a11y-stiac-scroll-hint.a11y-stiac-visible::before {
+      opacity: 1;
+    }
+
+    .a11y-stiac-scroll-hint.a11y-stiac-hide {
+      opacity: 0;
     }
 
     .a11y-stiac-item:hover .a11y-stiac-child {
@@ -2732,6 +2818,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 activeTranslations = payload && payload.translations ? payload.translations : {};
                 applyWidgetOverrides();
                 renderLanguageOptions(payload && payload.language ? payload.language : widgetScriptConfig.defaultLanguage);
+                refreshScrollHintCopy();
                 if (languageSelectElement && payload && payload.language) {
                     languageSelectElement.value = payload.language;
                 }
@@ -2759,6 +2846,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             renderLanguageOptions(widgetScriptConfig.defaultLanguage);
             applyWidgetOverrides();
+            refreshScrollHintCopy();
             if (languageSelectElement) {
                 languageSelectElement.setAttribute('disabled', 'disabled');
             }
@@ -2769,6 +2857,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         renderLanguageOptions(widgetScriptConfig.defaultLanguage);
         applyWidgetOverrides();
+        refreshScrollHintCopy();
         if (languageSelectElement) {
             languageSelectElement.setAttribute('disabled', 'disabled');
         }
@@ -2792,12 +2881,91 @@ document.addEventListener("DOMContentLoaded", function() {
         closeBtn.style.color = headerTextColor;
     }
 
+    const toolsContainer = document.getElementById('accessibility-tools');
+    let scrollHintElement = null;
+
+    function ensureScrollHintElement() {
+        if (!toolsContainer) {
+            return null;
+        }
+
+        if (!scrollHintElement) {
+            scrollHintElement = document.createElement('p');
+            scrollHintElement.id = 'accessibility-scroll-hint';
+            scrollHintElement.className = 'a11y-stiac-scroll-hint';
+            scrollHintElement.setAttribute('aria-hidden', 'true');
+            scrollHintElement.setAttribute('data-i18n', 'controls.scrollHint');
+            scrollHintElement.textContent = resolveScrollHintMessage();
+            toolsContainer.insertAdjacentElement('afterend', scrollHintElement);
+        }
+
+        return scrollHintElement;
+    }
+
+    function resolveScrollHintMessage() {
+        return activeTranslations
+            && activeTranslations.controls
+            && typeof activeTranslations.controls.scrollHint === 'string'
+            ? activeTranslations.controls.scrollHint
+            : 'Scroll for more tools';
+    }
+
+    function refreshScrollHintCopy() {
+        const hint = ensureScrollHintElement();
+        if (!hint) {
+            return;
+        }
+
+        hint.textContent = resolveScrollHintMessage();
+    }
+
+    function updateAccessibilityToolsScrollAffordances() {
+        if (!toolsContainer) {
+            return;
+        }
+
+        const hint = ensureScrollHintElement();
+        const hasOverflow = toolsContainer.scrollHeight - toolsContainer.clientHeight > 1;
+
+        if (!hasOverflow) {
+            toolsContainer.classList.remove(
+                'a11y-stiac-scrollable',
+                'a11y-stiac-scroll-top',
+                'a11y-stiac-scroll-bottom'
+            );
+
+            if (hint) {
+                hint.classList.remove('a11y-stiac-visible', 'a11y-stiac-hide');
+            }
+
+            return;
+        }
+
+        toolsContainer.classList.add('a11y-stiac-scrollable');
+
+        const atTop = toolsContainer.scrollTop <= 1;
+        const atBottom = toolsContainer.scrollTop + toolsContainer.clientHeight >= toolsContainer.scrollHeight - 1;
+
+        toolsContainer.classList.toggle('a11y-stiac-scroll-top', atTop);
+        toolsContainer.classList.toggle('a11y-stiac-scroll-bottom', atBottom);
+
+        if (hint) {
+            hint.classList.add('a11y-stiac-visible');
+
+            if (atBottom) {
+                hint.classList.add('a11y-stiac-hide');
+            } else {
+                hint.classList.remove('a11y-stiac-hide');
+            }
+        }
+    }
+
     // Trigger the refined reveal transition once the modal has been added to the DOM.
     requestAnimationFrame(() => {
         accessibilityModal.classList.add('is-ready');
     });
 
-    //console.info('Accessibility Widget v1.7.0 - Powered by Stiac Web Services');
+    //console.info('Accessibility Widget v1.7.1 - Powered by Stiac Web Services');
 
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
@@ -2806,8 +2974,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function applyAccessibilityToolsScrollbarPadding() {
-        const toolsContainer = document.getElementById('accessibility-tools');
-
         if (!toolsContainer || typeof window === 'undefined' || typeof window.getComputedStyle !== 'function') {
             return;
         }
@@ -2831,6 +2997,8 @@ document.addEventListener("DOMContentLoaded", function() {
             toolsContainer.style.paddingRight = '';
             delete toolsContainer.dataset.a11yStiacScrollbarPaddingApplied;
         }
+
+        updateAccessibilityToolsScrollAffordances();
     }
 
     function accessibilityModalOpenCloseToggle() {
@@ -2845,8 +3013,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     applyAccessibilityToolsScrollbarPadding();
 
+    if (toolsContainer && typeof toolsContainer.addEventListener === 'function') {
+        toolsContainer.addEventListener('scroll', () => {
+            updateAccessibilityToolsScrollAffordances();
+        }, { passive: true });
+    }
+
     if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
-        window.addEventListener('resize', applyAccessibilityToolsScrollbarPadding);
+        window.addEventListener('resize', () => {
+            applyAccessibilityToolsScrollbarPadding();
+        });
     }
 
     function getCloseButtonIconMarkup(isClosed) {

@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.7.0
+- **Version**: 1.7.1
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-25
+- **Last Update**: 2025-12-26
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,7 +11,8 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 
--## Recent Activities
+## Recent Activities
+- 2025-12-26 — Added localized scroll hints and gradient overlays so the tools list clearly communicates when more controls are available (AI assistant)
 - 2025-12-25 — Embedded all maintained locale bundles directly in the widget and introduced a local Tailwind build pipeline with a packaged stylesheet fallback (AI assistant)
 - 2025-12-22 — Hid the Change Positions controls by default and added a dataset toggle so hosts can re-enable them when required (AI assistant)
 - 2025-12-20 — Defaulted the accessibility modal to the bottom-left corner to mirror the launcher placement used on customer sites while retaining data attribute overrides (AI assistant)

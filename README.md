@@ -8,14 +8,13 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.7.0`
+- **Current Version:** `1.7.1`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
-## What's New in 1.7.0
+## What's New in 1.7.1
 
-- Embedded every maintained locale bundle directly in `accessibility-menu.js` and exposed them through `window.AccessibilityWidgetEmbeddedLocales` so translations keep working even when cross-origin JSON requests are blocked.
-- Added a local Tailwind CSS build pipeline (`npm run build:tailwind`) that compiles a minified `accessibility-tailwind.css` helper alongside the script for FTP-friendly deployments.
-- Introduced the `data-tailwind-stylesheet` attribute and updated the loader to inject the packaged stylesheet by default, keeping CDN-based helpers optional for legacy setups.
+- Added a localized scroll hint and gradient overlays to the accessibility tools grid so visitors immediately understand when additional controls are available below the fold.
+- Synced the new affordances with resize and language events to keep the guidance accurate across translations and responsive breakpoints.
 
 ## Features
 

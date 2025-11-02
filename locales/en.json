@@ -14,6 +14,7 @@
       "title": "Accessibility Tools",
       "subtitle": "Fine-tune colours, typography and focus helpers with a refreshed look."
     },
+    "scrollHint": "Scroll for more tools",
     "invertColours": {
       "label": "Invert Colours"
     },

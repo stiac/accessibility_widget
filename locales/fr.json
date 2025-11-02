@@ -14,6 +14,7 @@
       "title": "Outils d'accessibilité",
       "subtitle": "Ajustez couleurs, typographie et aides au focus avec une nouvelle interface."
     },
+    "scrollHint": "Faites défiler pour découvrir plus d’outils",
     "invertColours": {
       "label": "Inverser les couleurs"
     },
