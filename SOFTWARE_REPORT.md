@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.5.32
+- **Version**: 1.7.0
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-22
+- **Last Update**: 2025-12-25
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -11,7 +11,8 @@
 - **Persistence Layer**: Completed
 - **Testing**: Planned (manual regression required)
 
-## Recent Activities
+-## Recent Activities
+- 2025-12-25 — Embedded all maintained locale bundles directly in the widget and introduced a local Tailwind build pipeline with a packaged stylesheet fallback (AI assistant)
 - 2025-12-22 — Hid the Change Positions controls by default and added a dataset toggle so hosts can re-enable them when required (AI assistant)
 - 2025-12-20 — Defaulted the accessibility modal to the bottom-left corner to mirror the launcher placement used on customer sites while retaining data attribute overrides (AI assistant)
 - 2025-12-19 — Rebranded the accessibility widget by renaming every `acc-` class, ID, data attribute, and storage key to the new `a11y-stiac-` namespace for consistent STiac theming (AI assistant)
@@ -74,7 +75,8 @@
 - New CSS variable baseline for modal fonts should be regression-tested across browsers until automated coverage is available.
 
 ## Dependencies
-- No runtime dependencies.
+- Runtime: None (standalone widget).
+- Build tooling: `tailwindcss`, `@tailwindcss/forms`, `@tailwindcss/typography`, `terser` (dev-time only).
 
 ## Economic Report
 - Not tracked.

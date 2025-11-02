@@ -8,14 +8,14 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.6.0`
+- **Current Version:** `1.7.0`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
-## What's New in 1.6.0
+## What's New in 1.7.0
 
-- Trimmed the JavaScript bundle by moving the OpenDyslexic font into a lightweight `open-dyslexic.css` file that is only requested when visitors enable the dyslexia-friendly typeface.
-- Load locale JSON files on demand so the widget fetches only the language the visitor selects; English remains embedded as a safe fallback for offline installs.
-- Added new script attributes (`data-assets-path`, `data-open-dyslexic-stylesheet`, `data-tailwind`, `data-tailwind-cdn`) to let integrators customise where supporting assets live and whether the Tailwind CDN helper should be injected.
+- Embedded every maintained locale bundle directly in `accessibility-menu.js` and exposed them through `window.AccessibilityWidgetEmbeddedLocales` so translations keep working even when cross-origin JSON requests are blocked.
+- Added a local Tailwind CSS build pipeline (`npm run build:tailwind`) that compiles a minified `accessibility-tailwind.css` helper alongside the script for FTP-friendly deployments.
+- Introduced the `data-tailwind-stylesheet` attribute and updated the loader to inject the packaged stylesheet by default, keeping CDN-based helpers optional for legacy setups.
 
 ## Features
 
@@ -61,6 +61,8 @@ You can install the Accessibility Plugin using npm. Run the following command in
 After installation, you can link the `javascript` file _normally_ using
 <pre><code><script src="assets/app/accessibility/accessibility-menu.js"></script></code></pre>
 
+> Upload the generated `accessibility-tailwind.css` alongside the script so the fallback loader can serve Tailwind without relying on the CDN helper.
+
 ### OR
 
 You can use `min.js` file _as your requirement_
@@ -84,7 +86,7 @@ You can use `min.js` file _as your requirement_
 
 ### Styling
 
-- The menu now uses Tailwind CSS classes. If your page does not already include Tailwind, the plugin injects the CDN build automatically when the panel loads (set `data-tailwind="false"` to disable the helper or `data-tailwind-cdn` to point at a self-hosted build).
+- The menu now uses Tailwind CSS classes. When the host page does not already include Tailwind, the widget injects the generated `accessibility-tailwind.css` helper from the same directory (set `data-tailwind="false"` to disable the helper, `data-tailwind-stylesheet` to point at a custom CSS file, or `data-tailwind-cdn` if you intentionally prefer the CDN script).
 - Adjust the colour scheme quickly by editing the CSS variables (`--a11y-stiac-color-1`, `--a11y-stiac-color-2`, `--a11y-stiac-hover-color`, `--a11y-stiac-hover-text-color`, `--a11y-stiac-text-color`, `--a11y-stiac-header-bg-color`, `--a11y-stiac-header-text-color`, `--a11y-stiac-control-active-bg-color`, `--a11y-stiac-control-active-text-color`) at the top of `accessibility-menu.js`.
 
 ### Script data attributes
@@ -126,17 +128,28 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 | `data-locales-path` | Overrides the folder that contains JSON locale files. Use when hosting the bundles outside the script directory. | Relative or absolute path ending in the folder containing locale JSON files. | `<script dir>/locales` when same origin, otherwise the host site's `/locales` folder |
 | `data-assets-path` | Overrides the base path used for auxiliary assets such as `open-dyslexic.css`. Useful when the script is served from a CDN but supporting files live elsewhere. | Relative or absolute path ending with `/`. | Script directory |
 | `data-open-dyslexic-stylesheet` | Points directly to a custom stylesheet that defines the OpenDyslexic font faces. | Absolute or relative URL to a CSS file. | `<assets-path>/open-dyslexic.css` |
-| `data-tailwind` | Controls whether the fallback Tailwind CDN build is injected automatically. | `true`, `false`, `1`, `0`, `yes`, `no` | `true` |
-| `data-tailwind-cdn`, `data-tailwind-cdn-url` | Overrides the CDN URL used when injecting Tailwind. | Any valid script URL. | `https://cdn.tailwindcss.com?plugins=forms,typography` |
+| `data-tailwind` | Controls whether the fallback Tailwind helper is injected automatically. | `true`, `false`, `1`, `0`, `yes`, `no` | `true` (loads `accessibility-tailwind.css`) |
+| `data-tailwind-stylesheet` | Points at a custom Tailwind CSS bundle that should be injected when the host does not already ship Tailwind. | Absolute or relative URL to a CSS file. | `<assets-path>/accessibility-tailwind.css` |
+| `data-tailwind-cdn`, `data-tailwind-cdn-url` | Overrides the URL used when loading Tailwind as a script instead of a stylesheet. | Any valid script URL. | Not set (CDN disabled by default) |
 | `data-translate-language-names` | Opt-in flag that translates the language names using the active locale instead of native endonyms. | `true`, `false`, `1`, `0`, `yes`, `no` | `false` |
 | `data-preserve-language-icons` | Keeps the language dropdown icons visible even when the Hide Images control is active. | `true`, `false`, `1`, `0`, `yes`, `no` | `false` |
 
 All attributes are optional; omit any value to keep the default behaviour. Colours are validated at runtime, so unsupported values gracefully fall back to the defaults.
 
+#### Rebuilding the packaged Tailwind stylesheet
+
+If you customise the widget markup or Tailwind configuration, regenerate `accessibility-tailwind.css` locally before uploading the files to your server:
+
+1. `npm install`
+2. `npm run build:tailwind`
+
+The command scans `accessibility-menu.js`, compiles only the classes the widget needs, and writes a minified stylesheet next to the script so FTP-only deployments remain lightweight.
+
 ### Internationalisation
 
+- The widget bundles translations for `en`, `it`, `fr`, `de`, `es`, and `pt` directly inside `accessibility-menu.js`, exposing them on `window.AccessibilityWidgetEmbeddedLocales` so language switches succeed even when remote JSON endpoints are unavailable.
 - Load the `i18n.js` helper **before** `accessibility-menu.js`. The helper auto-detects the browser language (`navigator.language`), falls back to English, and stores the user's manual selection in `localStorage` (`stiacAccessibilityLanguage`).
-- Locale files live under `/locales/<lang>.json` by default (e.g., `/locales/en.json`). The loader checks the script's embedded English fallback first, then attempts to fetch from the script directory (ideal for CDN/versioned builds) and, if that fails, gracefully falls back to the host site's `/locales` directory; adjust `data-locales-path` or `data-assets-path` if your bundles live elsewhere. Each file mirrors the same structure so you can add new languages by dropping another JSON document and extending `SUPPORTED_LANGUAGES` in `accessibility-menu.js`.
+- Locale files live under `/locales/<lang>.json` by default (e.g., `/locales/en.json`). The loader checks the script's embedded locale bundle first (covering the six maintained languages), then attempts to fetch from the script directory (ideal for CDN/versioned builds) and, if that fails, gracefully falls back to the host site's `/locales` directory; adjust `data-locales-path` or `data-assets-path` if your bundles live elsewhere. Each file mirrors the same structure so you can add new languages by dropping another JSON document and extending `SUPPORTED_LANGUAGES` in `accessibility-menu.js`.
 - Use the built-in language selector inside the widget to switch languages. The control is fully keyboard accessible, updates the `<html lang>` attribute, and announces changes with `aria-live="polite"`. Language names stay in their native form by default; set `data-translate-language-names="true"` if you prefer them localised. When the **Hide Images** toggle is active the dropdown icons disappear automatically; add `data-preserve-language-icons="true"` if you need to keep them visible.
 - Every translatable string inside the widget is decorated with `data-i18n` or `data-i18n-attr`. If you render custom markup alongside the menu, you can reuse the helper by applying the same attributes to your elements and calling `window.AccessibilityI18n.applyTranslations()`.
 - If you host locale files in a different directory, set `data-locales-path` on the `<script>` tag or pass `localesPath` when calling `AccessibilityI18n.init`.
