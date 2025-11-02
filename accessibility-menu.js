@@ -3679,9 +3679,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     console.info('Stiac Web Services Accessibility Suite - Software proprietario, uso non autorizzato vietato.');
 
-    closeBtn.addEventListener('click', () => {
-        accessibilityModalOpenCloseToggle();
-    });
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            accessibilityModalOpenCloseToggle();
+        });
+    }
 
     function applyAccessibilityToolsScrollbarPadding() {
         const toolsContainer = document.getElementById('accessibility-tools');
