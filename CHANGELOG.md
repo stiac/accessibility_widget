@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.33] - 2025-12-23
+
+### Added
+- None.
+
+### Changed
+- Replaced the badge copy with a lowercase "powered by stiac web services" link that opens the official site in a new tab.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.5.32] - 2025-12-22
 
 ### Added
