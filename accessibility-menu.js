@@ -2166,14 +2166,14 @@ const accessibilityMenuHTML = `
 
         {{ changePositionsControls }}
         <p id="a11y-stiac-language-announcement" class="a11y-stiac-sr-only" aria-live="polite" role="status"></p>
-        <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold tracking-[0.3em] text-slate-500" role="note" aria-label="software protetto da powered by stiac web services">
+        <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold tracking-[0.3em] text-slate-500" role="note" aria-label="Powered by Stiac Web Services">
           <a
-            href="https://stiac.it/?utm_source=a11y"
+            href="https://olinke.com/vy9reypj2j"
             target="_blank"
             rel="noopener noreferrer"
             class="block text-xs tracking-[0.35em] text-slate-600"
           >
-            powered by stiac web services
+            Powered by Stiac Web Services
           </a>
           <span class="text-[10px] font-normal tracking-[0.3em] text-slate-400">Proprietary Accessibility Suite</span>
         </div>
@@ -3690,7 +3690,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     accessibilityModal.classList.add('stiac-sws-protected');
-    accessibilityModal.setAttribute('data-stiac-owner', 'powered by stiac web services');
+    accessibilityModal.setAttribute('data-stiac-owner', 'Powered by Stiac Web Services');
 
     const resetAllButton = document.getElementById('reset-all');
     if (resetAllButton) {
@@ -3708,7 +3708,7 @@ document.addEventListener("DOMContentLoaded", function() {
         accessibilityModal.classList.add('is-ready');
     });
 
-    console.info('powered by stiac web services - software proprietario, uso non autorizzato vietato.');
+    console.info('Powered by Stiac Web Services');
 
     if (closeBtn) {
         closeBtn.addEventListener('click', () => {
