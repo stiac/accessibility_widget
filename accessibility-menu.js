@@ -2175,7 +2175,6 @@ const accessibilityMenuHTML = `
           >
             Powered by Stiac Web Services
           </a>
-          <span class="text-[10px] font-normal tracking-[0.3em] text-slate-400">Proprietary Accessibility Suite</span>
         </div>
       </div>
     </div>
