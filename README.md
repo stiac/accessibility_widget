@@ -8,8 +8,13 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.5.31`
+- **Current Version:** `1.5.32`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.5.32
+
+- Hide the Change Positions footer controls by default so the widget ships with a slimmer footprint while keeping the saved modal placement logic intact.
+- Added a `data-enable-position-controls` / `data-position-controls` script attribute so integrators can opt back into the Change Positions buttons when their layout requires user-accessible docking.
 
 ## What's New in 1.5.31
 
@@ -178,7 +183,7 @@ The Accessibility Plugin is a JavaScript library that helps improve the accessib
 - **Reading Guide**: Makes it easier to read long lines of text by Long Highlight Cursor.
 - **Reset**: Resets all accessibility settings to their default values.
 - **Close**: Closes the accessibility menu.
-- **Change Position**: You can change the position of the accessibility menu to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` as user needs.
+- **Change Position**: Optionally expose footer controls (via `data-enable-position-controls="true"`) so end users can dock the widget to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` without editing code.
 - **Save Settings**: Save the current settings to the local storage and load them when the page is reloaded.
 - **Internationalisation**: Auto-detects the visitor language, offers six bundled translations, and exposes a keyboard-accessible language picker with polite announcements.
 
@@ -217,8 +222,8 @@ You can use `min.js` file _as your requirement_
 
 ### Change Position
 
-- In the js file, you can find the `first div` with `id` as `accessibility-modal`
-- In this div, you can find class `right` by **default**. You can change it to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` as you need
+- Enable the footer controls by adding `data-enable-position-controls="true"` (or `data-position-controls="true"`) to the embedding `<script>` tag when you want end users to move the widget.
+- Set the default docking point with the existing `data-default-position` / `data-position` attributes or by editing the `#accessibility-modal` class if you are customising the markup directly.
 
 ### Styling
 
@@ -242,6 +247,9 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 ></script>
 ```
 
+> [!note]
+> Set `data-enable-position-controls="true"` (or `data-position-controls="true"`) if you want the Change Positions buttons to render for your visitors.
+
 | Attribute | Purpose | Accepted values | Default |
 | --- | --- | --- | --- |
 | `data-default-language` | Sets the UI language for headings, card labels, and screen-reader helpers. | `en`, `it` (other values fall back to English) | `en` |
@@ -255,6 +263,7 @@ You can fine-tune the widget without editing the bundle by adding configuration 
 | `data-color-control-active` | Background colour for active accessibility cards inside the grid. | Any valid CSS colour | Matches header background by default |
 | `data-color-control-active-text` | Overrides the text/icon colour used by active accessibility cards. Falls back to a contrast-safe value if omitted. | Any valid CSS colour | Derived from palette |
 | `data-default-position`, `data-position` | Sets the initial docking point for the accessibility modal. Accepts keyword positions (`left`, `top`, `bottom`, `right`, `bottom-left`, `bottom-right`) or the equivalent `align-a11y-stiac-*` control IDs. | Listed keywords / IDs | `bottom-left` |
+| `data-enable-position-controls`, `data-position-controls` | Opt-in flag that renders the Change Positions footer buttons so visitors can move the widget after load. | `true`, `false`, `1`, `0`, `yes`, `no` | `false` |
 | `data-voce1` | Overrides the main heading inside the widget (useful for localisation/branding). | Free text | `Accessibility Tools` / translated value |
 | `data-voce2` | Overrides the sub-heading tagline beneath the title. | Free text | `Fine-tune colours…` / translated value |
 | `data-locales-path` | Overrides the folder that contains JSON locale files. Use when hosting the bundles outside the script directory. | Relative or absolute path ending in the folder containing locale JSON files. | `<script dir>/locales` when same origin, otherwise the host site's `/locales` folder |
