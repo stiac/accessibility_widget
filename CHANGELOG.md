@@ -1,4 +1,18 @@
 # Changelog
+# [1.5.28] - 2025-12-18
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Guarded the launcher close button listener so the scrollbar padding helper always initialises and the widget no longer throws a `ReferenceError` when the trigger element is absent on load.
+
+### Removed
+- None.
+
 # [1.5.27] - 2025-12-17
 
 ### Added
