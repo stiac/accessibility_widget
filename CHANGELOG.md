@@ -1,4 +1,20 @@
 # Changelog
+# [1.7.0] - 2025-12-25
+
+### Added
+- Embedded the six maintained locale bundles directly inside `accessibility-menu.js` and published them to `window.AccessibilityWidgetEmbeddedLocales` so translations work even when remote JSON endpoints block cross-origin requests.
+- Introduced a Tailwind CSS build pipeline and committed the generated `accessibility-tailwind.css` helper for offline/FTP deployments.
+
+### Changed
+- Updated the Tailwind loader to serve the packaged stylesheet by default, keeping CDN script injection as an opt-in fallback via `data-tailwind-cdn`.
+- Documented the new `data-tailwind-stylesheet` attribute and local build instructions for integrators.
+
+### Fixed
+- Eliminated locale loading failures triggered by CORS or empty responses by preferring the embedded bundles before performing network requests.
+
+### Removed
+- None.
+
 # [1.6.0] - 2025-12-24
 
 ### Added

@@ -1108,7 +1108,8 @@ function resolveWidgetScriptConfig() {
         assetBasePath: '',
         openDyslexicStylesheet: '',
         injectTailwind: true,
-        tailwindCdnUrl: 'https://cdn.tailwindcss.com?plugins=forms,typography',
+        tailwindStylesheet: 'accessibility-tailwind.css',
+        tailwindCdnUrl: '',
         translateLanguageNames: false,
         preserveLanguageIcons: false,
         positionControlsEnabled: false
@@ -1233,6 +1234,10 @@ function resolveWidgetScriptConfig() {
         }
     }
 
+    if (typeof script.dataset.tailwindStylesheet === 'string' && script.dataset.tailwindStylesheet.trim()) {
+        config.tailwindStylesheet = script.dataset.tailwindStylesheet.trim();
+    }
+
     if (typeof script.dataset.tailwindCdn === 'string' && script.dataset.tailwindCdn.trim()) {
         config.tailwindCdnUrl = script.dataset.tailwindCdn.trim();
     } else if (typeof script.dataset.tailwindCdnUrl === 'string' && script.dataset.tailwindCdnUrl.trim()) {
@@ -1296,6 +1301,30 @@ function resolveOpenDyslexicStylesheetHref() {
     return DEFAULT_OPEN_DYSLEXIC_STYLESHEET;
 }
 
+function resolveTailwindAsset() {
+    const stylesheetPreference = typeof widgetScriptConfig.tailwindStylesheet === 'string'
+        ? widgetScriptConfig.tailwindStylesheet.trim()
+        : '';
+    if (stylesheetPreference) {
+        if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(stylesheetPreference) || stylesheetPreference.startsWith('/')) {
+            return { type: 'link', href: stylesheetPreference };
+        }
+        const basePath = widgetScriptConfig.assetBasePath || '';
+        const resolvedBase = basePath.endsWith('/') ? basePath : `${basePath}/`;
+        return { type: 'link', href: `${resolvedBase}${stylesheetPreference}` };
+    }
+
+    const cdnPreference = typeof widgetScriptConfig.tailwindCdnUrl === 'string'
+        ? widgetScriptConfig.tailwindCdnUrl.trim()
+        : '';
+    if (cdnPreference) {
+        const isStylesheet = /\.css(?:$|[?#])/i.test(cdnPreference);
+        return { type: isStylesheet ? 'link' : 'script', href: cdnPreference };
+    }
+
+    return null;
+}
+
 function ensureOpenDyslexicStylesheet() {
     if (typeof document === 'undefined') {
         return Promise.resolve();
@@ -1335,6 +1364,103 @@ function ensureOpenDyslexicStylesheet() {
 // depending on external JSON requests (useful when CORS is blocked or files cannot be hosted
 // separately). These mirror the JSON documents found in the `/locales` directory.
 const EMBEDDED_LOCALES = {
+    'de': {
+        "language": {
+            "code": "de",
+            "name": "Deutsch",
+            "selectorLabel": "Sprache",
+            "selectorDescription": "Wählen Sie die Sprache für die Oberfläche der Barrierefreiheits-Werkzeuge.",
+            "announcement": "Sprache auf {{language}} geändert."
+        },
+        "controls": {
+            "panelToggle": {
+                "ariaLabel": "Barrierefreiheitsmenü ein- oder ausblenden"
+            },
+            "heading": {
+                "title": "Barrierefreiheits-Werkzeuge",
+                "subtitle": "Optimieren Sie Farben, Typografie und Fokus-Hilfen mit einer überarbeiteten Oberfläche."
+            },
+            "invertColours": {
+                "label": "Farben invertieren"
+            },
+            "grayscale": {
+                "label": "Graustufen"
+            },
+            "lowSaturation": {
+                "label": "Geringe Sättigung"
+            },
+            "linksHighlight": {
+                "label": "Links hervorheben"
+            },
+            "fontSize": {
+                "label": "Schriftgröße"
+            },
+            "lineHeight": {
+                "label": "Zeilenhöhe"
+            },
+            "letterSpacing": {
+                "label": "Zeichenabstand"
+            },
+            "fontDyslexia": {
+                "label": "Schrift für Dyslexie",
+                "description": "Aktiviert eine dyslexiefreundliche Schrift auf der gesamten Seite, ohne das Barrierefreiheitsmenü zu verändern."
+            },
+            "textAlign": {
+                "label": "Textausrichtung",
+                "description": "Bestimmen Sie, wie Text auf der Seite ausgerichtet wird. Wiederholtes Klicken wechselt durch die verfügbaren Ausrichtungen; nach der letzten Option wird die Standardausrichtung wiederhergestellt.",
+                "status": {
+                    "start": "den Anfangsrand",
+                    "center": "die Mitte",
+                    "end": "den Endrand",
+                    "justify": "Blocksatz",
+                    "reset": "die Standardausrichtung der Seite"
+                }
+            },
+            "contrast": {
+                "label": "Kontrast"
+            },
+            "hideImages": {
+                "label": "Bilder ausblenden"
+            },
+            "hideVideo": {
+                "label": "Videos ausblenden"
+            },
+            "reduceMotion": {
+                "label": "Animationen reduzieren",
+                "description": "Stoppt animierte, blinkende und flackernde Inhalte, damit sie nicht automatisch abgespielt werden."
+            },
+            "changeCursors": {
+                "label": "Cursor ändern"
+            },
+            "resetAll": {
+                "label": "Alles zurücksetzen"
+            },
+            "position": {
+                "left": "Widget links andocken",
+                "top": "Widget am oberen Rand andocken",
+                "topLeft": "Widget in der oberen linken Ecke andocken",
+                "topRight": "Widget in der oberen rechten Ecke andocken",
+                "bottom": "Widget am unteren Rand andocken",
+                "bottomLeft": "Widget in der unteren linken Ecke andocken",
+                "bottomRight": "Widget in der unteren rechten Ecke andocken",
+                "right": "Widget rechts andocken"
+            }
+        },
+        "announcements": {
+            "textAlign": {
+                "set": "Textausrichtung auf {{value}} gesetzt.",
+                "reset": "Textausrichtung auf die Standardeinstellung der Seite zurückgesetzt."
+            }
+        },
+        "languageNames": {
+            "en": "Englisch",
+            "it": "Italienisch",
+            "fr": "Französisch",
+            "de": "Deutsch",
+            "es": "Spanisch",
+            "pt": "Portugiesisch"
+        }
+    },
     'en': {
         "language": {
             "code": "en",
@@ -1431,8 +1557,407 @@ const EMBEDDED_LOCALES = {
             "es": "Spanish",
             "pt": "Portuguese"
         }
+    },
+    'es': {
+        "language": {
+            "code": "es",
+            "name": "Español",
+            "selectorLabel": "Idioma",
+            "selectorDescription": "Elija el idioma utilizado para la interfaz de las herramientas de accesibilidad.",
+            "announcement": "Idioma cambiado a {{language}}."
+        },
+        "controls": {
+            "panelToggle": {
+                "ariaLabel": "Abrir o cerrar el panel de accesibilidad"
+            },
+            "heading": {
+                "title": "Herramientas de accesibilidad",
+                "subtitle": "Ajuste colores, tipografía y ayudas de enfoque con una interfaz renovada."
+            },
+            "invertColours": {
+                "label": "Invertir colores"
+            },
+            "grayscale": {
+                "label": "Escala de grises"
+            },
+            "lowSaturation": {
+                "label": "Baja saturación"
+            },
+            "linksHighlight": {
+                "label": "Resaltar enlaces"
+            },
+            "fontSize": {
+                "label": "Tamaño de letra"
+            },
+            "lineHeight": {
+                "label": "Altura de línea"
+            },
+            "letterSpacing": {
+                "label": "Espaciado entre letras"
+            },
+            "fontDyslexia": {
+                "label": "Fuente para dislexia",
+                "description": "Activa una familia de letras adecuada a la dislexia en toda la página sin alterar el menú de accesibilidad."
+            },
+            "textAlign": {
+                "label": "Alinear texto",
+                "description": "Decida cómo se alinea el texto en la página. Haga clic repetidamente para recorrer las alineaciones disponibles; tras la última opción se restablece la alineación predeterminada del sitio.",
+                "status": {
+                    "start": "el inicio",
+                    "center": "el centro",
+                    "end": "el extremo",
+                    "justify": "el justificado",
+                    "reset": "la alineación predeterminada del sitio"
+                }
+            },
+            "contrast": {
+                "label": "Contraste"
+            },
+            "hideImages": {
+                "label": "Ocultar imágenes"
+            },
+            "hideVideo": {
+                "label": "Ocultar vídeos"
+            },
+            "reduceMotion": {
+                "label": "Reducir movimiento",
+                "description": "Detiene que los elementos animados, parpadeantes o intermitentes se reproduzcan automáticamente en la página."
+            },
+            "changeCursors": {
+                "label": "Cambiar cursores"
+            },
+            "resetAll": {
+                "label": "Restablecer todo"
+            },
+            "position": {
+                "left": "Acoplar el widget al borde izquierdo",
+                "top": "Acoplar el widget al borde superior",
+                "topLeft": "Acoplar el widget a la esquina superior izquierda",
+                "topRight": "Acoplar el widget a la esquina superior derecha",
+                "bottom": "Acoplar el widget al borde inferior",
+                "bottomLeft": "Acoplar el widget a la esquina inferior izquierda",
+                "bottomRight": "Acoplar el widget a la esquina inferior derecha",
+                "right": "Acoplar el widget al borde derecho"
+            }
+        },
+        "announcements": {
+            "textAlign": {
+                "set": "Alineación de texto establecida en {{value}}.",
+                "reset": "Alineación de texto restablecida a la configuración predeterminada del sitio."
+            }
+        },
+        "languageNames": {
+            "en": "Inglés",
+            "it": "Italiano",
+            "fr": "Francés",
+            "de": "Alemán",
+            "es": "Español",
+            "pt": "Portugués"
+        }
+    },
+    'fr': {
+        "language": {
+            "code": "fr",
+            "name": "Français",
+            "selectorLabel": "Langue",
+            "selectorDescription": "Choisissez la langue utilisée pour l'interface des outils d'accessibilité.",
+            "announcement": "Langue changée en {{language}}."
+        },
+        "controls": {
+            "panelToggle": {
+                "ariaLabel": "Ouvrir ou fermer le panneau d'accessibilité"
+            },
+            "heading": {
+                "title": "Outils d'accessibilité",
+                "subtitle": "Ajustez couleurs, typographie et aides au focus avec une nouvelle interface."
+            },
+            "invertColours": {
+                "label": "Inverser les couleurs"
+            },
+            "grayscale": {
+                "label": "Niveaux de gris"
+            },
+            "lowSaturation": {
+                "label": "Faible saturation"
+            },
+            "linksHighlight": {
+                "label": "Mettre les liens en évidence"
+            },
+            "fontSize": {
+                "label": "Taille de police"
+            },
+            "lineHeight": {
+                "label": "Interligne"
+            },
+            "letterSpacing": {
+                "label": "Espacement des lettres"
+            },
+            "fontDyslexia": {
+                "label": "Police dyslexie",
+                "description": "Activez une police adaptée à la dyslexie sur toute la page sans modifier le menu d'accessibilité."
+            },
+            "textAlign": {
+                "label": "Alignement du texte",
+                "description": "Choisissez l'alignement du texte sur la page. Cliquez plusieurs fois pour parcourir les options disponibles ; après la dernière, l'alignement par défaut du site est rétabli.",
+                "status": {
+                    "start": "le bord initial",
+                    "center": "le centre",
+                    "end": "le bord final",
+                    "justify": "la justification",
+                    "reset": "l'alignement par défaut du site"
+                }
+            },
+            "contrast": {
+                "label": "Contraste"
+            },
+            "hideImages": {
+                "label": "Masquer les images"
+            },
+            "hideVideo": {
+                "label": "Masquer les vidéos"
+            },
+            "reduceMotion": {
+                "label": "Réduire les animations",
+                "description": "Empêche la lecture automatique des éléments animés, clignotants ou scintillants sur la page."
+            },
+            "changeCursors": {
+                "label": "Modifier les curseurs"
+            },
+            "resetAll": {
+                "label": "Réinitialiser tout"
+            },
+            "position": {
+                "left": "Ancrer le widget sur le bord gauche",
+                "top": "Ancrer le widget sur le bord supérieur",
+                "topLeft": "Ancrer le widget dans le coin supérieur gauche",
+                "topRight": "Ancrer le widget dans le coin supérieur droit",
+                "bottom": "Ancrer le widget sur le bord inférieur",
+                "bottomLeft": "Ancrer le widget dans le coin inférieur gauche",
+                "bottomRight": "Ancrer le widget dans le coin inférieur droit",
+                "right": "Ancrer le widget sur le bord droit"
+            }
+        },
+        "announcements": {
+            "textAlign": {
+                "set": "Alignement du texte défini sur {{value}}.",
+                "reset": "Alignement du texte rétabli sur la valeur par défaut du site."
+            }
+        },
+        "languageNames": {
+            "en": "Anglais",
+            "it": "Italien",
+            "fr": "Français",
+            "de": "Allemand",
+            "es": "Espagnol",
+            "pt": "Portugais"
+        }
+    },
+    'it': {
+        "language": {
+            "code": "it",
+            "name": "Italiano",
+            "selectorLabel": "Lingua",
+            "selectorDescription": "Scegli la lingua utilizzata per l'interfaccia degli strumenti di accessibilità.",
+            "announcement": "Lingua impostata su {{language}}."
+        },
+        "controls": {
+            "panelToggle": {
+                "ariaLabel": "Apri o chiudi il pannello di accessibilità"
+            },
+            "heading": {
+                "title": "Strumenti di Accessibilità",
+                "subtitle": "Personalizza colori, tipografia e aiuti al focus con un'interfaccia aggiornata."
+            },
+            "invertColours": {
+                "label": "Inverti Colori"
+            },
+            "grayscale": {
+                "label": "Scala di grigi"
+            },
+            "lowSaturation": {
+                "label": "Bassa Saturazione"
+            },
+            "linksHighlight": {
+                "label": "Evidenzia Link"
+            },
+            "fontSize": {
+                "label": "Dimensione Testo"
+            },
+            "lineHeight": {
+                "label": "Interlinea"
+            },
+            "letterSpacing": {
+                "label": "Spaziatura Lettere"
+            },
+            "fontDyslexia": {
+                "label": "Font per Dislessia",
+                "description": "Attiva un set di caratteri adatto alla dislessia sull'intera pagina senza modificare il menu di accessibilità."
+            },
+            "textAlign": {
+                "label": "Allineamento del testo",
+                "description": "Scegli come allineare il testo nella pagina. Clicca più volte per scorrere le opzioni disponibili; dopo l'ultima scelta viene ripristinato l'allineamento predefinito del sito.",
+                "status": {
+                    "start": "il margine iniziale",
+                    "center": "il centro",
+                    "end": "il margine finale",
+                    "justify": "la giustificazione",
+                    "reset": "l'allineamento predefinito del sito"
+                }
+            },
+            "contrast": {
+                "label": "Contrasto"
+            },
+            "hideImages": {
+                "label": "Nascondi immagini"
+            },
+            "hideVideo": {
+                "label": "Nascondi video"
+            },
+            "reduceMotion": {
+                "label": "Riduci animazioni",
+                "description": "Interrompe la riproduzione automatica di elementi animati, lampeggianti o sfarfallanti nella pagina."
+            },
+            "changeCursors": {
+                "label": "Cambia cursori"
+            },
+            "resetAll": {
+                "label": "Reimposta tutto"
+            },
+            "position": {
+                "left": "Aggancia il widget al bordo sinistro",
+                "top": "Aggancia il widget al bordo superiore",
+                "topLeft": "Aggancia il widget all'angolo in alto a sinistra",
+                "topRight": "Aggancia il widget all'angolo in alto a destra",
+                "bottom": "Aggancia il widget al bordo inferiore",
+                "bottomLeft": "Aggancia il widget all'angolo in basso a sinistra",
+                "bottomRight": "Aggancia il widget all'angolo in basso a destra",
+                "right": "Aggancia il widget al bordo destro"
+            }
+        },
+        "announcements": {
+            "textAlign": {
+                "set": "Allineamento del testo impostato su {{value}}.",
+                "reset": "Allineamento del testo ripristinato all'impostazione predefinita del sito."
+            }
+        },
+        "languageNames": {
+            "en": "Inglese",
+            "it": "Italiano",
+            "fr": "Francese",
+            "de": "Tedesco",
+            "es": "Spagnolo",
+            "pt": "Portoghese"
+        }
+    },
+    'pt': {
+        "language": {
+            "code": "pt",
+            "name": "Português",
+            "selectorLabel": "Idioma",
+            "selectorDescription": "Escolha o idioma utilizado na interface das ferramentas de acessibilidade.",
+            "announcement": "Idioma alterado para {{language}}."
+        },
+        "controls": {
+            "panelToggle": {
+                "ariaLabel": "Abrir ou fechar o painel de acessibilidade"
+            },
+            "heading": {
+                "title": "Ferramentas de acessibilidade",
+                "subtitle": "Ajuste cores, tipografia e auxiliares de foco com uma interface renovada."
+            },
+            "invertColours": {
+                "label": "Inverter cores"
+            },
+            "grayscale": {
+                "label": "Tons de cinza"
+            },
+            "lowSaturation": {
+                "label": "Baixa saturação"
+            },
+            "linksHighlight": {
+                "label": "Realçar ligações"
+            },
+            "fontSize": {
+                "label": "Tamanho da fonte"
+            },
+            "lineHeight": {
+                "label": "Altura da linha"
+            },
+            "letterSpacing": {
+                "label": "Espaçamento entre letras"
+            },
+            "fontDyslexia": {
+                "label": "Fonte para dislexia",
+                "description": "Ativa uma família de letras adequada à dislexia em toda a página sem alterar o menu de acessibilidade."
+            },
+            "textAlign": {
+                "label": "Alinhamento do texto",
+                "description": "Escolha como o texto deve ser alinhado na página. Clique repetidamente para percorrer as opções disponíveis; após a última opção o alinhamento padrão do site é restaurado.",
+                "status": {
+                    "start": "a margem inicial",
+                    "center": "o centro",
+                    "end": "a margem final",
+                    "justify": "a justificação",
+                    "reset": "o alinhamento padrão do site"
+                }
+            },
+            "contrast": {
+                "label": "Contraste"
+            },
+            "hideImages": {
+                "label": "Ocultar imagens"
+            },
+            "hideVideo": {
+                "label": "Ocultar vídeos"
+            },
+            "reduceMotion": {
+                "label": "Reduzir movimento",
+                "description": "Impede que elementos animados, intermitentes ou cintilantes sejam reproduzidos automaticamente na página."
+            },
+            "changeCursors": {
+                "label": "Alterar cursores"
+            },
+            "resetAll": {
+                "label": "Repor tudo"
+            },
+            "position": {
+                "left": "Ancorar o widget ao bordo esquerdo",
+                "top": "Ancorar o widget ao bordo superior",
+                "topLeft": "Ancorar o widget ao canto superior esquerdo",
+                "topRight": "Ancorar o widget ao canto superior direito",
+                "bottom": "Ancorar o widget ao bordo inferior",
+                "bottomLeft": "Ancorar o widget ao canto inferior esquerdo",
+                "bottomRight": "Ancorar o widget ao canto inferior direito",
+                "right": "Ancorar o widget ao bordo direito"
+            }
+        },
+        "announcements": {
+            "textAlign": {
+                "set": "Alinhamento do texto definido para {{value}}.",
+                "reset": "Alinhamento do texto reposto para a predefinição do site."
+            }
+        },
+        "languageNames": {
+            "en": "Inglês",
+            "it": "Italiano",
+            "fr": "Francês",
+            "de": "Alemão",
+            "es": "Espanhol",
+            "pt": "Português"
+        }
     }
 };
+
+// Merge embedded locales onto the global namespace so the shared i18n helper can resolve
+// translations without relying on cross-origin JSON fetches.
+if (typeof window !== 'undefined') {
+    const currentLocales = (window.AccessibilityWidgetEmbeddedLocales && typeof window.AccessibilityWidgetEmbeddedLocales === 'object')
+        ? window.AccessibilityWidgetEmbeddedLocales
+        : {};
+    const mergedLocales = { ...currentLocales, ...EMBEDDED_LOCALES };
+    window.AccessibilityWidgetEmbeddedLocales = mergedLocales;
+    window.STIAC_ACCESSIBILITY_LOCALES = mergedLocales;
+}
 
 const SUPPORTED_LANGUAGES = ['en', 'it', 'fr', 'de', 'es', 'pt'];
 const FALLBACK_LANGUAGE_NAMES = {
@@ -1786,12 +2311,26 @@ function ensureTailwindCSSLoaded() {
     if (!widgetScriptConfig.injectTailwind) {
         return;
     }
+    if (typeof document === 'undefined') {
+        return;
+    }
     if (typeof window !== 'undefined' && (window.tailwind || document.getElementById('stiac-accessibility-tailwind'))) {
         return;
     }
 
-    const existingTailwindAsset = document.querySelector('script[src*="tailwindcss.com"]') || document.querySelector('link[href*="tailwind"]');
-    if (existingTailwindAsset || !document.head) {
+    if (!document.head) {
+        return;
+    }
+
+    const existingTailwindAsset = document.querySelector('link[href*="tailwind"]')
+        || document.querySelector('style[data-tailwind]')
+        || document.querySelector('script[src*="tailwindcss.com"]');
+    if (existingTailwindAsset) {
+        return;
+    }
+
+    const tailwindAsset = resolveTailwindAsset();
+    if (!tailwindAsset || !tailwindAsset.href) {
         return;
     }
 
@@ -1799,12 +2338,22 @@ function ensureTailwindCSSLoaded() {
         document.documentElement.setAttribute('data-a11y-stiac-tailwind-fallback', 'true');
     }
 
-    const tailwindScript = document.createElement('script');
-    tailwindScript.id = 'stiac-accessibility-tailwind';
-    tailwindScript.src = widgetScriptConfig.tailwindCdnUrl || 'https://cdn.tailwindcss.com?plugins=forms,typography';
-    tailwindScript.defer = true;
-    tailwindScript.setAttribute('data-owner', 'stiac-accessibility');
-    document.head.appendChild(tailwindScript);
+    if (tailwindAsset.type === 'script') {
+        const tailwindScript = document.createElement('script');
+        tailwindScript.id = 'stiac-accessibility-tailwind';
+        tailwindScript.src = tailwindAsset.href;
+        tailwindScript.defer = true;
+        tailwindScript.setAttribute('data-owner', 'stiac-accessibility');
+        document.head.appendChild(tailwindScript);
+        return;
+    }
+
+    const tailwindLink = document.createElement('link');
+    tailwindLink.id = 'stiac-accessibility-tailwind';
+    tailwindLink.rel = 'stylesheet';
+    tailwindLink.href = tailwindAsset.href;
+    tailwindLink.setAttribute('data-owner', 'stiac-accessibility');
+    document.head.appendChild(tailwindLink);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
