@@ -1,4 +1,35 @@
 # Changelog
+# [1.7.2] - 2025-12-27
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Normalised duplicate `aria-labelledby` references inside host pages so the widget can resolve the correct accessible name even when integrators accidentally reuse heading IDs inside card grids.
+
+### Removed
+- None.
+
+# [1.7.1] - 2025-12-26
+
+### Added
+- Documented a troubleshooting workflow for card grids that reuse the same
+  heading ID, clarifying that duplicated IDs break the widget's
+  `aria-labelledby` lookup and how to correct the markup so cards stay
+  accessible.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.7.0] - 2025-12-25
 
 ### Added
