@@ -2291,6 +2291,204 @@ function deriveHoverColor(baseColor) {
     return adjusted || baseColor;
 }
 
+function escapeCssIdentifier(value) {
+    if (typeof value === 'undefined' || value === null) {
+        return '';
+    }
+    const stringValue = String(value);
+    if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
+        return CSS.escape(stringValue);
+    }
+    return stringValue.replace(/[^a-zA-Z0-9_-]/g, (character) => `\\${character}`);
+}
+
+function normaliseAriaLabelledbyTargets(root = document) {
+    if (!root || typeof root.querySelectorAll !== 'function') {
+        return;
+    }
+
+    const doc = root.nodeType === 9 ? root : root.ownerDocument || document;
+    if (!doc || typeof doc.querySelectorAll !== 'function') {
+        return;
+    }
+
+    const idUsageCounts = Object.create(null);
+    const elementsWithId = doc.querySelectorAll('[id]');
+    for (let i = 0; i < elementsWithId.length; i += 1) {
+        const existingId = elementsWithId[i].id;
+        if (!existingId) {
+            continue;
+        }
+        const trimmedId = existingId.trim();
+        if (!trimmedId) {
+            continue;
+        }
+        idUsageCounts[trimmedId] = (idUsageCounts[trimmedId] || 0) + 1;
+    }
+
+    let dedupeCounter = 0;
+    const getUniqueId = (baseId) => {
+        const normalisedBase = baseId && baseId.trim() ? baseId.trim() : 'a11y-label';
+        let candidate = '';
+        do {
+            dedupeCounter += 1;
+            candidate = `${normalisedBase}-a11ystiac-${dedupeCounter}`;
+        } while (doc.getElementById && doc.getElementById(candidate));
+        return candidate;
+    };
+
+    // Track synthetic labels so we can reuse them on subsequent passes without mutating host IDs.
+    const proxyAttribute = 'data-a11y-stiac-aria-proxy';
+
+    const extractLabelText = (node) => {
+        if (!node) {
+            return '';
+        }
+        if (typeof node.getAttribute === 'function') {
+            const labelledValue = node.getAttribute('aria-label');
+            if (labelledValue && labelledValue.trim()) {
+                return labelledValue.trim();
+            }
+        }
+        if (typeof node.textContent === 'string') {
+            const textValue = node.textContent.replace(/\s+/g, ' ').trim();
+            if (textValue) {
+                return textValue;
+            }
+        }
+        return '';
+    };
+
+    const ensureProxyLabel = (element, token, textValue) => {
+        if (!element || !textValue || typeof doc.createElement !== 'function') {
+            return null;
+        }
+
+        if (typeof element.querySelectorAll === 'function') {
+            const proxies = element.querySelectorAll(`[${proxyAttribute}]`);
+            for (let index = 0; index < proxies.length; index += 1) {
+                const proxyCandidate = proxies[index];
+                if (proxyCandidate && proxyCandidate.getAttribute && proxyCandidate.getAttribute(proxyAttribute) === token && proxyCandidate.id) {
+                    return proxyCandidate.id;
+                }
+            }
+        }
+
+        const proxyId = getUniqueId(token || 'a11y-label');
+        const proxy = doc.createElement('span');
+        proxy.id = proxyId;
+        proxy.className = 'a11y-stiac-sr-only';
+        proxy.setAttribute(proxyAttribute, token);
+        proxy.textContent = textValue;
+
+        if (typeof element.insertBefore === 'function') {
+            element.insertBefore(proxy, element.firstChild || null);
+        } else if (typeof element.appendChild === 'function') {
+            element.appendChild(proxy);
+        } else {
+            return null;
+        }
+
+        return proxyId;
+    };
+
+    // When the referenced ID is missing or lives outside the current element, derive
+    // a stable label from the visible heading/text content so assistive tech still
+    // receives a meaningful accessible name.
+    const findFallbackLabelText = (element) => {
+        if (!element || typeof element.querySelectorAll !== 'function') {
+            return '';
+        }
+
+        const textCandidates = element.querySelectorAll('h1, h2, h3, h4, h5, h6, strong, b, em, span, p');
+        for (let index = 0; index < textCandidates.length; index += 1) {
+            const extracted = extractLabelText(textCandidates[index]);
+            if (extracted) {
+                return extracted;
+            }
+        }
+
+        if (typeof element.textContent === 'string') {
+            const fallback = element.textContent.replace(/\s+/g, ' ').trim();
+            if (fallback) {
+                return fallback;
+            }
+        }
+
+        return '';
+    };
+
+    const labelledElements = root.querySelectorAll('[aria-labelledby]');
+    for (let elementIndex = 0; elementIndex < labelledElements.length; elementIndex += 1) {
+        const element = labelledElements[elementIndex];
+        const ariaValue = element.getAttribute('aria-labelledby');
+        if (!ariaValue) {
+            continue;
+        }
+
+        const rawTokens = ariaValue.split(/\s+/);
+        const resolvedTokens = [];
+        let mutated = false;
+
+        for (let tokenIndex = 0; tokenIndex < rawTokens.length; tokenIndex += 1) {
+            const token = rawTokens[tokenIndex] && rawTokens[tokenIndex].trim();
+            if (!token) {
+                continue;
+            }
+
+            const usageCount = idUsageCounts[token] || 0;
+            let newToken = token;
+
+            let scopedLabel = null;
+            if (typeof element.querySelector === 'function') {
+                try {
+                    scopedLabel = element.querySelector(`#${escapeCssIdentifier(token)}`);
+                } catch (error) {
+                    scopedLabel = null;
+                }
+            }
+
+            if (usageCount > 1 && scopedLabel) {
+                const labelText = extractLabelText(scopedLabel);
+                if (labelText) {
+                    const proxyId = ensureProxyLabel(element, token, labelText);
+                    if (proxyId) {
+                        newToken = proxyId;
+                        mutated = true;
+                    }
+                }
+            } else if (usageCount === 0) {
+                const sourceText = scopedLabel ? extractLabelText(scopedLabel) : findFallbackLabelText(element);
+                if (sourceText) {
+                    const proxyId = ensureProxyLabel(element, token, sourceText);
+                    if (proxyId) {
+                        newToken = proxyId;
+                        mutated = true;
+                    }
+                }
+            }
+
+            const scopedLabelInsideElement = scopedLabel && typeof element.contains === 'function' ? element.contains(scopedLabel) : false;
+            if (newToken === token && usageCount > 1 && (!scopedLabel || !scopedLabelInsideElement)) {
+                const fallbackText = findFallbackLabelText(element);
+                if (fallbackText) {
+                    const proxyId = ensureProxyLabel(element, token, fallbackText);
+                    if (proxyId) {
+                        newToken = proxyId;
+                        mutated = true;
+                    }
+                }
+            }
+
+            resolvedTokens.push(newToken);
+        }
+
+        if (mutated && resolvedTokens.length) {
+            element.setAttribute('aria-labelledby', resolvedTokens.join(' '));
+        }
+    }
+}
+
 function deriveReadableTextColor(backgroundColor, candidates = []) {
     const background = parseCssColor(backgroundColor);
     if (!background) {
@@ -2366,7 +2564,21 @@ function ensureTailwindCSSLoaded() {
     document.head.appendChild(tailwindLink);
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+// Guard against double execution when the bundle is injected after DOMContentLoaded
+// or multiple times across the host page.
+let widgetInitialised = false;
+
+function initialiseAccessibilityWidget() {
+    if (widgetInitialised) {
+        return;
+    }
+    widgetInitialised = true;
+
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    normaliseAriaLabelledbyTargets(document);
 
     const resolvedColors = {
         active: sanitiseWidgetColor(widgetScriptConfig.colorButtonActive, '#036cff'),
@@ -4546,4 +4758,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-});
+}
+
+function scheduleAccessibilityWidgetInitialisation() {
+    if (typeof document === 'undefined' || typeof document.addEventListener !== 'function') {
+        initialiseAccessibilityWidget();
+        return;
+    }
+
+    if (document.readyState === 'loading') {
+        const onReady = () => {
+            document.removeEventListener('DOMContentLoaded', onReady);
+            initialiseAccessibilityWidget();
+        };
+        document.addEventListener('DOMContentLoaded', onReady);
+        return;
+    }
+
+    initialiseAccessibilityWidget();
+}
+
+scheduleAccessibilityWidgetInitialisation();

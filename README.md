@@ -8,8 +8,28 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.7.0`
+- **Current Version:** `1.7.5`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.7.5
+
+- Hardened the startup sequence so the widget initialises reliably even when the script is injected after `DOMContentLoaded`, improving compatibility with tag managers and deferred loaders.
+
+## What's New in 1.7.4
+
+- Hardened the `aria-labelledby` reconciliation to support both duplicate and missing IDs by synthesizing scoped proxy labels from visible headings, improving compatibility with imperfect host markup at load time.
+
+## What's New in 1.7.3
+
+- Generates hidden proxy labels when host pages duplicate heading IDs so `aria-labelledby` relationships stay intact without renaming the original markup. This prevents screen readers from losing descriptions that rely on shared identifiers.
+
+## What's New in 1.7.2
+
+- Normalizes duplicate `aria-labelledby` references so the widget can safely resolve accessible names even when host pages reuse heading IDs.
+
+## What's New in 1.7.1
+
+- Documented an HTML integration pitfall where duplicate heading IDs break the `aria-labelledby` linkage that the widget relies on to announce card labels correctly. A new troubleshooting section explains how to diagnose and fix the issue.
 
 ## What's New in 1.7.0
 
@@ -160,6 +180,43 @@ The command scans `accessibility-menu.js`, compiles only the classes the widget 
 - Add `data-a11y-stiac-video-embed` to any custom wrapper that should respond to the **Hide Videos** toggle (useful for bespoke players or CMS shortcodes).
 - Add `data-a11y-stiac-preserve-video` directly on a video/iframe/embed element to keep it visible even while the global hide toggle is active.
 
+
+## Troubleshooting
+
+### Duplicate heading IDs break card labelling
+
+The widget resolves each card label by reading the anchor's `aria-labelledby`
+attribute and fetching the referenced heading with
+`document.getElementById`. When the host markup reuses the same `id` for every
+`<h3>` element, the lookup always returns the first heading so later cards end
+up with the wrong accessible name (or no label at all). The HTML fragment
+below reproduces the issue:
+
+```html
+<a class="card-v9" aria-labelledby="card-title-2">
+  <h3 id="card-title-1">Push Notifications</h3>
+  <!-- ... -->
+</a>
+```
+
+The anchor advertises `aria-labelledby="card-title-2"`, but no element with
+that ID exists because every heading is stamped as `card-title-1`. Aside from
+being invalid HTML (IDs must be unique), this mismatch stops the widget from
+finding the expected heading and breaks the compatibility helpers that
+announce the card copy to assistive technologies.
+
+**Fix:** ensure each heading exposes a unique ID that matches the
+`aria-labelledby` reference on its parent link:
+
+```html
+<a class="card-v9" aria-labelledby="card-title-2">
+  <h3 id="card-title-2">Push Notifications</h3>
+  <!-- ... -->
+</a>
+```
+
+Repeat the pattern for every card so the DOM stays valid and the widget can
+reliably map `aria-labelledby` attributes back to the intended text.
 
 ## Preview
 
