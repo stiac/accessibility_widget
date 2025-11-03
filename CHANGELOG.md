@@ -1,4 +1,18 @@
 # Changelog
+# [1.7.4] - 2025-12-29
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Reworked the `aria-labelledby` normaliser to synthesise proxy labels from visible headings when IDs are duplicated or missing, preventing load-time crashes on imperfect host markup.
+
+### Removed
+- None.
+
 # [1.7.3] - 2025-12-28
 
 ### Added

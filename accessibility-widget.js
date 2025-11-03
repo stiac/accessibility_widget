@@ -2307,67 +2307,79 @@ function normaliseAriaLabelledbyTargets(root = document) {
         return;
     }
 
-    const doc = root.nodeType === Node.DOCUMENT_NODE ? root : root.ownerDocument || document;
-    if (!doc) {
+    const doc = root.nodeType === 9 ? root : root.ownerDocument || document;
+    if (!doc || typeof doc.querySelectorAll !== 'function') {
         return;
     }
 
-    const idUsageCounts = new Map();
-    doc.querySelectorAll('[id]').forEach((element) => {
-        const existingId = element.id;
+    const idUsageCounts = Object.create(null);
+    const elementsWithId = doc.querySelectorAll('[id]');
+    for (let i = 0; i < elementsWithId.length; i += 1) {
+        const existingId = elementsWithId[i].id;
         if (!existingId) {
-            return;
+            continue;
         }
         const trimmedId = existingId.trim();
         if (!trimmedId) {
-            return;
+            continue;
         }
-        idUsageCounts.set(trimmedId, (idUsageCounts.get(trimmedId) || 0) + 1);
-    });
+        idUsageCounts[trimmedId] = (idUsageCounts[trimmedId] || 0) + 1;
+    }
 
     let dedupeCounter = 0;
     const getUniqueId = (baseId) => {
+        const normalisedBase = baseId && baseId.trim() ? baseId.trim() : 'a11y-label';
         let candidate = '';
         do {
             dedupeCounter += 1;
-            candidate = `${baseId}-a11ystiac-${dedupeCounter}`;
-        } while (doc.getElementById(candidate));
+            candidate = `${normalisedBase}-a11ystiac-${dedupeCounter}`;
+        } while (doc.getElementById && doc.getElementById(candidate));
         return candidate;
     };
 
-    const proxyCache = new WeakMap();
+    // Track synthetic labels so we can reuse them on subsequent passes without mutating host IDs.
+    const proxyAttribute = 'data-a11y-stiac-aria-proxy';
 
-    // Duplicate IDs break the browser's aria-labelledby resolution because only the first
-    // element with a given ID is returned. Instead of renaming host IDs (which could break
-    // other relationships), synthesise hidden proxy labels that mirror the text so the
-    // widget can point to a unique reference while the original markup stays untouched.
+    const extractLabelText = (node) => {
+        if (!node) {
+            return '';
+        }
+        if (typeof node.getAttribute === 'function') {
+            const labelledValue = node.getAttribute('aria-label');
+            if (labelledValue && labelledValue.trim()) {
+                return labelledValue.trim();
+            }
+        }
+        if (typeof node.textContent === 'string') {
+            const textValue = node.textContent.replace(/\s+/g, ' ').trim();
+            if (textValue) {
+                return textValue;
+            }
+        }
+        return '';
+    };
 
-    const ensureProxyLabel = (element, token, sourceLabel) => {
-        if (!sourceLabel || typeof doc.createElement !== 'function') {
+    const ensureProxyLabel = (element, token, textValue) => {
+        if (!element || !textValue || typeof doc.createElement !== 'function') {
             return null;
         }
 
-        let tokenMap = proxyCache.get(element);
-        if (!tokenMap) {
-            tokenMap = new Map();
-            proxyCache.set(element, tokenMap);
-        }
-
-        if (tokenMap.has(token)) {
-            return tokenMap.get(token);
-        }
-
-        const labelText = (sourceLabel.getAttribute('aria-label') || sourceLabel.textContent || '').trim();
-        if (!labelText) {
-            return null;
+        if (typeof element.querySelectorAll === 'function') {
+            const proxies = element.querySelectorAll(`[${proxyAttribute}]`);
+            for (let index = 0; index < proxies.length; index += 1) {
+                const proxyCandidate = proxies[index];
+                if (proxyCandidate && proxyCandidate.getAttribute && proxyCandidate.getAttribute(proxyAttribute) === token && proxyCandidate.id) {
+                    return proxyCandidate.id;
+                }
+            }
         }
 
         const proxyId = getUniqueId(token || 'a11y-label');
         const proxy = doc.createElement('span');
         proxy.id = proxyId;
         proxy.className = 'a11y-stiac-sr-only';
-        proxy.setAttribute('data-a11y-stiac-aria-proxy', token);
-        proxy.textContent = labelText;
+        proxy.setAttribute(proxyAttribute, token);
+        proxy.textContent = textValue;
 
         if (typeof element.insertBefore === 'function') {
             element.insertBefore(proxy, element.firstChild || null);
@@ -2377,53 +2389,104 @@ function normaliseAriaLabelledbyTargets(root = document) {
             return null;
         }
 
-        tokenMap.set(token, proxyId);
         return proxyId;
     };
 
-    root.querySelectorAll('[aria-labelledby]').forEach((element) => {
+    // When the referenced ID is missing or lives outside the current element, derive
+    // a stable label from the visible heading/text content so assistive tech still
+    // receives a meaningful accessible name.
+    const findFallbackLabelText = (element) => {
+        if (!element || typeof element.querySelectorAll !== 'function') {
+            return '';
+        }
+
+        const textCandidates = element.querySelectorAll('h1, h2, h3, h4, h5, h6, strong, b, em, span, p');
+        for (let index = 0; index < textCandidates.length; index += 1) {
+            const extracted = extractLabelText(textCandidates[index]);
+            if (extracted) {
+                return extracted;
+            }
+        }
+
+        if (typeof element.textContent === 'string') {
+            const fallback = element.textContent.replace(/\s+/g, ' ').trim();
+            if (fallback) {
+                return fallback;
+            }
+        }
+
+        return '';
+    };
+
+    const labelledElements = root.querySelectorAll('[aria-labelledby]');
+    for (let elementIndex = 0; elementIndex < labelledElements.length; elementIndex += 1) {
+        const element = labelledElements[elementIndex];
         const ariaValue = element.getAttribute('aria-labelledby');
         if (!ariaValue) {
-            return;
+            continue;
         }
 
-        const tokens = ariaValue
-            .split(/\s+/)
-            .map((token) => token.trim())
-            .filter(Boolean);
-
-        if (!tokens.length) {
-            return;
-        }
-
+        const rawTokens = ariaValue.split(/\s+/);
+        const resolvedTokens = [];
         let mutated = false;
-        const resolvedTokens = tokens.map((token) => {
-            const usageCount = idUsageCounts.get(token) || 0;
-            if (usageCount < 2) {
-                return token;
-            }
-            if (typeof element.querySelector !== 'function') {
-                return token;
+
+        for (let tokenIndex = 0; tokenIndex < rawTokens.length; tokenIndex += 1) {
+            const token = rawTokens[tokenIndex] && rawTokens[tokenIndex].trim();
+            if (!token) {
+                continue;
             }
 
-            const scopedLabel = element.querySelector(`#${escapeCssIdentifier(token)}`);
-            if (!scopedLabel) {
-                return token;
+            const usageCount = idUsageCounts[token] || 0;
+            let newToken = token;
+
+            let scopedLabel = null;
+            if (typeof element.querySelector === 'function') {
+                try {
+                    scopedLabel = element.querySelector(`#${escapeCssIdentifier(token)}`);
+                } catch (error) {
+                    scopedLabel = null;
+                }
             }
 
-            const proxyId = ensureProxyLabel(element, token, scopedLabel);
-            if (!proxyId) {
-                return token;
+            if (usageCount > 1 && scopedLabel) {
+                const labelText = extractLabelText(scopedLabel);
+                if (labelText) {
+                    const proxyId = ensureProxyLabel(element, token, labelText);
+                    if (proxyId) {
+                        newToken = proxyId;
+                        mutated = true;
+                    }
+                }
+            } else if (usageCount === 0) {
+                const sourceText = scopedLabel ? extractLabelText(scopedLabel) : findFallbackLabelText(element);
+                if (sourceText) {
+                    const proxyId = ensureProxyLabel(element, token, sourceText);
+                    if (proxyId) {
+                        newToken = proxyId;
+                        mutated = true;
+                    }
+                }
             }
 
-            mutated = true;
-            return proxyId;
-        });
+            const scopedLabelInsideElement = scopedLabel && typeof element.contains === 'function' ? element.contains(scopedLabel) : false;
+            if (newToken === token && usageCount > 1 && (!scopedLabel || !scopedLabelInsideElement)) {
+                const fallbackText = findFallbackLabelText(element);
+                if (fallbackText) {
+                    const proxyId = ensureProxyLabel(element, token, fallbackText);
+                    if (proxyId) {
+                        newToken = proxyId;
+                        mutated = true;
+                    }
+                }
+            }
 
-        if (mutated) {
+            resolvedTokens.push(newToken);
+        }
+
+        if (mutated && resolvedTokens.length) {
             element.setAttribute('aria-labelledby', resolvedTokens.join(' '));
         }
-    });
+    }
 }
 
 function deriveReadableTextColor(backgroundColor, candidates = []) {

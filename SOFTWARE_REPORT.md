@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.7.3
+- **Version**: 1.7.4
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-28
+- **Last Update**: 2025-12-29
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2025-12-29 — Rebuilt the `aria-labelledby` reconciliation to fall back to descendant headings when IDs are duplicated or missing, restoring startup compatibility on third-party grids (AI assistant)
 - 2025-12-28 — Generated hidden proxy labels for duplicated `aria-labelledby` references so accessible names stay intact without mutating host IDs (AI assistant)
 - 2025-12-27 — Normalised duplicate `aria-labelledby` references at runtime so the widget recovers accessible labels even when host cards reuse heading IDs (AI assistant)
 - 2025-12-26 — Documented troubleshooting guidance for duplicate heading IDs that break the widget's `aria-labelledby` lookup so integrators can repair card markup quickly (AI assistant)
