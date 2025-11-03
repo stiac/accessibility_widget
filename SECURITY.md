@@ -19,7 +19,7 @@ protected.
 ## Reporting a Vulnerability
 
 If you discover a vulnerability, please email
-**security@stiacwebservices.com** with the following details:
+**security@stiac.it** with the following details:
 
 - A concise description of the issue and potential impact.
 - Steps to reproduce, including proof-of-concept code or screenshots when
