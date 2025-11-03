@@ -2564,7 +2564,19 @@ function ensureTailwindCSSLoaded() {
     document.head.appendChild(tailwindLink);
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+// Guard against double execution when the bundle is injected after DOMContentLoaded
+// or multiple times across the host page.
+let widgetInitialised = false;
+
+function initialiseAccessibilityWidget() {
+    if (widgetInitialised) {
+        return;
+    }
+    widgetInitialised = true;
+
+    if (typeof document === 'undefined') {
+        return;
+    }
 
     normaliseAriaLabelledbyTargets(document);
 
@@ -4746,4 +4758,24 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-});
+}
+
+function scheduleAccessibilityWidgetInitialisation() {
+    if (typeof document === 'undefined' || typeof document.addEventListener !== 'function') {
+        initialiseAccessibilityWidget();
+        return;
+    }
+
+    if (document.readyState === 'loading') {
+        const onReady = () => {
+            document.removeEventListener('DOMContentLoaded', onReady);
+            initialiseAccessibilityWidget();
+        };
+        document.addEventListener('DOMContentLoaded', onReady);
+        return;
+    }
+
+    initialiseAccessibilityWidget();
+}
+
+scheduleAccessibilityWidgetInitialisation();

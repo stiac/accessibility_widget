@@ -1,4 +1,18 @@
 # Changelog
+# [1.7.5] - 2025-12-30
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Ensured the widget initialises exactly once even when the script loads after `DOMContentLoaded`, preventing startup failures on host sites that inject the bundle late or asynchronously.
+
+### Removed
+- None.
+
 # [1.7.4] - 2025-12-29
 
 ### Added
