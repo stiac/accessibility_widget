@@ -2,7 +2,7 @@
 
 
 ## Preview
-[click here to see preview](https://olinke.com/accessibility-plugin/)
+[Click Here to See Preview](https://olinke.com/accessibility-widget/)
 
 ## Description
 
