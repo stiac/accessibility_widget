@@ -1,5 +1,15 @@
-// Accessibility Menu for Stiac Web Services
-// Proprietary software by Stiac Web Services (SWS). Unauthorized duplication or tampering is prohibited.
+/* --------------------------------
+
+File#: accessibility-widget.js
+Title: Accessibility Widget
+Descr: The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
+
+License: Limited SWS - Proprietary software by Stiac Web Services (SWS). Unauthorized duplication or tampering is prohibited.
+Usage: gebher.com/license
+
+Demo & Report: https://olinke.com/accessibility-widget
+
+-------------------------------- */
 
 // Embed OpenDyslexic weights locally to avoid cross-origin font loads.
 // The base64 payloads mirror the OTF releases published at
