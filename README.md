@@ -8,8 +8,12 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.7.2`
+- **Current Version:** `1.7.3`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+## What's New in 1.7.3
+
+- Generates hidden proxy labels when host pages duplicate heading IDs so `aria-labelledby` relationships stay intact without renaming the original markup. This prevents screen readers from losing descriptions that rely on shared identifiers.
 
 ## What's New in 1.7.2
 

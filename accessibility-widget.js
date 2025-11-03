@@ -2335,6 +2335,52 @@ function normaliseAriaLabelledbyTargets(root = document) {
         return candidate;
     };
 
+    const proxyCache = new WeakMap();
+
+    // Duplicate IDs break the browser's aria-labelledby resolution because only the first
+    // element with a given ID is returned. Instead of renaming host IDs (which could break
+    // other relationships), synthesise hidden proxy labels that mirror the text so the
+    // widget can point to a unique reference while the original markup stays untouched.
+
+    const ensureProxyLabel = (element, token, sourceLabel) => {
+        if (!sourceLabel || typeof doc.createElement !== 'function') {
+            return null;
+        }
+
+        let tokenMap = proxyCache.get(element);
+        if (!tokenMap) {
+            tokenMap = new Map();
+            proxyCache.set(element, tokenMap);
+        }
+
+        if (tokenMap.has(token)) {
+            return tokenMap.get(token);
+        }
+
+        const labelText = (sourceLabel.getAttribute('aria-label') || sourceLabel.textContent || '').trim();
+        if (!labelText) {
+            return null;
+        }
+
+        const proxyId = getUniqueId(token || 'a11y-label');
+        const proxy = doc.createElement('span');
+        proxy.id = proxyId;
+        proxy.className = 'a11y-stiac-sr-only';
+        proxy.setAttribute('data-a11y-stiac-aria-proxy', token);
+        proxy.textContent = labelText;
+
+        if (typeof element.insertBefore === 'function') {
+            element.insertBefore(proxy, element.firstChild || null);
+        } else if (typeof element.appendChild === 'function') {
+            element.appendChild(proxy);
+        } else {
+            return null;
+        }
+
+        tokenMap.set(token, proxyId);
+        return proxyId;
+    };
+
     root.querySelectorAll('[aria-labelledby]').forEach((element) => {
         const ariaValue = element.getAttribute('aria-labelledby');
         if (!ariaValue) {
@@ -2365,12 +2411,13 @@ function normaliseAriaLabelledbyTargets(root = document) {
                 return token;
             }
 
-            const uniqueId = getUniqueId(token || 'a11y-label');
-            scopedLabel.id = uniqueId;
-            idUsageCounts.set(token, usageCount - 1);
-            idUsageCounts.set(uniqueId, 1);
+            const proxyId = ensureProxyLabel(element, token, scopedLabel);
+            if (!proxyId) {
+                return token;
+            }
+
             mutated = true;
-            return uniqueId;
+            return proxyId;
         });
 
         if (mutated) {

@@ -1,4 +1,18 @@
 # Changelog
+# [1.7.3] - 2025-12-28
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- Restored runtime compatibility with duplicated `aria-labelledby` IDs by injecting per-element proxy labels instead of renaming host markup, keeping other ARIA relationships untouched at load time.
+
+### Removed
+- None.
+
 # [1.7.2] - 2025-12-27
 
 ### Added
