@@ -163,10 +163,8 @@ The command scans `accessibility-menu.js`, compiles only the classes the widget 
 
 ## Preview
 
-<video style='width:100%; height:auto;' src='https://github.com/PrabothCharith/accessibility-plugin/assets/91902549/e310ea92-e434-4c35-a2d5-f1c99547e98e'></video>
-# accessibility_widget
-# accessibility_widget
-# accessibility_widget
+<video style='width:100%; height:auto;' src='https://www.youtube.com/watch?v=lGgnvHaFSIg'></video>
+
 
 ## License
 
