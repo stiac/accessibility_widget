@@ -8,8 +8,14 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.7.5`
+- **Current Version:** `1.8.0`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+All bundled Tailwind utilities and runtime state classes ship with the `stiac-` prefix so the widget can coexist with host stylesheets without unexpected overrides.
+
+## What's New in 1.8.0
+
+- Namespaced every widget utility class and state selector with the `stiac-` prefix and regenerated the packaged Tailwind stylesheet so deployments stay isolated from host CSS frameworks.
 
 ## What's New in 1.7.5
 
@@ -164,7 +170,7 @@ If you customise the widget markup or Tailwind configuration, regenerate `access
 1. `npm install`
 2. `npm run build:tailwind`
 
-The command scans `accessibility-menu.js`, compiles only the classes the widget needs, and writes a minified stylesheet next to the script so FTP-only deployments remain lightweight.
+The command scans `accessibility-widget.js`, compiles only the prefixed classes the widget needs, and writes a minified stylesheet next to the script so FTP-only deployments remain lightweight.
 
 ### Internationalisation
 

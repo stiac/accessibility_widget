@@ -183,7 +183,7 @@ const accessibilityMenuStyles = `
       filter: saturate(100%) blur(0);
     }
 
-    #accessibility-modal.is-ready {
+    #accessibility-modal.stiac-is-ready {
       opacity: 1;
       transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
     }
@@ -192,7 +192,7 @@ const accessibilityMenuStyles = `
      * Animate the modal with a gentle overshoot so the expansion from the
      * launcher bubble feels responsive without being jarring.
      */
-    #accessibility-modal.is-ready:not(.close) {
+    #accessibility-modal.stiac-is-ready:not(.stiac-close) {
       animation: a11y-stiac-modal-open 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
       animation-fill-mode: both;
     }
@@ -220,7 +220,7 @@ const accessibilityMenuStyles = `
       }
     }
 
-    #accessibility-modal.is-ready.close {
+    #accessibility-modal.stiac-is-ready.stiac-close {
       animation: a11y-stiac-modal-collapse 0.45s cubic-bezier(0.55, 0, 0.45, 1);
       animation-fill-mode: both;
     }
@@ -245,7 +245,7 @@ const accessibilityMenuStyles = `
       height: 1.75rem;
     }
 
-    #accessibility-modal.close {
+    #accessibility-modal.stiac-close {
       width: 3.75rem;
       height: 3.75rem;
       min-width: 3.75rem;
@@ -258,18 +258,18 @@ const accessibilityMenuStyles = `
       box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
     }
 
-    #accessibility-modal.is-ready.close {
+    #accessibility-modal.stiac-is-ready.stiac-close {
       transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
     }
 
-    #accessibility-modal.close #headerContent,
-    #accessibility-modal.close #accessibility-tools,
-    #accessibility-modal.close #language-selector,
-    #accessibility-modal.close #a11y-stiac-footer {
+    #accessibility-modal.stiac-close #headerContent,
+    #accessibility-modal.stiac-close #accessibility-tools,
+    #accessibility-modal.stiac-close #language-selector,
+    #accessibility-modal.stiac-close #a11y-stiac-footer {
       display: none;
     }
 
-    #accessibility-modal.close #closeBtn {
+    #accessibility-modal.stiac-close #closeBtn {
       inset: 0.5rem;
       position: absolute;
       width: 2.75rem;
@@ -279,36 +279,36 @@ const accessibilityMenuStyles = `
       box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
     }
 
-    #accessibility-modal.close #closeBtn svg {
+    #accessibility-modal.stiac-close #closeBtn svg {
       width: 2rem;
       height: 2rem;
     }
 
-    #accessibility-modal:not(.close) {
+    #accessibility-modal:not(.stiac-close) {
       border-radius: 24px;
     }
 
-    #accessibility-modal:not(.close) #closeBtn {
+    #accessibility-modal:not(.stiac-close) #closeBtn {
       position: absolute;
       top: 1.25rem;
       right: 1.25rem;
     }
 
-    #accessibility-modal.left {
+    #accessibility-modal.stiac-left {
       left: 1rem;
       right: auto;
       --a11y-stiac-translate-x: 0;
       --a11y-stiac-transform-origin: top left;
     }
 
-    #accessibility-modal.right {
+    #accessibility-modal.stiac-right {
       right: 1rem;
       left: auto;
       --a11y-stiac-translate-x: 0;
       --a11y-stiac-transform-origin: top right;
     }
 
-    #accessibility-modal.top {
+    #accessibility-modal.stiac-top {
       top: 1rem;
       bottom: auto;
       left: 50%;
@@ -317,7 +317,7 @@ const accessibilityMenuStyles = `
       --a11y-stiac-transform-origin: top center;
     }
 
-    #accessibility-modal.bottom {
+    #accessibility-modal.stiac-bottom {
       top: auto;
       bottom: 1rem;
       left: 50%;
@@ -326,7 +326,7 @@ const accessibilityMenuStyles = `
       --a11y-stiac-transform-origin: bottom center;
     }
 
-    #accessibility-modal.bottom-left {
+    #accessibility-modal.stiac-bottom-left {
       top: auto;
       bottom: 1rem;
       left: 1rem;
@@ -335,7 +335,7 @@ const accessibilityMenuStyles = `
       --a11y-stiac-transform-origin: bottom left;
     }
 
-    #accessibility-modal.bottom-right {
+    #accessibility-modal.stiac-bottom-right {
       top: auto;
       bottom: 1rem;
       right: 1rem;
@@ -490,42 +490,42 @@ const accessibilityMenuStyles = `
       display: none !important;
     }
 
-    .underline-style-0 a {
+    .stiac-underline-style-0 a {
       text-decoration: none;
       background: black !important;
       color: yellow !important;
       font-weight: bolder;
     }
 
-    .underline-style-0 a:hover,
-    .underline-style-2 a:hover,
-    .underline-style-1 a:hover {
+    .stiac-underline-style-0 a:hover,
+    .stiac-underline-style-2 a:hover,
+    .stiac-underline-style-1 a:hover {
       text-decoration: underline !important;
     }
 
-    .underline-style-1 a {
+    .stiac-underline-style-1 a {
       text-decoration: none;
       background: #FFD740 !important;
       color: #005A9C !important;
       font-weight: bolder;
     }
 
-    .underline-style-2 a {
+    .stiac-underline-style-2 a {
       text-decoration: none;
       background: white !important;
       color: black !important;
       font-weight: bolder;
     }
 
-    .hide-images :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
+    .stiac-hide-images :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
       display: none !important;
     }
 
-    .hide-images [data-a11y-stiac-preserve-images] :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
+    .stiac-hide-images [data-a11y-stiac-preserve-images] :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
       display: initial !important;
     }
 
-    .hide-video :where(
+    .stiac-hide-video :where(
         video,
         iframe[src*="youtube.com"],
         iframe[src*="youtu.be"],
@@ -555,7 +555,7 @@ const accessibilityMenuStyles = `
       display: none !important;
     }
 
-    .hide-video [data-a11y-stiac-preserve-video] {
+    .stiac-hide-video [data-a11y-stiac-preserve-video] {
       display: initial !important;
     }
 
@@ -569,14 +569,14 @@ const accessibilityMenuStyles = `
         transition-duration: 0.001ms !important;
       }
 
-      #accessibility-modal.is-ready:not(.close) {
+      #accessibility-modal.stiac-is-ready:not(.stiac-close) {
         animation: none !important;
       }
     }
 
-    html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *)),
-    html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::before,
-    html.reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::after {
+    html.stiac-reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *)),
+    html.stiac-reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::before,
+    html.stiac-reduce-motion body :where(:not(#accessibility-modal, #accessibility-modal *))::after {
       animation-duration: 0.001ms !important;
       animation-iteration-count: 1 !important;
       animation-name: none !important;
@@ -587,26 +587,26 @@ const accessibilityMenuStyles = `
       scroll-behavior: auto !important;
     }
 
-    html.reduce-motion #accessibility-modal.is-ready:not(.close) {
+    html.stiac-reduce-motion #accessibility-modal.stiac-is-ready:not(.stiac-close) {
       animation: none !important;
     }
 
-    html.reduce-motion body marquee,
-    html.reduce-motion body blink {
+    html.stiac-reduce-motion body marquee,
+    html.stiac-reduce-motion body blink {
       animation: none !important;
       -webkit-animation: none !important;
       scroll-behavior: auto !important;
     }
 
-    .line-height-0 * {
+    .stiac-line-height-0 * {
       line-height: 1.5;
     }
 
-    .line-height-1 * {
+    .stiac-line-height-1 * {
       line-height: 1.8;
     }
 
-    .line-height-2 * {
+    .stiac-line-height-2 * {
       line-height: 2;
     }
 
@@ -618,7 +618,7 @@ const accessibilityMenuStyles = `
       left: 0;
     }
 
-    #cursor.cursor-0 {
+    #cursor.stiac-cursor-0 {
       width: 50px;
       height: auto;
       aspect-ratio: 1/1;
@@ -632,7 +632,7 @@ const accessibilityMenuStyles = `
       transform: translate(-50%, -50%);
     }
 
-    #cursor.cursor-1 {
+    #cursor.stiac-cursor-1 {
       width: 100%;
       height: 15vh;
       background: transparent;
@@ -644,7 +644,7 @@ const accessibilityMenuStyles = `
       transform: translate(0, -50%);
     }
 
-    #cursor.cursor-2 {
+    #cursor.stiac-cursor-2 {
       width: 25vw;
       height: 8px;
       background: var(--a11y-stiac-color-1);
@@ -674,11 +674,11 @@ const accessibilityMenuStyles = `
 // constant keeps the main widget layout readable and allows runtime toggling.
 const changePositionsControlsHTML = `
         <!--change positions-->
-        <div id="change-positions" class="flex flex-wrap items-center justify-center gap-3">
+        <div id="change-positions" class="stiac-flex stiac-flex-wrap stiac-items-center stiac-justify-center stiac-gap-3">
           <button
             id="align-a11y-stiac-top"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-xl stiac-shadow-inner stiac-shadow-slate-900/5 stiac-ring-1 stiac-ring-slate-900/10 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the top edge"
             title="Dock widget to the top edge"
@@ -686,7 +686,7 @@ const changePositionsControlsHTML = `
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
+              class="stiac-block stiac-h-5 stiac-w-5"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -699,7 +699,7 @@ const changePositionsControlsHTML = `
           <button
             id="align-a11y-stiac-top-left"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-xl stiac-shadow-inner stiac-shadow-slate-900/5 stiac-ring-1 stiac-ring-slate-900/10 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the top-left corner"
             title="Dock widget to the top-left corner"
@@ -707,7 +707,7 @@ const changePositionsControlsHTML = `
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
+              class="stiac-block stiac-h-5 stiac-w-5"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -721,7 +721,7 @@ const changePositionsControlsHTML = `
           <button
             id="align-a11y-stiac-bottom"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-xl stiac-shadow-inner stiac-shadow-slate-900/5 stiac-ring-1 stiac-ring-slate-900/10 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom edge"
             title="Dock widget to the bottom edge"
@@ -729,7 +729,7 @@ const changePositionsControlsHTML = `
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
+              class="stiac-block stiac-h-5 stiac-w-5"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -742,7 +742,7 @@ const changePositionsControlsHTML = `
           <button
             id="align-a11y-stiac-bottom-left"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-xl stiac-shadow-inner stiac-shadow-slate-900/5 stiac-ring-1 stiac-ring-slate-900/10 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom-left corner"
             title="Dock widget to the bottom-left corner"
@@ -750,7 +750,7 @@ const changePositionsControlsHTML = `
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
+              class="stiac-block stiac-h-5 stiac-w-5"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -764,7 +764,7 @@ const changePositionsControlsHTML = `
           <button
             id="align-a11y-stiac-bottom-right"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-xl stiac-shadow-inner stiac-shadow-slate-900/5 stiac-ring-1 stiac-ring-slate-900/10 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the bottom-right corner"
             title="Dock widget to the bottom-right corner"
@@ -772,7 +772,7 @@ const changePositionsControlsHTML = `
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
+              class="stiac-block stiac-h-5 stiac-w-5"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -785,7 +785,7 @@ const changePositionsControlsHTML = `
           <button
             id="align-a11y-stiac-top-right"
             type="button"
-            class="flex h-12 w-12 items-center justify-center rounded-xl shadow-inner shadow-slate-900/5 ring-1 ring-slate-900/10 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40"
+            class="stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-xl stiac-shadow-inner stiac-shadow-slate-900/5 stiac-ring-1 stiac-ring-slate-900/10 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40"
             aria-pressed="false"
             aria-label="Dock widget to the top-right corner"
             title="Dock widget to the top-right corner"
@@ -793,7 +793,7 @@ const changePositionsControlsHTML = `
           ><!-- Render the icon as a block element so it stays optically centered inside the flex button. -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="block h-5 w-5"
+              class="stiac-block stiac-h-5 stiac-w-5"
               viewBox="0 0 24 24"
               fill="none"
               aria-hidden="true"
@@ -807,241 +807,241 @@ const changePositionsControlsHTML = `
         </div>`;
 
 const accessibilityMenuHTML = `
-    <div id="accessibility-modal" class="bottom close fixed z-[99999999] flex w-[calc(100%-2rem)] max-w-md flex-col gap-6 overflow-hidden rounded-3xl bg-white/95 text-slate-900 shadow-2xl shadow-slate-900/30 ring-1 ring-slate-900/10 backdrop-blur-lg max-h-[90vh]" data-a11y-stiac-preserve-images>
-      <button id="closeBtn" class="z-10 flex h-12 w-12 items-center justify-center rounded-full shadow-lg shadow-slate-900/40 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
+    <div id="accessibility-modal" class="stiac-bottom stiac-close stiac-fixed stiac-z-[99999999] stiac-flex stiac-w-[calc(100%-2rem)] stiac-max-w-md stiac-flex-col stiac-gap-6 stiac-overflow-hidden stiac-rounded-3xl stiac-bg-white/95 stiac-text-slate-900 stiac-shadow-2xl stiac-shadow-slate-900/30 stiac-ring-1 stiac-ring-slate-900/10 stiac-backdrop-blur-lg stiac-max-h-[90vh]" data-a11y-stiac-preserve-images>
+      <button id="closeBtn" class="stiac-z-10 stiac-flex stiac-h-12 stiac-w-12 stiac-items-center stiac-justify-center stiac-rounded-full stiac-shadow-lg stiac-shadow-slate-900/40 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40" aria-label="Toggle accessibility panel" data-i18n-attr="aria-label:controls.panelToggle.ariaLabel">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">
           <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143m-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z"></path>
           <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8"></path>
         </svg>
       </button>
-      <div id="headerContent" class="mx-6 mt-8 flex flex-col gap-2 rounded-2xl px-6 py-5 shadow-lg shadow-slate-900/40">
-        <p class="text-lg font-semibold tracking-tight" data-i18n="controls.heading.title">Accessibility Tools</p>
-        <span class="text-sm font-normal text-slate-300" data-i18n="controls.heading.subtitle">Fine-tune colours, typography and focus helpers with a refreshed look.</span>
+      <div id="headerContent" class="stiac-mx-6 stiac-mt-8 stiac-flex stiac-flex-col stiac-gap-2 stiac-rounded-2xl stiac-px-6 stiac-py-5 stiac-shadow-lg stiac-shadow-slate-900/40">
+        <p class="stiac-text-lg stiac-font-semibold stiac-tracking-tight" data-i18n="controls.heading.title">Accessibility Tools</p>
+        <span class="stiac-text-sm stiac-font-normal stiac-text-slate-300" data-i18n="controls.heading.subtitle">Fine-tune colours, typography and focus helpers with a refreshed look.</span>
       </div>
-      <div id="language-selector" class="mx-6 -mt-2 flex flex-col gap-2 rounded-2xl bg-white/80 px-6 py-4 text-slate-700 ring-1 ring-inset ring-slate-900/10">
-        <label id="a11y-stiac-language-label" for="a11y-stiac-language-select" class="text-xs font-semibold uppercase tracking-wide text-slate-600" data-i18n="language.selectorLabel">Language</label>
-        <div class="relative mt-1">
-          <button id="a11y-stiac-language-trigger" type="button" class="a11y-stiac-language-trigger inline-flex w-full items-center justify-between gap-3 rounded-xl border border-slate-900/10 bg-white/95 px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-900/40" aria-haspopup="listbox" aria-expanded="false" aria-describedby="a11y-stiac-language-help" aria-labelledby="a11y-stiac-language-label a11y-stiac-language-active-label" aria-controls="a11y-stiac-language-dropdown">
-            <span class="flex items-center gap-3">
-              <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 ring-1 ring-inset ring-slate-900/10" data-language-active-icon>
-                <svg class="h-6 w-6 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <div id="language-selector" class="stiac-mx-6 stiac--mt-2 stiac-flex stiac-flex-col stiac-gap-2 stiac-rounded-2xl stiac-bg-white/80 stiac-px-6 stiac-py-4 stiac-text-slate-700 stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10">
+        <label id="a11y-stiac-language-label" for="a11y-stiac-language-select" class="stiac-text-xs stiac-font-semibold stiac-uppercase stiac-tracking-wide stiac-text-slate-600" data-i18n="language.selectorLabel">Language</label>
+        <div class="stiac-relative stiac-mt-1">
+          <button id="a11y-stiac-language-trigger" type="button" class="a11y-stiac-language-trigger stiac-inline-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-3 stiac-rounded-xl stiac-border stiac-border-slate-900/10 stiac-bg-white/95 stiac-px-4 stiac-py-2.5 stiac-text-sm stiac-font-semibold stiac-text-slate-700 stiac-shadow-sm stiac-transition hover:stiac-bg-slate-50 focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40" aria-haspopup="listbox" aria-expanded="false" aria-describedby="a11y-stiac-language-help" aria-labelledby="a11y-stiac-language-label a11y-stiac-language-active-label" aria-controls="a11y-stiac-language-dropdown">
+            <span class="stiac-flex stiac-items-center stiac-gap-3">
+              <span class="stiac-flex stiac-h-9 stiac-w-9 stiac-items-center stiac-justify-center stiac-rounded-full stiac-bg-slate-100 stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10" data-language-active-icon>
+                <svg class="stiac-h-6 stiac-w-6 stiac-text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="12" cy="12" r="9"></circle>
                   <path d="M3 12h18"></path>
                   <path d="M12 3a15 15 0 0 1 0 18"></path>
                   <path d="M12 3a15 15 0 0 0 0 18"></path>
                 </svg>
               </span>
-              <span id="a11y-stiac-language-active-label" class="text-sm font-medium text-slate-700" data-language-active-label>English</span>
+              <span id="a11y-stiac-language-active-label" class="stiac-text-sm stiac-font-medium stiac-text-slate-700" data-language-active-label>English</span>
             </span>
-            <svg class="h-4 w-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <svg class="stiac-h-4 stiac-w-4 stiac-text-slate-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 0 1 1.08 1.04l-4.25 4.25a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div id="a11y-stiac-language-dropdown" class="a11y-stiac-language-dropdown absolute left-0 right-0 z-20 mt-3 hidden rounded-2xl border border-slate-900/10 bg-white/95 shadow-xl shadow-slate-900/20 backdrop-blur" data-language-dropdown>
-            <ul class="max-h-60 overflow-y-auto py-2" role="listbox" aria-labelledby="a11y-stiac-language-label" data-language-options></ul>
+          <div id="a11y-stiac-language-dropdown" class="a11y-stiac-language-dropdown stiac-absolute stiac-left-0 stiac-right-0 stiac-z-20 stiac-mt-3 stiac-hidden stiac-rounded-2xl stiac-border stiac-border-slate-900/10 stiac-bg-white/95 stiac-shadow-xl stiac-shadow-slate-900/20 stiac-backdrop-blur" data-language-dropdown>
+            <ul class="stiac-max-h-60 stiac-overflow-y-auto stiac-py-2" role="listbox" aria-labelledby="a11y-stiac-language-label" data-language-options></ul>
           </div>
         </div>
         <select id="a11y-stiac-language-select" class="a11y-stiac-sr-only" aria-describedby="a11y-stiac-language-help"></select>
-        <p id="a11y-stiac-language-help" class="text-xs text-slate-500" data-i18n="language.selectorDescription">Choose the language used for the accessibility tools interface.</p>
+        <p id="a11y-stiac-language-help" class="stiac-text-xs stiac-text-slate-500" data-i18n="language.selectorDescription">Choose the language used for the accessibility tools interface.</p>
       </div>
-      <div id="accessibility-tools" class="grid max-h-[60vh] grid-cols-2 gap-3 overflow-y-auto px-4 pb-6 sm:max-h-[45vh] sm:gap-4 sm:px-6">
+      <div id="accessibility-tools" class="stiac-grid stiac-max-h-[60vh] stiac-grid-cols-2 stiac-gap-3 stiac-overflow-y-auto stiac-px-4 stiac-pb-6 sm:stiac-max-h-[45vh] sm:stiac-gap-4 sm:stiac-px-6">
 
         <!--invert colors-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="invert-colors">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="invert-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet-half" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z" />
               <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.invertColours.label">Invert Colours</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.invertColours.label">Invert Colours</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--grayscale-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="grayscale">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="grayscale">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-circle-half" viewBox="0 0 16 16">
               <path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.grayscale.label">Grayscale</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.grayscale.label">Grayscale</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--saturation-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="saturation">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="saturation">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-palette" viewBox="0 0 16 16">
               <path d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
               <path d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.lowSaturation.label">Low Saturation</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 active h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.lowSaturation.label">Low Saturation</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-active stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--links highlight-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="underline">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="underline">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
               <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z" />
               <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.linksHighlight.label">Links Highlight</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.linksHighlight.label">Links Highlight</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--font size-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="font-size">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="font-size">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M17 12V17H17.5C17.7761 17 18 17.2239 18 17.5C18 17.7761 17.7761 18 17.5 18H15.5C15.2239 18 15 17.7761 15 17.5C15 17.2239 15.2239 17 15.5 17H16V12H14V12.5C14 12.7761 13.7761 13 13.5 13C13.2239 13 13 12.7761 13 12.5V11.5C13 11.2239 13.2239 11 13.5 11H19.5C19.7761 11 20 11.2239 20 11.5V12.5C20 12.7761 19.7761 13 19.5 13C19.2239 13 19 12.7761 19 12.5V12H17ZM10 6V17H11.5C11.7761 17 12 17.2239 12 17.5C12 17.7761 11.7761 18 11.5 18H7.5C7.22386 18 7 17.7761 7 17.5C7 17.2239 7.22386 17 7.5 17H9V6H5V7.5C5 7.77614 4.77614 8 4.5 8C4.22386 8 4 7.77614 4 7.5V5.5C4 5.22386 4.22386 5 4.5 5H14.5C14.7761 5 15 5.22386 15 5.5V7.5C15 7.77614 14.7761 8 14.5 8C14.2239 8 14 7.77614 14 7.5V6H10Z" fill="currentColor" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.fontSize.label">Font Size</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.fontSize.label">Font Size</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--line height-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="line-height">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="line-height">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.lineHeight.label">Line Height</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.lineHeight.label">Line Height</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--letter spacing-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="letter-spacing">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="letter-spacing">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M19 5.70711V17.2929L20.1464 16.1464C20.3417 15.9512 20.6583 15.9512 20.8536 16.1464C21.0488 16.3417 21.0488 16.6583 20.8536 16.8536L18.8536 18.8536C18.6583 19.0488 18.3417 19.0488 18.1464 18.8536L16.1464 16.8536C15.9512 16.6583 15.9512 16.3417 16.1464 16.1464C16.3417 15.9512 16.6583 15.9512 16.8536 16.1464L18 17.2929V5.70711L16.8536 6.85355C16.6583 7.04882 16.3417 7.04882 16.1464 6.85355C15.9512 6.65829 15.9512 6.34171 16.1464 6.14645L18.1464 4.14645C18.3417 3.95118 18.6583 3.95118 18.8536 4.14645L20.8536 6.14645C21.0488 6.34171 21.0488 6.65829 20.8536 6.85355C20.6583 7.04882 20.3417 7.04882 20.1464 6.85355L19 5.70711ZM8 18V5H4V6.5C4 6.77614 3.77614 7 3.5 7C3.22386 7 3 6.77614 3 6.5V4.5C3 4.22386 3.22386 4 3.5 4H13.5C13.7761 4 14 4.22386 14 4.5V6.5C14 6.77614 13.7761 7 13.5 7C13.2239 7 13 6.77614 13 6.5V5H9V18H10.5C10.7761 18 11 18.2239 11 18.5C11 18.7761 10.7761 19 10.5 19H6.5C6.22386 19 6 18.7761 6 18.5C6 18.2239 6.22386 18 6.5 18H8Z" fill="currentColor" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.letterSpacing.label">Letter Spacing</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.letterSpacing.label">Letter Spacing</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--dyslexia friendly font toggle-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="font-dyslexia" aria-describedby="font-dyslexia-description">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="font-dyslexia" aria-describedby="font-dyslexia-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.5 5C3.11929 5 2 6.11929 2 7.5V16.5C2 17.8807 3.11929 19 4.5 19H11.75C13.1307 19 14.25 17.8807 14.25 16.5V13.75H19.5C20.8807 13.75 22 12.6307 22 11.25V7.5C22 6.11929 20.8807 5 19.5 5H4.5ZM4 7.5C4 7.22386 4.22386 7 4.5 7H11.5C11.7761 7 12 7.22386 12 7.5V9C12 9.27614 11.7761 9.5 11.5 9.5H6.75V16.5C6.75 16.7761 6.52614 17 6.25 17H4.5C4.22386 17 4 16.7761 4 16.5V7.5ZM14 7.5C14 7.22386 14.2239 7 14.5 7H19.5C19.7761 7 20 7.22386 20 7.5V11.25C20 11.5261 19.7761 11.75 19.5 11.75H14.5C14.2239 11.75 14 11.5261 14 11.25V7.5Z" fill="currentColor" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.fontDyslexia.label">Font Dyslexia</p>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.fontDyslexia.label">Font Dyslexia</p>
             <p id="font-dyslexia-description" class="a11y-stiac-sr-only" data-i18n="controls.fontDyslexia.description">Toggle a dyslexia-friendly font stack across the page without altering the accessibility menu.</p>
           </div>
         </div>
 
         <!--text align-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="text-align" aria-labelledby="text-align-label" aria-describedby="text-align-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-text-align-icon>
               <path d="M4.5 7C4.22386 7 4 6.77614 4 6.5C4 6.22386 4.22386 6 4.5 6H19.5C19.7761 6 20 6.22386 20 6.5C20 6.77614 19.7761 7 19.5 7H4.5ZM4.5 15C4.22386 15 4 14.7761 4 14.5C4 14.2239 4.22386 14 4.5 14H19.5C19.7761 14 20 14.2239 20 14.5C20 14.7761 19.7761 15 19.5 15H4.5ZM4.5 11C4.22386 11 4 10.7761 4 10.5C4 10.2239 4.22386 10 4.5 10H13.5C13.7761 10 14 10.2239 14 10.5C14 10.7761 13.7761 11 13.5 11H4.5ZM4.5 19C4.22386 19 4 18.7761 4 18.5C4 18.2239 4.22386 18 4.5 18H13.5C13.7761 18 14 18.2239 14 18.5C14 18.7761 13.7761 19 13.5 19H4.5Z" fill="currentColor"/>
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" id="text-align-label" data-i18n="controls.textAlign.label">Text Align</p>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" id="text-align-label" data-i18n="controls.textAlign.label">Text Align</p>
             <p id="text-align-description" class="a11y-stiac-sr-only" data-i18n="controls.textAlign.description">Choose how text should align across the page. Click repeatedly to cycle through the available alignments; after the last option the alignment returns to the site default.</p>
             <p class="a11y-stiac-sr-only" data-text-align-status role="status" aria-live="polite"></p>
-            <div class="a11y-stiac-progress-parent hidden mt-3 flex w-full items-center justify-between gap-2" aria-hidden="true">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-4 h-1 flex-1"></div>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-3 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2" aria-hidden="true">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-4 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--contrast-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="contrast">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="contrast">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-transparency" viewBox="0 0 16 16">
               <path d="M0 6.5a6.5 6.5 0 0 1 12.346-2.846 6.5 6.5 0 1 1-8.691 8.691A6.5 6.5 0 0 1 0 6.5m5.144 6.358a5.5 5.5 0 1 0 7.714-7.714 6.5 6.5 0 0 1-7.714 7.714m-.733-1.269q.546.226 1.144.33l-1.474-1.474q.104.597.33 1.144m2.614.386a5.5 5.5 0 0 0 1.173-.242L4.374 7.91a6 6 0 0 0-.296 1.118zm2.157-.672q.446-.25.838-.576L5.418 6.126a6 6 0 0 0-.587.826zm1.545-1.284q.325-.39.576-.837L6.953 4.83a6 6 0 0 0-.827.587l4.6 4.602Zm1.006-1.822q.183-.562.242-1.172L9.028 4.078q-.58.096-1.118.296l3.823 3.824Zm.186-2.642a5.5 5.5 0 0 0-.33-1.144 5.5 5.5 0 0 0-1.144-.33z" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.contrast.label">Contrast</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.contrast.label">Contrast</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
 
         <!--hide images-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="hide-images">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="hide-images">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.8,4L4.8,4l1,1L4.8,4z M19.7,19L19.7,19l0.8,0.8L19.7,19z" />
               <path d="M18,7h-2c-0.5,0-1,0.5-1,1v2c0,0.5,0.5,1,1,1h2c0.5,0,1-0.5,1-1V8C19,7.5,18.5,7,18,7z M18,10h-2V8h2V10z" />
               <path d="M22,6.5v11c0,0.6-0.2,1.1-0.6,1.6l-0.6-0.6l-0.1-0.1l-4.9-4.9l0.3-0.3c0.2-0.2,0.5-0.2,0.7,0l4.2,4.1V6.5	C21,5.7,20.3,5,19.5,5H7.4l-1-1h13.1C20.9,4,22,5.1,22,6.5z" />
               <path d="M1.9,1.1L1.1,1.9l2.4,2.4C2.6,4.6,2,5.5,2,6.5v11C2,18.9,3.1,20,4.5,20h14.8l2.9,2.9l0.7-0.7L1.9,1.1z M3,6.5	C3,5.8,3.5,5.1,4.3,5l10,10l-0.8,0.8l-5.7-5.6c-0.2-0.2-0.5-0.2-0.7,0L3,14.3V6.5z M4.5,19C3.7,19,3,18.3,3,17.5v-1.8l4.5-4.5	l5.7,5.6c0.2,0.2,0.5,0.2,0.7,0l1.1-1.1l3.3,3.3H4.5z" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.hideImages.label">Hide Image</p>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.hideImages.label">Hide Image</p>
           </div>
         </div>
 
         <!--hide video-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="hide-video">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="hide-video">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-off" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M10.961 12.365a2 2 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518zM1.428 4.18A1 1 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634zM15 11.73l-3.5-1.555v-4.35L15 4.269zm-4.407 3.56-10-14 .814-.58 10 14z" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.hideVideo.label">Hide Video</p>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.hideVideo.label">Hide Video</p>
           </div>
         </div>
 
         <!--reduce motion-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="reduce-motion" aria-describedby="reduce-motion-description">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="reduce-motion" aria-describedby="reduce-motion-description">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm-2.5-11.5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Zm5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5Z" fill="currentColor" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.reduceMotion.label">Reduce Motion</p>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.reduceMotion.label">Reduce Motion</p>
             <p id="reduce-motion-description" class="a11y-stiac-sr-only" data-i18n="controls.reduceMotion.description">Stop animated, blinking, and flashing visuals from playing automatically across the page.</p>
           </div>
         </div>
 
         <!--change cursor-->
-        <div class="a11y-stiac-item group">
-          <div class="a11y-stiac-child flex h-full flex-col items-center justify-center gap-3 rounded-2xl p-4 text-center text-sm font-semibold shadow-md ring-1 ring-inset ring-slate-900/10 transition duration-200 sm:p-5" id="change-cursor">
+        <div class="a11y-stiac-item stiac-group">
+          <div class="a11y-stiac-child stiac-flex stiac-h-full stiac-flex-col stiac-items-center stiac-justify-center stiac-gap-3 stiac-rounded-2xl stiac-p-4 stiac-text-center stiac-text-sm stiac-font-semibold stiac-shadow-md stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10 stiac-transition stiac-duration-200 sm:stiac-p-5" id="change-cursor">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.85333 19.8536C8.58758 20.1193 8.13463 20.0079 8.02253 19.6492L3.02253 3.64915C2.90221 3.26413 3.26389 2.90246 3.64891 3.02278L19.6489 8.02278C20.0076 8.13487 20.1191 8.58782 19.8533 8.85357L16.2069 12.5L20.8533 17.1465C21.0486 17.3417 21.0486 17.6583 20.8533 17.8536L17.8533 20.8536C17.6581 21.0488 17.3415 21.0488 17.1462 20.8536L12.4998 16.2071L8.85333 19.8536ZM4.26173 4.26197L8.73053 18.5621L12.1462 15.1465C12.3415 14.9512 12.6581 14.9512 12.8533 15.1465L17.4998 19.7929L19.7927 17.5L15.1462 12.8536C14.951 12.6583 14.951 12.3417 15.1462 12.1465L18.5619 8.73078L4.26173 4.26197Z" fill="currentColor" />
             </svg>
-            <p class="text-[13px] font-semibold uppercase tracking-wide sm:text-xs" data-i18n="controls.changeCursors.label">Change Cursors</p>
-            <div class="a11y-stiac-progress-parent hidden mt-1 flex w-full items-center justify-between gap-2">
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 h-1 flex-1"></div>
-              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 h-1 flex-1"></div>
+            <p class="stiac-text-[13px] stiac-font-semibold stiac-uppercase stiac-tracking-wide sm:stiac-text-xs" data-i18n="controls.changeCursors.label">Change Cursors</p>
+            <div class="a11y-stiac-progress-parent stiac-hidden stiac-mt-1 stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-2">
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
@@ -1052,21 +1052,21 @@ const accessibilityMenuHTML = `
       <div id="triangle-cursor"></div>
 
       <!--accessibility modal footer-->
-      <div id="a11y-stiac-footer" class="flex flex-col gap-4 border-t border-slate-900/10 bg-white/90 px-6 py-5 shadow-inner shadow-slate-900/5">
+      <div id="a11y-stiac-footer" class="stiac-flex stiac-flex-col stiac-gap-4 stiac-border-t stiac-border-slate-900/10 stiac-bg-white/90 stiac-px-6 stiac-py-5 stiac-shadow-inner stiac-shadow-slate-900/5">
 
         <!--reset all-->
-        <button id="reset-all" class="inline-flex items-center justify-center rounded-xl px-4 py-3 text-sm font-semibold shadow-lg shadow-slate-900/30 transition focus:outline-none focus:ring-2 focus:ring-slate-900/40" data-i18n="controls.resetAll.label">
+        <button id="reset-all" class="stiac-inline-flex stiac-items-center stiac-justify-center stiac-rounded-xl stiac-px-4 stiac-py-3 stiac-text-sm stiac-font-semibold stiac-shadow-lg stiac-shadow-slate-900/30 stiac-transition focus:stiac-outline-none focus:stiac-ring-2 focus:stiac-ring-slate-900/40" data-i18n="controls.resetAll.label">
           Reset All
         </button>
 
         {{ changePositionsControls }}
         <p id="a11y-stiac-language-announcement" class="a11y-stiac-sr-only" aria-live="polite" role="status"></p>
-        <div id="stiac-sws-branding" class="stiac-sws-badge text-center text-[11px] font-semibold tracking-[0.3em] text-slate-500" role="note" aria-label="Powered by Stiac Web Services">
+        <div id="stiac-sws-branding" class="stiac-sws-badge stiac-text-center stiac-text-[11px] stiac-font-semibold stiac-tracking-[0.3em] stiac-text-slate-500" role="note" aria-label="Powered by Stiac Web Services">
           <a
             href="https://olinke.com/vy9reypj2j"
             target="_blank"
             rel="noopener noreferrer"
-            class="block text-xs tracking-[0.35em] text-slate-600"
+            class="stiac-block stiac-text-xs stiac-tracking-[0.35em] stiac-text-slate-600"
           >
             Powered by Stiac Web Services
           </a>
@@ -1075,7 +1075,14 @@ const accessibilityMenuHTML = `
     </div>
 `;
 
-const VALID_MODAL_POSITIONS = ['left', 'top', 'bottom', 'right', 'bottom-left', 'bottom-right'];
+const VALID_MODAL_POSITIONS = [
+    'stiac-left',
+    'stiac-top',
+    'stiac-bottom',
+    'stiac-right',
+    'stiac-bottom-left',
+    'stiac-bottom-right'
+];
 
 /**
  * Normalise widget placement requests so we always apply a known alignment class.
@@ -1085,7 +1092,7 @@ const VALID_MODAL_POSITIONS = ['left', 'top', 'bottom', 'right', 'bottom-left', 
  * @param {string} fallback - Safe position to use when the provided value is invalid.
  * @returns {string} Sanitised position class.
  */
-function normalisePositionClass(value, fallback = 'bottom') {
+function normalisePositionClass(value, fallback = 'stiac-bottom') {
     if (typeof value !== 'string') {
         return fallback;
     }
@@ -1096,7 +1103,16 @@ function normalisePositionClass(value, fallback = 'bottom') {
     const withoutPrefix = trimmedValue.startsWith('align-a11y-stiac-')
         ? trimmedValue.substring('align-a11y-stiac-'.length)
         : trimmedValue;
-    return VALID_MODAL_POSITIONS.includes(withoutPrefix) ? withoutPrefix : fallback;
+    const rawKeyword = withoutPrefix.startsWith('stiac-')
+        ? withoutPrefix.substring('stiac-'.length)
+        : withoutPrefix;
+    const canonicalKeyword = rawKeyword === 'top-left'
+        ? 'left'
+        : rawKeyword === 'top-right'
+            ? 'right'
+            : rawKeyword;
+    const candidate = `stiac-${canonicalKeyword}`;
+    return VALID_MODAL_POSITIONS.includes(candidate) ? candidate : fallback;
 }
 
 function resolveWidgetScriptConfig() {
@@ -1296,7 +1312,7 @@ function resolveWidgetScriptConfig() {
 }
 
 const widgetScriptConfig = resolveWidgetScriptConfig();
-const DEFAULT_MODAL_POSITION = normalisePositionClass(widgetScriptConfig.defaultPosition, 'bottom-left');
+const DEFAULT_MODAL_POSITION = normalisePositionClass(widgetScriptConfig.defaultPosition, 'stiac-bottom-left');
 
 function resolveOpenDyslexicStylesheetHref() {
     if (widgetScriptConfig.openDyslexicStylesheet) {
@@ -1987,7 +2003,7 @@ const NATIVE_LANGUAGE_NAMES = {
     pt: 'Português'
 };
 const LANGUAGE_ICONS = {
-    en: `<svg aria-hidden="true" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    en: `<svg aria-hidden="true" class="stiac-h-8 stiac-w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <rect x="1" y="4" width="30" height="24" rx="4" ry="4" fill="#fff"></rect>
             <path d="M1.638,5.846H30.362c-.711-1.108-1.947-1.846-3.362-1.846H5c-1.414,0-2.65,.738-3.362,1.846Z" fill="#a62842"></path>
             <path d="M2.03,7.692c-.008,.103-.03,.202-.03,.308v1.539H31v-1.539c0-.105-.022-.204-.03-.308H2.03Z" fill="#a62842"></path>
@@ -2018,28 +2034,28 @@ const LANGUAGE_ICONS = {
             <path d="M10.56 14.744L11.151 14.315 10.42 14.315 10.194 13.619 9.968 14.315 9.237 14.315 9.828 14.744 9.603 15.44 10.194 15.01 10.785 15.44 10.56 14.744z" fill="#fff"></path>
             <path d="M13.539 14.744L14.13 14.315 13.399 14.315 13.173 13.619 12.947 14.315 12.216 14.315 12.808 14.744 12.582 15.44 13.173 15.01 13.765 15.44 13.539 14.744z" fill="#fff"></path>
         </svg>`,
-    it: `<svg aria-hidden="true" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    it: `<svg aria-hidden="true" class="stiac-h-8 stiac-w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <path fill="#fff" d="M10 4H22V28H10z"></path>
             <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#41914d"></path>
             <path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" transform="rotate(180 26 16)" fill="#bf393b"></path>
             <path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"></path>
             <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"></path>
         </svg>`,
-    fr: `<svg aria-hidden="true" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    fr: `<svg aria-hidden="true" class="stiac-h-8 stiac-w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <path fill="#fff" d="M10 4H22V28H10z"></path>
             <path d="M5,4h6V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#092050"></path>
             <path d="M25,4h6V28h-6c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" transform="rotate(180 26 16)" fill="#be2a2c"></path>
             <path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"></path>
             <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"></path>
         </svg>`,
-    de: `<svg aria-hidden="true" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    de: `<svg aria-hidden="true" class="stiac-h-8 stiac-w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <path fill="#cc2b1d" d="M1 11H31V21H1z"></path>
             <path d="M5,4H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z"></path>
             <path d="M5,20H27c2.208,0,4,1.792,4,4v4H1v-4c0-2.208,1.792-4,4-4Z" transform="rotate(180 16 24)" fill="#f8d147"></path>
             <path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"></path>
             <path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"></path>
         </svg>`,
-    es: `<svg aria-hidden="true" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    es: `<svg aria-hidden="true" class="stiac-h-8 stiac-w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <path fill="#f1c142" d="M1 10H31V22H1z"></path>
             <path d="M5,4H27c2.208,0,4,1.792,4,4v3H1v-3c0-2.208,1.792-4,4-4Z" fill="#a0251e"></path>
             <path d="M5,21H27c2.208,0,4,1.792,4,4v3H1v-3c0-2.208,1.792-4,4-4Z" transform="rotate(180 16 24.5)" fill="#a0251e"></path>
@@ -2050,7 +2066,7 @@ const LANGUAGE_ICONS = {
             <path d="M8.36,16.058c-.153-.062-.39-.098-.653-.102v-.76c.094-.041,.034-.115-.013-.159,.02-.038,.092-.057,.056-.115h.043v-.261h-.912v.261h.039c-.037,.059,.039,.078,.057,.115-.047,.042-.108,.118-.014,.159v.873c-.644,.133-.611,.748,0,.945v.35c-.59,.154-.415,.567-.193,.896l.057,.053c.123-.103,.136-.31,.031-.429,.032-.018,.067-.036,.105-.053v.932c-.055,.018-.069,.093-.021,.126,.005,.064-.059,.089-.113,.081,0,.026,0,.236,0,.268-.045,.024-.113,.031-.17,.028v.401h0v.215c.459-.068,.895-.068,1.352,0v-.186s0,0,0,0v-.108s0,0,0,0v-.107s0,0,0,0v-.107s0,0,0,0v-.108c-.056,.002-.124-.004-.169-.028,0-.033,0-.241,0-.269-.055,.008-.119-.018-.113-.083,.045-.034,.03-.107-.024-.124v-1.29c.421-.192,.383-.772,0-.8v-.224c.575,.035,.796,.314,.653-.392Z" fill="#9b8028"></path>
             <path d="M12.531,14.533h-4.28l.003,2.572v1.485c0,.432,.226,.822,.591,1.019,.473,.252,1.024,.391,1.552,.391s1.064-.135,1.544-.391c.364-.197,.591-.587,.591-1.019v-4.057Z" fill="#a0251e"></path>
         </svg>`,
-    pt: `<svg aria-hidden="true" class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+    pt: `<svg aria-hidden="true" class="stiac-h-8 stiac-w-8" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
             <path d="M5,4H13V28H5c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" fill="#2b6519"></path>
             <path d="M16,4h15V28h-15c-2.208,0-4-1.792-4-4V8c0-2.208,1.792-4,4-4Z" transform="rotate(180 21.5 16)" fill="#ea3323"></path>
             <path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"></path>
@@ -2681,17 +2697,17 @@ function initialiseAccessibilityWidget() {
         if (typeof document === 'undefined' || !document.documentElement) {
             return false;
         }
-        return document.documentElement.classList.contains('hide-images');
+        return document.documentElement.classList.contains('stiac-hide-images');
     };
 
     const updateLanguageIconsVisibility = () => {
         const hideIcons = shouldHideLanguageIcons();
         if (languageActiveIconElement) {
-            languageActiveIconElement.classList.toggle('hidden', hideIcons);
+            languageActiveIconElement.classList.toggle('stiac-hidden', hideIcons);
         }
         if (languageOptionsListElement) {
             languageOptionsListElement.querySelectorAll('[data-language-icon]').forEach((iconElement) => {
-                iconElement.classList.toggle('hidden', hideIcons);
+                iconElement.classList.toggle('stiac-hidden', hideIcons);
             });
         }
     };
@@ -2724,7 +2740,7 @@ function initialiseAccessibilityWidget() {
         if (!languageDropdownElement || !languageTriggerButton) {
             return;
         }
-        languageDropdownElement.classList.add('hidden');
+        languageDropdownElement.classList.add('stiac-hidden');
         languageTriggerButton.setAttribute('aria-expanded', 'false');
         languageDropdownOpen = false;
         focusedLanguageIndex = -1;
@@ -2737,7 +2753,7 @@ function initialiseAccessibilityWidget() {
         if (!languageDropdownElement || !languageTriggerButton) {
             return;
         }
-        languageDropdownElement.classList.remove('hidden');
+        languageDropdownElement.classList.remove('stiac-hidden');
         languageTriggerButton.setAttribute('aria-expanded', 'true');
         languageDropdownOpen = true;
     };
@@ -2896,20 +2912,20 @@ function initialiseAccessibilityWidget() {
 
                 const optionButton = document.createElement('button');
                 optionButton.type = 'button';
-                optionButton.className = 'a11y-stiac-language-option flex w-full items-center justify-between gap-3 px-4 py-2 text-sm text-slate-600 transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/40';
+                optionButton.className = 'a11y-stiac-language-option stiac-flex stiac-w-full stiac-items-center stiac-justify-between stiac-gap-3 stiac-px-4 stiac-py-2 stiac-text-sm stiac-text-slate-600 stiac-transition hover:stiac-bg-slate-100 focus:stiac-outline-none focus-visible:stiac-ring-2 focus-visible:stiac-ring-slate-900/40';
                 optionButton.setAttribute('role', 'option');
                 optionButton.setAttribute('id', `a11y-stiac-language-option-${code}`);
                 optionButton.setAttribute('data-language-option', code);
                 optionButton.setAttribute('aria-selected', code === resolvedLanguage ? 'true' : 'false');
                 optionButton.innerHTML = `
-                    <span class="flex flex-1 items-center gap-3">
-                        <span class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 ring-1 ring-inset ring-slate-900/10" data-language-icon>${LANGUAGE_ICONS[code] || LANGUAGE_ICONS.en}</span>
-                        <span class="flex-1 text-left font-medium ${code === resolvedLanguage ? 'text-slate-900' : 'text-slate-600'}">${names[code] || FALLBACK_LANGUAGE_NAMES[code] || code}</span>
+                    <span class="stiac-flex stiac-flex-1 stiac-items-center stiac-gap-3">
+                        <span class="stiac-flex stiac-h-9 stiac-w-9 stiac-items-center stiac-justify-center stiac-rounded-full stiac-bg-slate-100 stiac-ring-1 stiac-ring-inset stiac-ring-slate-900/10" data-language-icon>${LANGUAGE_ICONS[code] || LANGUAGE_ICONS.en}</span>
+                        <span class="stiac-flex-1 stiac-text-left stiac-font-medium ${code === resolvedLanguage ? 'stiac-text-slate-900' : 'stiac-text-slate-600'}">${names[code] || FALLBACK_LANGUAGE_NAMES[code] || code}</span>
                     </span>
-                    <span class="text-slate-400 ${code === resolvedLanguage ? 'opacity-100' : 'opacity-0'}" aria-hidden="true">✓</span>
+                    <span class="stiac-text-slate-400 ${code === resolvedLanguage ? 'stiac-opacity-100' : 'stiac-opacity-0'}" aria-hidden="true">✓</span>
                 `;
                 if (code === resolvedLanguage) {
-                    optionButton.classList.add('bg-slate-100', 'text-slate-900');
+                    optionButton.classList.add('stiac-bg-slate-100', 'stiac-text-slate-900');
                 }
                 optionButton.addEventListener('click', () => {
                     selectLanguageFromDropdown(code);
@@ -3016,7 +3032,7 @@ function initialiseAccessibilityWidget() {
 
     // Trigger the refined reveal transition once the modal has been added to the DOM.
     requestAnimationFrame(() => {
-        accessibilityModal.classList.add('is-ready');
+        accessibilityModal.classList.add('stiac-is-ready');
     });
 
     //console.info('Accessibility Widget v1.7.0 - Powered by Stiac Web Services');
@@ -3056,7 +3072,7 @@ function initialiseAccessibilityWidget() {
     }
 
     function accessibilityModalOpenCloseToggle() {
-        const isClosing = accessibilityModal.classList.toggle('close');
+        const isClosing = accessibilityModal.classList.toggle('stiac-close');
         updateCloseButtonIcon();
         if (!isClosing) {
             requestAnimationFrame(() => {
@@ -3088,7 +3104,7 @@ function initialiseAccessibilityWidget() {
         if (!closeBtn) {
             return;
         }
-        const isClosed = accessibilityModal.classList.contains('close');
+        const isClosed = accessibilityModal.classList.contains('stiac-close');
         // Show the accessibility glyph while the modal is closed and switch to an "X" when it opens.
         closeBtn.innerHTML = getCloseButtonIconMarkup(isClosed);
     }
@@ -3293,7 +3309,7 @@ function initialiseAccessibilityWidget() {
         }
 
         hideImagesObserver = new MutationObserver((mutations) => {
-            if (!docElement.classList.contains('hide-images')) {
+            if (!docElement.classList.contains('stiac-hide-images')) {
                 return;
             }
 
@@ -3321,7 +3337,7 @@ function initialiseAccessibilityWidget() {
     // Toggle the Hide Images state while keeping gradients and other non-image backgrounds intact.
     function setHideImagesActive(active) {
         const shouldActivate = Boolean(active);
-        docElement.classList.toggle('hide-images', shouldActivate);
+        docElement.classList.toggle('stiac-hide-images', shouldActivate);
 
         if (shouldActivate) {
             applyHideImagesToBackgrounds();
@@ -3485,7 +3501,7 @@ function initialiseAccessibilityWidget() {
         }
 
         reduceMotionObserver = new MutationObserver((mutations) => {
-            if (!docElement.classList.contains('reduce-motion')) {
+            if (!docElement.classList.contains('stiac-reduce-motion')) {
                 return;
             }
 
@@ -3512,7 +3528,7 @@ function initialiseAccessibilityWidget() {
 
     function setReduceMotionActive(active) {
         const shouldActivate = Boolean(active);
-        docElement.classList.toggle('reduce-motion', shouldActivate);
+        docElement.classList.toggle('stiac-reduce-motion', shouldActivate);
 
         if (shouldActivate) {
             docElement.setAttribute('data-a11y-stiac-reduce-motion', 'true');
@@ -3800,7 +3816,7 @@ function initialiseAccessibilityWidget() {
             }
         }
 
-        textAlignControl.classList.toggle('active', Boolean(currentValue));
+        textAlignControl.classList.toggle('stiac-active', Boolean(currentValue));
         updateProgress(textAlignControl, typeof progressIndex === 'number' ? progressIndex : -1);
 
         if (textAlignStatusElement) {
@@ -3847,7 +3863,7 @@ function initialiseAccessibilityWidget() {
         if (!element) {
             return;
         }
-        element.classList.toggle('active', isActive);
+        element.classList.toggle('stiac-active', isActive);
         element.setAttribute('aria-pressed', String(Boolean(isActive)));
         const targetColor = isActive ? 'var(--a11y-stiac-header-text-color)' : 'var(--a11y-stiac-text-color)';
         element.style.color = targetColor;
@@ -3866,12 +3882,12 @@ function initialiseAccessibilityWidget() {
             return;
         }
         if (activeIndex < 0) {
-            progressParent.classList.add('hidden');
+            progressParent.classList.add('stiac-hidden');
         } else {
-            progressParent.classList.remove('hidden');
+            progressParent.classList.remove('stiac-hidden');
         }
         progressParent.querySelectorAll('.a11y-stiac-progress-child').forEach((child, index) => {
-            child.classList.toggle('active', index === activeIndex);
+            child.classList.toggle('stiac-active', index === activeIndex);
         });
     }
 
@@ -3885,12 +3901,12 @@ function initialiseAccessibilityWidget() {
 
     const positionClasses = [...VALID_MODAL_POSITIONS];
     const positionControls = [
-        { element: alignAccTopLeft, className: 'left' },
-        { element: alignAccTop, className: 'top' },
-        { element: alignAccBottom, className: 'bottom' },
-        { element: alignAccBottomLeft, className: 'bottom-left' },
-        { element: alignAccBottomRight, className: 'bottom-right' },
-        { element: alignAccTopRight, className: 'right' }
+        { element: alignAccTopLeft, className: 'stiac-left' },
+        { element: alignAccTop, className: 'stiac-top' },
+        { element: alignAccBottom, className: 'stiac-bottom' },
+        { element: alignAccBottomLeft, className: 'stiac-bottom-left' },
+        { element: alignAccBottomRight, className: 'stiac-bottom-right' },
+        { element: alignAccTopRight, className: 'stiac-right' }
     ];
 
     if (!accessibilityModal.classList.contains(DEFAULT_MODAL_POSITION)) {
@@ -3912,7 +3928,7 @@ function initialiseAccessibilityWidget() {
                 return;
             }
             const isActive = control.className === currentPosition;
-            control.element.classList.toggle('active', isActive);
+            control.element.classList.toggle('stiac-active', isActive);
             // Keep pressed state in sync so assistive technologies announce the active placement.
             control.element.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
@@ -3999,23 +4015,23 @@ function initialiseAccessibilityWidget() {
         let progressIndex = -1;
 
         if (underlineClickCount === 0) {
-            docElement.classList.add('underline-style-0');
-            docElement.classList.remove('underline-style-1', 'underline-style-2');
+            docElement.classList.add('stiac-underline-style-0');
+            docElement.classList.remove('stiac-underline-style-1', 'stiac-underline-style-2');
             underlineClickCount = 1;
             progressIndex = 0;
         } else if (underlineClickCount === 1) {
-            docElement.classList.remove('underline-style-0');
-            docElement.classList.add('underline-style-1');
-            docElement.classList.remove('underline-style-2');
+            docElement.classList.remove('stiac-underline-style-0');
+            docElement.classList.add('stiac-underline-style-1');
+            docElement.classList.remove('stiac-underline-style-2');
             underlineClickCount = 2;
             progressIndex = 1;
         } else if (underlineClickCount === 2) {
-            docElement.classList.remove('underline-style-0', 'underline-style-1');
-            docElement.classList.add('underline-style-2');
+            docElement.classList.remove('stiac-underline-style-0', 'stiac-underline-style-1');
+            docElement.classList.add('stiac-underline-style-2');
             underlineClickCount = 3;
             progressIndex = 2;
         } else {
-            docElement.classList.remove('underline-style-0', 'underline-style-1', 'underline-style-2');
+            docElement.classList.remove('stiac-underline-style-0', 'stiac-underline-style-1', 'stiac-underline-style-2');
             underlineClickCount = 0;
             progressIndex = -1;
         }
@@ -4106,23 +4122,23 @@ function initialiseAccessibilityWidget() {
         let progressIndex = -1;
 
         if (lineHeightClickCount === 0) {
-            docElement.classList.add('line-height-0');
-            docElement.classList.remove('line-height-1', 'line-height-2');
+            docElement.classList.add('stiac-line-height-0');
+            docElement.classList.remove('stiac-line-height-1', 'stiac-line-height-2');
             lineHeightClickCount = 1;
             progressIndex = 0;
         } else if (lineHeightClickCount === 1) {
-            docElement.classList.remove('line-height-0');
-            docElement.classList.add('line-height-1');
-            docElement.classList.remove('line-height-2');
+            docElement.classList.remove('stiac-line-height-0');
+            docElement.classList.add('stiac-line-height-1');
+            docElement.classList.remove('stiac-line-height-2');
             lineHeightClickCount = 2;
             progressIndex = 1;
         } else if (lineHeightClickCount === 2) {
-            docElement.classList.remove('line-height-0', 'line-height-1');
-            docElement.classList.add('line-height-2');
+            docElement.classList.remove('stiac-line-height-0', 'stiac-line-height-1');
+            docElement.classList.add('stiac-line-height-2');
             lineHeightClickCount = 3;
             progressIndex = 2;
         } else {
-            docElement.classList.remove('line-height-0', 'line-height-1', 'line-height-2');
+            docElement.classList.remove('stiac-line-height-0', 'stiac-line-height-1', 'stiac-line-height-2');
             lineHeightClickCount = 0;
             progressIndex = -1;
         }
@@ -4231,7 +4247,7 @@ function initialiseAccessibilityWidget() {
 
     document.querySelector('#hide-images').addEventListener('click', () => {
         const item = document.querySelector('#hide-images');
-        const nextState = !docElement.classList.contains('hide-images');
+        const nextState = !docElement.classList.contains('stiac-hide-images');
         setHideImagesActive(nextState);
         setControlActiveState(item, nextState);
         saveSettings();
@@ -4239,15 +4255,15 @@ function initialiseAccessibilityWidget() {
 
     document.querySelector('#hide-video').addEventListener('click', () => {
         const item = document.querySelector('#hide-video');
-        const nextState = !docElement.classList.contains('hide-video');
-        docElement.classList.toggle('hide-video');
+        const nextState = !docElement.classList.contains('stiac-hide-video');
+        docElement.classList.toggle('stiac-hide-video');
         setControlActiveState(item, nextState);
         saveSettings();
     });
 
     document.querySelector('#reduce-motion').addEventListener('click', () => {
         const item = document.querySelector('#reduce-motion');
-        const nextState = !docElement.classList.contains('reduce-motion');
+        const nextState = !docElement.classList.contains('stiac-reduce-motion');
         reduceMotionPreferenceLocked = true;
         setReduceMotionActive(nextState);
         setControlActiveState(item, nextState);
@@ -4267,25 +4283,25 @@ function initialiseAccessibilityWidget() {
         }
 
         if (cursorClickCount === 0) {
-            cursor.classList.add('cursor-0');
-            cursor.classList.remove('cursor-1', 'cursor-2');
+            cursor.classList.add('stiac-cursor-0');
+            cursor.classList.remove('stiac-cursor-1', 'stiac-cursor-2');
             cursor.style.width = '50px';
             cursor.style.height = '50px';
             docElement.style.cursor = '';
             cursorClickCount = 1;
             progressIndex = 0;
         } else if (cursorClickCount === 1) {
-            cursor.classList.remove('cursor-0');
-            cursor.classList.add('cursor-1');
-            cursor.classList.remove('cursor-2');
+            cursor.classList.remove('stiac-cursor-0');
+            cursor.classList.add('stiac-cursor-1');
+            cursor.classList.remove('stiac-cursor-2');
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
             docElement.style.cursor = '';
             cursorClickCount = 2;
             progressIndex = 1;
         } else if (cursorClickCount === 2) {
-            cursor.classList.remove('cursor-0', 'cursor-1');
-            cursor.classList.add('cursor-2');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1');
+            cursor.classList.add('stiac-cursor-2');
             docElement.style.cursor = 'none';
             cursor.style.width = '25vw';
             cursor.style.height = '8px';
@@ -4295,7 +4311,7 @@ function initialiseAccessibilityWidget() {
             cursorClickCount = 3;
             progressIndex = 2;
         } else {
-            cursor.classList.remove('cursor-0', 'cursor-1', 'cursor-2');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2');
             docElement.style.cursor = '';
             cursor.style.width = '';
             cursor.style.height = '';
@@ -4311,13 +4327,13 @@ function initialiseAccessibilityWidget() {
     //cursor
     const cursor = document.getElementById('cursor');
     document.addEventListener('mousemove', e => {
-        if (cursor.classList.contains('cursor-0')) {
+        if (cursor.classList.contains('stiac-cursor-0')) {
             cursor.style.top = e.clientY + 'px';
             cursor.style.left = e.clientX + 'px';
-        } else if (cursor.classList.contains('cursor-1')) {
+        } else if (cursor.classList.contains('stiac-cursor-1')) {
             cursor.style.top = e.clientY + 'px';
             cursor.style.left = 0;
-        } else if (cursor.classList.contains('cursor-2')) {
+        } else if (cursor.classList.contains('stiac-cursor-2')) {
             cursor.style.top = e.clientY + 'px';
             if (e.clientX < window.innerWidth / 8) {
                 cursor.style.left = window.innerWidth / 8 + 'px';
@@ -4334,13 +4350,13 @@ function initialiseAccessibilityWidget() {
 
     document.querySelectorAll('a,button').forEach(a => {
         a.addEventListener('mouseover', () => {
-            if (cursor.classList.contains('cursor-0')) {
+            if (cursor.classList.contains('stiac-cursor-0')) {
                 cursor.style.width = '100px';
                 cursor.style.height = '100px';
             }
         });
         a.addEventListener('mouseleave', () => {
-            if (cursor.classList.contains('cursor-0')) {
+            if (cursor.classList.contains('stiac-cursor-0')) {
                 cursor.style.width = '50px';
                 cursor.style.height = '50px';
             }
@@ -4357,15 +4373,15 @@ function initialiseAccessibilityWidget() {
         filterState.contrast = 'default';
         applyFilterState();
 
-        docElement.classList.remove('underline-style-0', 'underline-style-1', 'underline-style-2');
+        docElement.classList.remove('stiac-underline-style-0', 'stiac-underline-style-1', 'stiac-underline-style-2');
         applyGlobalFontSize('');
-        docElement.classList.remove('line-height-0', 'line-height-1', 'line-height-2');
+        docElement.classList.remove('stiac-line-height-0', 'stiac-line-height-1', 'stiac-line-height-2');
         docElement.style.letterSpacing = '';
         setDocumentTextAlign('');
         syncTextAlignUI();
         delete docElement.dataset.a11yStiacDyslexiaFont;
         setHideImagesActive(false);
-        docElement.classList.remove('hide-video');
+        docElement.classList.remove('stiac-hide-video');
         setReduceMotionActive(false);
         reduceMotionPreferenceLocked = false;
         if (pendingSystemReduceMotion) {
@@ -4373,7 +4389,7 @@ function initialiseAccessibilityWidget() {
         }
 
         if (cursorElement) {
-            cursorElement.classList.remove('cursor-0', 'cursor-1', 'cursor-2');
+            cursorElement.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2');
             cursorElement.style.width = '';
             cursorElement.style.height = '';
         }
@@ -4404,16 +4420,16 @@ function initialiseAccessibilityWidget() {
                 saturation: filterState.saturation,
                 contrast: filterState.contrast
             },
-            underline: docElement.classList.contains('underline-style-2') ? 'style-2' : docElement.classList.contains('underline-style-1') ? 'style-1' : docElement.classList.contains('underline-style-0') ? 'style-0' : 'default',
+            underline: docElement.classList.contains('stiac-underline-style-2') ? 'style-2' : docElement.classList.contains('stiac-underline-style-1') ? 'style-1' : docElement.classList.contains('stiac-underline-style-0') ? 'style-0' : 'default',
             fontSize: docElement.dataset.a11yStiacFontSizeValue || '',
-            lineHeight: docElement.classList.contains('line-height-2') ? 'line-height-2' : docElement.classList.contains('line-height-1') ? 'line-height-1' : docElement.classList.contains('line-height-0') ? 'line-height-0' : 'default',
+            lineHeight: docElement.classList.contains('stiac-line-height-2') ? 'line-height-2' : docElement.classList.contains('stiac-line-height-1') ? 'line-height-1' : docElement.classList.contains('stiac-line-height-0') ? 'line-height-0' : 'default',
             letterSpacing: docElement.style.letterSpacing || '',
             textAlign: getDocumentTextAlign(),
             dyslexiaFont: Boolean(docElement.dataset.a11yStiacDyslexiaFont),
-            hideImages: docElement.classList.contains('hide-images'),
-            hideVideo: docElement.classList.contains('hide-video'),
-            reduceMotion: docElement.classList.contains('reduce-motion'),
-            cursor: cursor.classList.contains('cursor-2') ? 'guide' : cursor.classList.contains('cursor-1') ? 'mask' : cursor.classList.contains('cursor-0') ? 'focus' : 'default',
+            hideImages: docElement.classList.contains('stiac-hide-images'),
+            hideVideo: docElement.classList.contains('stiac-hide-video'),
+            reduceMotion: docElement.classList.contains('stiac-reduce-motion'),
+            cursor: cursor.classList.contains('stiac-cursor-2') ? 'guide' : cursor.classList.contains('stiac-cursor-1') ? 'mask' : cursor.classList.contains('stiac-cursor-0') ? 'focus' : 'default',
             position: getCurrentPosition()
         };
 
@@ -4464,13 +4480,13 @@ function initialiseAccessibilityWidget() {
             filterState.contrast = settings.filters.contrast || 'default';
             applyFilterState();
         }
-        docElement.classList.toggle('underline-style-0', settings.underline === 'style-0');
-        docElement.classList.toggle('underline-style-1', settings.underline === 'style-1');
-        docElement.classList.toggle('underline-style-2', settings.underline === 'style-2');
+        docElement.classList.toggle('stiac-underline-style-0', settings.underline === 'style-0');
+        docElement.classList.toggle('stiac-underline-style-1', settings.underline === 'style-1');
+        docElement.classList.toggle('stiac-underline-style-2', settings.underline === 'style-2');
         applyGlobalFontSize(settings.fontSize || '');
-        docElement.classList.toggle('line-height-0', settings.lineHeight === 'line-height-0');
-        docElement.classList.toggle('line-height-1', settings.lineHeight === 'line-height-1');
-        docElement.classList.toggle('line-height-2', settings.lineHeight === 'line-height-2');
+        docElement.classList.toggle('stiac-line-height-0', settings.lineHeight === 'line-height-0');
+        docElement.classList.toggle('stiac-line-height-1', settings.lineHeight === 'line-height-1');
+        docElement.classList.toggle('stiac-line-height-2', settings.lineHeight === 'line-height-2');
         docElement.style.letterSpacing = settings.letterSpacing || '';
         setDocumentTextAlign(settings.textAlign || '');
         if (settings.dyslexiaFont) {
@@ -4484,12 +4500,12 @@ function initialiseAccessibilityWidget() {
             delete docElement.dataset.a11yStiacDyslexiaFont;
         }
         setHideImagesActive(Boolean(settings.hideImages));
-        docElement.classList.toggle('hide-video', Boolean(settings.hideVideo));
+        docElement.classList.toggle('stiac-hide-video', Boolean(settings.hideVideo));
         setReduceMotionActive(Boolean(settings.reduceMotion));
 
-        cursor.classList.toggle('cursor-0', settings.cursor === 'focus');
-        cursor.classList.toggle('cursor-1', settings.cursor === 'mask');
-        cursor.classList.toggle('cursor-2', settings.cursor === 'guide');
+        cursor.classList.toggle('stiac-cursor-0', settings.cursor === 'focus');
+        cursor.classList.toggle('stiac-cursor-1', settings.cursor === 'mask');
+        cursor.classList.toggle('stiac-cursor-2', settings.cursor === 'guide');
         if (settings.cursor === 'focus') {
             cursor.style.width = '50px';
             cursor.style.height = '50px';
@@ -4553,7 +4569,7 @@ function initialiseAccessibilityWidget() {
         }
 
         const underlineItem = document.querySelector('#underline');
-        const underlineState = docElement.classList.contains('underline-style-2') ? 'style-2' : docElement.classList.contains('underline-style-1') ? 'style-1' : docElement.classList.contains('underline-style-0') ? 'style-0' : 'default';
+        const underlineState = docElement.classList.contains('stiac-underline-style-2') ? 'style-2' : docElement.classList.contains('stiac-underline-style-1') ? 'style-1' : docElement.classList.contains('stiac-underline-style-0') ? 'style-0' : 'default';
         if (underlineState === 'style-0') {
             underlineClickCount = 1;
             updateProgress(underlineItem, 0);
@@ -4601,15 +4617,15 @@ function initialiseAccessibilityWidget() {
         }
 
         const lineHeightItem = document.querySelector('#line-height');
-        if (docElement.classList.contains('line-height-0')) {
+        if (docElement.classList.contains('stiac-line-height-0')) {
             lineHeightClickCount = 1;
             updateProgress(lineHeightItem, 0);
             setControlActiveState(lineHeightItem, true);
-        } else if (docElement.classList.contains('line-height-1')) {
+        } else if (docElement.classList.contains('stiac-line-height-1')) {
             lineHeightClickCount = 2;
             updateProgress(lineHeightItem, 1);
             setControlActiveState(lineHeightItem, true);
-        } else if (docElement.classList.contains('line-height-2')) {
+        } else if (docElement.classList.contains('stiac-line-height-2')) {
             lineHeightClickCount = 3;
             updateProgress(lineHeightItem, 2);
             setControlActiveState(lineHeightItem, true);
@@ -4664,19 +4680,19 @@ function initialiseAccessibilityWidget() {
         }
 
         const hideImagesItem = document.querySelector('#hide-images');
-        const hideImagesActive = docElement.classList.contains('hide-images');
+        const hideImagesActive = docElement.classList.contains('stiac-hide-images');
         setControlActiveState(hideImagesItem, hideImagesActive);
         const hideVideoItem = document.querySelector('#hide-video');
-        const hideVideoActive = docElement.classList.contains('hide-video');
+        const hideVideoActive = docElement.classList.contains('stiac-hide-video');
         setControlActiveState(hideVideoItem, hideVideoActive);
 
         const reduceMotionItem = document.querySelector('#reduce-motion');
-        const reduceMotionActive = docElement.classList.contains('reduce-motion');
+        const reduceMotionActive = docElement.classList.contains('stiac-reduce-motion');
         setControlActiveState(reduceMotionItem, reduceMotionActive);
 
         const cursorItem = document.querySelector('#change-cursor');
         const triangle = document.getElementById('triangle-cursor');
-        if (cursor.classList.contains('cursor-0')) {
+        if (cursor.classList.contains('stiac-cursor-0')) {
             cursorClickCount = 1;
             cursor.style.width = '50px';
             cursor.style.height = '50px';
@@ -4686,7 +4702,7 @@ function initialiseAccessibilityWidget() {
             }
             updateProgress(cursorItem, 0);
             setControlActiveState(cursorItem, true);
-        } else if (cursor.classList.contains('cursor-1')) {
+        } else if (cursor.classList.contains('stiac-cursor-1')) {
             cursorClickCount = 2;
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
@@ -4696,7 +4712,7 @@ function initialiseAccessibilityWidget() {
             }
             updateProgress(cursorItem, 1);
             setControlActiveState(cursorItem, true);
-        } else if (cursor.classList.contains('cursor-2')) {
+        } else if (cursor.classList.contains('stiac-cursor-2')) {
             cursorClickCount = 3;
             cursor.style.width = '25vw';
             cursor.style.height = '8px';
