@@ -1,19 +1,4 @@
 # Changelog
-# [1.8.0] - 2026-01-05
-
-### Added
-- None.
-
-### Changed
-- Namespaced every widget utility and state selector with the `stiac-` prefix so the menu no longer collides with host Tailwind classes or global CSS.
-- Updated the Tailwind build to scan `accessibility-widget.js` and emit prefixed utilities inside `accessibility-tailwind.css`, keeping the packaged stylesheet aligned with the runtime markup.
-
-### Fixed
-- None.
-
-### Removed
-- None.
-
 # [1.7.5] - 2025-12-30
 
 ### Added
