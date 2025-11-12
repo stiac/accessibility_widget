@@ -378,14 +378,14 @@ const accessibilityMenuStyles = `
       transition: color 0.2s ease, fill 0.2s ease;
     }
 
-    .a11y-stiac-child.active {
+    .a11y-stiac-child.stiac-active {
       background: var(--a11y-stiac-control-active-bg-color);
       color: var(--a11y-stiac-control-active-text-color);
       border-color: transparent;
     }
 
-    .a11y-stiac-child:not(.active):hover,
-    .a11y-stiac-child.active:hover,
+    .a11y-stiac-child:not(.stiac-active):hover,
+    .a11y-stiac-child.stiac-active:hover,
     .a11y-stiac-item.group:hover .a11y-stiac-child {
       background: var(--a11y-stiac-hover-color);
       color: var(--a11y-stiac-hover-text-color);
@@ -408,7 +408,7 @@ const accessibilityMenuStyles = `
       transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .a11y-stiac-progress-child.active {
+    .a11y-stiac-progress-child.stiac-active {
       opacity: 1;
       background: var(--a11y-stiac-color-1);
       border-color: var(--a11y-stiac-color-1);
@@ -470,18 +470,18 @@ const accessibilityMenuStyles = `
       color: var(--a11y-stiac-hover-text-color);
     }
 
-    #change-positions button.active {
+    #change-positions button.stiac-active {
       background: var(--a11y-stiac-header-bg-color);
       color: var(--a11y-stiac-header-text-color);
       box-shadow: none;
     }
 
-    #change-positions button.active:hover {
+    #change-positions button.stiac-active:hover {
       background: var(--a11y-stiac-hover-color);
       color: var(--a11y-stiac-hover-text-color);
     }
 
-    .a11y-stiac-item:hover .a11y-stiac-child.active {
+    .a11y-stiac-item:hover .a11y-stiac-child.stiac-active {
       background: var(--a11y-stiac-hover-color);
       color: var(--a11y-stiac-hover-text-color);
     }
