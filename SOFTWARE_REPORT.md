@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.7.5
+- **Version**: 1.8.1
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2025-12-30
+- **Last Update**: 2026-01-06
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,8 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2026-01-06 — Forced the widget to inject the packaged Tailwind stylesheet even when host sites provide their own build so the `stiac-` utilities always render (AI assistant)
+- 2026-01-05 — Namespaced every Tailwind utility and widget state class with the `stiac-` prefix and regenerated the packaged stylesheet to avoid collisions with host CSS frameworks (AI assistant)
 - 2025-12-30 — Refactored the startup scheduler so the widget initialises once even when injected after `DOMContentLoaded`, eliminating load-time failures on asynchronous embeds (AI assistant)
 - 2025-12-29 — Rebuilt the `aria-labelledby` reconciliation to fall back to descendant headings when IDs are duplicated or missing, restoring startup compatibility on third-party grids (AI assistant)
 - 2025-12-28 — Generated hidden proxy labels for duplicated `aria-labelledby` references so accessible names stay intact without mutating host IDs (AI assistant)

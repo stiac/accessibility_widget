@@ -8,8 +8,19 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.7.5`
+- **Current Version:** `1.8.1`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
+
+All bundled Tailwind utilities and runtime state classes ship with the `stiac-` prefix so the widget can coexist with host stylesheets without unexpected overrides.
+
+## What's New in 1.8.1
+
+- Always inject the packaged, namespaced Tailwind stylesheet so the widget keeps its layout even when host sites already ship th
+eir own Tailwind build.
+
+## What's New in 1.8.0
+
+- Namespaced every widget utility class and state selector with the `stiac-` prefix and regenerated the packaged Tailwind stylesheet so deployments stay isolated from host CSS frameworks.
 
 ## What's New in 1.7.5
 
@@ -107,7 +118,7 @@ You can use `min.js` file _as your requirement_
 
 ### Styling
 
-- The menu now uses Tailwind CSS classes. When the host page does not already include Tailwind, the widget injects the generated `accessibility-tailwind.css` helper from the same directory (set `data-tailwind="false"` to disable the helper, `data-tailwind-stylesheet` to point at a custom CSS file, or `data-tailwind-cdn` if you intentionally prefer the CDN script).
+- The menu uses Tailwind CSS classes and always injects the generated `accessibility-tailwind.css` helper from the same directory so the prefixed `stiac-` utilities stay available even when host sites already ship Tailwind (set `data-tailwind="false"` to disable the helper, `data-tailwind-stylesheet` to point at a custom CSS file, or `data-tailwind-cdn` if you intentionally prefer the CDN script).
 - Adjust the colour scheme quickly by editing the CSS variables (`--a11y-stiac-color-1`, `--a11y-stiac-color-2`, `--a11y-stiac-hover-color`, `--a11y-stiac-hover-text-color`, `--a11y-stiac-text-color`, `--a11y-stiac-header-bg-color`, `--a11y-stiac-header-text-color`, `--a11y-stiac-control-active-bg-color`, `--a11y-stiac-control-active-text-color`) at the top of `accessibility-menu.js`.
 
 ### Script data attributes
@@ -164,7 +175,7 @@ If you customise the widget markup or Tailwind configuration, regenerate `access
 1. `npm install`
 2. `npm run build:tailwind`
 
-The command scans `accessibility-menu.js`, compiles only the classes the widget needs, and writes a minified stylesheet next to the script so FTP-only deployments remain lightweight.
+The command scans `accessibility-widget.js`, compiles only the prefixed classes the widget needs, and writes a minified stylesheet next to the script so FTP-only deployments remain lightweight.
 
 ### Internationalisation
 
