@@ -4766,7 +4766,7 @@ function initialiseAccessibilityWidget() {
         if (!trigger) {
             return;
         }
-        const targetColor = trigger.classList.contains('active') ? 'var(--a11y-stiac-header-text-color)' : 'var(--a11y-stiac-text-color)';
+        const targetColor = trigger.classList.contains('stiac-active') ? 'var(--a11y-stiac-header-text-color)' : 'var(--a11y-stiac-text-color)';
         trigger.style.color = targetColor;
         trigger.querySelectorAll('svg').forEach(icon => {
             icon.style.color = targetColor;
