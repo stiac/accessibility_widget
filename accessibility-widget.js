@@ -599,15 +599,15 @@ const accessibilityMenuStyles = `
     }
 
     .stiac-line-height-0 * {
-      line-height: 1.5;
+      line-height: 1.5 !important;
     }
 
     .stiac-line-height-1 * {
-      line-height: 1.8;
+      line-height: 1.8 !important;
     }
 
     .stiac-line-height-2 * {
-      line-height: 2;
+      line-height: 2 !important;
     }
 
     /* Cursor overlays for focus helpers */
@@ -646,13 +646,17 @@ const accessibilityMenuStyles = `
     }
 
     #cursor.stiac-cursor-2 {
-      width: 25vw;
-      height: 8px;
-      background: var(--a11y-stiac-color-1);
-      border: yellow 2px solid;
+      box-sizing: border-box;
+      position: fixed;
+      width: 40vw !important;
+      min-width: 200px !important;
+      height: 12px !important;
+      background: #000;
+      border: 3px solid #fff300;
+      border-radius: 5px;
       transition: all 0.1s ease;
       transform-origin: center;
-      transform: translate(-50%, 50%);
+      transform: translate(-50%, -50%);
     }
 
     #cursor.stiac-cursor-3 {
@@ -664,7 +668,7 @@ const accessibilityMenuStyles = `
       height: 0;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
-      border-bottom: 10px solid yellow;
+      border-bottom: 12px solid #fff300;
       position: fixed;
       top: 0;
       left: 0;
@@ -4022,6 +4026,38 @@ function initialiseAccessibilityWidget() {
         docElement.style.filter = filters.join(' ');
     }
 
+    /**
+     * Apply the visual styling for the reading guide cursor helper.
+     * @param {HTMLElement} cursorElement
+     */
+    function applyGuideCursorStyles(cursorElement) {
+        if (!cursorElement) {
+            return;
+        }
+        cursorElement.style.width = '40vw';
+        cursorElement.style.minWidth = '200px';
+        cursorElement.style.height = '12px';
+        cursorElement.style.boxSizing = 'border-box';
+        cursorElement.style.background = '#000';
+        cursorElement.style.border = '3px solid #fff300';
+        cursorElement.style.borderRadius = '5px';
+    }
+
+    /**
+     * Remove reading guide specific inline styles so other cursor modes render cleanly.
+     * @param {HTMLElement} cursorElement
+     */
+    function clearGuideCursorStyles(cursorElement) {
+        if (!cursorElement) {
+            return;
+        }
+        cursorElement.style.minWidth = '';
+        cursorElement.style.boxSizing = '';
+        cursorElement.style.background = '';
+        cursorElement.style.border = '';
+        cursorElement.style.borderRadius = '';
+    }
+
     function setControlActiveState(element, isActive) {
         if (!element) {
             return;
@@ -4440,11 +4476,14 @@ function initialiseAccessibilityWidget() {
 
         if (triangle) {
             triangle.style.display = 'none';
+            triangle.style.borderBottomWidth = '';
+            triangle.style.borderBottomColor = '';
         }
 
         docElement.style.cursor = '';
         docElement.classList.remove('stiac-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+        clearGuideCursorStyles(cursor);
 
         if (cursorClickCount === 0) {
             cursor.classList.add('stiac-cursor-0');
@@ -4464,10 +4503,11 @@ function initialiseAccessibilityWidget() {
             cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-3');
             cursor.classList.add('stiac-cursor-2');
             docElement.style.cursor = 'none';
-            cursor.style.width = '25vw';
-            cursor.style.height = '8px';
+            applyGuideCursorStyles(cursor);
             if (triangle) {
                 triangle.style.display = 'block';
+                triangle.style.borderBottomColor = '#fff300';
+                triangle.style.borderBottomWidth = '12px';
             }
             cursorClickCount = 3;
             progressIndex = 2;
@@ -4504,16 +4544,16 @@ function initialiseAccessibilityWidget() {
             cursor.style.left = 0;
         } else if (cursor.classList.contains('stiac-cursor-2')) {
             cursor.style.top = e.clientY + 'px';
-            if (e.clientX < window.innerWidth / 8) {
-                cursor.style.left = window.innerWidth / 8 + 'px';
-            } else if (e.clientX > window.innerWidth - window.innerWidth / 8) {
-                cursor.style.left = window.innerWidth - window.innerWidth / 8 + 'px';
-            } else {
-                cursor.style.left = e.clientX + 'px';
-            }
+            const halfWidth = Math.max(cursor.offsetWidth / 2, 0);
+            const minX = halfWidth;
+            const maxX = Math.max(window.innerWidth - halfWidth, minX);
+            const clampedX = Math.min(Math.max(e.clientX, minX), maxX);
+            cursor.style.left = clampedX + 'px';
             const triangle = document.getElementById('triangle-cursor');
-            triangle.style.top = e.clientY + 'px';
-            triangle.style.left = e.clientX + 'px';
+            if (triangle) {
+                triangle.style.top = e.clientY + 'px';
+                triangle.style.left = e.clientX + 'px';
+            }
         }
     });
 
@@ -4561,12 +4601,15 @@ function initialiseAccessibilityWidget() {
             cursorElement.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
             cursorElement.style.width = '';
             cursorElement.style.height = '';
+            clearGuideCursorStyles(cursorElement);
         }
         docElement.style.cursor = '';
         docElement.classList.remove('stiac-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
         if (triangle) {
             triangle.style.display = 'none';
+            triangle.style.borderBottomWidth = '';
+            triangle.style.borderBottomColor = '';
         }
 
         saturationClickCount = 0;
@@ -4695,6 +4738,7 @@ function initialiseAccessibilityWidget() {
 
         docElement.classList.remove('stiac-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+        clearGuideCursorStyles(cursor);
 
         if (settings.cursor === 'focus') {
             cursor.style.width = '50px';
@@ -4705,8 +4749,7 @@ function initialiseAccessibilityWidget() {
             cursor.style.height = '15vh';
             docElement.style.cursor = '';
         } else if (settings.cursor === 'guide') {
-            cursor.style.width = '25vw';
-            cursor.style.height = '8px';
+            applyGuideCursorStyles(cursor);
             docElement.style.cursor = 'none';
         } else if (settings.cursor === 'large') {
             cursor.style.width = '';
@@ -4721,7 +4764,15 @@ function initialiseAccessibilityWidget() {
         }
         const triangle = document.getElementById('triangle-cursor');
         if (triangle) {
-            triangle.style.display = settings.cursor === 'guide' ? 'block' : 'none';
+            if (settings.cursor === 'guide') {
+                triangle.style.display = 'block';
+                triangle.style.borderBottomColor = '#fff300';
+                triangle.style.borderBottomWidth = '12px';
+            } else {
+                triangle.style.display = 'none';
+                triangle.style.borderBottomWidth = '';
+                triangle.style.borderBottomColor = '';
+            }
         }
 
         positionClasses.forEach(positionClass => {
@@ -4890,6 +4941,7 @@ function initialiseAccessibilityWidget() {
 
         const cursorItem = document.querySelector('#change-cursor');
         const triangle = document.getElementById('triangle-cursor');
+        clearGuideCursorStyles(cursor);
         if (cursor.classList.contains('stiac-cursor-0')) {
             cursorClickCount = 1;
             cursor.style.width = '50px';
@@ -4899,6 +4951,8 @@ function initialiseAccessibilityWidget() {
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
+                triangle.style.borderBottomWidth = '';
+                triangle.style.borderBottomColor = '';
             }
             updateProgress(cursorItem, 0);
             setControlActiveState(cursorItem, true);
@@ -4911,18 +4965,21 @@ function initialiseAccessibilityWidget() {
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
+                triangle.style.borderBottomWidth = '';
+                triangle.style.borderBottomColor = '';
             }
             updateProgress(cursorItem, 1);
             setControlActiveState(cursorItem, true);
         } else if (cursor.classList.contains('stiac-cursor-2')) {
             cursorClickCount = 3;
-            cursor.style.width = '25vw';
-            cursor.style.height = '8px';
+            applyGuideCursorStyles(cursor);
             docElement.style.cursor = 'none';
             docElement.classList.remove('stiac-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'block';
+                triangle.style.borderBottomColor = '#fff300';
+                triangle.style.borderBottomWidth = '12px';
             }
             updateProgress(cursorItem, 2);
             setControlActiveState(cursorItem, true);
@@ -4935,6 +4992,8 @@ function initialiseAccessibilityWidget() {
             docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
             if (triangle) {
                 triangle.style.display = 'none';
+                triangle.style.borderBottomWidth = '';
+                triangle.style.borderBottomColor = '';
             }
             updateProgress(cursorItem, 3);
             setControlActiveState(cursorItem, true);
@@ -4947,6 +5006,8 @@ function initialiseAccessibilityWidget() {
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
+                triangle.style.borderBottomWidth = '';
+                triangle.style.borderBottomColor = '';
             }
             updateProgress(cursorItem, -1);
             setControlActiveState(cursorItem, false);

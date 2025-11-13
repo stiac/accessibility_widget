@@ -1,4 +1,18 @@
 # Changelog
+# [1.9.2] - 2026-01-10
+
+### Added
+- None.
+
+### Changed
+- Enlarged the reading guide cursor with a black and yellow palette so the highlight bar is easier to spot across wide layouts.
+
+### Fixed
+- Marked the Line Height helpers as `!important` to ensure the spacing adjustments remain active alongside site-specific CSS.
+
+### Removed
+- None.
+
 # [1.9.1] - 2026-01-09
 
 ### Added

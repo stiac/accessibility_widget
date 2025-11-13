@@ -8,10 +8,15 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.9.1`
+- **Current Version:** `1.9.2`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
 All bundled Tailwind utilities and runtime state classes ship with the `stiac-` prefix so the widget can coexist with host stylesheets without unexpected overrides.
+
+## What's New in 1.9.2
+
+- Expanded the reading guide cursor with a 40vw high-contrast bar so visitors get a thicker, easier-to-track highlight line.
+- Forced line-height helpers to override host styles, letting the spacing options coexist with complex site typography.
 
 ## What's New in 1.9.1
 
