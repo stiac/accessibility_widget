@@ -1,17 +1,18 @@
 # Changelog
-# [1.10.0] - 2026-01-09
+# [1.9.1] - 2026-01-09
 
 ### Added
-- Delivered an extra-large pointer option within the Change Cursor tool so visitors who need oversized pointers that exceed WCAG 2.2 and EN 301 549 guidance can activate it without leaving the widget.
+- None.
 
 ### Changed
-- Extended the Change Cursor progress indicator to five steps and bumped the persisted settings schema to version 6 so existing users can seamlessly adopt the new pointer cycle.
+- Replaced the large pointer cursor asset with the client-provided WCAG 2.2 compliant SVG so the enlarged cursor matches the expected arrow artwork.
 
 ### Fixed
-- None.
+- Added the missing fourth progress indicator slot to the Change Cursor control so the large pointer state now visibly activates.
+- Realigned the Links Highlight progress tracker with the available underline styles to remove the inactive indicator segment.
 
 ### Removed
-- None.
+- Retired the unused third Links Highlight style to keep the control and its progress bar in sync.
 
 # [1.9.0] - 2026-01-08
 
