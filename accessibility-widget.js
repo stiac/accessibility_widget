@@ -3441,6 +3441,8 @@ function initialiseAccessibilityWidget() {
     }
 
     function resumeVideoTargets() {
+        const reduceMotionActive = docElement.classList.contains('stiac-reduce-motion');
+
         hideVideoPausedMedia.forEach((metadata, element) => {
             if (!metadata) {
                 return;
@@ -3462,7 +3464,7 @@ function initialiseAccessibilityWidget() {
                 element.removeAttribute('muted');
             }
 
-            if (metadata.wasPlaying && typeof element.play === 'function') {
+            if (metadata.wasPlaying && !reduceMotionActive && typeof element.play === 'function') {
                 try {
                     const playResult = element.play();
                     if (playResult && typeof playResult.catch === 'function') {
