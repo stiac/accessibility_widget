@@ -34,6 +34,7 @@ const accessibilityMenuStyles = `
       --a11y-stiac-control-active-bg-color: #036cff;
       --a11y-stiac-control-active-text-color: #ffffff;
       --a11y-stiac-large-cursor-url: auto;
+      --a11y-stiac-extra-large-cursor-url: auto;
       --border_radius: 24px;
       --a11y-stiac-font-scale: 1;
       --a11y-stiac-open-radius: 24px;
@@ -109,6 +110,12 @@ const accessibilityMenuStyles = `
     html.stiac-large-cursor body,
     html.stiac-large-cursor body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       cursor: var(--a11y-stiac-large-cursor-url, auto) !important;
+    }
+
+    html.stiac-extra-large-cursor,
+    html.stiac-extra-large-cursor body,
+    html.stiac-extra-large-cursor body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+      cursor: var(--a11y-stiac-extra-large-cursor-url, auto) !important;
     }
 
     /* Classic screen-reader only helper */
@@ -667,6 +674,10 @@ const accessibilityMenuStyles = `
       display: none;
     }
 
+    #cursor.stiac-cursor-4 {
+      display: none;
+    }
+
     #triangle-cursor {
       width: 0;
       height: 0;
@@ -685,6 +696,7 @@ const accessibilityMenuStyles = `
 `;
 
 const LARGE_CURSOR_DATA_URL = 'url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2064%2064%27%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%2728%27%20fill%3D%27%23ffffff%27%20stroke%3D%27%23036cff%27%20stroke-width%3D%276%27/%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%276%27%20fill%3D%27%23036cff%27/%3E%3C/svg%3E") 32 32, auto';
+const EXTRA_LARGE_CURSOR_DATA_URL = 'url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2796%27%20height%3D%2796%27%20viewBox%3D%270%200%2096%2096%27%3E%3Ccircle%20cx%3D%2748%27%20cy%3D%2748%27%20r%3D%2742%27%20fill%3D%27%23ffffff%27%20stroke%3D%27%23036cff%27%20stroke-width%3D%278%27/%3E%3Ccircle%20cx%3D%2748%27%20cy%3D%2748%27%20r%3D%2710%27%20fill%3D%27%23036cff%27/%3E%3C/svg%3E") 48 48, auto';
 // Template block for the optional position controls. Having a dedicated
 // constant keeps the main widget layout readable and allows runtime toggling.
 const changePositionsControlsHTML = `
@@ -921,6 +933,8 @@ const accessibilityMenuHTML = `
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-4 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-5 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
@@ -4458,25 +4472,26 @@ function initialiseAccessibilityWidget() {
         }
 
         docElement.style.cursor = '';
-        docElement.classList.remove('stiac-large-cursor');
+        docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+        docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
 
         if (cursorClickCount === 0) {
             cursor.classList.add('stiac-cursor-0');
-            cursor.classList.remove('stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
+            cursor.classList.remove('stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3', 'stiac-cursor-4');
             cursor.style.width = '50px';
             cursor.style.height = '50px';
             cursorClickCount = 1;
             progressIndex = 0;
         } else if (cursorClickCount === 1) {
-            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-2', 'stiac-cursor-3');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-2', 'stiac-cursor-3', 'stiac-cursor-4');
             cursor.classList.add('stiac-cursor-1');
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
             cursorClickCount = 2;
             progressIndex = 1;
         } else if (cursorClickCount === 2) {
-            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-3');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-3', 'stiac-cursor-4');
             cursor.classList.add('stiac-cursor-2');
             docElement.style.cursor = 'none';
             cursor.style.width = '25vw';
@@ -4487,7 +4502,7 @@ function initialiseAccessibilityWidget() {
             cursorClickCount = 3;
             progressIndex = 2;
         } else if (cursorClickCount === 3) {
-            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-4');
             cursor.classList.add('stiac-cursor-3');
             cursor.style.width = '';
             cursor.style.height = '';
@@ -4495,8 +4510,17 @@ function initialiseAccessibilityWidget() {
             docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
             cursorClickCount = 4;
             progressIndex = 3;
-        } else {
+        } else if (cursorClickCount === 4) {
             cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
+            cursor.classList.add('stiac-cursor-4');
+            cursor.style.width = '';
+            cursor.style.height = '';
+            docElement.classList.add('stiac-extra-large-cursor');
+            docElement.style.setProperty('--a11y-stiac-extra-large-cursor-url', EXTRA_LARGE_CURSOR_DATA_URL);
+            cursorClickCount = 5;
+            progressIndex = 4;
+        } else {
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3', 'stiac-cursor-4');
             cursor.style.width = '';
             cursor.style.height = '';
             cursorClickCount = 0;
@@ -4573,13 +4597,14 @@ function initialiseAccessibilityWidget() {
         }
 
         if (cursorElement) {
-            cursorElement.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
+            cursorElement.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3', 'stiac-cursor-4');
             cursorElement.style.width = '';
             cursorElement.style.height = '';
         }
         docElement.style.cursor = '';
-        docElement.classList.remove('stiac-large-cursor');
+        docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+        docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
         if (triangle) {
             triangle.style.display = 'none';
         }
@@ -4599,7 +4624,7 @@ function initialiseAccessibilityWidget() {
     //save the user's settings in local storage
     function saveSettings() {
         const settings = {
-            version: 5,
+            version: 6,
             filters: {
                 invert: filterState.invert,
                 grayscale: filterState.grayscale,
@@ -4615,15 +4640,17 @@ function initialiseAccessibilityWidget() {
             hideImages: docElement.classList.contains('stiac-hide-images'),
             hideVideo: docElement.classList.contains('stiac-hide-video'),
             reduceMotion: docElement.classList.contains('stiac-reduce-motion'),
-            cursor: cursor.classList.contains('stiac-cursor-3') || docElement.classList.contains('stiac-large-cursor')
-                ? 'large'
-                : cursor.classList.contains('stiac-cursor-2')
-                    ? 'guide'
-                    : cursor.classList.contains('stiac-cursor-1')
-                        ? 'mask'
-                        : cursor.classList.contains('stiac-cursor-0')
-                            ? 'focus'
-                            : 'default',
+            cursor: cursor.classList.contains('stiac-cursor-4') || docElement.classList.contains('stiac-extra-large-cursor')
+                ? 'extra-large'
+                : cursor.classList.contains('stiac-cursor-3') || docElement.classList.contains('stiac-large-cursor')
+                    ? 'large'
+                    : cursor.classList.contains('stiac-cursor-2')
+                        ? 'guide'
+                        : cursor.classList.contains('stiac-cursor-1')
+                            ? 'mask'
+                            : cursor.classList.contains('stiac-cursor-0')
+                                ? 'focus'
+                                : 'default',
             position: getCurrentPosition()
         };
 
@@ -4639,7 +4666,7 @@ function initialiseAccessibilityWidget() {
             return null;
         }
         return {
-            version: 5,
+            version: 6,
             filters: {
                 invert: Boolean(legacy.invertColors),
                 grayscale: Boolean(legacy.grayscale),
@@ -4701,9 +4728,11 @@ function initialiseAccessibilityWidget() {
         cursor.classList.toggle('stiac-cursor-1', settings.cursor === 'mask');
         cursor.classList.toggle('stiac-cursor-2', settings.cursor === 'guide');
         cursor.classList.toggle('stiac-cursor-3', settings.cursor === 'large');
+        cursor.classList.toggle('stiac-cursor-4', settings.cursor === 'extra-large');
 
-        docElement.classList.remove('stiac-large-cursor');
+        docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+        docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
 
         if (settings.cursor === 'focus') {
             cursor.style.width = '50px';
@@ -4723,6 +4752,12 @@ function initialiseAccessibilityWidget() {
             docElement.style.cursor = '';
             docElement.classList.add('stiac-large-cursor');
             docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
+        } else if (settings.cursor === 'extra-large') {
+            cursor.style.width = '';
+            cursor.style.height = '';
+            docElement.style.cursor = '';
+            docElement.classList.add('stiac-extra-large-cursor');
+            docElement.style.setProperty('--a11y-stiac-extra-large-cursor-url', EXTRA_LARGE_CURSOR_DATA_URL);
         } else {
             cursor.style.width = '';
             cursor.style.height = '';
@@ -4905,8 +4940,9 @@ function initialiseAccessibilityWidget() {
             cursor.style.width = '50px';
             cursor.style.height = '50px';
             docElement.style.cursor = '';
-            docElement.classList.remove('stiac-large-cursor');
+            docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+            docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
             }
@@ -4917,8 +4953,9 @@ function initialiseAccessibilityWidget() {
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
             docElement.style.cursor = '';
-            docElement.classList.remove('stiac-large-cursor');
+            docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+            docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
             }
@@ -4929,8 +4966,9 @@ function initialiseAccessibilityWidget() {
             cursor.style.width = '25vw';
             cursor.style.height = '8px';
             docElement.style.cursor = 'none';
-            docElement.classList.remove('stiac-large-cursor');
+            docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+            docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'block';
             }
@@ -4948,13 +4986,26 @@ function initialiseAccessibilityWidget() {
             }
             updateProgress(cursorItem, 3);
             setControlActiveState(cursorItem, true);
+        } else if (cursor.classList.contains('stiac-cursor-4') || docElement.classList.contains('stiac-extra-large-cursor')) {
+            cursorClickCount = 5;
+            cursor.style.width = '';
+            cursor.style.height = '';
+            docElement.style.cursor = '';
+            docElement.classList.add('stiac-extra-large-cursor');
+            docElement.style.setProperty('--a11y-stiac-extra-large-cursor-url', EXTRA_LARGE_CURSOR_DATA_URL);
+            if (triangle) {
+                triangle.style.display = 'none';
+            }
+            updateProgress(cursorItem, 4);
+            setControlActiveState(cursorItem, true);
         } else {
             cursorClickCount = 0;
             cursor.style.width = '';
             cursor.style.height = '';
             docElement.style.cursor = '';
-            docElement.classList.remove('stiac-large-cursor');
+            docElement.classList.remove('stiac-large-cursor', 'stiac-extra-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+            docElement.style.removeProperty('--a11y-stiac-extra-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
             }

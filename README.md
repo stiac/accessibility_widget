@@ -8,10 +8,15 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.9.0`
+- **Current Version:** `1.10.0`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
 All bundled Tailwind utilities and runtime state classes ship with the `stiac-` prefix so the widget can coexist with host stylesheets without unexpected overrides.
+
+## What's New in 1.10.0
+
+- Expanded the Change Cursor control with an **Extra-Large Pointer** option that enlarges the pointer graphic beyond the 32 × 32 px WCAG 2.2 and EN 301 549 visibility baseline while retaining the existing focus, mask, guide, and large cursor helpers.
+- Bumped the local storage schema to version 6 so previously saved preferences cleanly adopt the new pointer mode without manual resets.
 
 ## What's New in 1.9.0
 
@@ -79,8 +84,7 @@ eir own Tailwind build.
 - **Hide Images**: Hides all images on the page to improve readability for users with visual impairments.
 - **Hide Videos**: Hides native video tags, common iframe players, and plugin embeds (with an opt-out via `data-a11y-stiac-preserve-video`) to reduce motion for users who prefer a still experience.
 - **Reduce Motion**: Disables CSS animations and smooth scrolling while pausing autoplaying media and marquees to eliminate blinking or flashing movement on demand (use `data-a11y-stiac-preserve-motion` to opt specific widgets out).
-- **Cursor Modes**: Cycle between a focus ring, reading mask, reading guide, and the new large high-contrast pointer to support
-  different tracking and visibility needs.
+- **Cursor Modes**: Cycle between a focus ring, reading mask, reading guide, a large high-contrast pointer, and an extra-large pointer that magnifies the click target for WCAG 2.2 / EN 301 549 compliance.
 - **Reset**: Resets all accessibility settings to their default values.
 - **Close**: Closes the accessibility menu.
 - **Change Position**: Optionally expose footer controls (via `data-enable-position-controls="true"`) so end users can dock the widget to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` without editing code.
