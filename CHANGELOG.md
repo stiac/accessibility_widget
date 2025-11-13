@@ -1,4 +1,18 @@
 # Changelog
+# [1.8.2] - 2026-01-07
+
+### Added
+- None.
+
+### Changed
+- Rebuilt the inline widget stylesheet around shared layout tokens so spacing, border radii, and scroll handling stay consistent regardless of the launcher position.
+
+### Fixed
+- Corrected panel misalignment by reorganising the CSS structure, ensuring the close launcher, header banner, and control grid remain visually aligned across every docking mode.
+
+### Removed
+- None.
+
 # [1.8.1] - 2026-01-06
 
 ### Added

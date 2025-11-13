@@ -19,6 +19,10 @@ const DEFAULT_OPEN_DYSLEXIC_STYLESHEET = 'open-dyslexic.css';
 let openDyslexicStylesheetPromise = null;
 
 const accessibilityMenuStyles = `
+    /*
+     * Layout tokens centralised in CSS custom properties so spacing, animation,
+     * and palette rules stay perfectly aligned for every docking configuration.
+     */
     :root {
       --a11y-stiac-color-1: #036cff;
       --a11y-stiac-color-2: #f8fafc;
@@ -31,12 +35,24 @@ const accessibilityMenuStyles = `
       --a11y-stiac-control-active-text-color: #ffffff;
       --border_radius: 24px;
       --a11y-stiac-font-scale: 1;
+      --a11y-stiac-open-radius: 24px;
+      --a11y-stiac-closed-radius: 9999px;
+      --a11y-stiac-launcher-shadow: 0 22px 36px -18px rgba(15, 23, 42, 0.55);
+      --a11y-stiac-panel-width: calc(100% - 2rem);
+      --a11y-stiac-panel-max-width: 26rem;
+      --a11y-stiac-panel-max-height: 90vh;
+      --a11y-stiac-panel-gap: 1.5rem;
+      --a11y-stiac-panel-padding-x: 0;
+      --a11y-stiac-panel-padding-y: 0;
+      --a11y-stiac-launcher-offset-y: 8px;
+      --a11y-stiac-launcher-scale: 0.94;
+      --a11y-stiac-translate-x: 0;
+      --a11y-stiac-transform-origin: top right;
     }
 
     /*
-     * A dyslexia-friendly font stack is toggled via a lightweight stylesheet
-     * that loads on demand when the control is activated. The widget keeps
-     * its own typography intact so only host page content inherits the face.
+     * Font scale and dyslexia-friendly helpers override host typography without
+     * disturbing the widget itself so controls remain readable at any zoom level.
      */
     html[data-a11y-stiac-font-scale-active] {
       font-size: var(--a11y-stiac-root-font-size, 100%) !important;
@@ -46,24 +62,14 @@ const accessibilityMenuStyles = `
       font-size: var(--a11y-stiac-body-font-size, inherit) !important;
     }
 
-    /*
-     * Apply dyslexia-supportive font stack across the host page when the
-     * dedicated control is active while leaving the widget typography
-     * untouched for consistent UI rendering.
-     */
     html[data-a11y-stiac-dyslexia-font] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       font-family: "OpenDyslexic", "OpenDyslexic3", "Atkinson Hyperlegible", "Lexend Deca", "Lexend", "Arial", "Verdana", sans-serif !important;
       letter-spacing: 0.02em;
     }
 
     /*
-     * Tailwind's preflight sets inline media elements (audio, canvas, embed,
-     * iframe, img, object, svg, video) to display: block. When we lazily load
-     * the CDN build for hosts that do not already use Tailwind, that reset can
-     * unexpectedly force inline media to break layouts on the surrounding
-     * site. Mark the document when we inject our fallback Tailwind build and
-     * restore the browser defaults for inline media while keeping the widget's
-     * icons block-level for sizing consistency.
+     * Revert Tailwind's block-level media reset when we inject the fallback build
+     * so host layouts keep their inline rendering while widget icons stay aligned.
      */
     html[data-a11y-stiac-tailwind-fallback] audio,
     html[data-a11y-stiac-tailwind-fallback] canvas,
@@ -82,12 +88,6 @@ const accessibilityMenuStyles = `
       vertical-align: middle;
     }
 
-    /*
-     * Text alignment helpers to comply with WCAG 2.1 Level A and the
-     * European Accessibility Act. Users can align textual content according
-     * to their reading preference without author styles fighting the choice.
-     * The modal is excluded so that the control affects the host page only.
-     */
     html[data-a11y-stiac-text-align="start"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       text-align: start !important;
     }
@@ -104,6 +104,7 @@ const accessibilityMenuStyles = `
       text-align: justify !important;
     }
 
+    /* Classic screen-reader only helper */
     .a11y-stiac-sr-only {
       position: absolute;
       width: 1px;
@@ -116,31 +117,23 @@ const accessibilityMenuStyles = `
       border: 0;
     }
 
+    /*
+     * Normalise typography transitions inside the widget so host-level font tweaks
+     * never disturb the control layout while we animate between states.
+     */
     #accessibility-modal,
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: inherit;
       line-height: 1.25;
       letter-spacing: 0;
       user-select: none;
     }
 
-    #accessibility-modal {
-      font-size: var(--a11y-stiac-modal-font-size, calc(1rem / var(--a11y-stiac-font-scale, 1)));
-    }
-
     #accessibility-modal * {
       font-size: inherit;
     }
 
-    /*
-     * Neutralise Tailwind typography utilities inside the accessibility modal when the
-     * Font Size control scales the host page. These utilities rely on rem units which
-     * follow the root font size, so we provide fixed pixel fallbacks based on the
-     * widget's baseline measurements and counter-scale them with the active font factor
-     * to keep the UI stable regardless of the applied zoom level.
-     */
     #accessibility-modal .text-xs {
       font-size: var(--a11y-stiac-modal-text-xs, calc(0.75rem / var(--a11y-stiac-font-scale, 1)));
     }
@@ -161,22 +154,34 @@ const accessibilityMenuStyles = `
       font-size: var(--a11y-stiac-modal-text-11, calc(11px / var(--a11y-stiac-font-scale, 1)));
     }
 
+    /*
+     * Primary panel layout: centralises width, backdrop, and animation handling so
+     * each docking helper only needs to adjust transforms and alignment.
+     */
     #accessibility-modal {
+      font-size: var(--a11y-stiac-modal-font-size, calc(1rem / var(--a11y-stiac-font-scale, 1)));
       position: fixed;
       top: 1.5rem;
       right: 1rem;
-      max-width: 26rem;
-      width: calc(100% - 2rem);
-      max-height: 90vh;
+      left: auto;
+      bottom: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: var(--a11y-stiac-panel-gap);
+      width: var(--a11y-stiac-panel-width);
+      max-width: var(--a11y-stiac-panel-max-width);
+      max-height: var(--a11y-stiac-panel-max-height);
+      padding: var(--a11y-stiac-panel-padding-y) var(--a11y-stiac-panel-padding-x);
       z-index: 99999999;
       text-align: left;
-      --a11y-stiac-translate-x: 0;
-      --a11y-stiac-transform-origin: top right;
-      --a11y-stiac-open-radius: 24px;
-      --a11y-stiac-closed-radius: 9999px;
-      --a11y-stiac-launcher-shadow: 0 22px 36px -18px rgba(15, 23, 42, 0.55);
       transform-origin: var(--a11y-stiac-transform-origin);
       border-radius: var(--a11y-stiac-open-radius);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--a11y-stiac-text-color);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--a11y-stiac-launcher-shadow);
       transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1), width 0.35s ease, height 0.35s ease, opacity 0.35s ease, box-shadow 0.35s ease;
       opacity: 0;
       transform: translate3d(var(--a11y-stiac-translate-x), 16px, 0) scale(0.96);
@@ -188,10 +193,6 @@ const accessibilityMenuStyles = `
       transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
     }
 
-    /*
-     * Animate the modal with a gentle overshoot so the expansion from the
-     * launcher bubble feels responsive without being jarring.
-     */
     #accessibility-modal.stiac-is-ready:not(.stiac-close) {
       animation: a11y-stiac-modal-open 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
       animation-fill-mode: both;
@@ -203,7 +204,7 @@ const accessibilityMenuStyles = `
         transform: translate3d(var(--a11y-stiac-translate-x), 22px, 0) scale(0.9);
         filter: saturate(92%) blur(8px);
         border-radius: var(--a11y-stiac-closed-radius);
-        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        box-shadow: var(--a11y-stiac-launcher-shadow);
       }
       55% {
         opacity: 1;
@@ -216,7 +217,7 @@ const accessibilityMenuStyles = `
         transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
         filter: saturate(100%) blur(0);
         border-radius: var(--a11y-stiac-open-radius);
-        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        box-shadow: var(--a11y-stiac-launcher-shadow);
       }
     }
 
@@ -230,13 +231,13 @@ const accessibilityMenuStyles = `
         opacity: 1;
         transform: translate3d(var(--a11y-stiac-translate-x), 0, 0) scale(1);
         border-radius: var(--a11y-stiac-open-radius);
-        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        box-shadow: var(--a11y-stiac-launcher-shadow);
       }
       100% {
         opacity: 1;
-        transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
+        transform: translate3d(var(--a11y-stiac-translate-x), var(--a11y-stiac-launcher-offset-y), 0) scale(var(--a11y-stiac-launcher-scale));
         border-radius: var(--a11y-stiac-closed-radius);
-        box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+        box-shadow: var(--a11y-stiac-launcher-shadow);
       }
     }
 
@@ -245,6 +246,7 @@ const accessibilityMenuStyles = `
       height: 1.75rem;
     }
 
+    /* Compact launcher bubble state */
     #accessibility-modal.stiac-close {
       width: 3.75rem;
       height: 3.75rem;
@@ -253,13 +255,9 @@ const accessibilityMenuStyles = `
       border-radius: var(--a11y-stiac-closed-radius);
       overflow: hidden;
       opacity: 1;
-      transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
+      transform: translate3d(var(--a11y-stiac-translate-x), var(--a11y-stiac-launcher-offset-y), 0) scale(var(--a11y-stiac-launcher-scale));
       filter: saturate(100%) blur(0);
-      box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
-    }
-
-    #accessibility-modal.stiac-is-ready.stiac-close {
-      transform: translate3d(var(--a11y-stiac-translate-x), 8px, 0) scale(0.94);
+      box-shadow: var(--a11y-stiac-launcher-shadow);
     }
 
     #accessibility-modal.stiac-close #headerContent,
@@ -276,7 +274,7 @@ const accessibilityMenuStyles = `
       height: 2.75rem;
       border-radius: 9999px;
       margin: 0;
-      box-shadow: var(--a11y-stiac-launcher-shadow, 0 22px 36px -18px rgba(15, 23, 42, 0.55));
+      box-shadow: var(--a11y-stiac-launcher-shadow);
     }
 
     #accessibility-modal.stiac-close #closeBtn svg {
@@ -285,7 +283,7 @@ const accessibilityMenuStyles = `
     }
 
     #accessibility-modal:not(.stiac-close) {
-      border-radius: 24px;
+      border-radius: var(--a11y-stiac-open-radius);
     }
 
     #accessibility-modal:not(.stiac-close) #closeBtn {
@@ -344,9 +342,9 @@ const accessibilityMenuStyles = `
       --a11y-stiac-transform-origin: bottom right;
     }
 
+    /* Scrollbar styling keeps the grid aligned with the navigation column */
     #accessibility-modal #accessibility-tools {
       scrollbar-width: thin;
-      /* Keep the tools grid visually centred beside the navigation column. */
       padding-right: 0.9rem;
     }
 
@@ -359,11 +357,21 @@ const accessibilityMenuStyles = `
       border-radius: 9999px;
     }
 
+    /* Interactive card styling */
+    .a11y-stiac-item {
+      height: 100%;
+    }
+
     .a11y-stiac-item:hover .a11y-stiac-child {
       transform: translateY(-2px);
     }
 
     .a11y-stiac-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
       border: 1px solid rgba(15, 23, 42, 0.1);
       background: var(--a11y-stiac-color-2);
       border-radius: 20px;
@@ -415,6 +423,7 @@ const accessibilityMenuStyles = `
       box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.65);
     }
 
+    /* Palette bindings for configurable sections */
     #headerContent {
       background: var(--a11y-stiac-header-bg-color) !important;
       color: var(--a11y-stiac-header-text-color) !important;
@@ -505,8 +514,8 @@ const accessibilityMenuStyles = `
 
     .stiac-underline-style-1 a {
       text-decoration: none;
-      background: #FFD740 !important;
-      color: #005A9C !important;
+      background: #ffd740 !important;
+      color: #005a9c !important;
       font-weight: bolder;
     }
 
@@ -517,6 +526,7 @@ const accessibilityMenuStyles = `
       font-weight: bolder;
     }
 
+    /* Media suppression helpers */
     .stiac-hide-images :where(img, picture, svg, canvas, [role="img"], object[type^="image"], embed[type^="image"]) {
       display: none !important;
     }
@@ -559,11 +569,7 @@ const accessibilityMenuStyles = `
       display: initial !important;
     }
 
-    /*
-     * Reduce Motion applies a WCAG 2.1 Level A friendly blanket to the host page by
-     * pausing CSS driven transitions/animations, disabling smooth scrolling, and
-     * allowing the widget itself to continue operating normally.
-     */
+    /* Honour reduced motion preferences for every animation in the bundle */
     @media (prefers-reduced-motion: reduce) {
       #accessibility-modal {
         transition-duration: 0.001ms !important;
@@ -610,6 +616,7 @@ const accessibilityMenuStyles = `
       line-height: 2;
     }
 
+    /* Cursor overlays for focus helpers */
     #cursor {
       position: fixed;
       z-index: 999999999;
@@ -621,7 +628,7 @@ const accessibilityMenuStyles = `
     #cursor.stiac-cursor-0 {
       width: 50px;
       height: auto;
-      aspect-ratio: 1/1;
+      aspect-ratio: 1 / 1;
       background: rgba(255, 0, 0, 0.5);
       border: 2px solid var(--a11y-stiac-color-2);
       box-shadow: 0 0 20px 0 var(--a11y-stiac-color-2);
