@@ -125,13 +125,8 @@ const accessibilityMenuStyles = `
     #accessibility-modal * {
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, transform 0.3s ease;
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.25;
       letter-spacing: 0;
       user-select: none;
-    }
-
-    #accessibility-modal * {
-      font-size: inherit;
     }
 
     #accessibility-modal .text-xs {
