@@ -1,4 +1,34 @@
 # Changelog
+# [1.9.1] - 2026-01-09
+
+### Added
+- None.
+
+### Changed
+- Replaced the large pointer cursor asset with the client-provided WCAG 2.2 compliant SVG so the enlarged cursor matches the expected arrow artwork.
+
+### Fixed
+- Added the missing fourth progress indicator slot to the Change Cursor control so the large pointer state now visibly activates.
+- Realigned the Links Highlight progress tracker with the available underline styles to remove the inactive indicator segment.
+
+### Removed
+- Retired the unused third Links Highlight style to keep the control and its progress bar in sync.
+
+# [1.9.0] - 2026-01-08
+
+### Added
+- Introduced a WCAG 2.2 compliant large pointer mode to the Change Cursor control so visitors can pick a high-visibility cursor option in addition to the existing focus, mask, and guide helpers.
+
+### Changed
+- Bumped the persisted settings schema to version 5 and expanded the cursor cycle to include the new pointer mode.
+
+### Fixed
+- Restored the active card styling and progress indicator colours by synchronising the `.active` state with runtime toggles.
+- Updated the Hide Video control to pause and mute HTML media elements so hidden clips no longer continue playing audio in the background.
+
+### Removed
+- None.
+
 # [1.8.2] - 2026-01-07
 
 ### Added
