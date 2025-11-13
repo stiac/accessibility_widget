@@ -8,10 +8,19 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.8.2`
+- **Current Version:** `1.9.0`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
 All bundled Tailwind utilities and runtime state classes ship with the `stiac-` prefix so the widget can coexist with host stylesheets without unexpected overrides.
+
+## What's New in 1.9.0
+
+- Added a WCAG 2.2 and EN 301 549 aligned "Large Pointer" option to the Change Cursor tool so visitors can quickly switch to a
+  high-visibility pointer alongside the existing focus, mask, and guide helpers.
+- Restored the active card styling and progress indicator colours so buttons clearly reflect their on/off state across the enti
+  re widget.
+- Ensured Hide Video pauses and silences active `<video>` and `<audio>` elements so background audio stops as soon as the contro
+  l is enabled.
 
 ## What's New in 1.8.2
 
@@ -70,9 +79,8 @@ eir own Tailwind build.
 - **Hide Images**: Hides all images on the page to improve readability for users with visual impairments.
 - **Hide Videos**: Hides native video tags, common iframe players, and plugin embeds (with an opt-out via `data-a11y-stiac-preserve-video`) to reduce motion for users who prefer a still experience.
 - **Reduce Motion**: Disables CSS animations and smooth scrolling while pausing autoplaying media and marquees to eliminate blinking or flashing movement on demand (use `data-a11y-stiac-preserve-motion` to opt specific widgets out).
-- **Big Circle Cursor**: Changes the cursor to a big circle to improve visibility for users with visual impairments.
-- **Reading Mask**: Highlights the current line of text being read to improve focus for users with visual impairments.
-- **Reading Guide**: Makes it easier to read long lines of text by Long Highlight Cursor.
+- **Cursor Modes**: Cycle between a focus ring, reading mask, reading guide, and the new large high-contrast pointer to support
+  different tracking and visibility needs.
 - **Reset**: Resets all accessibility settings to their default values.
 - **Close**: Closes the accessibility menu.
 - **Change Position**: Optionally expose footer controls (via `data-enable-position-controls="true"`) so end users can dock the widget to `left`, `right`, `top`, `bottom`, `bottom-left`, or `bottom-right` without editing code.

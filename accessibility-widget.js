@@ -33,6 +33,7 @@ const accessibilityMenuStyles = `
       --a11y-stiac-header-text-color: #ffffff;
       --a11y-stiac-control-active-bg-color: #036cff;
       --a11y-stiac-control-active-text-color: #ffffff;
+      --a11y-stiac-large-cursor-url: auto;
       --border_radius: 24px;
       --a11y-stiac-font-scale: 1;
       --a11y-stiac-open-radius: 24px;
@@ -102,6 +103,12 @@ const accessibilityMenuStyles = `
 
     html[data-a11y-stiac-text-align="justify"] body :where(:not(#accessibility-modal, #accessibility-modal *)) {
       text-align: justify !important;
+    }
+
+    html.stiac-large-cursor,
+    html.stiac-large-cursor body,
+    html.stiac-large-cursor body :where(:not(#accessibility-modal, #accessibility-modal *)) {
+      cursor: var(--a11y-stiac-large-cursor-url, auto) !important;
     }
 
     /* Classic screen-reader only helper */
@@ -656,6 +663,10 @@ const accessibilityMenuStyles = `
       transform: translate(-50%, 50%);
     }
 
+    #cursor.stiac-cursor-3 {
+      display: none;
+    }
+
     #triangle-cursor {
       width: 0;
       height: 0;
@@ -672,6 +683,8 @@ const accessibilityMenuStyles = `
       display: none;
     }
 `;
+
+const LARGE_CURSOR_DATA_URL = 'url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2064%2064%27%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%2728%27%20fill%3D%27%23ffffff%27%20stroke%3D%27%23036cff%27%20stroke-width%3D%276%27/%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%276%27%20fill%3D%27%23036cff%27/%3E%3C/svg%3E") 32 32, auto';
 // Template block for the optional position controls. Having a dedicated
 // constant keeps the main widget layout readable and allows runtime toggling.
 const changePositionsControlsHTML = `
@@ -860,6 +873,7 @@ const accessibilityMenuHTML = `
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-4 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
@@ -875,6 +889,7 @@ const accessibilityMenuHTML = `
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-1 stiac-h-1 stiac-flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-2 stiac-h-1 stiac-flex-1"></div>
               <div class="a11y-stiac-progress-child a11y-stiac-progress-child-3 stiac-h-1 stiac-flex-1"></div>
+              <div class="a11y-stiac-progress-child a11y-stiac-progress-child-4 stiac-h-1 stiac-flex-1"></div>
             </div>
           </div>
         </div>
@@ -3346,6 +3361,166 @@ function initialiseAccessibilityWidget() {
         updateLanguageIconsVisibility();
     }
 
+    // Track HTML media elements so Hide Video can silence audio alongside the visual toggle.
+    const hideVideoPausedMedia = new Map();
+    let hideVideoObserver = null;
+
+    function shouldProcessVideoTarget(element) {
+        if (!(element instanceof HTMLMediaElement)) {
+            return false;
+        }
+        if (elementIsInsideAccessibilityWidget(element)) {
+            return false;
+        }
+        if (element.closest('[data-a11y-stiac-preserve-video]')) {
+            return false;
+        }
+        return true;
+    }
+
+    function collectVideoTargets(root) {
+        if (!root || root.nodeType !== Node.ELEMENT_NODE) {
+            return [];
+        }
+
+        const targets = [];
+        if (shouldProcessVideoTarget(root)) {
+            targets.push(root);
+        }
+
+        if (typeof root.querySelectorAll === 'function') {
+            root.querySelectorAll('video, audio').forEach((element) => {
+                if (shouldProcessVideoTarget(element)) {
+                    targets.push(element);
+                }
+            });
+        }
+
+        return targets;
+    }
+
+    function pauseVideoTargets(root = docElement) {
+        collectVideoTargets(root).forEach((element) => {
+            const alreadyTracked = hideVideoPausedMedia.has(element);
+            const metadata = alreadyTracked
+                ? hideVideoPausedMedia.get(element)
+                : {
+                    wasPlaying: false,
+                    wasMuted: Boolean(element.muted),
+                    hadMutedAttr: element.hasAttribute('muted'),
+                    hadAutoplayAttr: element.hasAttribute('autoplay'),
+                    autoplay: Boolean(element.autoplay)
+                };
+
+            const isCurrentlyPlaying = !element.paused && typeof element.pause === 'function';
+
+            if (isCurrentlyPlaying && typeof element.pause === 'function') {
+                try {
+                    element.pause();
+                } catch (error) {
+                    /* noop */
+                }
+            }
+
+            metadata.wasPlaying = metadata.wasPlaying || isCurrentlyPlaying;
+
+            if (!element.muted) {
+                element.muted = true;
+            }
+
+            if (element.autoplay) {
+                element.autoplay = false;
+            }
+
+            if (metadata.hadAutoplayAttr) {
+                element.removeAttribute('autoplay');
+            }
+
+            hideVideoPausedMedia.set(element, metadata);
+        });
+    }
+
+    function resumeVideoTargets() {
+        hideVideoPausedMedia.forEach((metadata, element) => {
+            if (!metadata) {
+                return;
+            }
+
+            if (metadata.autoplay) {
+                element.autoplay = true;
+            }
+            if (metadata.hadAutoplayAttr) {
+                element.setAttribute('autoplay', '');
+            } else {
+                element.removeAttribute('autoplay');
+            }
+
+            element.muted = metadata.wasMuted;
+            if (metadata.hadMutedAttr) {
+                element.setAttribute('muted', '');
+            } else {
+                element.removeAttribute('muted');
+            }
+
+            if (metadata.wasPlaying && typeof element.play === 'function') {
+                try {
+                    const playResult = element.play();
+                    if (playResult && typeof playResult.catch === 'function') {
+                        playResult.catch(() => {});
+                    }
+                } catch (error) {
+                    /* noop */
+                }
+            }
+        });
+
+        hideVideoPausedMedia.clear();
+    }
+
+    function ensureHideVideoObserver() {
+        if (hideVideoObserver) {
+            return;
+        }
+
+        hideVideoObserver = new MutationObserver((mutations) => {
+            if (!docElement.classList.contains('stiac-hide-video')) {
+                return;
+            }
+
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach((node) => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        pauseVideoTargets(node);
+                    }
+                });
+            });
+        });
+
+        hideVideoObserver.observe(docElement, { childList: true, subtree: true });
+    }
+
+    function disconnectHideVideoObserver() {
+        if (!hideVideoObserver) {
+            return;
+        }
+
+        hideVideoObserver.disconnect();
+        hideVideoObserver = null;
+    }
+
+    function setHideVideoActive(active) {
+        const shouldActivate = Boolean(active);
+        docElement.classList.toggle('stiac-hide-video', shouldActivate);
+
+        if (shouldActivate) {
+            pauseVideoTargets();
+            ensureHideVideoObserver();
+        } else {
+            disconnectHideVideoObserver();
+            resumeVideoTargets();
+        }
+    }
+
     // Track motion-heavy media so Reduce Motion can pause and resume them safely.
     const reduceMotionPausedMedia = new Set();
     const reduceMotionMarquees = new Set();
@@ -3861,6 +4036,7 @@ function initialiseAccessibilityWidget() {
             return;
         }
         element.classList.toggle('stiac-active', isActive);
+        element.classList.toggle('active', isActive);
         element.setAttribute('aria-pressed', String(Boolean(isActive)));
         const targetColor = isActive ? 'var(--a11y-stiac-header-text-color)' : 'var(--a11y-stiac-text-color)';
         element.style.color = targetColor;
@@ -3884,7 +4060,9 @@ function initialiseAccessibilityWidget() {
             progressParent.classList.remove('stiac-hidden');
         }
         progressParent.querySelectorAll('.a11y-stiac-progress-child').forEach((child, index) => {
-            child.classList.toggle('stiac-active', index === activeIndex);
+            const isCurrent = index === activeIndex;
+            child.classList.toggle('stiac-active', isCurrent);
+            child.classList.toggle('active', isCurrent);
         });
     }
 
@@ -4253,7 +4431,7 @@ function initialiseAccessibilityWidget() {
     document.querySelector('#hide-video').addEventListener('click', () => {
         const item = document.querySelector('#hide-video');
         const nextState = !docElement.classList.contains('stiac-hide-video');
-        docElement.classList.toggle('stiac-hide-video');
+        setHideVideoActive(nextState);
         setControlActiveState(item, nextState);
         saveSettings();
     });
@@ -4268,7 +4446,7 @@ function initialiseAccessibilityWidget() {
     });
 
     let cursorClickCount = 0;
-    // Rotate between the three custom cursor styles and ensure the browser cursor/guide triangle reset appropriately.
+    // Rotate between the custom cursor styles and ensure the browser cursor/guide triangle reset appropriately.
     document.querySelector('#change-cursor').addEventListener('click', () => {
         const item = document.querySelector('#change-cursor');
         const cursor = document.querySelector('#cursor');
@@ -4279,25 +4457,26 @@ function initialiseAccessibilityWidget() {
             triangle.style.display = 'none';
         }
 
+        docElement.style.cursor = '';
+        docElement.classList.remove('stiac-large-cursor');
+        docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+
         if (cursorClickCount === 0) {
             cursor.classList.add('stiac-cursor-0');
-            cursor.classList.remove('stiac-cursor-1', 'stiac-cursor-2');
+            cursor.classList.remove('stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
             cursor.style.width = '50px';
             cursor.style.height = '50px';
-            docElement.style.cursor = '';
             cursorClickCount = 1;
             progressIndex = 0;
         } else if (cursorClickCount === 1) {
-            cursor.classList.remove('stiac-cursor-0');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-2', 'stiac-cursor-3');
             cursor.classList.add('stiac-cursor-1');
-            cursor.classList.remove('stiac-cursor-2');
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
-            docElement.style.cursor = '';
             cursorClickCount = 2;
             progressIndex = 1;
         } else if (cursorClickCount === 2) {
-            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1');
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-3');
             cursor.classList.add('stiac-cursor-2');
             docElement.style.cursor = 'none';
             cursor.style.width = '25vw';
@@ -4307,9 +4486,17 @@ function initialiseAccessibilityWidget() {
             }
             cursorClickCount = 3;
             progressIndex = 2;
-        } else {
+        } else if (cursorClickCount === 3) {
             cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2');
-            docElement.style.cursor = '';
+            cursor.classList.add('stiac-cursor-3');
+            cursor.style.width = '';
+            cursor.style.height = '';
+            docElement.classList.add('stiac-large-cursor');
+            docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
+            cursorClickCount = 4;
+            progressIndex = 3;
+        } else {
+            cursor.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
             cursor.style.width = '';
             cursor.style.height = '';
             cursorClickCount = 0;
@@ -4378,7 +4565,7 @@ function initialiseAccessibilityWidget() {
         syncTextAlignUI();
         delete docElement.dataset.a11yStiacDyslexiaFont;
         setHideImagesActive(false);
-        docElement.classList.remove('stiac-hide-video');
+        setHideVideoActive(false);
         setReduceMotionActive(false);
         reduceMotionPreferenceLocked = false;
         if (pendingSystemReduceMotion) {
@@ -4386,11 +4573,13 @@ function initialiseAccessibilityWidget() {
         }
 
         if (cursorElement) {
-            cursorElement.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2');
+            cursorElement.classList.remove('stiac-cursor-0', 'stiac-cursor-1', 'stiac-cursor-2', 'stiac-cursor-3');
             cursorElement.style.width = '';
             cursorElement.style.height = '';
         }
         docElement.style.cursor = '';
+        docElement.classList.remove('stiac-large-cursor');
+        docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
         if (triangle) {
             triangle.style.display = 'none';
         }
@@ -4410,7 +4599,7 @@ function initialiseAccessibilityWidget() {
     //save the user's settings in local storage
     function saveSettings() {
         const settings = {
-            version: 4,
+            version: 5,
             filters: {
                 invert: filterState.invert,
                 grayscale: filterState.grayscale,
@@ -4426,7 +4615,15 @@ function initialiseAccessibilityWidget() {
             hideImages: docElement.classList.contains('stiac-hide-images'),
             hideVideo: docElement.classList.contains('stiac-hide-video'),
             reduceMotion: docElement.classList.contains('stiac-reduce-motion'),
-            cursor: cursor.classList.contains('stiac-cursor-2') ? 'guide' : cursor.classList.contains('stiac-cursor-1') ? 'mask' : cursor.classList.contains('stiac-cursor-0') ? 'focus' : 'default',
+            cursor: cursor.classList.contains('stiac-cursor-3') || docElement.classList.contains('stiac-large-cursor')
+                ? 'large'
+                : cursor.classList.contains('stiac-cursor-2')
+                    ? 'guide'
+                    : cursor.classList.contains('stiac-cursor-1')
+                        ? 'mask'
+                        : cursor.classList.contains('stiac-cursor-0')
+                            ? 'focus'
+                            : 'default',
             position: getCurrentPosition()
         };
 
@@ -4442,7 +4639,7 @@ function initialiseAccessibilityWidget() {
             return null;
         }
         return {
-            version: 4,
+            version: 5,
             filters: {
                 invert: Boolean(legacy.invertColors),
                 grayscale: Boolean(legacy.grayscale),
@@ -4497,26 +4694,40 @@ function initialiseAccessibilityWidget() {
             delete docElement.dataset.a11yStiacDyslexiaFont;
         }
         setHideImagesActive(Boolean(settings.hideImages));
-        docElement.classList.toggle('stiac-hide-video', Boolean(settings.hideVideo));
+        setHideVideoActive(Boolean(settings.hideVideo));
         setReduceMotionActive(Boolean(settings.reduceMotion));
 
         cursor.classList.toggle('stiac-cursor-0', settings.cursor === 'focus');
         cursor.classList.toggle('stiac-cursor-1', settings.cursor === 'mask');
         cursor.classList.toggle('stiac-cursor-2', settings.cursor === 'guide');
+        cursor.classList.toggle('stiac-cursor-3', settings.cursor === 'large');
+
+        docElement.classList.remove('stiac-large-cursor');
+        docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
+
         if (settings.cursor === 'focus') {
             cursor.style.width = '50px';
             cursor.style.height = '50px';
+            docElement.style.cursor = '';
         } else if (settings.cursor === 'mask') {
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
+            docElement.style.cursor = '';
         } else if (settings.cursor === 'guide') {
             cursor.style.width = '25vw';
             cursor.style.height = '8px';
+            docElement.style.cursor = 'none';
+        } else if (settings.cursor === 'large') {
+            cursor.style.width = '';
+            cursor.style.height = '';
+            docElement.style.cursor = '';
+            docElement.classList.add('stiac-large-cursor');
+            docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
         } else {
             cursor.style.width = '';
             cursor.style.height = '';
+            docElement.style.cursor = '';
         }
-        docElement.style.cursor = settings.cursor === 'guide' ? 'none' : '';
         const triangle = document.getElementById('triangle-cursor');
         if (triangle) {
             triangle.style.display = settings.cursor === 'guide' ? 'block' : 'none';
@@ -4694,6 +4905,8 @@ function initialiseAccessibilityWidget() {
             cursor.style.width = '50px';
             cursor.style.height = '50px';
             docElement.style.cursor = '';
+            docElement.classList.remove('stiac-large-cursor');
+            docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
             }
@@ -4704,6 +4917,8 @@ function initialiseAccessibilityWidget() {
             cursor.style.width = '100%';
             cursor.style.height = '15vh';
             docElement.style.cursor = '';
+            docElement.classList.remove('stiac-large-cursor');
+            docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
             }
@@ -4714,16 +4929,32 @@ function initialiseAccessibilityWidget() {
             cursor.style.width = '25vw';
             cursor.style.height = '8px';
             docElement.style.cursor = 'none';
+            docElement.classList.remove('stiac-large-cursor');
+            docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'block';
             }
             updateProgress(cursorItem, 2);
+            setControlActiveState(cursorItem, true);
+        } else if (cursor.classList.contains('stiac-cursor-3') || docElement.classList.contains('stiac-large-cursor')) {
+            cursorClickCount = 4;
+            cursor.style.width = '';
+            cursor.style.height = '';
+            docElement.style.cursor = '';
+            docElement.classList.add('stiac-large-cursor');
+            docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
+            if (triangle) {
+                triangle.style.display = 'none';
+            }
+            updateProgress(cursorItem, 3);
             setControlActiveState(cursorItem, true);
         } else {
             cursorClickCount = 0;
             cursor.style.width = '';
             cursor.style.height = '';
             docElement.style.cursor = '';
+            docElement.classList.remove('stiac-large-cursor');
+            docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
             if (triangle) {
                 triangle.style.display = 'none';
             }
