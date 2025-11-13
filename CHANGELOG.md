@@ -1,4 +1,18 @@
 # Changelog
+# [1.10.0] - 2026-01-09
+
+### Added
+- Delivered an extra-large pointer option within the Change Cursor tool so visitors who need oversized pointers that exceed WCAG 2.2 and EN 301 549 guidance can activate it without leaving the widget.
+
+### Changed
+- Extended the Change Cursor progress indicator to five steps and bumped the persisted settings schema to version 6 so existing users can seamlessly adopt the new pointer cycle.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 # [1.9.0] - 2026-01-08
 
 ### Added
