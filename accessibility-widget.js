@@ -3359,6 +3359,7 @@ function initialiseAccessibilityWidget() {
     // Track HTML media elements so Hide Video can silence audio alongside the visual toggle.
     const hideVideoPausedMedia = new Map();
     let hideVideoObserver = null;
+    let hideVideoPendingReduceMotionResume = false;
 
     function shouldProcessVideoTarget(element) {
         if (!(element instanceof HTMLMediaElement)) {
@@ -3436,8 +3437,28 @@ function initialiseAccessibilityWidget() {
     }
 
     function resumeVideoTargets() {
+        const reduceMotionActive = docElement.classList.contains('stiac-reduce-motion');
+
         hideVideoPausedMedia.forEach((metadata, element) => {
             if (!metadata) {
+                return;
+            }
+
+            if (reduceMotionActive) {
+                if (metadata.autoplay && element.dataset.a11yStiacReduceMotionWasAutoplay !== 'true') {
+                    element.dataset.a11yStiacReduceMotionWasAutoplay = 'true';
+                }
+
+                if (metadata.hadAutoplayAttr && element.dataset.a11yStiacReduceMotionHadAutoplayAttr !== 'true') {
+                    element.dataset.a11yStiacReduceMotionHadAutoplayAttr = 'true';
+                }
+
+                if (metadata.wasPlaying && element.dataset.a11yStiacReduceMotionPaused !== 'true') {
+                    element.dataset.a11yStiacReduceMotionPaused = 'true';
+                }
+
+                reduceMotionPausedMedia.add(element);
+
                 return;
             }
 
@@ -3469,7 +3490,13 @@ function initialiseAccessibilityWidget() {
             }
         });
 
+        if (reduceMotionActive) {
+            hideVideoPendingReduceMotionResume = hideVideoPausedMedia.size > 0;
+            return;
+        }
+
         hideVideoPausedMedia.clear();
+        hideVideoPendingReduceMotionResume = false;
     }
 
     function ensureHideVideoObserver() {
@@ -3510,6 +3537,7 @@ function initialiseAccessibilityWidget() {
         if (shouldActivate) {
             pauseVideoTargets();
             ensureHideVideoObserver();
+            hideVideoPendingReduceMotionResume = false;
         } else {
             disconnectHideVideoObserver();
             resumeVideoTargets();
@@ -3705,6 +3733,9 @@ function initialiseAccessibilityWidget() {
             docElement.removeAttribute('data-a11y-stiac-reduce-motion');
             resumeMotionTargets();
             disconnectReduceMotionObserver();
+            if (hideVideoPendingReduceMotionResume && !docElement.classList.contains('stiac-hide-video')) {
+                resumeVideoTargets();
+            }
         }
     }
 
