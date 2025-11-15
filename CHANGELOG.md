@@ -1,4 +1,18 @@
 # Changelog
+# [1.9.3] - 2026-01-11
+
+### Added
+- None.
+
+### Changed
+- Linked the reading guide cursor bar and arrow styling to shared CSS variables so themes can retint the helper without script changes.
+
+### Fixed
+- Restored the dynamic pointer arrow in the Change Cursor guide mode by toggling the dedicated arrow helper and reusing the shared palette.
+
+### Removed
+- None.
+
 # [1.9.2] - 2026-01-10
 
 ### Added
