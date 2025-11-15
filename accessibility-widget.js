@@ -646,29 +646,27 @@ const accessibilityMenuStyles = `
     }
 
     #cursor.stiac-cursor-2 {
-      box-sizing: border-box;
-      position: fixed;
-      width: 40vw !important;
-      min-width: 200px !important;
-      height: 12px !important;
-      background: #000;
-      border: 3px solid #fff300;
-      border-radius: 5px;
       transition: all 0.1s ease;
       transform-origin: center;
       transform: translate(-50%, -50%);
+    }
+
+    #cursor.stiac-reading-guide {
+      box-sizing: border-box;
+      width: 40vw !important;
+      min-width: 200px !important;
+      height: 12px !important;
+      background: var(--a11y-stiac-reading-guide-background-color, #000);
+      border: 3px solid var(--a11y-stiac-reading-guide-border-color, #fff300);
+      border-radius: 5px;
     }
 
     #cursor.stiac-cursor-3 {
       display: none;
     }
 
-    #triangle-cursor {
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 12px solid #fff300;
+    #triangle-cursor,
+    .stiac-reading-guide__arrow {
       position: fixed;
       top: 0;
       left: 0;
@@ -677,10 +675,42 @@ const accessibilityMenuStyles = `
       z-index: 999999998;
       pointer-events: none;
       display: none;
+      width: 0;
+      height: 0;
+    }
+
+    #triangle-cursor::before,
+    #triangle-cursor::after,
+    .stiac-reading-guide__arrow::before,
+    .stiac-reading-guide__arrow::after {
+      content: "";
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    #triangle-cursor::before,
+    .stiac-reading-guide__arrow::before {
+      border-bottom-color: var(--a11y-stiac-reading-guide-border-color, #fff300);
+      border-width: 17px;
+      margin-left: -17px;
+    }
+
+    #triangle-cursor::after,
+    .stiac-reading-guide__arrow::after {
+      border-bottom-color: var(--a11y-stiac-reading-guide-background-color, #000);
+      border-width: 14px;
+      margin-left: -14px;
     }
 `;
 
 const LARGE_CURSOR_DATA_URL = 'url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyOS4xODhweCIgaGVpZ2h0PSI0My42MjVweCIgdmlld0JveD0iMCAwIDI5LjE4OCA0My42MjUiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI5LjE4OCA0My42MjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwb2x5Z29uIGZpbGw9IiNGRkZGRkYiIHN0cm9rZT0iI0Q5REFEOSIgc3Ryb2tlLXdpZHRoPSIxLjE0MDYiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRzPSIyLjgsNC41NDkgMjYuODQ3LDE5LjkwMiAxNi45NjQsMjIuNzAxIDI0LjIzOSwzNy43NDkgMTguMjc4LDQyLjAxNyA5Ljc0MSwzMC43MjQgMS4xMzgsMzUuODA5ICIvPjxnPjxnPjxnPjxwYXRoIGZpbGw9IiMyMTI2MjciIGQ9Ik0yOS4xNzUsMjEuMTU1YzAuMDcxLTAuNjEzLTAuMTY1LTEuMjUzLTAuNjM1LTEuNTczTDIuMTY1LDAuMjU4Yy0wLjQyNC0wLjMyLTAuOTg4LTAuMzQ2LTEuNDM1LTAuMDUzQzAuMjgyLDAuNDk3LDAsMS4wMywwLDEuNjE3djM0LjE3MWMwLDAuNjEzLDAuMzA2LDEuMTQ2LDAuNzc2LDEuNDM5YzAuNDcxLDAuMjY3LDEuMDU5LDAuMjEzLDEuNDgyLTAuMTZsNy40ODItNi4zNDRsNi44NDcsMTIuMTU1YzAuMjU5LDAuNDgsMC43MjksMC43NDYsMS4yLDAuNzQ2YzAuMjM1LDAsMC40OTQtMC4wOCwwLjcwNi0wLjIxM2w2Ljk4OC00LjU4NWMwLjMyOS0wLjIxMywwLjU2NS0wLjU4NiwwLjY1OS0xLjAxM2MwLjA5NC0wLjQyNiwwLjAyNC0wLjg4LTAuMTg4LTEuMjI2bC02LjM3Ni0xMS4zODJsOC42MTEtMi43NDVDMjguNzA1LDIyLjI3NCwyOS4xMDUsMjEuNzY4LDI5LjE3NSwyMS4xNTV6IE0xNi45NjQsMjIuNzAxYy0wLjQyNCwwLjEzMy0wLjc3NiwwLjUwNi0wLjk0MSwwLjk2Yy0wLjE2NSwwLjQ4LTAuMTE4LDEuMDEzLDAuMTE4LDEuNDM5bDYuNTg4LDExLjc4MWwtNC41NDEsMi45ODVsLTYuODk0LTEyLjMxNWMtMC4yMTItMC4zNzMtMC41NDEtMC42NC0wLjk0MS0wLjcyYy0wLjA5NC0wLjAyNy0wLjE2NS0wLjAyNy0wLjI1OS0wLjAyN2MtMC4zMDYsMC0wLjU4OCwwLjEwNy0wLjg0NywwLjMyTDIuOCwzMi41OVY0LjU0OWwyMS41OTksMTUuODA2TDE2Ljk2NCwyMi43MDF6Ii8+PC9nPjwvZz48L2c+PC9nPjwvc3ZnPg==") 0 0, auto';
+const GUIDE_CURSOR_BORDER_COLOR = '#fff300';
+const GUIDE_CURSOR_BACKGROUND_COLOR = '#000';
 // Template block for the optional position controls. Having a dedicated
 // constant keeps the main widget layout readable and allows runtime toggling.
 const changePositionsControlsHTML = `
@@ -1061,7 +1091,7 @@ const accessibilityMenuHTML = `
 
       <!--cursor and triangle cursor-->
       <div id="cursor"></div>
-      <div id="triangle-cursor"></div>
+      <div id="triangle-cursor" aria-hidden="true"></div>
 
       <!--accessibility modal footer-->
       <div id="a11y-stiac-footer" class="stiac-flex stiac-flex-col stiac-gap-4 stiac-border-t stiac-border-slate-900/10 stiac-bg-white/90 stiac-px-6 stiac-py-5 stiac-shadow-inner stiac-shadow-slate-900/5">
@@ -4069,9 +4099,12 @@ function initialiseAccessibilityWidget() {
         cursorElement.style.minWidth = '200px';
         cursorElement.style.height = '12px';
         cursorElement.style.boxSizing = 'border-box';
-        cursorElement.style.background = '#000';
-        cursorElement.style.border = '3px solid #fff300';
+        cursorElement.style.background = GUIDE_CURSOR_BACKGROUND_COLOR;
+        cursorElement.style.border = `3px solid ${GUIDE_CURSOR_BORDER_COLOR}`;
         cursorElement.style.borderRadius = '5px';
+        cursorElement.classList.add('stiac-reading-guide');
+        cursorElement.style.setProperty('--a11y-stiac-reading-guide-background-color', GUIDE_CURSOR_BACKGROUND_COLOR);
+        cursorElement.style.setProperty('--a11y-stiac-reading-guide-border-color', GUIDE_CURSOR_BORDER_COLOR);
     }
 
     /**
@@ -4087,6 +4120,37 @@ function initialiseAccessibilityWidget() {
         cursorElement.style.background = '';
         cursorElement.style.border = '';
         cursorElement.style.borderRadius = '';
+        cursorElement.classList.remove('stiac-reading-guide');
+        cursorElement.style.removeProperty('--a11y-stiac-reading-guide-background-color');
+        cursorElement.style.removeProperty('--a11y-stiac-reading-guide-border-color');
+    }
+
+    /**
+     * Display the directional arrow that follows the reading guide cursor.
+     * @param {HTMLElement} triangleElement
+     */
+    function showGuideCursorArrow(triangleElement) {
+        if (!triangleElement) {
+            return;
+        }
+        triangleElement.style.display = 'block';
+        triangleElement.classList.add('stiac-reading-guide__arrow');
+        triangleElement.style.setProperty('--a11y-stiac-reading-guide-border-color', GUIDE_CURSOR_BORDER_COLOR);
+        triangleElement.style.setProperty('--a11y-stiac-reading-guide-background-color', GUIDE_CURSOR_BACKGROUND_COLOR);
+    }
+
+    /**
+     * Hide and reset the reading guide arrow styling so other cursor modes stay clean.
+     * @param {HTMLElement} triangleElement
+     */
+    function hideGuideCursorArrow(triangleElement) {
+        if (!triangleElement) {
+            return;
+        }
+        triangleElement.style.display = 'none';
+        triangleElement.classList.remove('stiac-reading-guide__arrow');
+        triangleElement.style.removeProperty('--a11y-stiac-reading-guide-border-color');
+        triangleElement.style.removeProperty('--a11y-stiac-reading-guide-background-color');
     }
 
     function setControlActiveState(element, isActive) {
@@ -4505,11 +4569,7 @@ function initialiseAccessibilityWidget() {
         const triangle = document.getElementById('triangle-cursor');
         let progressIndex = -1;
 
-        if (triangle) {
-            triangle.style.display = 'none';
-            triangle.style.borderBottomWidth = '';
-            triangle.style.borderBottomColor = '';
-        }
+        hideGuideCursorArrow(triangle);
 
         docElement.style.cursor = '';
         docElement.classList.remove('stiac-large-cursor');
@@ -4535,11 +4595,7 @@ function initialiseAccessibilityWidget() {
             cursor.classList.add('stiac-cursor-2');
             docElement.style.cursor = 'none';
             applyGuideCursorStyles(cursor);
-            if (triangle) {
-                triangle.style.display = 'block';
-                triangle.style.borderBottomColor = '#fff300';
-                triangle.style.borderBottomWidth = '12px';
-            }
+            showGuideCursorArrow(triangle);
             cursorClickCount = 3;
             progressIndex = 2;
         } else if (cursorClickCount === 3) {
@@ -4637,11 +4693,7 @@ function initialiseAccessibilityWidget() {
         docElement.style.cursor = '';
         docElement.classList.remove('stiac-large-cursor');
         docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
-        if (triangle) {
-            triangle.style.display = 'none';
-            triangle.style.borderBottomWidth = '';
-            triangle.style.borderBottomColor = '';
-        }
+        hideGuideCursorArrow(triangle);
 
         saturationClickCount = 0;
         underlineClickCount = 0;
@@ -4796,13 +4848,9 @@ function initialiseAccessibilityWidget() {
         const triangle = document.getElementById('triangle-cursor');
         if (triangle) {
             if (settings.cursor === 'guide') {
-                triangle.style.display = 'block';
-                triangle.style.borderBottomColor = '#fff300';
-                triangle.style.borderBottomWidth = '12px';
+                showGuideCursorArrow(triangle);
             } else {
-                triangle.style.display = 'none';
-                triangle.style.borderBottomWidth = '';
-                triangle.style.borderBottomColor = '';
+                hideGuideCursorArrow(triangle);
             }
         }
 
@@ -4980,11 +5028,7 @@ function initialiseAccessibilityWidget() {
             docElement.style.cursor = '';
             docElement.classList.remove('stiac-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
-            if (triangle) {
-                triangle.style.display = 'none';
-                triangle.style.borderBottomWidth = '';
-                triangle.style.borderBottomColor = '';
-            }
+            hideGuideCursorArrow(triangle);
             updateProgress(cursorItem, 0);
             setControlActiveState(cursorItem, true);
         } else if (cursor.classList.contains('stiac-cursor-1')) {
@@ -4994,11 +5038,7 @@ function initialiseAccessibilityWidget() {
             docElement.style.cursor = '';
             docElement.classList.remove('stiac-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
-            if (triangle) {
-                triangle.style.display = 'none';
-                triangle.style.borderBottomWidth = '';
-                triangle.style.borderBottomColor = '';
-            }
+            hideGuideCursorArrow(triangle);
             updateProgress(cursorItem, 1);
             setControlActiveState(cursorItem, true);
         } else if (cursor.classList.contains('stiac-cursor-2')) {
@@ -5007,11 +5047,7 @@ function initialiseAccessibilityWidget() {
             docElement.style.cursor = 'none';
             docElement.classList.remove('stiac-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
-            if (triangle) {
-                triangle.style.display = 'block';
-                triangle.style.borderBottomColor = '#fff300';
-                triangle.style.borderBottomWidth = '12px';
-            }
+            showGuideCursorArrow(triangle);
             updateProgress(cursorItem, 2);
             setControlActiveState(cursorItem, true);
         } else if (cursor.classList.contains('stiac-cursor-3') || docElement.classList.contains('stiac-large-cursor')) {
@@ -5021,11 +5057,7 @@ function initialiseAccessibilityWidget() {
             docElement.style.cursor = '';
             docElement.classList.add('stiac-large-cursor');
             docElement.style.setProperty('--a11y-stiac-large-cursor-url', LARGE_CURSOR_DATA_URL);
-            if (triangle) {
-                triangle.style.display = 'none';
-                triangle.style.borderBottomWidth = '';
-                triangle.style.borderBottomColor = '';
-            }
+            hideGuideCursorArrow(triangle);
             updateProgress(cursorItem, 3);
             setControlActiveState(cursorItem, true);
         } else {
@@ -5035,11 +5067,7 @@ function initialiseAccessibilityWidget() {
             docElement.style.cursor = '';
             docElement.classList.remove('stiac-large-cursor');
             docElement.style.removeProperty('--a11y-stiac-large-cursor-url');
-            if (triangle) {
-                triangle.style.display = 'none';
-                triangle.style.borderBottomWidth = '';
-                triangle.style.borderBottomColor = '';
-            }
+            hideGuideCursorArrow(triangle);
             updateProgress(cursorItem, -1);
             setControlActiveState(cursorItem, false);
         }

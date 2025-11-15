@@ -8,10 +8,15 @@
 
 The Accessibility Plugin is a JavaScript library that helps improve the accessibility of your web applications. It provides a set of utility functions and components that can be easily integrated into your project.
 
-- **Current Version:** `1.9.2`
+- **Current Version:** `1.9.3`
 - See [`CHANGELOG.md`](./CHANGELOG.md) for full release history and [`SOFTWARE_REPORT.md`](./SOFTWARE_REPORT.md) for status tracking.
 
 All bundled Tailwind utilities and runtime state classes ship with the `stiac-` prefix so the widget can coexist with host stylesheets without unexpected overrides.
+
+## What's New in 1.9.3
+
+- Restored the reading guide cursor arrow so the third Change Cursor mode once again follows the pointer with a high-contrast triangle.
+- Synced the cursor bar and arrow colours through CSS variables, allowing custom themes to retint the guide without editing JavaScript.
 
 ## What's New in 1.9.2
 

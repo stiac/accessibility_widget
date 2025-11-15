@@ -1,9 +1,9 @@
 # Software Report
 
 - **Project**: Accessibility Plugin
-- **Version**: 1.9.2
+- **Version**: 1.9.3
 - **Maintainer**: Praboth Charith
-- **Last Update**: 2026-01-10
+- **Last Update**: 2026-01-11
 
 ## Module Status
 - **Menu Rendering**: Completed
@@ -12,6 +12,7 @@
 - **Testing**: Planned (manual regression required)
 
 ## Recent Activities
+- 2026-01-11 — Restored the reading guide arrow and linked the guide palette to CSS variables so the cursor theme can be retinted safely (AI assistant)
 - 2026-01-10 — Boosted the reading guide visuals and hardened the line-height helper overrides so cursor and spacing controls stay effective together (AI assistant)
 - 2026-01-09 — Added an extra-large cursor option, refreshed the Change Cursor progress indicator, and bumped the persistence schema to version 6 so stored settings accept the new pointer state (AI assistant)
 - 2026-01-07 — Rebuilt the inline widget stylesheet around shared layout tokens so the panel, launcher, and control grid stay aligned across every docking mode (AI assistant)
